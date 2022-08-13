@@ -1,6 +1,6 @@
-package com.nhn.JobSearchSpringBoot.repository;
+package com.nhn.repositories;
 
-import com.nhn.JobSearchSpringBoot.model.User;
+import com.nhn.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

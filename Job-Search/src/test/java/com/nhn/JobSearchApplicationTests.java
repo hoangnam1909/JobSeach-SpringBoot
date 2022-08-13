@@ -1,10 +1,10 @@
-package com.nhn.JobSearchSpringBoot;
+package com.nhn;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JobSearchSpringBootApplicationTests {
+class JobSearchApplicationTests {
 
 	@Test
 	void contextLoads() {

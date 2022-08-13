@@ -1,13 +1,13 @@
-package com.nhn.JobSearchSpringBoot;
+package com.nhn;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JobSearchSpringBootApplication {
+public class JobSearchApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JobSearchSpringBootApplication.class, args);
+		SpringApplication.run(JobSearchApplication.class, args);
 	}
 
 }
