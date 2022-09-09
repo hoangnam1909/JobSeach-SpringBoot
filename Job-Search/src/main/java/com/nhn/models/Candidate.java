@@ -1,10 +1,20 @@
 package com.nhn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Table(name = "candidate")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Candidate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -35,75 +45,4 @@ public class Candidate {
     @Column(name = "cv")
     private String cv;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Integer getYearsExperience() {
-        return yearsExperience;
-    }
-
-    public void setYearsExperience(Integer yearsExperience) {
-        this.yearsExperience = yearsExperience;
-    }
-
-    public String getStrengths() {
-        return strengths;
-    }
-
-    public void setStrengths(String strengths) {
-        this.strengths = strengths;
-    }
-
-    public String getWeaknesses() {
-        return weaknesses;
-    }
-
-    public void setWeaknesses(String weaknesses) {
-        this.weaknesses = weaknesses;
-    }
-
-    public String getMajoring() {
-        return majoring;
-    }
-
-    public void setMajoring(String majoring) {
-        this.majoring = majoring;
-    }
-
-    public String getMajoringDetail() {
-        return majoringDetail;
-    }
-
-    public void setMajoringDetail(String majoringDetail) {
-        this.majoringDetail = majoringDetail;
-    }
-
-    public String getLanguageCertificate() {
-        return languageCertificate;
-    }
-
-    public void setLanguageCertificate(String languageCertificate) {
-        this.languageCertificate = languageCertificate;
-    }
-
-    public String getInformaticsCertificate() {
-        return informaticsCertificate;
-    }
-
-    public void setInformaticsCertificate(String informaticsCertificate) {
-        this.informaticsCertificate = informaticsCertificate;
-    }
-
-    public String getCv() {
-        return cv;
-    }
-
-    public void setCv(String cv) {
-        this.cv = cv;
-    }
 }

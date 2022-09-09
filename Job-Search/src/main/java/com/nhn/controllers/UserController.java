@@ -2,8 +2,17 @@ package com.nhn.controllers;
 
 import com.nhn.models.RespondObject;
 import com.nhn.models.User;
-import com.nhn.repositories.UserRepository;
+import com.nhn.models.dto.UserDTO;
+import com.nhn.models.request.UpdateUserReq;
+import com.nhn.repository.UserRepository;
+import com.nhn.service.UserService;
+import static com.nhn.specifications.UserSpecification.*;
+
+import com.nhn.specifications.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.data.jpa.domain.Specification.*;
+
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +26,16 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/username/{username}")
+    List<User> findByFullNameAndGender(@PathVariable("username") String username) {
+//        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
+
+        return userRepository.findAll(where(containsUsername(username)));
+    }
 
     @GetMapping("")
     List<User> getAll() {
@@ -51,32 +70,42 @@ public class UserController {
         );
     }
 
+//    @PutMapping("/{id}")
+//    ResponseEntity<RespondObject> upsert(@PathVariable int id,
+//                                         @RequestBody User newUser) {
+//
+//        User updatedUser = userRepository.findById(id)
+//                // Update user
+//                .map(user -> {
+//                    user.setUsername(newUser.getUsername());
+//                    user.setPassword(newUser.getPassword());
+//                    user.setAvatar(newUser.getAvatar());
+//                    user.setUserType(newUser.getUserType());
+//                    user.setActive(newUser.getActive());
+//                    user.setFullName(newUser.getFullName());
+//                    user.setEmail(newUser.getEmail());
+//                    user.setPhone(newUser.getPhone());
+//                    user.setDob(newUser.getDob());
+//                    user.setGender(newUser.getGender());
+//                    user.setAddress(newUser.getAddress());
+//                    user.setEmployer(newUser.getEmployer());
+//                    user.setCandidate(newUser.getCandidate());
+//                    return userRepository.save(user);
+//                }).orElseGet(() -> {
+//                    newUser.setId(id);
+//                    return userRepository.save(newUser);
+//                });
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//                new RespondObject("OK", "Update User successfully", updatedUser)
+//        );
+//    }
+
     @PutMapping("/{id}")
-    ResponseEntity<RespondObject> upsert(@PathVariable int id, @RequestBody User newUser) {
-        
-        User updatedUser = userRepository.findById(id)
-                // Update user
-                .map(user -> {
-                    user.setUsername(newUser.getUsername());
-                    user.setPassword(newUser.getPassword());
-                    user.setAvatar(newUser.getAvatar());
-                    user.setUserType(newUser.getUserType());
-                    user.setActive(newUser.getActive());
-                    user.setFullName(newUser.getFullName());
-                    user.setEmail(newUser.getEmail());
-                    user.setPhone(newUser.getPhone());
-                    user.setDob(newUser.getDob());
-                    user.setGender(newUser.getGender());
-                    user.setAddress(newUser.getAddress());
-                    user.setEmployer(newUser.getEmployer());
-                    user.setCandidate(newUser.getCandidate());
-                    return userRepository.save(user);
-                }).orElseGet(() -> {
-                    newUser.setId(id);
-                    return userRepository.save(newUser);
-                });
+    ResponseEntity<RespondObject> upsert(@PathVariable int id,
+                                         @RequestBody UpdateUserReq req) {
+        UserDTO userDTO = userService.updateUser(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("OK", "Update User successfully", updatedUser)
+                new RespondObject("OK", "Update User successfully", userDTO)
         );
     }
 
