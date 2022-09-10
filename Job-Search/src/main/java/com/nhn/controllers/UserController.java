@@ -3,22 +3,20 @@ package com.nhn.controllers;
 import com.nhn.models.RespondObject;
 import com.nhn.models.User;
 import com.nhn.models.dto.UserDTO;
+import com.nhn.models.mapper.UserMapper;
 import com.nhn.models.request.UpdateUserReq;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
-import static com.nhn.specifications.UserSpecification.*;
-
-import com.nhn.specifications.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.data.jpa.domain.Specification.*;
-
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.nhn.specifications.UserSpecification.containsUsername;
+import static org.springframework.data.jpa.domain.Specification.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/user")
@@ -31,10 +29,17 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/username/{username}")
-    List<User> findByFullNameAndGender(@PathVariable("username") String username) {
+    ResponseEntity<RespondObject> findByFullNameAndGender(@PathVariable("username") String username) {
 //        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
+        List<UserDTO> userDTOS = UserMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
 
-        return userRepository.findAll(where(containsUsername(username)));
+        return !userDTOS.isEmpty() ?
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Users found", userDTOS)
+                ) :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("FAIL", "Users not found", "")
+                );
     }
 
     @GetMapping("")

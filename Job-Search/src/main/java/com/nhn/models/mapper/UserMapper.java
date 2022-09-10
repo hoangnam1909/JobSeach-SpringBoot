@@ -10,7 +10,8 @@ import com.nhn.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -73,6 +74,16 @@ public class UserMapper {
         userDTO.setJoinedDate(user.getJoinedDate());
 
         return userDTO;
+    }
+
+    public static List<UserDTO> toDTOList(List<User> users) {
+        List<UserDTO> userList = new ArrayList<>();
+
+        users.forEach(user -> {
+            userList.add(toDTO(user));
+        });
+
+        return userList;
     }
 
 }
