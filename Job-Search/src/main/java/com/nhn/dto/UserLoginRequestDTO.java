@@ -14,8 +14,6 @@ import java.util.Date;
 public class UserLoginRequestDTO {
 
     private String username;
-    private String email;
-    private String phone;
     private String password;
 
 }

@@ -8,6 +8,11 @@ import com.nhn.dto.UserUpdateRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +30,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Qualifier("userServiceImpl")
     @Autowired
     private UserService userService;
 
@@ -46,8 +52,37 @@ public class UserController {
     }
 
     @GetMapping("")
-    List<User> getAll() {
-        return userRepository.findAll();
+    ResponseEntity<RespondObject> getWithPageNumber(@RequestParam(name = "page", required = false) String page) {
+        if (page != null) {
+            if (Integer.parseInt(page) <= 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Fail", "Page number of out range", ""));
+            }
+
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, 5, Sort.by("id").ascending());
+            Page<User> foundUser = userRepository.findAll(paging);
+            System.err.println("getNumber = " + foundUser.getNumber());
+            System.err.println("getNumberOfElements = " + foundUser.getNumberOfElements());
+            System.err.println("getTotalElements = " + foundUser.getTotalElements());
+            System.err.println("getTotalPages = " + foundUser.getTotalPages());
+
+            if (Integer.parseInt(page) > foundUser.getTotalPages()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Fail", "Page number of out range", ""));
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Users found", foundUser));
+        } else {
+            List<User> foundUser = userRepository.findAll();
+            return foundUser.size() > 0 ?
+                    ResponseEntity.status(HttpStatus.OK).body(
+                            new RespondObject("OK", "Users found", foundUser)
+                    ) :
+                    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                            new RespondObject("FAIL", "No users", "")
+                    );
+        }
     }
 
     @GetMapping("/{id}")
@@ -77,36 +112,6 @@ public class UserController {
                 new RespondObject("OK", "Save User successfully", userRepository.save(user))
         );
     }
-
-//    @PutMapping("/{id}")
-//    ResponseEntity<RespondObject> upsert(@PathVariable int id,
-//                                         @RequestBody User newUser) {
-//
-//        User updatedUser = userRepository.findById(id)
-//                // Update user
-//                .map(user -> {
-//                    user.setUsername(newUser.getUsername());
-//                    user.setPassword(newUser.getPassword());
-//                    user.setAvatar(newUser.getAvatar());
-//                    user.setUserType(newUser.getUserType());
-//                    user.setActive(newUser.getActive());
-//                    user.setFullName(newUser.getFullName());
-//                    user.setEmail(newUser.getEmail());
-//                    user.setPhone(newUser.getPhone());
-//                    user.setDob(newUser.getDob());
-//                    user.setGender(newUser.getGender());
-//                    user.setAddress(newUser.getAddress());
-//                    user.setEmployer(newUser.getEmployer());
-//                    user.setCandidate(newUser.getCandidate());
-//                    return userRepository.save(user);
-//                }).orElseGet(() -> {
-//                    newUser.setId(id);
-//                    return userRepository.save(newUser);
-//                });
-//        return ResponseEntity.status(HttpStatus.OK).body(
-//                new RespondObject("OK", "Update User successfully", updatedUser)
-//        );
-//    }
 
     @PutMapping("/{id}")
     ResponseEntity<RespondObject> upsert(@PathVariable int id,

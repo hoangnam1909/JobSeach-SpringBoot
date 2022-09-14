@@ -1,15 +1,18 @@
 package com.nhn.service;
 
+import com.nhn.Util.JwtUtils;
+import com.nhn.common.RespondObject;
 import com.nhn.dto.UserLoginRequestDTO;
 import com.nhn.dto.UserSignUpRequestDTO;
-import com.nhn.common.RespondObject;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class LoginService {
@@ -20,7 +23,10 @@ public class LoginService {
     @Autowired
     private UserMapper userMapper;
 
-    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO){
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO) {
         RespondObject respondObject = new RespondObject();
 
         // dto to entity
@@ -30,28 +36,57 @@ public class LoginService {
         // store entity
         userSignUp = userRepository.save(userSignUp);
 
-        return new RespondObject("SUCCESS", "User Sign Up Success", userSignUp);
+        // generate token
+        String token = jwtUtils.generateJwt(userSignUp);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("accessToken", token);
+
+        respondObject.setData(data);
+
+        // return
+        return respondObject;
     }
 
-    public RespondObject login(UserLoginRequestDTO userLogin){
+    public RespondObject login(UserLoginRequestDTO userLogin) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         RespondObject respondObject = new RespondObject();
 
         // validation
 
         // verify
-        User user = userRepository.findOneByUsernameIgnoreCaseAndAndPassword(userLogin.getUsername(), userLogin.getPassword());
+        User user = userRepository.findOneByUsernameEqualsIgnoreCase(userLogin.getUsername());
+        if (!passwordEncoder.matches(userLogin.getPassword(), user.getPassword()))
+            user = null;
 
         // response
-        if (user != null){
-            respondObject.setStatus("OK");
-            respondObject.setMessage("User logged in");
-            respondObject.setData("");
-        } else {
-            respondObject.setStatus("FAILED");
+        if (user == null) {
+            respondObject.setStatus("Failed");
             respondObject.setMessage("User login failed");
             respondObject.setData("");
+
+            return respondObject;
         }
 
-        return respondObject;
+        // logged in
+        if (user.getUsername().equals(userLogin.getUsername()) &&
+                passwordEncoder.matches(userLogin.getPassword(), user.getPassword())) {
+
+            respondObject.setStatus("Ok");
+            respondObject.setMessage("User logged in");
+
+            // generate jwt
+            String token = jwtUtils.generateJwt(user);
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("accessToken", token);
+
+            respondObject.setData(data);
+
+            // return
+            return respondObject;
+        }
+
+        return new RespondObject("Failed", "Login failed", "");
     }
 }

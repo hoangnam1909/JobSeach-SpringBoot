@@ -2,11 +2,16 @@ package com.nhn.specifications;
 
 import com.nhn.model.User;
 import com.nhn.model.User_;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserSpecification {
+
+    private static BCryptPasswordEncoder passwordEncoder;
 
     public static Specification<User> hasUsername(String username){
         return ((root, query, criteriaBuilder) -> {

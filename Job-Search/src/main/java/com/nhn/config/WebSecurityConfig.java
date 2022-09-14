@@ -50,32 +50,36 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/admin").hasAnyAuthority("ADMIN")
-                .anyRequest().authenticated()
+        http
+                .authorizeRequests()
+                .antMatchers("/api/v1**").anonymous()
+                .antMatchers("/admin**").hasRole("ADMIN")
+                .anyRequest().permitAll()
                 .and()
+
+                .csrf().disable()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/login?success=true")
+                .defaultSuccessUrl("/logged-in")
                 .permitAll()
                 .and()
+
                 .logout().permitAll()
+                .logoutSuccessUrl("/index")
                 .and()
+
                 .exceptionHandling().accessDeniedPage("/403")
         ;
-
+        http.csrf().disable();
         return http.build();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
-    }
-
-
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+//    }
 
 }
