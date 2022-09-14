@@ -1,12 +1,13 @@
 package com.nhn.service;
 
-import com.nhn.models.dto.UserDTO;
-import com.nhn.models.request.UpdateUserReq;
+import com.nhn.dto.UserDTO;
+import com.nhn.dto.UserUpdateRequest;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-@Service
-public interface UserService {
+@Service("userDetailsService")
+public interface UserService extends UserDetailsService {
 
-    UserDTO updateUser(int id, UpdateUserReq req);
+    UserDTO updateUser(int id, UserUpdateRequest req);
 
 }

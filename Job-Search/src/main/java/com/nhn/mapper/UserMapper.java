@@ -1,10 +1,11 @@
-package com.nhn.models.mapper;
+package com.nhn.mapper;
 
-import com.nhn.models.Candidate;
-import com.nhn.models.Employer;
-import com.nhn.models.User;
-import com.nhn.models.dto.UserDTO;
-import com.nhn.models.request.UpdateUserReq;
+import com.nhn.dto.UserSignUpRequestDTO;
+import com.nhn.model.Candidate;
+import com.nhn.model.Employer;
+import com.nhn.model.User;
+import com.nhn.dto.UserDTO;
+import com.nhn.dto.UserUpdateRequest;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserMapper {
         return INSTANCE;
     }
 
-    public User toEntity(UpdateUserReq req) {
+    public User toEntity(UserUpdateRequest req) {
         User user = new User();
 
         user.setUsername(req.getUsername());
@@ -58,7 +59,30 @@ public class UserMapper {
         return user;
     }
 
-    public static UserDTO toDTO(User user) {
+    public User toEntity(UserSignUpRequestDTO req) {
+        User user = new User();
+
+        user.setUsername(req.getUsername());
+        user.setPassword(req.getPassword());
+        user.setAvatar(req.getAvatar());
+        user.setFullName(req.getFullName());
+        user.setEmail(req.getEmail());
+        user.setPhone(req.getPhone());
+        user.setDob(req.getDob());
+        user.setGender(req.isGender());
+        user.setAddress(req.getAddress());
+        user.setUserType(req.getUserType());
+
+        Optional<Employer> employer = employerRepository.findById(req.getEmployerId());
+        employer.ifPresent(user::setEmployer);
+
+        Optional<Candidate> candidate = candidateRepository.findById(req.getCandidateId());
+        candidate.ifPresent(user::setCandidate);
+
+        return user;
+    }
+
+    public UserDTO toDTO(User user) {
         UserDTO userDTO = new UserDTO();
 
         userDTO.setUsername(user.getUsername());
@@ -76,7 +100,7 @@ public class UserMapper {
         return userDTO;
     }
 
-    public static List<UserDTO> toDTOList(List<User> users) {
+    public List<UserDTO> toDTOList(List<User> users) {
         List<UserDTO> userList = new ArrayList<>();
 
         users.forEach(user -> {

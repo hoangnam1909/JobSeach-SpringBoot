@@ -1,7 +1,7 @@
 package com.nhn.repository.impl;
 
-import com.nhn.models.User;
-import com.nhn.models.User_;
+import com.nhn.model.User;
+import com.nhn.model.User_;
 import com.nhn.repository.UserCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

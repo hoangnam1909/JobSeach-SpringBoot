@@ -1,4 +1,4 @@
-package com.nhn.models.dto;
+package com.nhn.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,15 +7,13 @@ import lombok.Setter;
 
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserCreationDTO {
+public class UserUpdateRequest {
 
-    private int id;
     private String username;
-    private String password;
     private String avatar;
     private String userType;
     private boolean active;
@@ -25,7 +23,6 @@ public class UserCreationDTO {
     private Date dob;
     private boolean gender;
     private String address;
-    private Date joinedDate;
     private int employerId;
     private int candidateId;
 

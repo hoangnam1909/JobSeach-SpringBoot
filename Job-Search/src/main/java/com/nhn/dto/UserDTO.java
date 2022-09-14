@@ -1,4 +1,4 @@
-package com.nhn.models.request;
+package com.nhn.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class UpdateUserReq {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDTO {
 
+    private int id;
     private String username;
     private String avatar;
     private String userType;
@@ -23,7 +24,6 @@ public class UpdateUserReq {
     private Date dob;
     private boolean gender;
     private String address;
-    private int employerId;
-    private int candidateId;
+    private Date joinedDate;
 
 }

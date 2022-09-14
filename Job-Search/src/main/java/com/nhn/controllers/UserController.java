@@ -1,10 +1,10 @@
 package com.nhn.controllers;
 
-import com.nhn.models.RespondObject;
-import com.nhn.models.User;
-import com.nhn.models.dto.UserDTO;
-import com.nhn.models.mapper.UserMapper;
-import com.nhn.models.request.UpdateUserReq;
+import com.nhn.common.RespondObject;
+import com.nhn.model.User;
+import com.nhn.dto.UserDTO;
+import com.nhn.mapper.UserMapper;
+import com.nhn.dto.UserUpdateRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @GetMapping("/username/{username}")
     ResponseEntity<RespondObject> findByFullNameAndGender(@PathVariable("username") String username) {
 //        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
-        List<UserDTO> userDTOS = UserMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
+        List<UserDTO> userDTOS = userMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
 
         return !userDTOS.isEmpty() ?
                 ResponseEntity.status(HttpStatus.OK).body(
@@ -107,7 +110,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     ResponseEntity<RespondObject> upsert(@PathVariable int id,
-                                         @RequestBody UpdateUserReq req) {
+                                         @RequestBody UserUpdateRequest req) {
         UserDTO userDTO = userService.updateUser(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("OK", "Update User successfully", userDTO)

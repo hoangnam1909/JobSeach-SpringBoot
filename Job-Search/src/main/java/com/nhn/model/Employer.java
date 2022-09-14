@@ -1,4 +1,4 @@
-package com.nhn.models;
+package com.nhn.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

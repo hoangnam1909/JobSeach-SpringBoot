@@ -1,5 +1,6 @@
-package com.nhn.models;
+package com.nhn.model;
 
+import com.nhn.common.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,10 +31,10 @@ public class User {
     private String avatar;
     @Basic
     @Column(name = "user_type")
-    private String userType;
+    private String userType = Constant.USER_TYPE.NORMAL;
     @Basic
     @Column(name = "active")
-    private boolean active;
+    private boolean active = true;
     @Basic
     @Column(name = "full_name")
     private String fullName;
@@ -64,5 +65,16 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
     private Employer employer;
+
+    @PrePersist
+    public void onSave(){
+        Date currentDate = new Date();
+
+        if (joinedDate == null)
+            joinedDate = currentDate;
+
+        if (userType.equals(Constant.USER_TYPE.EMPLOYER))
+            active = false;
+    }
 
 }

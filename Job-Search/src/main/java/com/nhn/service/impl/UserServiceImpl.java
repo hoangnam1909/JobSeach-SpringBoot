@@ -1,16 +1,23 @@
 package com.nhn.service.impl;
 
-import com.nhn.models.User;
-import com.nhn.models.dto.UserDTO;
-import com.nhn.models.mapper.UserMapper;
-import com.nhn.models.request.UpdateUserReq;
+import com.nhn.model.User;
+import com.nhn.dto.UserDTO;
+import com.nhn.mapper.UserMapper;
+import com.nhn.dto.UserUpdateRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -25,16 +32,30 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserDTO updateUser(int id, UpdateUserReq req) {
+    public UserDTO updateUser(int id, UserUpdateRequest req) {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isPresent()){
             User updateUser = userMapper.toEntity(req);
             updateUser.setPassword(user.get().getPassword());
-            return UserMapper.toDTO(userRepository.save(updateUser));
+            return userMapper.toDTO(userRepository.save(updateUser));
         }
 
         return null;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<User> users = this.userRepository.findByUsername(username);
+        if (users.isEmpty())
+            throw new UsernameNotFoundException("User does not exist!!!");
+
+        User user = users.get(0);
+
+        Set<GrantedAuthority> auth = new HashSet<>();
+        auth.add(new SimpleGrantedAuthority(user.getUserType()));
+
+        return new org.springframework.security.core
+                .userdetails.User(user.getUsername(), user.getPassword(), auth);
+    }
 }

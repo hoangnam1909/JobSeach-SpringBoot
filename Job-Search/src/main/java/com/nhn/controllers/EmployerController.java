@@ -1,7 +1,7 @@
 package com.nhn.controllers;
 
-import com.nhn.models.Employer;
-import com.nhn.models.RespondObject;
+import com.nhn.model.Employer;
+import com.nhn.common.RespondObject;
 import com.nhn.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

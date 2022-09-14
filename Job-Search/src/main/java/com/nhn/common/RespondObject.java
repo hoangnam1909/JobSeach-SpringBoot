@@ -1,4 +1,4 @@
-package com.nhn.models;
+package com.nhn.common;
 
 public class RespondObject {
 

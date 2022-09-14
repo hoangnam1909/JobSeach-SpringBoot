@@ -1,7 +1,7 @@
 package com.nhn.specifications;
 
-import com.nhn.models.User;
-import com.nhn.models.User_;
+import com.nhn.model.User;
+import com.nhn.model.User_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 

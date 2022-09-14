@@ -1,6 +1,6 @@
 package com.nhn.repository;
 
-import com.nhn.models.User;
+import com.nhn.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -10,5 +10,6 @@ public interface UserRepository extends JpaRepository<User, Integer>,
         UserCustomRepository, JpaSpecificationExecutor<User> {
 
     List<User> findByUsername(String username);
+    User findOneByUsernameIgnoreCaseAndAndPassword(String username, String password);
 
 }

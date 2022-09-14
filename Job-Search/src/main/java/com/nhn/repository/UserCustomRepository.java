@@ -1,6 +1,6 @@
 package com.nhn.repository;
 
-import com.nhn.models.User;
+import com.nhn.model.User;
 
 import java.util.List;
 
