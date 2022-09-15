@@ -43,6 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
+    @Bean
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
@@ -52,12 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/authenticated").permitAll()
-                .antMatchers("/current-user").permitAll()
-                .antMatchers("/public/**").permitAll()
-                .antMatchers("/success").permitAll()
-                .antMatchers("/admin").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
+//                .antMatchers("/authenticated").permitAll()
+//                .antMatchers("/current-user").permitAll()
+//                .antMatchers("/public/**").permitAll()
+//                .antMatchers("/success").permitAll()
+//                .antMatchers("/api/**").permitAll()
+//                .antMatchers("/admin").hasAuthority("ADMIN")
+                .anyRequest().permitAll()
                 .and()
 
                 .formLogin().permitAll()
@@ -68,13 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .csrf().disable()
-//                .exceptionHandling()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .exceptionHandling()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
 
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

@@ -1,9 +1,15 @@
 package com.nhn.ControllerRender;
 
+import com.nhn.common.RespondObject;
+import com.nhn.dto.UserDTO;
+import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -13,6 +19,9 @@ public class Hehe {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @RequestMapping("/public/login")
     public String login() {
@@ -28,10 +37,10 @@ public class Hehe {
     public String loginSuccess(Principal principal) {
         String username = principal.getName();
 
-        User user = userRepository.findUserByUsername(username);
+        UserDTO user = userMapper.toDTO(userRepository.findUserByUsername(username));
 
         System.err.println("username: " + user.getUsername());
-        System.err.println("password: " + user.getPassword());
+        System.err.println("fullName: " + user.getFullName());
         System.err.println("role: " + user.getUserType());
 
         return "/login-success";

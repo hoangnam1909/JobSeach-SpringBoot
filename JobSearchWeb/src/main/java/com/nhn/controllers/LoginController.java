@@ -4,6 +4,7 @@ import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.dto.CusUserDetailsImpl;
 import com.nhn.dto.LoginRequest;
+import com.nhn.dto.UserDTO;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
@@ -22,14 +23,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-//@RequestMapping("/api/v1")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v1/public")
 public class LoginController {
 
     @Autowired
@@ -41,8 +42,8 @@ public class LoginController {
     @Autowired
     private UserMapper userMapper;
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -62,24 +63,24 @@ public class LoginController {
 //        return "/login-success";
 //    }
 
-//    @PostMapping("/authenticated")
-//    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
-//
-//        try {
-//            authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-//            );
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                    loginService.login(loginRequest)
-//            );
-////            throw new Exception("Invalid username/password");
-//        }
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(
-//                new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
-//        );
-//    }
+    @PostMapping("/authenticated")
+    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
+
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    loginService.login(loginRequest)
+            );
+//            throw new Exception("Invalid username/password");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
+        );
+    }
 
 //    @RequestMapping("/login")
 //    public String loginPage() {
@@ -92,13 +93,16 @@ public class LoginController {
 //    }
 
     @GetMapping("/current-user")
-    public ResponseEntity<RespondObject> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public ResponseEntity<RespondObject> getCurrentUser(Principal principal) {
+        String username = principal.getName();
 
-        String username = authentication.getName();
-        System.err.println(username);
+        UserDTO user = userMapper.toDTO(userRepository.findUserByUsername(username));
 
-        return username != null ?
+        System.err.println("username: " + user.getUsername());
+        System.err.println("fullName: " + user.getFullName());
+        System.err.println("role: " + user.getUserType());
+
+        return user.getUsername() != null ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new RespondObject("Ok", "User logged in", username)
                 ) :
