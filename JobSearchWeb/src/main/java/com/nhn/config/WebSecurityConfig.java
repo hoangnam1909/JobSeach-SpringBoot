@@ -58,12 +58,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/authenticated").permitAll()
-//                .antMatchers("/current-user").permitAll()
-//                .antMatchers("/public/**").permitAll()
-//                .antMatchers("/success").permitAll()
-//                .antMatchers("/api/**").permitAll()
-//                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/authenticated").permitAll()
+                .antMatchers("/current-user").permitAll()
+                .antMatchers("/public/**").permitAll()
+                .antMatchers("/success").authenticated()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/admin").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
 
@@ -72,16 +72,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .usernameParameter("username")
 //                .passwordParameter("password")
                 .defaultSuccessUrl("/success")
+                .failureUrl("/error")
 
                 .and()
                 .csrf().disable()
                 .exceptionHandling()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

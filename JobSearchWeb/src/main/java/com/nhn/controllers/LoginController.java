@@ -120,37 +120,26 @@ public class LoginController {
 //                .status(HttpStatus.OK)
 //                .body(respondObject);
 //    }
-//
-//    @PostMapping("/public/login")
-//    public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest,
-//                                               HttpServletRequest request) {
-////        Authentication authentication = authenticationManager.authenticate(
-////                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-////
-////        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-////        UsernamePasswordAuthenticationToken authReq
-////                = new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
-////        Authentication auth = authenticationManager.authenticate(authReq);
-////        SecurityContext sc = SecurityContextHolder.getContext();
-////        sc.setAuthentication(auth);
-//
-//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
-//
-//        // Authenticate the user
-//        Authentication authentication = authenticationManager.authenticate(authRequest);
-//        SecurityContext securityContext = SecurityContextHolder.getContext();
-//        securityContext.setAuthentication(authentication);
-//
-//        // Create a new session and add the security context.
-//        HttpSession session = request.getSession(true);
-//        session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(new RespondObject("Ok", "User logged in", "")
-//                );
-//    }
+
+    @PostMapping("/login")
+    public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest) throws Exception {
+
+        Authentication authentication;
+
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception ex) {
+            throw new Exception("Invalid credentials");
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new RespondObject("Ok", "User logged in", "")
+                );
+    }
 
 //    @GetMapping("/privateApi")
 //    public ResponseEntity<RespondObject> privateApi(@RequestHeader(value = "authorization", defaultValue = "") String auth) throws Exception {
