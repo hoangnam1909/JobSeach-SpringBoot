@@ -1,38 +1,128 @@
 package com.nhn.specifications;
 
+import com.nhn.dto.SearchCriteria;
 import com.nhn.model.User;
-import com.nhn.model.User_;
+import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 
-@Component
-public class UserSpecification {
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
-    private static BCryptPasswordEncoder passwordEncoder;
+//@Component
+public class UserSpecification implements Specification<User> {
 
-    public static Specification<User> hasUsername(String username){
-        return ((root, query, criteriaBuilder) -> {
-            return criteriaBuilder.equal(root.get(User_.USERNAME), username);
-        });
+    private List<SearchCriteria> list;
+
+    public UserSpecification() {
+        this.list = new ArrayList<>();
     }
 
-    public static Specification<User> containsUsername(String username){
-        return ((root, query, criteriaBuilder) -> {
-            return criteriaBuilder.like(root.get(User_.USERNAME), "%" + username + "%");
-        });
+    public void add(SearchCriteria criteria) {
+        list.add(criteria);
     }
 
-    public static Specification<User> containsFullName(String fullName){
-        return ((root, query, criteriaBuilder) -> {
-            return criteriaBuilder.like(root.get(User_.FULL_NAME), "%" + fullName + "%");
-        });
+
+
+    @Override
+    public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+
+        //create a new predicate list
+        List<Predicate> predicates = new ArrayList<>();
+
+        //add add criteria to predicates
+        for (SearchCriteria criteria : list) {
+            if (criteria.getOperation().equals(SearchOperation.GREATER_THAN)) {
+
+                predicates.add(builder.greaterThan(
+                        root.get(criteria.getKey()), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.LESS_THAN)) {
+
+                predicates.add(builder.lessThan(
+                        root.get(criteria.getKey()), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.GREATER_THAN_EQUAL)) {
+
+                predicates.add(builder.greaterThanOrEqualTo(
+                        root.get(criteria.getKey()), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.LESS_THAN_EQUAL)) {
+
+                predicates.add(builder.lessThanOrEqualTo(
+                        root.get(criteria.getKey()), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.NOT_EQUAL)) {
+
+                predicates.add(builder.notEqual(
+                        root.get(criteria.getKey()), criteria.getValue()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.EQUAL)) {
+
+                predicates.add(builder.equal(
+                        root.get(criteria.getKey()), criteria.getValue()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.MATCH)) {
+
+                predicates.add(builder.like(
+                        builder.lower(root.get(criteria.getKey())),
+                        "%" + criteria.getValue().toString().toLowerCase() + "%"));
+
+            } else if (criteria.getOperation().equals(SearchOperation.MATCH_END)) {
+
+                predicates.add(builder.like(
+                        builder.lower(root.get(criteria.getKey())),
+                        criteria.getValue().toString().toLowerCase() + "%"));
+
+            } else if (criteria.getOperation().equals(SearchOperation.MATCH_START)) {
+
+                predicates.add(builder.like(
+                        builder.lower(root.get(criteria.getKey())),
+                        "%" + criteria.getValue().toString().toLowerCase()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.IN)) {
+
+                predicates.add(builder.in(root.get(criteria.getKey())).value(criteria.getValue()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.NOT_IN)) {
+
+                predicates.add(builder.not(root.get(criteria.getKey())).in(criteria.getValue()));
+
+            }
+        }
+
+        return builder.and(predicates.toArray(new Predicate[0]));
+
     }
 
-    public static Specification<User> hasGender(boolean gender){
-        return ((root, query, criteriaBuilder) -> {
-            return criteriaBuilder.equal(root.get(User_.GENDER), gender);
-        });
-    }
+
+//    private static BCryptPasswordEncoder passwordEncoder;
+//
+//    public static Specification<User> hasUsername(String username){
+//        return ((root, query, criteriaBuilder) -> {
+//            return criteriaBuilder.equal(root.get(User_.USERNAME), username);
+//        });
+//    }
+//
+//    public static Specification<User> containsUsername(String username){
+//        return ((root, query, criteriaBuilder) -> {
+//            return criteriaBuilder.like(root.get(User_.USERNAME), "%" + username + "%");
+//        });
+//    }
+//
+//    public static Specification<User> containsFullName(String fullName){
+//        return ((root, query, criteriaBuilder) -> {
+//            return criteriaBuilder.like(root.get(User_.FULL_NAME), "%" + fullName + "%");
+//        });
+//    }
+//
+//    public static Specification<User> hasGender(boolean gender){
+//        return ((root, query, criteriaBuilder) -> {
+//            return criteriaBuilder.equal(root.get(User_.GENDER), gender);
+//        });
+//    }
 
 }

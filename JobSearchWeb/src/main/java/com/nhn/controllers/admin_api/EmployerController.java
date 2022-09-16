@@ -1,4 +1,4 @@
-package com.nhn.controllers;
+package com.nhn.controllers.admin_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.model.Employer;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/v1/employer")
+@RequestMapping(path = "/admin/api/v1/employer")
 public class EmployerController {
 
     @Autowired

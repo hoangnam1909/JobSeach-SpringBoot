@@ -1,30 +1,35 @@
-package com.nhn.controllers;
+package com.nhn.controllers.admin_api;
 
 import com.nhn.common.RespondObject;
+import com.nhn.dto.SearchCriteria;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
+import com.nhn.specifications.SpecificationConverter;
+import com.nhn.specifications.UserSpecification;
+import com.nhn.specifications.key.SearchOperation;
+import com.nhn.specifications.key.UserEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-import static com.nhn.specifications.UserSpecification.containsUsername;
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @RestController
-@RequestMapping(path = "/api/v1/user")
+@RequestMapping(path = "/admin/api/v1/user")
 public class UserController {
 
     @Autowired
@@ -36,30 +41,38 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/username/{username}")
-    ResponseEntity<RespondObject> findByFullNameAndGender(@PathVariable("username") String username) {
-//        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
-        List<UserDTO> userDTOS = userMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
+    @Autowired
+    private SpecificationConverter specificationConverter;
 
-        return !userDTOS.isEmpty() ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Users found", userDTOS)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("FAIL", "Users not found", "")
-                );
-    }
+//    @GetMapping("/username/{username}")
+//    ResponseEntity<RespondObject> findByFullNameAndGender(@PathVariable("username") String username) {
+////        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
+//        List<UserDTO> userDTOS = userMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
+//
+//        return !userDTOS.isEmpty() ?
+//                ResponseEntity.status(HttpStatus.OK).body(
+//                        new RespondObject("OK", "Users found", userDTOS)
+//                ) :
+//                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+//                        new RespondObject("FAIL", "Users not found", "")
+//                );
+//    }
 
     @GetMapping("")
-    ResponseEntity<RespondObject> getWithPageNumber(@RequestParam(name = "page", required = false) String page) {
-        if (page != null) {
+    ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
+                                         @RequestParam(name = "page", defaultValue = "1") String page) {
+
+        if (params != null) {
             if (Integer.parseInt(page) <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new RespondObject("Fail", "Page number of out range", ""));
             }
 
+            UserSpecification specification = specificationConverter.userSpecification(params);
             Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, 5, Sort.by("id").ascending());
-            Page<User> foundUser = userRepository.findAll(paging);
+
+            Page<User> foundUser = userRepository.findAll(specification, paging);
+
             System.err.println("getNumber = " + foundUser.getNumber());
             System.err.println("getNumberOfElements = " + foundUser.getNumberOfElements());
             System.err.println("getTotalElements = " + foundUser.getTotalElements());
