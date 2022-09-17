@@ -36,7 +36,7 @@ public class Hehe {
 
         System.err.println("username: " + user.getUsername());
         System.err.println("fullName: " + user.getFullName());
-        System.err.println("role: " + user.getUserType());
+        System.err.println("role: " + user.getRole());
 
         return "/login-success";
     }

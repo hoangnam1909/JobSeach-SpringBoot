@@ -22,7 +22,7 @@ public class UserSignUpRequestDTO {
     private Date dob;
     private boolean gender;
     private String address;
-    private String userType;
+    private String role;
     private int employerId;
     private int candidateId;
 

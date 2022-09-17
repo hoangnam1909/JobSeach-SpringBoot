@@ -2,7 +2,7 @@ package com.nhn.common;
 
 public interface Constant {
 
-    interface USER_TYPE {
+    interface USER_ROLE {
 
         String ADMIN = "ADMIN";
 

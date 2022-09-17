@@ -39,7 +39,7 @@ public class UserMapper {
 
         user.setUsername(req.getUsername());
         user.setAvatar(req.getAvatar());
-        user.setUserType(req.getUserType());
+        user.setRole(req.getRole());
         user.setActive(req.isActive());
         user.setFullName(req.getFullName());
         user.setEmail(req.getEmail());
@@ -71,7 +71,7 @@ public class UserMapper {
         user.setDob(req.getDob());
         user.setGender(req.isGender());
         user.setAddress(req.getAddress());
-        user.setUserType(req.getUserType());
+        user.setRole(req.getRole());
 
         Optional<Employer> employer = employerRepository.findById(req.getEmployerId());
         employer.ifPresent(user::setEmployer);
@@ -87,7 +87,7 @@ public class UserMapper {
 
         userDTO.setUsername(user.getUsername());
         userDTO.setAvatar(user.getAvatar());
-        userDTO.setUserType(user.getUserType());
+        userDTO.setRole(user.getRole());
         userDTO.setActive(user.isActive());
         userDTO.setFullName(user.getFullName());
         userDTO.setEmail(user.getEmail());

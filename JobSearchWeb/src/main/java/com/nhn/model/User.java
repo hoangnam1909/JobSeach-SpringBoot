@@ -1,5 +1,6 @@
 package com.nhn.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nhn.common.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
+    @JsonIgnore
     private int id;
     @Basic
     @Column(name = "username")
@@ -30,8 +32,8 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
     @Basic
-    @Column(name = "user_type")
-    private String userType = Constant.USER_TYPE.NORMAL;
+    @Column(name = "role")
+    private String role = Constant.USER_ROLE.NORMAL;
     @Basic
     @Column(name = "active")
     private boolean active = true;
@@ -62,6 +64,7 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employer_id", referencedColumnName = "id")
     private Employer employer;
@@ -73,7 +76,7 @@ public class User {
         if (joinedDate == null)
             joinedDate = currentDate;
 
-        if (userType.equals(Constant.USER_TYPE.EMPLOYER))
+        if (role.equals(Constant.USER_ROLE.EMPLOYER))
             active = false;
     }
 

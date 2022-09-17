@@ -73,7 +73,7 @@ public class LoginController {
 
         System.err.println("username: " + userDTO.getUsername());
         System.err.println("fullName: " + userDTO.getFullName());
-        System.err.println("role: " + userDTO.getUserType());
+        System.err.println("role: " + userDTO.getRole());
 
         return userDTO.getUsername() != null ?
                 ResponseEntity.status(HttpStatus.OK).body(

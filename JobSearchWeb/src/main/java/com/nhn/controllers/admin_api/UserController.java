@@ -114,7 +114,7 @@ public class UserController {
     ResponseEntity<RespondObject> insert(@RequestBody User user) {
         if (user.getUsername() == null ||
                 user.getPassword() == null ||
-                user.getUserType() == null) {
+                user.getRole() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new RespondObject("FAIL", "Not null columns is null", "")
             );

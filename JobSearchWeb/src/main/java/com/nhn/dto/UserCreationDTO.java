@@ -17,7 +17,7 @@ public class UserCreationDTO {
     private String username;
     private String password;
     private String avatar;
-    private String userType;
+    private String role;
     private boolean active;
     private String fullName;
     private String email;

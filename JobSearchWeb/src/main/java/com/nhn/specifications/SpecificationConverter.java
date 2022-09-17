@@ -1,11 +1,8 @@
 package com.nhn.specifications;
 
 import com.nhn.dto.SearchCriteria;
-import com.nhn.model.User;
 import com.nhn.specifications.key.SearchOperation;
 import com.nhn.specifications.key.UserEnum;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

@@ -22,7 +22,7 @@ public class CusUserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         HashSet<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-        authorities.add(new SimpleGrantedAuthority(user.getUserType()));
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
         return authorities;
     }
