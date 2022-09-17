@@ -17,41 +17,53 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     @JsonIgnore
     private int id;
+
     @Basic
     @Column(name = "username")
     private String username;
+
     @Basic
     @Column(name = "password")
+    @JsonIgnore
     private String password;
+
     @Basic
     @Column(name = "avatar")
     private String avatar;
+
     @Basic
     @Column(name = "role")
     private String role = Constant.USER_ROLE.NORMAL;
     @Basic
     @Column(name = "active")
     private boolean active = true;
+
     @Basic
     @Column(name = "full_name")
     private String fullName;
+
     @Basic
     @Column(name = "email")
     private String email;
+
     @Basic
     @Column(name = "phone")
     private String phone;
+
     @Basic
     @Column(name = "dob")
     private Date dob;
+
     @Basic
     @Column(name = "gender")
-    private boolean gender;
+    private boolean gender = false;
+
     @Basic
     @Column(name = "address")
     private String address;

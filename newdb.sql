@@ -30,7 +30,7 @@ CREATE TABLE `candidate` (
   `linkedin` varchar(300) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `cv` longtext COLLATE utf8mb4_unicode_520_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,1909,'test add lang skill',NULL),(42,190901,'test add lang skill2',NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,31 +73,31 @@ INSERT INTO `employer` VALUES (1,'Microsoft','Microsoft là một tập đoàn �
 UNLOCK TABLES;
 
 --
--- Table structure for table `languages`
+-- Table structure for table `language`
 --
 
-DROP TABLE IF EXISTS `languages`;
+DROP TABLE IF EXISTS `language`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `languages` (
+CREATE TABLE `language` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_520_ci,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_language_candidate_idx` (`candidate_id`),
+  KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `languages`
+-- Dumping data for table `language`
 --
 
-LOCK TABLES `languages` WRITE;
-/*!40000 ALTER TABLE `languages` DISABLE KEYS */;
-INSERT INTO `languages` VALUES (1,'IELTS','8',1),(2,'TOEIC','850',1);
-/*!40000 ALTER TABLE `languages` ENABLE KEYS */;
+LOCK TABLES `language` WRITE;
+/*!40000 ALTER TABLE `language` DISABLE KEYS */;
+INSERT INTO `language` VALUES (21,'Tiếng Việt','',41),(22,'Tiếng Anh','',41),(23,'Tiếng Trung','',41),(24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42);
+/*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,6 +177,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
+INSERT INTO `skill` VALUES (1,'Java','Master',42);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +225,7 @@ CREATE TABLE `user` (
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `gender` tinyint DEFAULT NULL,
+  `gender` tinyint DEFAULT '0',
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `joined_date` datetime DEFAULT NULL,
   `candidate_id` int DEFAULT NULL,
@@ -236,7 +237,7 @@ CREATE TABLE `user` (
   KEY `fk_user_employer_idx` (`employer_id`),
   CONSTRAINT `fk_user_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_employer` FOREIGN KEY (`employer_id`) REFERENCES `employer` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +246,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(16,'tle115','$2a$10$PZO.QW.444UwAX/Z1QegMOE5e7SksgM32EKqeJUKDR/kSNSvSL6te','https://res.cloudinary.com/dxorabap0/image/upload/v1651835885/tad3sft0wskhbwbnjmuf.png','ROLE_NTD',1,'Lê Thị Thanh Thuỳ','lethuy01091997@gmail.com','0123456764','2000-05-11',1,'Bắc Kạn','2022-05-07 01:57:52',NULL,4),(34,'nhatuyendung1','$2a$10$Ou5IFFxv2Xhq4Iqy9DP24O01OYIl03yXXQQ.5/sXhiqQhev/IbCRK','https://res.cloudinary.com/dxorabap0/image/upload/v1651837183/izbrvjvf4wnbqybhu5cd.png','ROLE_NTD',1,'Nhà Tuyển Dụng 1','nhatuyendung1@gmail.com','0543753475','1995-08-06',0,'Hưng Yên','2022-08-05 14:51:37',NULL,2),(51,'nhatuyendungtest','$2a$10$nQXlbN/6wowMEyB7a6j7NOs2arFqvMHOVYJu5nQFPs3EgTLGdPU82','https://res.cloudinary.com/dxorabap0/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','ROLE_NTD',1,'Nhatuyendungtest','nhatuyendungtest@gmail.com','053874543','1995-09-08',0,'nhatuyendungtest','2022-05-05 13:19:02',NULL,1),(62,'nhatuyendung','$2a$10$JOVb93BfJMvHrJunn7aJdeZjVrChfDmuEOTMTUIrVR2r0eJv.3zJW','https://res.cloudinary.com/dxorabap0/image/upload/v1651837336/v0uuuznv4ncflu3i8itl.webp','ROLE_NTD',1,'Nhatuyendung','nhatuyendung@gmail.com','057834785','2005-07-08',0,'nhatuyendung','2022-05-07 01:57:52',NULL,5),(66,'spacex_elonmusk','$2a$10$mAaju0LrTWt4zkDwXjTUc.CBcBveFFpvr/4J2U9cfrxzDw17VAn86','https://res.cloudinary.com/dxorabap0/image/upload/v1651888409/ly3ymky09bwbqhxzuvso.jpg','ROLE_NTD',1,'Elon Musk','spacex_elon@gmail.com','017437534','2002-03-14',0,'Hawthorne, California, Hoa Kỳ','2022-08-05 14:51:37',NULL,6),(90,'phuongnamvina','$2a$10$6kBhM.G1/BzBLIpLuhYUzu.hxjsmhIvM3xSlxqGjZGBS2CU0.lsuO','https://res.cloudinary.com/dxorabap0/image/upload/v1659242419/mmatellaxbrd17dolfor.webp','ROLE_NTD',1,'Phương Nam Vina','phuongnamvina@gmail.com','075894753458','1984-08-11',0,'Thành phố Hồ Chí Minh','2022-05-07 01:57:52',NULL,3),(94,'shopeevn','$2a$10$n0ixQdpRi5xMTkEHY0DWJOyDyz6AAgcCWr9p1EkjBLwx7C5Gb8PnC','https://res.cloudinary.com/dxorabap0/image/upload/v1659251638/gdo9ekyv5lqouvhv2fws.jpg','ROLE_NTD',1,'Shopee','shopeevn@gmail.com','19001221','1996-08-08',1,'số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam','2022-08-05 14:51:37',NULL,12),(101,'vnairlines','$2a$10$1hg9xuoGhYUQ/Fu.nQwx1eDTV9W9MM8bsz2tiScijRQP9Egoq6dUG','https://res.cloudinary.com/dxorabap0/image/upload/v1659288633/edwy5okja3rjmzav5hvu.jpg','ROLE_NTD',1,'Vietnam Airlines','vnairlines@gmail.com','0478623432','1976-08-08',1,'Số 200 Nguyễn Sơn, P.Bồ Đề, Q.Long Biên, Hà Nội','2022-08-05 14:51:37',NULL,13),(102,'kfcvietnam','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe','https://res.cloudinary.com/dxorabap0/image/upload/v1659544737/rnjukd7vhmeyf64mfeep.jpg','ROLE_NTD',1,'KFC VIỆT NAM','kfcvietnam@gmail.com','02838489828','1998-10-29',0,'Số 292 Bà Triệu, P. Lê Đại Hành, Q. Hai Bà Trưng, TP. Hà Nội','2022-05-07 01:57:52',NULL,14),(128,'hehe','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
+INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(16,'tle115','$2a$10$PZO.QW.444UwAX/Z1QegMOE5e7SksgM32EKqeJUKDR/kSNSvSL6te','https://res.cloudinary.com/dxorabap0/image/upload/v1651835885/tad3sft0wskhbwbnjmuf.png','EMP',1,'Lê Thị Thanh Thuỳ','lethuy01091997@gmail.com','0123456764','2000-05-11',1,'Bắc Kạn','2022-05-07 01:57:52',NULL,4),(34,'nhatuyendung1','$2a$10$Ou5IFFxv2Xhq4Iqy9DP24O01OYIl03yXXQQ.5/sXhiqQhev/IbCRK','https://res.cloudinary.com/dxorabap0/image/upload/v1651837183/izbrvjvf4wnbqybhu5cd.png','EMP',1,'Nhà Tuyển Dụng 1','nhatuyendung1@gmail.com','0543753475','1995-08-06',0,'Hưng Yên','2022-08-05 14:51:37',NULL,2),(51,'nhatuyendungtest','$2a$10$nQXlbN/6wowMEyB7a6j7NOs2arFqvMHOVYJu5nQFPs3EgTLGdPU82','https://res.cloudinary.com/dxorabap0/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','EMP',1,'Nhatuyendungtest','nhatuyendungtest@gmail.com','053874543','1995-09-08',0,'nhatuyendungtest','2022-05-05 13:19:02',NULL,1),(62,'nhatuyendung','$2a$10$JOVb93BfJMvHrJunn7aJdeZjVrChfDmuEOTMTUIrVR2r0eJv.3zJW','https://res.cloudinary.com/dxorabap0/image/upload/v1651837336/v0uuuznv4ncflu3i8itl.webp','EMP',1,'Nhatuyendung','nhatuyendung@gmail.com','057834785','2005-07-08',0,'nhatuyendung','2022-05-07 01:57:52',NULL,5),(66,'spacex_elonmusk','$2a$10$mAaju0LrTWt4zkDwXjTUc.CBcBveFFpvr/4J2U9cfrxzDw17VAn86','https://res.cloudinary.com/dxorabap0/image/upload/v1651888409/ly3ymky09bwbqhxzuvso.jpg','EMP',1,'Elon Musk','spacex_elon@gmail.com','017437534','2002-03-14',0,'Hawthorne, California, Hoa Kỳ','2022-08-05 14:51:37',NULL,6),(90,'phuongnamvina','$2a$10$6kBhM.G1/BzBLIpLuhYUzu.hxjsmhIvM3xSlxqGjZGBS2CU0.lsuO','https://res.cloudinary.com/dxorabap0/image/upload/v1659242419/mmatellaxbrd17dolfor.webp','EMP',1,'Phương Nam Vina','phuongnamvina@gmail.com','075894753458','1984-08-11',0,'Thành phố Hồ Chí Minh','2022-05-07 01:57:52',NULL,3),(94,'shopeevn','$2a$10$n0ixQdpRi5xMTkEHY0DWJOyDyz6AAgcCWr9p1EkjBLwx7C5Gb8PnC','https://res.cloudinary.com/dxorabap0/image/upload/v1659251638/gdo9ekyv5lqouvhv2fws.jpg','EMP',1,'Shopee','shopeevn@gmail.com','19001221','1996-08-08',1,'số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành phố Hà Nội, Việt Nam','2022-08-05 14:51:37',NULL,12),(101,'vnairlines','$2a$10$1hg9xuoGhYUQ/Fu.nQwx1eDTV9W9MM8bsz2tiScijRQP9Egoq6dUG','https://res.cloudinary.com/dxorabap0/image/upload/v1659288633/edwy5okja3rjmzav5hvu.jpg','EMP',1,'Vietnam Airlines','vnairlines@gmail.com','0478623432','1976-08-08',1,'Số 200 Nguyễn Sơn, P.Bồ Đề, Q.Long Biên, Hà Nội','2022-08-05 14:51:37',NULL,13),(102,'kfcvietnam','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe','https://res.cloudinary.com/dxorabap0/image/upload/v1659544737/rnjukd7vhmeyf64mfeep.jpg','EMP',1,'KFC VIỆT NAM','kfcvietnam@gmail.com','02838489828','1998-10-29',0,'Số 292 Bà Triệu, P. Lê Đại Hành, Q. Hai Bà Trưng, TP. Hà Nội','2022-05-07 01:57:52',NULL,14),(128,'ungvien1','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe',NULL,'CAN',1,NULL,NULL,NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,0,NULL,NULL,42,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-17 17:27:50
+-- Dump completed on 2022-09-18  1:59:01

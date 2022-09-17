@@ -26,7 +26,7 @@ public class Candidate {
 
     @Basic
     @Column(name = "years_exp")
-    private Integer yearsExp;
+    private int yearsExp;
 
     @Basic
     @Column(name = "linkedin")
@@ -40,9 +40,9 @@ public class Candidate {
     @JsonManagedReference
     private Collection<WorkExperience> workExperiences;
 
-    @OneToMany(mappedBy = "languagesCandidate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Collection<Languages> languages;
+    private Collection<Language> languages;
 
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     @JsonManagedReference

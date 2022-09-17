@@ -1,5 +1,10 @@
 package com.nhn.common;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class RespondObject {
 
     private String status;

@@ -1,6 +1,7 @@
 package com.nhn.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Languages {
+public class Language {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -31,6 +32,11 @@ public class Languages {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference
-    private Candidate languagesCandidate;
+    private Candidate candidate;
+
+    public Language(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
 }
