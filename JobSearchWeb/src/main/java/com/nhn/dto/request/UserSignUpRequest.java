@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignUpRequestDTO {
+public class UserSignUpRequest {
 
     private String username;
     private String password;
@@ -23,7 +23,5 @@ public class UserSignUpRequestDTO {
     private boolean gender;
     private String address;
     private String role;
-    private int employerId;
-    private int candidateId;
 
 }

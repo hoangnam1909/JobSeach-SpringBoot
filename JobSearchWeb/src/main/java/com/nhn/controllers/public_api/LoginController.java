@@ -4,7 +4,7 @@ import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.LoginRequest;
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.request.UserSignUpRequestDTO;
+import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.LoginService;
@@ -86,9 +86,9 @@ public class LoginController {
     }
 
         @PostMapping("/signup")
-    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequestDTO userSignUpRequestDTO) {
+    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
 
-        RespondObject respondObject = loginService.signUp(userSignUpRequestDTO);
+        RespondObject respondObject = loginService.signUp(userSignUpRequest);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -1,7 +1,8 @@
 package com.nhn.mapper;
 
+import com.nhn.common.Constant;
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.request.UserSignUpRequestDTO;
+import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.model.Candidate;
 import com.nhn.model.Employer;
@@ -59,7 +60,7 @@ public class UserMapper {
         return user;
     }
 
-    public User toEntity(UserSignUpRequestDTO req) {
+    public User toEntity(UserSignUpRequest req) {
         User user = new User();
 
         user.setUsername(req.getUsername());
@@ -72,12 +73,6 @@ public class UserMapper {
         user.setGender(req.isGender());
         user.setAddress(req.getAddress());
         user.setRole(req.getRole());
-
-        Optional<Employer> employer = employerRepository.findById(req.getEmployerId());
-        employer.ifPresent(user::setEmployer);
-
-        Optional<Candidate> candidate = candidateRepository.findById(req.getCandidateId());
-        candidate.ifPresent(user::setCandidate);
 
         return user;
     }

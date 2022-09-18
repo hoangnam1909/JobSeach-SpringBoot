@@ -1,11 +1,16 @@
 package com.nhn.service;
 
 import com.nhn.Util.JwtUtils;
+import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.LoginRequest;
-import com.nhn.dto.request.UserSignUpRequestDTO;
+import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.mapper.UserMapper;
+import com.nhn.model.Candidate;
+import com.nhn.model.Employer;
 import com.nhn.model.User;
+import com.nhn.repository.CandidateRepository;
+import com.nhn.repository.EmployerRepository;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,16 +23,30 @@ public class LoginService {
     private UserRepository userRepository;
 
     @Autowired
+    private CandidateRepository candidateRepository;
+
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private JwtUtils jwtUtils;
 
-    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO) {
+    public RespondObject signUp(UserSignUpRequest userSignUpRequest) {
         RespondObject respondObject = new RespondObject();
 
         // dto to entity
-        User userSignUp = userMapper.toEntity(userSignUpRequestDTO);
+        User userSignUp = userMapper.toEntity(userSignUpRequest);
+
+        if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.EMPLOYER)) {
+            Employer employer = new Employer();
+            userSignUp.setEmployer(employerRepository.save(employer));
+        } else if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+            Candidate candidate = new Candidate();
+            userSignUp.setCandidate(candidateRepository.save(candidate));
+        }
 
         // store entity
         userSignUp = userRepository.save(userSignUp);
