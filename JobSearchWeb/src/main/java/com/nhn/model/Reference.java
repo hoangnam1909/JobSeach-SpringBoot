@@ -23,11 +23,11 @@ public class Reference {
 
     @Basic
     @Column(name = "name")
-    private String name;
+    private String name = "n/a";
 
     @Basic
     @Column(name = "link")
-    private String link;
+    private String link = "n/a";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)

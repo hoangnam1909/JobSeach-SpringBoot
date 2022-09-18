@@ -1,4 +1,4 @@
-package com.nhn.dto;
+package com.nhn.dto.request;
 
 import lombok.*;
 

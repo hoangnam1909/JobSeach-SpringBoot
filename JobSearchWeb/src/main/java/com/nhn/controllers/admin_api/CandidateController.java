@@ -1,20 +1,12 @@
 package com.nhn.controllers.admin_api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.nhn.Util.CandidateJSONUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
+import com.nhn.dto.request.*;
 import com.nhn.model.Candidate;
-import com.nhn.model.Language;
-import com.nhn.model.Skill;
 import com.nhn.model.User;
-import com.nhn.repository.CandidateRepository;
-import com.nhn.repository.LanguageRepository;
-import com.nhn.repository.SkillRepository;
 import com.nhn.repository.UserRepository;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.nhn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,16 +22,25 @@ public class CandidateController {
     private UserRepository userRepository;
 
     @Autowired
-    private CandidateJSONUtils candidateJSONUtils;
+    private CandidateService candidateService;
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    private LanguageService languageService;
 
     @Autowired
-    private LanguageRepository languageRepository;
+    private QualificationService qualificationService;
 
     @Autowired
-    private SkillRepository skillRepository;
+    private ReferenceService referenceService;
+
+    @Autowired
+    private SkillService skillService;
+
+    @Autowired
+    private TalentService talentService;
+
+    @Autowired
+    private WorkExperienceService workExperienceService;
 
     @GetMapping("")
     ResponseEntity<RespondObject> getAll() {
@@ -54,46 +55,97 @@ public class CandidateController {
                 );
     }
 
-    @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody String requestStr) {
+    @PutMapping("/update-candidate")
+    ResponseEntity<RespondObject> updateCandidate(@RequestBody CandidateRequest candidateRequest) {
 
-        Gson gsonBuilder = new GsonBuilder().create();
-
-        JSONObject jsonObject = new JSONObject(requestStr);
-        String candidateStr = jsonObject.getJSONObject("candidate").toString();
-        Candidate candidate = gsonBuilder.fromJson(candidateStr, Candidate.class);
-
-        Candidate candidateSaved = candidateRepository.save(candidate);
-
-        System.err.println(candidate.getClass());
-        System.err.println(candidate.getLinkedin());
-
-        JSONArray languagesArr = jsonObject.getJSONArray("languages");
-        if (!languagesArr.isEmpty()){
-            List<Language> languageList = candidateJSONUtils.toListLanguages(languagesArr);
-
-            for (Language language : languageList){
-                language.setCandidate(candidateSaved);
-                languageRepository.save(language);
-            }
+        try {
+            Candidate candidateSaved = candidateService.updateCandidate(candidateRequest);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save candidate successfully", candidateSaved.getId()));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Save candidate failed", ex));
         }
+    }
 
-        JSONArray skillsArr = jsonObject.getJSONArray("skills");
-        if (!skillsArr.isEmpty()){
-            List<Skill> skillList = candidateJSONUtils.toListSkills(skillsArr);
 
-            for (Skill skill : skillList){
-                skill.setCandidate(candidateSaved);
-                skillRepository.save(skill);
-            }
+    // ADD DETAIL
+    @PostMapping("/add-languages")
+    ResponseEntity<RespondObject> addLanguages(@RequestBody List<LanguageRequest> languageRequestList) {
+
+        try {
+            languageService.add(languageRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save languages to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
         }
+    }
 
-//        System.err.println(arr.getClass());
-//        System.err.println(arr.isEmpty());
+    @PostMapping("/add-qualifications")
+    ResponseEntity<RespondObject> addQualifications(@RequestBody List<QualificationRequest> qualificationRequestList) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("OK", "Save User successfully", "")
-        );
+        try {
+            qualificationService.add(qualificationRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save qualifications to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
+        }
+    }
+
+    @PostMapping("/add-references")
+    ResponseEntity<RespondObject> addReferences(@RequestBody List<ReferenceRequest> referenceRequestList) {
+        System.err.println(referenceRequestList.get(0).getLink());
+        try {
+            referenceService.add(referenceRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save references to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
+        }
+    }
+
+    @PostMapping("/add-skills")
+    ResponseEntity<RespondObject> addSkills(@RequestBody List<SkillRequest> skillRequestList) {
+
+        try {
+            skillService.add(skillRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save skills to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
+        }
+    }
+
+    @PostMapping("/add-talents")
+    ResponseEntity<RespondObject> addTalents(@RequestBody List<TalentRequest> talentRequestList) {
+
+        try {
+            talentService.add(talentRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save talents to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
+        }
+    }
+
+    @PostMapping("/add-work-exps")
+    ResponseEntity<RespondObject> addWorkExperiences(@RequestBody List<WorkExperienceRequest> workExperienceRequestList) {
+
+        try {
+            workExperienceService.add(workExperienceRequestList);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save work experiences to candidate successfully", ""));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+                    new RespondObject("Failed", "Error", ex));
+        }
     }
 
 }

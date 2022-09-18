@@ -27,10 +27,10 @@ DROP TABLE IF EXISTS `candidate`;
 CREATE TABLE `candidate` (
   `id` int NOT NULL AUTO_INCREMENT,
   `years_exp` int DEFAULT NULL,
-  `linkedin` varchar(300) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `cv` longtext COLLATE utf8mb4_unicode_520_ci,
+  `linkedin` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `cv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,1909,'test add lang skill',NULL),(42,190901,'test add lang skill2',NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,2222222,'candidate ungvien1 update lan2',NULL),(42,190901,'test add lang skill2',NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,12 +82,12 @@ DROP TABLE IF EXISTS `language`;
 CREATE TABLE `language` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_520_ci,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (21,'Tiếng Việt','',41),(22,'Tiếng Anh','',41),(23,'Tiếng Trung','',41),(24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42);
+INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(36,'Tiếng cc','4 kỹ năng',41),(37,'Tiếng Đức','4 kỹ năng',41),(38,'Tiếng Khóc','4 kỹ năng',41),(39,'Tiếng Lmao','4 kỹ năng',41);
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,12 +109,12 @@ DROP TABLE IF EXISTS `qualification`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qualification` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_qualification_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_qualification_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +123,7 @@ CREATE TABLE `qualification` (
 
 LOCK TABLES `qualification` WRITE;
 /*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
+INSERT INTO `qualification` VALUES (7,'nene 750',41),(8,'9.0',41);
 /*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,13 +136,13 @@ DROP TABLE IF EXISTS `reference`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reference` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `link` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_reference_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_reference_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +151,7 @@ CREATE TABLE `reference` (
 
 LOCK TABLES `reference` WRITE;
 /*!40000 ALTER TABLE `reference` DISABLE KEYS */;
+INSERT INTO `reference` VALUES (13,'Facebook','n/a',41),(14,'Youtube','n/a',41),(15,'Instagram','n/a',41);
 /*!40000 ALTER TABLE `reference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,13 +164,13 @@ DROP TABLE IF EXISTS `skill`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `skill` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `level` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `level` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +179,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (1,'Java','Master',42);
+INSERT INTO `skill` VALUES (1,'Java','Master',42),(2,'Java','Master',41),(3,'C#','Beginner',41),(4,'Python','Senior',41),(5,'Spring','Master',41);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +192,7 @@ DROP TABLE IF EXISTS `talent`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `talent` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `content` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_talent_candidate_idx` (`candidate_id`),
@@ -259,10 +261,10 @@ DROP TABLE IF EXISTS `work_experience`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `work_experience` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `from_date` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `to_date` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `content` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `position` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `content` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `position` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_candidate_id_idx` (`candidate_id`),
@@ -289,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-18  1:59:01
+-- Dump completed on 2022-09-18 15:41:17

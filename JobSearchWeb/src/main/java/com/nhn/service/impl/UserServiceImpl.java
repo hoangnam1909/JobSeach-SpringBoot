@@ -1,7 +1,7 @@
 package com.nhn.service.impl;
 
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.UserUpdateRequest;
+import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;

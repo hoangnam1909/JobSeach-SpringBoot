@@ -1,23 +1,19 @@
 package com.nhn.controllers.admin_api;
 
 import com.nhn.common.RespondObject;
-import com.nhn.dto.SearchCriteria;
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.UserUpdateRequest;
+import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.UserSpecification;
-import com.nhn.specifications.key.SearchOperation;
-import com.nhn.specifications.key.UserEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @RestController
 @RequestMapping(path = "/admin/api/v1/user")

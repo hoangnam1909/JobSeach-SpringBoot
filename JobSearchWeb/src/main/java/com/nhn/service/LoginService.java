@@ -2,17 +2,14 @@ package com.nhn.service;
 
 import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
-import com.nhn.dto.LoginRequest;
-import com.nhn.dto.UserSignUpRequestDTO;
+import com.nhn.dto.request.LoginRequest;
+import com.nhn.dto.request.UserSignUpRequestDTO;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class LoginService {
@@ -25,6 +22,21 @@ public class LoginService {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO) {
+        RespondObject respondObject = new RespondObject();
+
+        // dto to entity
+        User userSignUp = userMapper.toEntity(userSignUpRequestDTO);
+
+        // store entity
+        userSignUp = userRepository.save(userSignUp);
+
+        respondObject.setData(userSignUp);
+
+        // return
+        return respondObject;
+    }
 
 //    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO) {
 //        RespondObject respondObject = new RespondObject();

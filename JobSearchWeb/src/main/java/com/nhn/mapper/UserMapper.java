@@ -1,8 +1,8 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.UserSignUpRequestDTO;
-import com.nhn.dto.UserUpdateRequest;
+import com.nhn.dto.request.UserSignUpRequestDTO;
+import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.model.Candidate;
 import com.nhn.model.Employer;
 import com.nhn.model.User;

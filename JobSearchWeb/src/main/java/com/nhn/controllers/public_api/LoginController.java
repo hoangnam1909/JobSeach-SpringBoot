@@ -2,8 +2,9 @@ package com.nhn.controllers.public_api;
 
 import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
-import com.nhn.dto.LoginRequest;
+import com.nhn.dto.request.LoginRequest;
 import com.nhn.dto.UserDTO;
+import com.nhn.dto.request.UserSignUpRequestDTO;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.LoginService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/v1/public")
+@RequestMapping("/public/api/v1")
 public class LoginController {
 
     @Autowired
@@ -84,15 +85,15 @@ public class LoginController {
                 );
     }
 
-    //    @PostMapping("/signup")
-//    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequestDTO userSignUpRequestDTO) {
-//
-//        RespondObject respondObject = loginService.signUp(userSignUpRequestDTO);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(respondObject);
-//    }
+        @PostMapping("/signup")
+    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequestDTO userSignUpRequestDTO) {
+
+        RespondObject respondObject = loginService.signUp(userSignUpRequestDTO);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(respondObject);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest) throws Exception {

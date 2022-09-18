@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -26,11 +27,11 @@ public class WorkExperience {
 
     @Basic
     @Column(name = "from_date")
-    private String fromDate;
+    private Date fromDate;
 
     @Basic
     @Column(name = "to_date")
-    private String toDate;
+    private Date toDate;
 
     @Basic
     @Column(name = "content")
