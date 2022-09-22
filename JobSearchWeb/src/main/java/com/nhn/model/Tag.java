@@ -8,13 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "tag", schema = "jobsearchingnew", catalog = "")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Talent {
+public class Tag {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,12 +27,11 @@ public class Talent {
     private int id;
 
     @Basic
-    @Column(name = "content")
-    private String content;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)
+    @ManyToMany(mappedBy = "tags")
     @JsonBackReference
-    private Candidate candidate;
+    private List<Job> jobs;
 
 }

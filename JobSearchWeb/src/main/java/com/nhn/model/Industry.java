@@ -2,19 +2,23 @@ package com.nhn.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "industry", schema = "jobsearchingnew", catalog = "")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Talent {
+public class Industry {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,12 +27,15 @@ public class Talent {
     private int id;
 
     @Basic
-    @Column(name = "content")
-    private String content;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)
+//    @OneToMany(mappedBy = "industry", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    Set<CompanyIndustry> companyIndustrySet;
+
+    @ManyToMany(mappedBy = "industries")
     @JsonBackReference
-    private Candidate candidate;
+    private List<Company> companies;
 
 }

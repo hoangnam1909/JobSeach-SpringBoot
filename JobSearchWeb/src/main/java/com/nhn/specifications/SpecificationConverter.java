@@ -1,6 +1,7 @@
 package com.nhn.specifications;
 
 import com.nhn.dto.SearchCriteria;
+import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
 import com.nhn.specifications.key.UserEnum;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,24 @@ public class SpecificationConverter {
 
         if (params.containsKey(UserEnum.ADDRESS)){
             specification.add(new SearchCriteria(UserEnum.ADDRESS, params.get(UserEnum.ADDRESS), SearchOperation.MATCH));
+        }
+
+        return specification;
+    }
+
+    public JobSpecification jobSpecification(Map<String, String> params){
+        JobSpecification specification = new JobSpecification();
+
+        if (params.containsKey(JobEnum.TITLE)){
+            specification.add(new SearchCriteria(JobEnum.TITLE, params.get(JobEnum.TITLE), SearchOperation.MATCH));
+        }
+
+        if (params.containsKey(JobEnum.BEGINNING_SALARY)){
+            specification.add(new SearchCriteria(JobEnum.BEGINNING_SALARY, params.get(JobEnum.BEGINNING_SALARY), SearchOperation.GREATER_THAN_EQUAL));
+        }
+
+        if (params.containsKey(JobEnum.ENDING_SALARY)){
+            specification.add(new SearchCriteria(JobEnum.ENDING_SALARY, params.get(JobEnum.ENDING_SALARY), SearchOperation.LESS_THAN_EQUAL));
         }
 
         return specification;

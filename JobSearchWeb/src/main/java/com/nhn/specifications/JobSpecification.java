@@ -1,6 +1,7 @@
 package com.nhn.specifications;
 
 import com.nhn.dto.SearchCriteria;
+import com.nhn.model.Job;
 import com.nhn.model.User;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,12 +13,11 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
-public class UserSpecification implements Specification<User> {
+public class JobSpecification implements Specification<Job> {
 
     private List<SearchCriteria> list;
 
-    public UserSpecification() {
+    public JobSpecification() {
         this.list = new ArrayList<>();
     }
 
@@ -26,12 +26,10 @@ public class UserSpecification implements Specification<User> {
     }
 
     @Override
-    public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-
+    public Predicate toPredicate(Root<Job> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         //create a new predicate list
         List<Predicate> predicates = new ArrayList<>();
 
-        //add add criteria to predicates
         for (SearchCriteria criteria : list) {
             if (criteria.getOperation().equals(SearchOperation.GREATER_THAN)) {
 
@@ -93,7 +91,7 @@ public class UserSpecification implements Specification<User> {
         }
 
         return builder.and(predicates.toArray(new Predicate[0]));
-
     }
+
 
 }

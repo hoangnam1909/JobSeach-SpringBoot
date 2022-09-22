@@ -6,7 +6,7 @@ public interface Constant {
 
         String ADMIN = "ADMIN";
 
-        String EMPLOYER = "EMPLOYER";
+        String COMPANY = "COMPANY";
 
         String CANDIDATE = "CANDIDATE";
 

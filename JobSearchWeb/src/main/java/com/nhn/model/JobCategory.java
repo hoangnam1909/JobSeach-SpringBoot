@@ -1,6 +1,5 @@
 package com.nhn.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,11 +9,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "job_category", schema = "jobsearchingnew", catalog = "")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Talent {
+public class JobCategory {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,12 +23,14 @@ public class Talent {
     private int id;
 
     @Basic
-    @Column(name = "content")
-    private String content;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
-    private Candidate candidate;
+    @Basic
+    @Column(name = "description")
+    private String description;
+
+//    @OneToMany(mappedBy = "jobCategory")
+//    private Collection<JobEntity> jobsById;
 
 }

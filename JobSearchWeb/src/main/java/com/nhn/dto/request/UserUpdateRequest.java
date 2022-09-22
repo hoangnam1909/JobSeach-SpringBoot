@@ -23,7 +23,7 @@ public class UserUpdateRequest {
     private Date dob;
     private boolean gender;
     private String address;
-    private int employerId;
+    private int companyId;
     private int candidateId;
 
 }

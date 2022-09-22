@@ -1,14 +1,13 @@
 package com.nhn.mapper;
 
-import com.nhn.common.Constant;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.model.Candidate;
-import com.nhn.model.Employer;
+import com.nhn.model.Company;
 import com.nhn.model.User;
 import com.nhn.repository.CandidateRepository;
-import com.nhn.repository.EmployerRepository;
+import com.nhn.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +19,7 @@ import java.util.Optional;
 public class UserMapper {
 
     @Autowired
-    private EmployerRepository employerRepository;
+    private CompanyRepository companyRepository;
 
     @Autowired
     private CandidateRepository candidateRepository;
@@ -49,9 +48,9 @@ public class UserMapper {
         user.setGender(req.isGender());
         user.setAddress(req.getAddress());
 
-        Optional<Employer> employer = employerRepository.findById(req.getEmployerId());
-        if (employer.isPresent())
-            user.setEmployer(employer.get());
+        Optional<Company> company = companyRepository.findById(req.getCompanyId());
+        if (company.isPresent())
+            user.setCompany(company.get());
 
         Optional<Candidate> candidate = candidateRepository.findById(req.getCandidateId());
         if (candidate.isPresent())

@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -26,10 +29,13 @@ public class User {
 
     @Basic
     @Column(name = "username")
+    @NotNull
+    @UniqueElements
     private String username;
 
     @Basic
     @Column(name = "password")
+    @NotNull
     @JsonIgnore
     private String password;
 
@@ -50,6 +56,7 @@ public class User {
 
     @Basic
     @Column(name = "email")
+    @Email
     private String email;
 
     @Basic
@@ -78,8 +85,8 @@ public class User {
     private Candidate candidate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "employer_id", referencedColumnName = "id")
-    private Employer employer;
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private Company company;
 
     @PrePersist
     public void onSave(){
@@ -88,7 +95,7 @@ public class User {
         if (joinedDate == null)
             joinedDate = currentDate;
 
-        if (role.equals(Constant.USER_ROLE.EMPLOYER))
+        if (role.equals(Constant.USER_ROLE.COMPANY))
             active = false;
     }
 

@@ -11,35 +11,25 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "employer")
+@Table(name = "position", schema = "jobsearchingnew", catalog = "")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employer {
+public class Position {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     @JsonIgnore
     private int id;
+
     @Basic
     @Column(name = "name")
     private String name;
+
     @Basic
     @Column(name = "description")
     private String description;
-    @Basic
-    @Column(name = "location")
-    private String location;
-    @Basic
-    @Column(name = "contact")
-    private String contact;
-    @Basic
-    @Column(name = "website")
-    private String website;
-    @Basic
-    @Column(name = "majoring")
-    private String majoring;
 
 }
