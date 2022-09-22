@@ -1,9 +1,13 @@
 package com.nhn.service.impl;
 
 import com.nhn.Util.Util;
+import com.nhn.common.Constant;
 import com.nhn.dto.UserDTO;
+import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
+import com.nhn.model.Candidate;
+import com.nhn.model.Company;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
@@ -14,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -35,10 +41,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserMapper userMapper;
 
     @Override
+    public UserDTO add(AdminUserInsertRequest req) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        User user = userMapper.toEntity(req);
+        user.setPassword(passwordEncoder.encode(req.getPassword()));
+
+        return userMapper.toDTO(userRepository.save(user));
+    }
+
+    @Override
     public UserDTO updateUser(int id, UserUpdateRequest req) {
         Optional<User> user = userRepository.findById(id);
 
-        if (user.isPresent()){
+        if (user.isPresent()) {
             User updateUser = userMapper.toEntity(req);
 
             if (!Util.isBCrypt(user.get().getPassword()))

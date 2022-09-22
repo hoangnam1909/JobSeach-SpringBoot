@@ -2,12 +2,14 @@ package com.nhn.controllers.public_api;
 
 import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
+import com.nhn.dto.request.EmailDetails;
 import com.nhn.dto.request.LoginRequest;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
-import com.nhn.service.LoginService;
+import com.nhn.service.EmailService;
+import com.nhn.service.impl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,9 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private JwtUtils jwtUtils;
 
     @RequestMapping("/")
@@ -48,23 +53,23 @@ public class LoginController {
         return "index";
     }
 
-    @PostMapping("/authenticated")
-    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
-
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-            );
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    loginService.login(loginRequest)
-            );
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
-        );
-    }
+//    @PostMapping("/authenticated")
+//    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
+//
+//        try {
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+//            );
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                    loginService.login(loginRequest)
+//            );
+//        }
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//                new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
+//        );
+//    }
 
     @GetMapping("/current-user")
     public ResponseEntity<RespondObject> getCurrentUser(Principal principal) {
@@ -85,14 +90,33 @@ public class LoginController {
                 );
     }
 
-        @PostMapping("/signup")
-    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
+    @PostMapping("/signup")
+    public ResponseEntity<RespondObject> signUp(@RequestBody UserSignUpRequest request) {
 
-        RespondObject respondObject = loginService.signUp(userSignUpRequest);
+        try {
+            UserDTO userSaved = loginService.signUp(request);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(respondObject);
+            if (userSaved != null) {
+                EmailDetails emailDetails = new EmailDetails();
+                emailDetails.setRecipient(userSaved.getEmail());
+                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
+                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
+
+                emailService.sendSimpleMail(emailDetails);
+
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Save user successfully", userSaved)
+                );
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                        new RespondObject("Failed", "Save user failed", "")
+                );
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
     }
 
     @PostMapping("/login")
@@ -110,7 +134,6 @@ public class LoginController {
                     .status(HttpStatus.OK)
                     .body(new RespondObject("Failed", "User login failed", "")
                     );
-//            throw new Exception("Invalid credentials");
         }
 
         return ResponseEntity

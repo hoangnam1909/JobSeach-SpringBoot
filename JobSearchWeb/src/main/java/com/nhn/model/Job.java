@@ -43,7 +43,7 @@ public class Job {
 
     @Basic
     @Column(name = "job_start_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date jobStartDate;
 
     @Basic

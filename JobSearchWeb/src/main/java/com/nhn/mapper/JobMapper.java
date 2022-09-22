@@ -1,13 +1,15 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.JobRequest;
-import com.nhn.model.Job;
+import com.nhn.model.*;
 import com.nhn.repository.JobCategoryRepository;
 import com.nhn.repository.JobTypeRepository;
 import com.nhn.repository.PositionRepository;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class JobMapper {
@@ -32,10 +34,19 @@ public class JobMapper {
         job.setJobStartDate(req.getJobStartDate());
         job.setLocation(req.getLocation());
         job.setNoOfVacancies(req.getNoOfVacancies());
-        job.setPosition(positionRepository.getById(req.getPositionId()));
-        job.setJobCategory(jobCategoryRepository.getById(req.getJobCategoryId()));
-        job.setJobType(jobTypeRepository.getById(req.getJobTypeId()));
-        job.setUser(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
+
+        Optional<Position> position = positionRepository.findById(req.getPositionId());
+        position.ifPresent(job::setPosition);
+
+        Optional<JobCategory> jobCategory = jobCategoryRepository.findById(req.getJobCategoryId());
+        jobCategory.ifPresent(job::setJobCategory);
+
+        Optional<JobType> jobType = jobTypeRepository.findById(req.getJobTypeId());
+        jobType.ifPresent(job::setJobType);
+
+        Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
+        userCompany.ifPresent(job::setUser);
+
         job.setBeginningSalary(req.getBeginningSalary());
         job.setEndingSalary(req.getEndingSalary());
 

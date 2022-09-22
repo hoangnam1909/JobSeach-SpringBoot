@@ -30,7 +30,7 @@ public class Company {
 
     @Basic
     @Column(name = "company_name")
-    private String companyName;
+    private String companyName = "n/a";
 
     @Basic
     @Column(name = "company_size")

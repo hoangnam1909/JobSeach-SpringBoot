@@ -4,7 +4,7 @@ import com.nhn.common.RespondObject;
 import com.nhn.dto.request.JobRequest;
 import com.nhn.mapper.JobMapper;
 import com.nhn.model.Job;
-import com.nhn.repository.JobRepository;
+import com.nhn.repository.*;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
 import org.mindrot.jbcrypt.BCrypt;
@@ -25,7 +25,19 @@ import java.util.Map;
 public class JobController {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private JobRepository jobRepository;
+
+    @Autowired
+    private PositionRepository positionRepository;
+
+    @Autowired
+    private JobCategoryRepository jobCategoryRepository;
+
+    @Autowired
+    private JobTypeRepository jobTypeRepository;
 
     @Autowired
     private SpecificationConverter specificationConverter;
@@ -71,15 +83,18 @@ public class JobController {
     ResponseEntity<RespondObject> insert(@RequestBody JobRequest request) {
 
         try {
-            Job job = jobRepository.save(jobMapper.toEntity(request));
+            Job job = jobMapper.toEntity(request);
+            Job jobSaved = jobRepository.save(job);
+
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Job saved", job));
+                    new RespondObject("Ok", "Job saved", jobSaved));
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("OK", "Jobs found", ex.getMessage())
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Fail", "Save failed", ex.getMessage())
             );
         }
-
     }
+
+
 
 }

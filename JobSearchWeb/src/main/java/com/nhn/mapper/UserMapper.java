@@ -1,6 +1,8 @@
 package com.nhn.mapper;
 
+import com.nhn.common.Constant;
 import com.nhn.dto.UserDTO;
+import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.model.Candidate;
@@ -55,6 +57,31 @@ public class UserMapper {
         Optional<Candidate> candidate = candidateRepository.findById(req.getCandidateId());
         if (candidate.isPresent())
             user.setCandidate(candidate.get());
+
+        return user;
+    }
+
+    public User toEntity(AdminUserInsertRequest req) {
+        User user = new User();
+
+        user.setUsername(req.getUsername());
+        user.setAvatar(req.getAvatar());
+        user.setRole(req.getRole());
+        user.setActive(req.isActive());
+        user.setFullName(req.getFullName());
+        user.setEmail(req.getEmail());
+        user.setPhone(req.getPhone());
+        user.setDob(req.getDob());
+        user.setGender(req.isGender());
+        user.setAddress(req.getAddress());
+
+        if (req.getRole().equals(Constant.USER_ROLE.COMPANY)) {
+            Company company = new Company();
+            user.setCompany(companyRepository.save(company));
+        } else if (req.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+            Candidate candidate = new Candidate();
+            user.setCandidate(candidateRepository.save(candidate));
+        }
 
         return user;
     }

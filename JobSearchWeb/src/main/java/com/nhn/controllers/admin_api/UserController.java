@@ -2,10 +2,13 @@ package com.nhn.controllers.admin_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.UserDTO;
+import com.nhn.dto.request.AdminUserInsertRequest;
+import com.nhn.dto.request.EmailDetails;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
+import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.UserSpecification;
@@ -31,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private UserMapper userMapper;
@@ -91,9 +97,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<RespondObject> findById(@PathVariable int id) {
-        Optional<User> foundUser = userRepository.findById(id);
+    @GetMapping("/{username}")
+    ResponseEntity<RespondObject> findById(@PathVariable String username) {
+        Optional<User> foundUser = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(username));
 
         return foundUser.isPresent() ?
                 ResponseEntity.status(HttpStatus.OK).body(
@@ -105,18 +111,31 @@ public class UserController {
     }
 
     @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody User user) {
-        if (user.getUsername() == null ||
-                user.getPassword() == null ||
-                user.getRole() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("FAIL", "Not null columns is null", "")
+    ResponseEntity<RespondObject> insert(@RequestBody AdminUserInsertRequest req) {
+        try {
+            UserDTO userSaved = userService.add(req);
+
+            if (userSaved != null) {
+                EmailDetails emailDetails = new EmailDetails();
+                emailDetails.setRecipient(userSaved.getEmail());
+                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
+                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
+
+                emailService.sendSimpleMail(emailDetails);
+
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Save user successfully", userSaved)
+                );
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                        new RespondObject("Failed", "Save user failed", "")
+                );
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
             );
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("OK", "Save User successfully", userRepository.save(user))
-        );
     }
 
     @PutMapping("/{id}")

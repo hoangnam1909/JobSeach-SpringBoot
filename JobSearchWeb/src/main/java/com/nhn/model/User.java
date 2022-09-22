@@ -30,7 +30,6 @@ public class User {
     @Basic
     @Column(name = "username")
     @NotNull
-    @UniqueElements
     private String username;
 
     @Basic

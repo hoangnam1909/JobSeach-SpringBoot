@@ -1,4 +1,4 @@
-package com.nhn.dto;
+package com.nhn.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,10 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class AdminUserInsertRequest {
 
     private String username;
+    private String password;
     private String avatar;
     private String role;
     private boolean active;
@@ -23,6 +24,5 @@ public class UserDTO {
     private Date dob;
     private boolean gender;
     private String address;
-    private Date joinedDate;
 
 }

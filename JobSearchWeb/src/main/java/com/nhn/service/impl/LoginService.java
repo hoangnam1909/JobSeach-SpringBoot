@@ -1,8 +1,9 @@
-package com.nhn.service;
+package com.nhn.service.impl;
 
 import com.nhn.Util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
+import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.LoginRequest;
 import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.mapper.UserMapper;
@@ -34,28 +35,45 @@ public class LoginService {
     @Autowired
     private JwtUtils jwtUtils;
 
-    public RespondObject signUp(UserSignUpRequest userSignUpRequest) {
-        RespondObject respondObject = new RespondObject();
+    public UserDTO signUp(UserSignUpRequest request) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        // dto to entity
-        User userSignUp = userMapper.toEntity(userSignUpRequest);
+        User user = userMapper.toEntity(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.COMPANY)) {
+        if (request.getRole().equals(Constant.USER_ROLE.COMPANY)) {
             Company company = new Company();
-            userSignUp.setCompany(companyRepository.save(company));
-        } else if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+            user.setCompany(companyRepository.save(company));
+        } else if (request.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
             Candidate candidate = new Candidate();
-            userSignUp.setCandidate(candidateRepository.save(candidate));
+            user.setCandidate(candidateRepository.save(candidate));
         }
 
-        // store entity
-        userSignUp = userRepository.save(userSignUp);
-
-        respondObject.setData(userSignUp);
-
-        // return
-        return respondObject;
+        return userMapper.toDTO(userRepository.save(user));
     }
+
+//    public RespondObject signUp(UserSignUpRequest userSignUpRequest) {
+//        RespondObject respondObject = new RespondObject();
+//
+//        // dto to entity
+//        User userSignUp = userMapper.toEntity(userSignUpRequest);
+//
+//        if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.COMPANY)) {
+//            Company company = new Company();
+//            userSignUp.setCompany(companyRepository.save(company));
+//        } else if (userSignUpRequest.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+//            Candidate candidate = new Candidate();
+//            userSignUp.setCandidate(candidateRepository.save(candidate));
+//        }
+//
+//        // store entity
+//        userSignUp = userRepository.save(userSignUp);
+//
+//        respondObject.setData(userSignUp);
+//
+//        // return
+//        return respondObject;
+//    }
 
 //    public RespondObject signUp(UserSignUpRequestDTO userSignUpRequestDTO) {
 //        RespondObject respondObject = new RespondObject();
