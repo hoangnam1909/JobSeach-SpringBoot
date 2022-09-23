@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "candidate", schema = "jobsearchingnew", catalog = "")
+@Table(name = "candidate", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor

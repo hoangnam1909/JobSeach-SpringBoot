@@ -12,6 +12,9 @@ public enum SearchOperation {
     MATCH_START,
     MATCH_END,
     IN,
-    NOT_IN
+    NOT_IN,
+    CATEGORY_ID,
+    POSITION_ID,
+    JOB_TYPE_ID
 
 }

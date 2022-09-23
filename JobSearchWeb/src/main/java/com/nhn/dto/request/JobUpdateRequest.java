@@ -1,20 +1,21 @@
 package com.nhn.dto.request;
 
-import com.nhn.model.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobRequest {
+public class JobUpdateRequest {
 
+    private int id;
     private String companyUsername;
     private String title;
     private String description;
@@ -26,5 +27,6 @@ public class JobRequest {
     private int jobTypeId;
     private double beginningSalary;
     private double endingSalary;
+    List<Integer> tagsId;
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "industry", schema = "jobsearchingnew", catalog = "")
+@Table(name = "industry", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor

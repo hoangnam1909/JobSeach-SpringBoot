@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "job", schema = "jobsearchingnew", catalog = "")
+@Table(name = "job", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +24,6 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    @JsonIgnore
     private int id;
 
     @Basic

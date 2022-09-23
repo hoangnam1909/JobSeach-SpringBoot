@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "qualification", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor

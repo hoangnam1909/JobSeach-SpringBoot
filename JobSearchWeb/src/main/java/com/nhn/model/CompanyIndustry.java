@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "company_industry", schema = "jobsearchingnew", catalog = "")
+@Table(name = "company_industry", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor

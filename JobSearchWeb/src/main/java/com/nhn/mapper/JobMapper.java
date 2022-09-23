@@ -1,6 +1,7 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.JobRequest;
+import com.nhn.dto.request.JobUpdateRequest;
 import com.nhn.model.*;
 import com.nhn.repository.JobCategoryRepository;
 import com.nhn.repository.JobTypeRepository;
@@ -29,6 +30,34 @@ public class JobMapper {
     public Job toEntity(JobRequest req) {
         Job job = new Job();
 
+        job.setTitle(req.getTitle());
+        job.setDescription(req.getDescription());
+        job.setJobStartDate(req.getJobStartDate());
+        job.setLocation(req.getLocation());
+        job.setNoOfVacancies(req.getNoOfVacancies());
+
+        Optional<Position> position = positionRepository.findById(req.getPositionId());
+        position.ifPresent(job::setPosition);
+
+        Optional<JobCategory> jobCategory = jobCategoryRepository.findById(req.getJobCategoryId());
+        jobCategory.ifPresent(job::setJobCategory);
+
+        Optional<JobType> jobType = jobTypeRepository.findById(req.getJobTypeId());
+        jobType.ifPresent(job::setJobType);
+
+        Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
+        userCompany.ifPresent(job::setUser);
+
+        job.setBeginningSalary(req.getBeginningSalary());
+        job.setEndingSalary(req.getEndingSalary());
+
+        return job;
+    }
+
+    public Job toEntity(JobUpdateRequest req) {
+        Job job = new Job();
+
+        job.setId(req.getId());
         job.setTitle(req.getTitle());
         job.setDescription(req.getDescription());
         job.setJobStartDate(req.getJobStartDate());

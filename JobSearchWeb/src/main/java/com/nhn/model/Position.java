@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "position", schema = "jobsearchingnew", catalog = "")
+@Table(name = "position", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor

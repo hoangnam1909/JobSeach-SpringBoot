@@ -60,6 +60,18 @@ public class SpecificationConverter {
             specification.add(new SearchCriteria(JobEnum.ENDING_SALARY, params.get(JobEnum.ENDING_SALARY), SearchOperation.LESS_THAN_EQUAL));
         }
 
+        if (params.containsKey(JobEnum.CATEGORY_ID)){
+            specification.add(new SearchCriteria(JobEnum.CATEGORY_ID, params.get(JobEnum.CATEGORY_ID), SearchOperation.CATEGORY_ID));
+        }
+
+        if (params.containsKey(JobEnum.JOB_TYPE_ID)){
+            specification.add(new SearchCriteria(JobEnum.JOB_TYPE_ID, params.get(JobEnum.JOB_TYPE_ID), SearchOperation.JOB_TYPE_ID));
+        }
+
+        if (params.containsKey(JobEnum.POSITION_ID)){
+            specification.add(new SearchCriteria(JobEnum.POSITION_ID, params.get(JobEnum.POSITION_ID), SearchOperation.POSITION_ID));
+        }
+
         return specification;
     }
 

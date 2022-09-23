@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "job_tag", schema = "jobsearchingnew", catalog = "")
+@Table(name = "job_tag", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,4 +30,8 @@ public class JobTag {
     @Column(name = "tag_id")
     private int tagId;
 
+    public JobTag(int jobId, int tagId) {
+        this.jobId = jobId;
+        this.tagId = tagId;
+    }
 }

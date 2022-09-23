@@ -1,15 +1,11 @@
 package com.nhn.specifications;
 
 import com.nhn.dto.SearchCriteria;
-import com.nhn.model.Job;
-import com.nhn.model.User;
+import com.nhn.model.*;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +82,21 @@ public class JobSpecification implements Specification<Job> {
             } else if (criteria.getOperation().equals(SearchOperation.NOT_IN)) {
 
                 predicates.add(builder.not(root.get(criteria.getKey())).in(criteria.getValue()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.CATEGORY_ID)) {
+
+                Join<JobCategory, Job> categoryJobs = root.join("jobCategory");
+                predicates.add(builder.equal(categoryJobs.get("id"), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.JOB_TYPE_ID)) {
+
+                Join<JobType, Job> jobTypeJobs = root.join("jobType");
+                predicates.add(builder.equal(jobTypeJobs.get("id"), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.POSITION_ID)) {
+
+                Join<Position, Job> positionJobs = root.join("position");
+                predicates.add(builder.equal(positionJobs.get("id"), criteria.getValue().toString()));
 
             }
         }

@@ -45,7 +45,7 @@ public class LoginController {
 
     @RequestMapping("/")
     public String welcome() {
-        return "welcome huhu";
+        return "welcome huh";
     }
 
     @RequestMapping("/index")
@@ -105,7 +105,7 @@ public class LoginController {
                 emailService.sendSimpleMail(emailDetails);
 
                 return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Save user successfully", userSaved)
+                        new RespondObject("Ok", "Save user successfully", userSaved)
                 );
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
@@ -120,7 +120,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication;
 

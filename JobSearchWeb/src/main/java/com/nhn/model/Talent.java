@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "talent", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
