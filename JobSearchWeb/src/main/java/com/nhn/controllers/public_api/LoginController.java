@@ -121,7 +121,7 @@ public class LoginController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception ex) {
             return ResponseEntity
-                    .status(HttpStatus.OK)
+                    .status(HttpStatus.NOT_FOUND)
                     .body(new RespondObject("Failed", "User login failed", "")
                     );
         }
