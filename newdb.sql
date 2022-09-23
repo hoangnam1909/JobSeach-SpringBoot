@@ -63,7 +63,7 @@ CREATE TABLE `company` (
   `headquarters` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `link` varchar(300) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (21,'SpaceX',12000,'SpaceX','310-363-6000','sales@spacex.com','1 Rocket Rd, Hawthorne, CA 90250, United States','“You want to wake up in the morning and think the future is going to be great - and that’s what being a spacefaring civilization is all about. It’s about believing in the future and thinking that the future will be better than the past. And I can’t think of anything more exciting than going out there and being among the stars.”',2002,'Hawthorne, California','https://www.spacex.com/');
+INSERT INTO `company` VALUES (21,'SpaceX',12000,'SpaceX','310-363-6000','sales@spacex.com','1 Rocket Rd, Hawthorne, CA 90250, United States','“You want to wake up in the morning and think the future is going to be great - and that’s what being a spacefaring civilization is all about. It’s about believing in the future and thinking that the future will be better than the past. And I can’t think of anything more exciting than going out there and being among the stars.”',2002,'Hawthorne, California','https://www.spacex.com/'),(22,'n/a',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `job` (
   CONSTRAINT `fk_job_jtype` FOREIGN KEY (`job_type_id`) REFERENCES `job_type` (`id`),
   CONSTRAINT `fk_job_pos` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
   CONSTRAINT `fk_job_usercomp` FOREIGN KEY (`user_company_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,6000000,11000000,8,24,1,134),(3,'test add job',NULL,'2022-09-22 16:53:44',NULL,'2022-09-22 16:53:44',NULL,0,15000000,20000000,1,1,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,35000000,50000000,3,2,1,134);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,6000000,11000000,8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,25000000,40000000,1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,35000000,50000000,3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,35000000,50000000,2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,25000000,40000000,1,3,1,134),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,25000000,40000000,2,5,2,134),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,25000000,40000000,3,5,3,134),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,25000000,40000000,1,2,1,134);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +214,7 @@ CREATE TABLE `job_tag` (
   KEY `fk_jobtag_tag_idx` (`tag_id`),
   CONSTRAINT `fk_jobtag_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
   CONSTRAINT `fk_jobtag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,6 +223,7 @@ CREATE TABLE `job_tag` (
 
 LOCK TABLES `job_tag` WRITE;
 /*!40000 ALTER TABLE `job_tag` DISABLE KEYS */;
+INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12);
 /*!40000 ALTER TABLE `job_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +469,7 @@ CREATE TABLE `user` (
   KEY `fk_user_employer_idx` (`company_id`),
   CONSTRAINT `fk_user_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -477,7 +478,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe',NULL,'CANDIDATE',1,NULL,NULL,NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2',NULL,NULL,'CANDIDATE',0,NULL,NULL,NULL,NULL,0,NULL,NULL,42,NULL),(132,'emoloyer1','emoloyer1','avatar','CANDIDATE',1,'emoloyer1 fullname','emoloyer1@gmail.com','01234567','2000-05-10',0,'Hà Nội','2022-09-18 16:14:35',44,NULL),(133,'toanem','toanem','deo co','CANDIDATE',1,'Lươn Hoàng Nam','toanem@gmail.com','01234567','2001-01-01',0,'Thành phố Hồ Chí Minh','2022-09-19 20:54:29',45,NULL),(134,'company1','$2a$12$RqfagGpmp9wydk.fYNCaNOKnwR8ZlOez8hL1Mr7GT.ndkE9pwiQee',NULL,'COMPANY',0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,21);
+INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe',NULL,'CANDIDATE',1,NULL,NULL,NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2',NULL,NULL,'CANDIDATE',0,NULL,NULL,NULL,NULL,0,NULL,NULL,42,NULL),(132,'emoloyer1','emoloyer1','avatar','CANDIDATE',1,'emoloyer1 fullname','emoloyer1@gmail.com','01234567','2000-05-10',0,'Hà Nội','2022-09-18 16:14:35',44,NULL),(133,'toanem','toanem','deo co','CANDIDATE',1,'Lươn Hoàng Nam','toanem@gmail.com','01234567','2001-01-01',0,'Thành phố Hồ Chí Minh','2022-09-19 20:54:29',45,NULL),(134,'company1','$2a$12$RqfagGpmp9wydk.fYNCaNOKnwR8ZlOez8hL1Mr7GT.ndkE9pwiQee',NULL,'COMPANY',0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,21),(135,'admin2','$2a$10$uz4YCYRUpnYwQePYS3eZnObQZ6rLDbjPfn3F4gO2ibLO.kayp4Lpe',NULL,'ADMIN',0,NULL,'nguyenhoangn023@gmail.com',NULL,NULL,0,NULL,'2022-09-22 23:46:57',NULL,NULL),(136,'audi','$2a$10$Dn9QRA0zvzl8L4hXptbXaeLQiYv6u.gMYHfAUCyeQNKSoeYCGEq6a','deo co','COMPANY',0,'Audi Automotive manufacture','1951052125nam@ou.edu.vn','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -520,4 +521,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-22 17:36:03
+-- Dump completed on 2022-09-23 23:39:43

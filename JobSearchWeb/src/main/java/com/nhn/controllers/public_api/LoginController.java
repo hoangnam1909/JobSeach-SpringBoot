@@ -43,16 +43,6 @@ public class LoginController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @RequestMapping("/")
-    public String welcome() {
-        return "welcome huh";
-    }
-
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
-    }
-
 //    @PostMapping("/authenticated")
 //    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
 //
@@ -73,21 +63,21 @@ public class LoginController {
 
     @GetMapping("/current-user")
     public ResponseEntity<RespondObject> getCurrentUser(Principal principal) {
-        String username = principal.getName();
+        try {
+            String username = principal.getName();
 
-        UserDTO userDTO = userMapper.toDTO(userRepository.findUserByUsername(username));
+            UserDTO userDTO = userMapper.toDTO(userRepository.findUserByUsername(username));
 
-        System.err.println("username: " + userDTO.getUsername());
-        System.err.println("fullName: " + userDTO.getFullName());
-        System.err.println("role: " + userDTO.getRole());
+            System.err.println("username: " + userDTO.getUsername());
+            System.err.println("fullName: " + userDTO.getFullName());
+            System.err.println("role: " + userDTO.getRole());
 
-        return userDTO.getUsername() != null ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "User logged in", userDTO)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Failed", "User not found", "")
-                );
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "User logged in", userDTO));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new RespondObject("Failed", "User not found", ""));
+        }
     }
 
     @PostMapping("/signup")

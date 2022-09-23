@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -58,18 +59,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/public/**").permitAll()
 //                .antMatchers("/success").authenticated()
 //                .antMatchers("/api/**").permitAll()
-                .antMatchers("/admin").hasAuthority("ADMIN")
-                .anyRequest().permitAll()
+//                .antMatchers("/admin").hasAuthority("ADMIN")
+//                .antMatchers("/index").permitAll()
+//                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .and()
 
-                .formLogin().permitAll()
+//                .formLogin().permitAll()
 //                .loginPage("/login")
 //                .usernameParameter("username")
 //                .passwordParameter("password")
-                .defaultSuccessUrl("/success")
-                .failureUrl("/error")
+//                .defaultSuccessUrl("/success")
+//                .failureUrl("/error")
 
-                .and()
+//                .and()
                 .csrf().disable()
                 .exceptionHandling()
 //                .and()
