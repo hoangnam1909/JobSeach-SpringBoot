@@ -5,11 +5,11 @@ import com.nhn.dto.request.JobRequest;
 import com.nhn.dto.request.JobUpdateRequest;
 import com.nhn.mapper.JobMapper;
 import com.nhn.model.Job;
+import com.nhn.model.JobType;
 import com.nhn.repository.*;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -89,6 +89,17 @@ public class JobController {
                             new RespondObject("FAIL", "No jobs found", "")
                     );
         }
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity<RespondObject> getById(@PathVariable String id) {
+
+        Optional<Job> job = jobRepository.findById(Integer.parseInt(id));
+        return job.map(value -> ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Job found", "Job a found with id = " + id, value)
+        )).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new RespondObject("Processed", "No jobs found", "No data")
+        ));
     }
 
     @PostMapping("")

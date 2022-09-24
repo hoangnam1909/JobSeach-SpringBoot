@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/public/api/v1")
 public class LoginController {
 
@@ -71,12 +72,14 @@ public class LoginController {
             System.err.println("username: " + userDTO.getUsername());
             System.err.println("fullName: " + userDTO.getFullName());
             System.err.println("role: " + userDTO.getRole());
-
+            System.err.println("logged in");
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "User logged in", userDTO));
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new RespondObject("Failed", "User not found", ""));
+            System.err.println("login failed");
+            System.err.println(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                    new RespondObject("Failed", "User not found", ex));
         }
     }
 
@@ -119,17 +122,39 @@ public class LoginController {
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.err.println("logged in");
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new RespondObject("Ok", "User logged in", authentication.getName())
+                    );
         } catch (Exception ex) {
+            System.err.println("login failed");
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body(new RespondObject("Failed", "User login failed", "")
                     );
         }
+    }
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new RespondObject("Ok", "User logged in", "")
-                );
+    @GetMapping("/logout")
+    public ResponseEntity<RespondObject> logout() {
+
+        try {
+            SecurityContextHolder.getContext().setAuthentication(null);
+            System.err.println("logged out");
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new RespondObject("Ok", "logged out", "")
+                    );
+        } catch (Exception ex) {
+            System.err.println("log out failed");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new RespondObject("Failed", "User log out failed", "")
+                    );
+        }
     }
 
 //    @GetMapping("/privateApi")
