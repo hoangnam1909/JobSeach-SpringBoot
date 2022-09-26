@@ -5,7 +5,6 @@ import com.nhn.dto.request.JobRequest;
 import com.nhn.dto.request.JobUpdateRequest;
 import com.nhn.mapper.JobMapper;
 import com.nhn.model.Job;
-import com.nhn.model.JobType;
 import com.nhn.repository.*;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
