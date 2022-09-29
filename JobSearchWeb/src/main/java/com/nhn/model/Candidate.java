@@ -60,4 +60,7 @@ public class Candidate {
     @JsonManagedReference
     private Collection<Talent> talents;
 
+//    @OneToMany(mappedBy = "candidate")
+//    private Collection<Comment> comments;
+
 }

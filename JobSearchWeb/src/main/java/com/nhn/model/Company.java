@@ -1,6 +1,5 @@
 package com.nhn.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -9,10 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "company", schema = "jobsearchingnew")
@@ -68,16 +64,19 @@ public class Company {
     @Column(name = "link")
     private String link;
 
-//    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private Set<CompanyIndustry> companyIndustrySet;
-
     @ManyToMany
     @JoinTable(
             name = "company_industry",
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "industry_id"))
     @JsonManagedReference
-    Set<Industry> industries;
+    private Set<Industry> industries;
+
+//    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+//    private Collection<Comment> comments;
+
+//    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    private Set<CompanyIndustry> companyIndustrySet;
 
 }

@@ -88,10 +88,8 @@ public class User {
 
     @PrePersist
     public void onSave(){
-        Date currentDate = new Date();
-
         if (joinedDate == null)
-            joinedDate = currentDate;
+            joinedDate = new Date();
 
         if (role.equals(Constant.USER_ROLE.COMPANY))
             active = false;
