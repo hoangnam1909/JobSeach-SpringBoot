@@ -177,8 +177,7 @@ CREATE TABLE `job` (
   `modified_date` datetime DEFAULT NULL,
   `location` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `no_of_vacancies` int DEFAULT NULL,
-  `beginning_salary` decimal(10,0) NOT NULL,
-  `ending_salary` decimal(10,0) NOT NULL,
+  `salary` varchar(15) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `position_id` int NOT NULL,
   `category_id` int NOT NULL,
   `job_type_id` int NOT NULL,
@@ -201,7 +200,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,6000000,11000000,8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,25000000,40000000,1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,35000000,50000000,3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,35000000,50000000,2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,25000000,40000000,1,3,1,134),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,25000000,40000000,2,5,2,134),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,25000000,40000000,3,5,3,134),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,25000000,40000000,1,2,1,134);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,134),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,'40000000',2,5,2,134),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,134),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,134);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -553,4 +552,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-30 15:55:00
+-- Dump completed on 2022-09-30 16:36:02
