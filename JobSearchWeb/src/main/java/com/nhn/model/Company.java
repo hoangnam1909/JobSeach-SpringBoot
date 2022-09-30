@@ -30,7 +30,7 @@ public class Company {
 
     @Basic
     @Column(name = "company_size")
-    private Integer companySize;
+    private int companySize;
 
     @Basic
     @Column(name = "contact_name")
@@ -54,7 +54,7 @@ public class Company {
 
     @Basic
     @Column(name = "founded_year")
-    private Integer foundedYear;
+    private int foundedYear;
 
     @Basic
     @Column(name = "headquarters")

@@ -2,15 +2,18 @@ package com.nhn.controllers.admin_api;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
+import com.nhn.dto.request.CandidateRequest;
+import com.nhn.dto.request.CompanyRequest;
+import com.nhn.mapper.CompanyMapper;
+import com.nhn.model.Candidate;
+import com.nhn.model.Company;
 import com.nhn.model.User;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +27,9 @@ public class CompanyController {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private CompanyMapper companyMapper;
+
     @GetMapping("")
     ResponseEntity<RespondObject> getAll() {
 
@@ -36,5 +42,20 @@ public class CompanyController {
                         new RespondObject("Fail", "No companies found", "")
                 );
     }
+
+    @PutMapping("")
+    ResponseEntity<RespondObject> updateCandidate(@RequestBody CompanyRequest request) {
+
+        try {
+            Company company = companyRepository.save(companyMapper.toEntity(request));
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Save company successfully", company));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new RespondObject("Failed", "Save company failed", ex));
+        }
+    }
+
+
 
 }

@@ -62,7 +62,7 @@ CREATE TABLE `comment` (
   KEY `fk_cmt_cand_idx` (`candidate_id`),
   CONSTRAINT `fk_cmt_cand` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`),
   CONSTRAINT `fk_cmt_comp` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1);
+INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1),(2,21,41,'cmt comp_id = 21 uv1','2022-09-29 16:36:01',1),(3,21,42,'cmt comp_id = 21 uv2','2022-09-29 16:36:01',1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -510,7 +510,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe',NULL,'CANDIDATE',1,NULL,NULL,NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2',NULL,NULL,'CANDIDATE',0,NULL,NULL,NULL,NULL,0,NULL,NULL,42,NULL),(132,'emoloyer1','emoloyer1','avatar','CANDIDATE',1,'emoloyer1 fullname','emoloyer1@gmail.com','01234567','2000-05-10',0,'Hà Nội','2022-09-18 16:14:35',44,NULL),(133,'toanem','toanem','deo co','CANDIDATE',1,'Lươn Hoàng Nam','toanem@gmail.com','01234567','2001-01-01',0,'Thành phố Hồ Chí Minh','2022-09-19 20:54:29',45,NULL),(134,'company1','$2a$12$RqfagGpmp9wydk.fYNCaNOKnwR8ZlOez8hL1Mr7GT.ndkE9pwiQee',NULL,'COMPANY',0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,21),(135,'admin2','$2a$10$uz4YCYRUpnYwQePYS3eZnObQZ6rLDbjPfn3F4gO2ibLO.kayp4Lpe',NULL,'ADMIN',0,NULL,'nguyenhoangn023@gmail.com',NULL,NULL,0,NULL,'2022-09-22 23:46:57',NULL,NULL),(136,'audi','$2a$10$Dn9QRA0zvzl8L4hXptbXaeLQiYv6u.gMYHfAUCyeQNKSoeYCGEq6a','deo co','COMPANY',0,'Audi Automotive manufacture','1951052125nam@ou.edu.vn','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22);
+INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$10$bnIbO8kkK3bMN9luP96BYufVfWZrhWM08iBpsVu5FTU.PuqTDrsHe','avatar uv1','CANDIDATE',1,'ungvien1',NULL,NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2',NULL,'avatar uv2','CANDIDATE',0,'ungvien2',NULL,NULL,NULL,0,NULL,NULL,42,NULL),(132,'emoloyer1','emoloyer1','avatar','CANDIDATE',1,'emoloyer1 fullname','emoloyer1@gmail.com','01234567','2000-05-10',0,'Hà Nội','2022-09-18 16:14:35',44,NULL),(133,'toanem','toanem','deo co','CANDIDATE',1,'Lươn Hoàng Nam','toanem@gmail.com','01234567','2001-01-01',0,'Thành phố Hồ Chí Minh','2022-09-19 20:54:29',45,NULL),(134,'company1','$2a$12$RqfagGpmp9wydk.fYNCaNOKnwR8ZlOez8hL1Mr7GT.ndkE9pwiQee',NULL,'COMPANY',0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,21),(135,'admin2','$2a$10$uz4YCYRUpnYwQePYS3eZnObQZ6rLDbjPfn3F4gO2ibLO.kayp4Lpe',NULL,'ADMIN',0,NULL,'nguyenhoangn023@gmail.com',NULL,NULL,0,NULL,'2022-09-22 23:46:57',NULL,NULL),(136,'audi','$2a$10$Dn9QRA0zvzl8L4hXptbXaeLQiYv6u.gMYHfAUCyeQNKSoeYCGEq6a','deo co','COMPANY',0,'Audi Automotive manufacture','1951052125nam@ou.edu.vn','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -553,4 +553,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-29 16:50:48
+-- Dump completed on 2022-09-30 15:55:00

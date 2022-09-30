@@ -55,13 +55,13 @@ public class CandidateController {
                 );
     }
 
-    @PutMapping("/update-candidate")
+    @PutMapping("")
     ResponseEntity<RespondObject> updateCandidate(@RequestBody CandidateRequest candidateRequest) {
 
         try {
-            Candidate candidateSaved = candidateService.updateCandidate(candidateRequest);
+            Candidate candidate = candidateService.updateCandidate(candidateRequest);
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("OK", "Save candidate successfully", candidateSaved.getId()));
+                    new RespondObject("OK", "Save candidate successfully", candidate));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
                     new RespondObject("Failed", "Save candidate failed", ex));

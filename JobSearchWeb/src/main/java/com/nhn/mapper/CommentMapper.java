@@ -1,18 +1,26 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.CommentInsertRequest;
+import com.nhn.dto.response.SimpleCommentResponse;
 import com.nhn.model.Candidate;
 import com.nhn.model.Comment;
 import com.nhn.model.Company;
+import com.nhn.model.User;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
+import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
 public class CommentMapper {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -38,6 +46,27 @@ public class CommentMapper {
         comment.setContent(request.getContent());
 
         return comment;
+    }
+
+    public SimpleCommentResponse toResponse(Comment comment) {
+        SimpleCommentResponse response = new SimpleCommentResponse();
+
+        User candidateUser = userRepository.findOneByCandidate(comment.getCandidate());
+
+        response.setFullName(candidateUser.getFullName());
+        response.setAvatar(candidateUser.getAvatar());
+        response.setContent(comment.getContent());
+        response.setCreatedDate(comment.getCreatedDate());
+
+        return response;
+    }
+
+    public List<SimpleCommentResponse> toCommentShowResponseList(List<Comment> comments) {
+        List<SimpleCommentResponse> responseList = new ArrayList<>();
+
+        comments.forEach(comment -> responseList.add(toResponse(comment)));
+
+        return responseList;
     }
 
 }
