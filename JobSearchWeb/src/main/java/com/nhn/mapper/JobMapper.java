@@ -48,8 +48,7 @@ public class JobMapper {
         Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
         userCompany.ifPresent(job::setUser);
 
-        job.setBeginningSalary(req.getBeginningSalary());
-        job.setEndingSalary(req.getEndingSalary());
+        job.setSalary(req.getSalary());
 
         return job;
     }
@@ -76,8 +75,7 @@ public class JobMapper {
         Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
         userCompany.ifPresent(job::setUser);
 
-        job.setBeginningSalary(req.getBeginningSalary());
-        job.setEndingSalary(req.getEndingSalary());
+        job.setSalary(req.getSalary());
 
         return job;
     }

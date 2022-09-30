@@ -75,14 +75,8 @@ public class Job {
     private User user;
 
     @Basic
-    @Column(name = "beginning_salary")
-    @NotNull
-    private double beginningSalary = 0;
-
-    @Basic
-    @Column(name = "ending_salary")
-    @NotNull
-    private double endingSalary = 0;
+    @Column(name = "salary")
+    private String salary;
 
     @ManyToMany
     @JoinTable(

@@ -24,7 +24,6 @@ public class JobRequest {
     private int positionId;
     private int jobCategoryId;
     private int jobTypeId;
-    private double beginningSalary;
-    private double endingSalary;
+    private String salary;
 
 }
