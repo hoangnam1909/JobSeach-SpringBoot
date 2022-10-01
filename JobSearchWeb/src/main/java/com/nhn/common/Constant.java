@@ -13,4 +13,16 @@ public interface Constant {
         String NORMAL = "NORMAL";
 
     }
+
+    interface STATUS {
+
+        String PENDING = "PENDING";
+
+        String APPROVED = "APPROVED";
+
+        String CANCELLED = "CANCELLED";
+
+        String DELETED = "DELETED";
+
+    }
 }

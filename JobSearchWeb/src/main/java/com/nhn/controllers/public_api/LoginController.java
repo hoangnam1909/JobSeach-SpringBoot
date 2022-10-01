@@ -23,7 +23,7 @@ import java.security.Principal;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/public/api/v1")
+@RequestMapping("/auth")
 public class LoginController {
 
     @Autowired

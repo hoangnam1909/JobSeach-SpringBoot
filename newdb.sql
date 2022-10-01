@@ -18,6 +18,35 @@ USE `jobsearchingnew`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `applying_job`
+--
+
+DROP TABLE IF EXISTS `applying_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applying_job` (
+  `job_id` int NOT NULL,
+  `candidate_user_id` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `status` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  PRIMARY KEY (`job_id`,`candidate_user_id`),
+  KEY `fk_user_candidate_id_idx` (`candidate_user_id`),
+  CONSTRAINT `fk_app_job_id` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
+  CONSTRAINT `fk_user_candidate_id` FOREIGN KEY (`candidate_user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `applying_job`
+--
+
+LOCK TABLES `applying_job` WRITE;
+/*!40000 ALTER TABLE `applying_job` DISABLE KEYS */;
+INSERT INTO `applying_job` VALUES (1,128,'2022-09-18 16:14:35','PENDING'),(3,128,'2022-09-18 16:14:35','PENDING'),(4,128,'2022-09-18 16:14:35','PENDING'),(4,129,'2022-09-18 16:14:35','PENDING'),(5,128,'2022-09-18 16:14:35','PENDING'),(5,129,'2022-09-18 16:14:35','PENDING');
+/*!40000 ALTER TABLE `applying_job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `candidate`
 --
 
@@ -552,4 +581,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-01 16:03:24
+-- Dump completed on 2022-10-01 19:15:07

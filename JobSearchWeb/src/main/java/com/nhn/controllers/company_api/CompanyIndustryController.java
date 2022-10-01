@@ -1,4 +1,4 @@
-package com.nhn.controllers.public_api;
+package com.nhn.controllers.company_api;
 
 
 import com.nhn.common.RespondObject;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/public/api/v1/company-industry")
+@RequestMapping(path = "/company/api/company-industry")
 public class CompanyIndustryController {
 
     @Autowired

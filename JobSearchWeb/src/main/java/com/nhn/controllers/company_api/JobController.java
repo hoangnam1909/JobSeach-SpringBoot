@@ -1,4 +1,4 @@
-package com.nhn.controllers.public_api;
+package com.nhn.controllers.company_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.JobRequest;
@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/public/api/v1/job")
+@RequestMapping(path = "/company/api/job")
 public class JobController {
 
     @Autowired

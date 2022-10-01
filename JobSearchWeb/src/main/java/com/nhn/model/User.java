@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -44,6 +45,7 @@ public class User {
     @Basic
     @Column(name = "role")
     private String role = Constant.USER_ROLE.NORMAL;
+
     @Basic
     @Column(name = "active")
     private boolean active = true;
@@ -85,6 +87,12 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
+
+//    @OneToMany(mappedBy = "user")
+//    private Collection<ApplyingJob> applyingJobs;
+
+//    @OneToMany(mappedBy = "user")
+//    private Collection<Job> jobs;
 
     @PrePersist
     public void onSave(){

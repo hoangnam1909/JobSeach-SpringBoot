@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/admin/api/v1/user")
+@RequestMapping(path = "/admin/api/user")
 public class UserController {
 
     @Autowired

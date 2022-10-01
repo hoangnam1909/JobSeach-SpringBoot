@@ -1,4 +1,4 @@
-package com.nhn.controllers.public_api;
+package com.nhn.controllers.candidate_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.CommentInsertRequest;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/public/api/v1/comment")
+@RequestMapping(path = "/candidate/api/comment")
 public class CommentController {
 
     @Autowired

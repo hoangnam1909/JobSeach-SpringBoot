@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "/admin/api/v1/candidate")
+@RequestMapping(path = "/admin/api/candidate")
 public class CandidateController {
 
     @Autowired
