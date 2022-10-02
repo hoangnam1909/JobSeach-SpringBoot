@@ -1,19 +1,18 @@
 package com.nhn.controllers.company_api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.nhn.common.RespondObject;
+import com.nhn.dto.request.IdRequest;
+import com.nhn.mapper.ApplyingJobMapper;
 import com.nhn.model.ApplyingJob;
 import com.nhn.repository.ApplyingJobRepository;
+import com.nhn.validator.JobIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -25,7 +24,10 @@ public class ApplyingJobController {
     private ApplyingJobRepository applyingJobRepository;
 
     @Autowired
-    private ObjectMapper mapper;
+    private ApplyingJobMapper applyingJobMapper;
+
+    @Autowired
+    private JobIdValidator jobIdValidator;
 
     @GetMapping("/candidate-user-id/{candidate-user-id}")
     ResponseEntity<RespondObject> getByCandidateUserId(@PathVariable(name = "candidate-user-id") String candidateUserId) {
@@ -39,36 +41,25 @@ public class ApplyingJobController {
                 new RespondObject("Found", String.format("Applying job of candidate with userId = %s found", candidateUserId), applyingJobs));
     }
 
-//    @GetMapping("/job-id/{job-id}")
-//    ResponseEntity<RespondObject> getByJobId(@PathVariable(name = "job-id") String jobId) {
-//
-//        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(Integer.parseInt(jobId));
-//
-//        if (applyingJobs.isEmpty())
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                    new RespondObject("Fail", "Job id does not exist", jobId));
-//
-//        return ResponseEntity.status(HttpStatus.FOUND).body(
-//                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", jobId), applyingJobs));
-//    }
+    @GetMapping("/job-id")
+    ResponseEntity<RespondObject> getByJobId(@Valid @RequestBody IdRequest request,
+                                             BindingResult result) {
 
-    @GetMapping("/job-id/{job-id}")
-    ResponseEntity<RespondObject> getByJobId(@PathVariable(name = "job-id") String jobId) throws JsonProcessingException {
+        jobIdValidator.validate(request, result);
+        if (result.hasErrors()) {
+            System.err.println(result.getAllErrors());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new RespondObject("Fail", "Job id invalid", result.getAllErrors()));
+        }
 
-        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(Integer.parseInt(jobId));
-//        ObjectMapper mapper = new ObjectMapper();
+        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(request.getId());
 
-        FilterProvider filters = new SimpleFilterProvider()
-                .addFilter("applyingJobFilter", SimpleBeanPropertyFilter.serializeAllExcept("job", "user"));
+        if (applyingJobs.isEmpty())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new RespondObject("Fail", "Job id does not exist", request.getId()));
 
-        String jsonString = mapper.writer(filters)
-                .withDefaultPrettyPrinter()
-                .writeValueAsString(applyingJobs);
-
-        JsonNode actualObj = mapper.readTree(jsonString);
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new RespondObject("Fail", "Job id does not exist", actualObj));
+        return ResponseEntity.status(HttpStatus.FOUND).body(
+                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", request.getId()), applyingJobMapper.removeKey(applyingJobs)));
     }
 
 }

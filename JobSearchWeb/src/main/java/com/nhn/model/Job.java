@@ -8,10 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -73,7 +70,7 @@ public class Job {
 
     @ManyToOne
     @JoinColumn(name = "user_company_id", referencedColumnName = "id", nullable = false)
-    private User user;
+    private User companyUser;
 
     @Basic
     @Column(name = "salary")

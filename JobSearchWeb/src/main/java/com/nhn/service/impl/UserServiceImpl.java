@@ -2,6 +2,7 @@ package com.nhn.service.impl;
 
 import com.nhn.Util.Util;
 import com.nhn.common.Constant;
+import com.nhn.common.RespondObject;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.UserUpdateRequest;
@@ -12,8 +13,12 @@ import com.nhn.model.User;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +70,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         return null;
+    }
+
+    @Override
+    public User currentUser() {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String username = auth.getName();
+
+            return userRepository.findUserByUsername(username);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override

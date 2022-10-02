@@ -9,6 +9,7 @@ import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
+import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,9 @@ public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserMapper userMapper;
@@ -63,21 +67,13 @@ public class LoginController {
 //    }
 
     @GetMapping("/current-user")
-    public ResponseEntity<RespondObject> getCurrentUser(Principal principal) {
+    public ResponseEntity<RespondObject> getCurrentUser() {
         try {
-            String username = principal.getName();
+            UserDTO userDTO = userMapper.toDTO(userService.currentUser());
 
-            UserDTO userDTO = userMapper.toDTO(userRepository.findUserByUsername(username));
-
-            System.err.println("username: " + userDTO.getUsername());
-            System.err.println("fullName: " + userDTO.getFullName());
-            System.err.println("role: " + userDTO.getRole());
-            System.err.println("logged in");
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "User logged in", userDTO));
         } catch (Exception ex) {
-            System.err.println("login failed");
-            System.err.println(ex.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(
                     new RespondObject("Failed", "User not found", ex));
         }
