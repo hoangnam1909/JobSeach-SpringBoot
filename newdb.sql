@@ -28,7 +28,7 @@ CREATE TABLE `applying_job` (
   `job_id` int NOT NULL,
   `candidate_user_id` int NOT NULL,
   `created_date` datetime NOT NULL,
-  `status` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`job_id`,`candidate_user_id`),
   KEY `fk_user_candidate_id_idx` (`candidate_user_id`),
   CONSTRAINT `fk_app_job_id` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
@@ -83,7 +83,7 @@ CREATE TABLE `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `company_id` int NOT NULL,
   `candidate_id` int NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `created_date` datetime NOT NULL,
   `is_available` tinyint NOT NULL,
   PRIMARY KEY (`id`),
@@ -114,13 +114,13 @@ DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `id` int NOT NULL AUTO_INCREMENT,
   `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `company_size` int DEFAULT NULL,
+  `company_size` int DEFAULT '0',
   `contact_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_tel` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_address` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `introduction` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
-  `founded_year` int DEFAULT NULL,
+  `founded_year` int DEFAULT '0',
   `headquarters` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -133,7 +133,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (21,'SpaceX',12000,'SpaceX','310-363-6000','sales@spacex.com','1 Rocket Rd, Hawthorne, CA 90250, United States','“You want to wake up in the morning and think the future is going to be great - and that’s what being a spacefaring civilization is all about. It’s about believing in the future and thinking that the future will be better than the past. And I can’t think of anything more exciting than going out there and being among the stars.”',2002,'Hawthorne, California','https://www.spacex.com/'),(22,'n/a',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `company` VALUES (21,'SpaceX',12000,'SpaceX','310-363-6000','sales@spacex.com','1 Rocket Rd, Hawthorne, CA 90250, United States','“You want to wake up in the morning and think the future is going to be great - and that’s what being a spacefaring civilization is all about. It’s about believing in the future and thinking that the future will be better than the past. And I can’t think of anything more exciting than going out there and being among the stars.”',2002,'Hawthorne, California','https://www.spacex.com/'),(22,'n/a',0,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,8 +205,8 @@ CREATE TABLE `job` (
   `job_start_date` datetime DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL,
   `location` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `no_of_vacancies` int DEFAULT NULL,
-  `salary` varchar(15) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `no_of_vacancies` int DEFAULT '0',
+  `salary` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `position_id` int NOT NULL,
   `category_id` int NOT NULL,
   `job_type_id` int NOT NULL,
@@ -220,7 +220,7 @@ CREATE TABLE `job` (
   CONSTRAINT `fk_job_jtype` FOREIGN KEY (`job_type_id`) REFERENCES `job_type` (`id`),
   CONSTRAINT `fk_job_pos` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
   CONSTRAINT `fk_job_usercomp` FOREIGN KEY (`user_company_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +229,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,136),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,'40000000',2,5,2,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,136);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,136),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,'40000000',2,5,2,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,136),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',NULL,0,'25000000',1,12,1,134),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',NULL,0,'25000000',1,12,1,134);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -581,4 +581,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-02 11:07:10
+-- Dump completed on 2022-10-04  8:30:39
