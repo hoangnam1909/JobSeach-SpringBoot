@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
@@ -83,6 +84,10 @@ public class Job {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     @JsonManagedReference
     Set<Tag> tags;
+
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Collection<Requirement> requirements;
 
     @PrePersist
     public void onSave() {

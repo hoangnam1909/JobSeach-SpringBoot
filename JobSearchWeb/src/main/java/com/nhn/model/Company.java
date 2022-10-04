@@ -21,7 +21,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    @JsonIgnore
+//    @JsonIgnore
     private int id;
 
     @Basic
