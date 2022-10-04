@@ -22,7 +22,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"ungvie\"\r\n}",
+									"raw": "{\r\n    \"username\": \"ungvien2\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -155,266 +155,6 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "candidate",
-					"item": [
-						{
-							"name": "getAll",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"ungvien1\",\r\n    \"yearsExp\": 2222222,\r\n    \"linkedin\": \"candidate ungvien1 update lan2\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/update-candidate",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"update-candidate"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addLanguages",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng cc\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Đức\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Khóc\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Lmao\",\r\n        \"description\": \"4 kỹ năng\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-language",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-language"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addQualification",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"nene 750\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"9.0\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-qualifications",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-qualifications"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addReference",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Facebook\",\r\n        \"link\": \"fb.com/abc\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Youtube\",\r\n        \"link\": \"youtube.com\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Instagram\",\r\n        \"link\": \"ig.com/abc\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-references",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-references"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addSkill",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Java\",\r\n        \"level\": \"Master\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"C#\",\r\n        \"level\": \"Beginner\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Python\",\r\n        \"level\": \"Senior\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Spring\",\r\n        \"level\": \"Master\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-skills",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-skills"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addTalent",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Đàn\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Đấm nhau\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Võ mồm\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-talents",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-talents"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addWorkExperience",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"fromDate\": \"\",\r\n        \"toDate\": \"\",\r\n        \"content\": \"TMA Solution\",\r\n        \"position\": \"Product Manager\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"fromDate\": \"\",\r\n        \"toDate\": \"\",\r\n        \"content\": \"CityNow\",\r\n        \"position\": \"Senior\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/candidate/add-work-exps",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"candidate",
-										"add-work-exps"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "company",
-					"item": [
-						{
-							"name": "findAll",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/company",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"company"
-									]
-								}
-							},
-							"response": []
-						}
-					]
 				}
 			]
 		},
@@ -439,16 +179,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/public/api/v1/signup",
+									"raw": "http://localhost:8080/auth/signup",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"public",
-										"api",
-										"v1",
+										"auth",
 										"signup"
 									]
 								}
@@ -486,16 +224,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/public/authenticated",
+									"raw": "http://localhost:8080/auth/authenticated",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"api",
-										"v1",
-										"public",
+										"auth",
 										"authenticated"
 									]
 								}
@@ -525,7 +261,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"raw": "{\r\n    \"username\": \"company1\",\r\n    \"password\": \"company1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -533,14 +269,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/login",
+									"raw": "{{port-8080}}/auth/login",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
-										"api",
-										"v1",
+										"auth",
 										"login"
 									]
 								}
@@ -549,9 +283,6 @@
 						},
 						{
 							"name": "currentUser",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"auth": {
 									"type": "noauth"
@@ -571,85 +302,14 @@
 										"disabled": true
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/current-user",
+									"raw": "{{port-8080}}/auth/current-user",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
-										"api",
-										"v1",
+										"auth",
 										"current-user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "admin",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzMzNTQyMCwiaWF0IjoxNjYzMjk5NDIwfQ.qYD84qrWgSEIyGuA2pykjYUUawNpH88Z64bd2zgndP8",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{port-8080}}/admin",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "loginSuccess",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzMzNTQyMCwiaWF0IjoxNjYzMjk5NDIwfQ.qYD84qrWgSEIyGuA2pykjYUUawNpH88Z64bd2zgndP8",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{port-8080}}/success",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"success"
 									]
 								}
 							},
@@ -658,6 +318,9 @@
 						{
 							"name": "logout",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "GET",
 								"header": [
 									{
@@ -668,55 +331,19 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzMzNTQyMCwiaWF0IjoxNjYzMjk5NDIwfQ.qYD84qrWgSEIyGuA2pykjYUUawNpH88Z64bd2zgndP8",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
 										"type": "text",
 										"disabled": true
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8080/logout",
-									"protocol": "http",
+									"raw": "{{port-8080}}/auth/logout",
 									"host": [
-										"localhost"
+										"{{port-8080}}"
 									],
-									"port": "8080",
 									"path": [
+										"auth",
 										"logout"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "regis api",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzMzNTQyMCwiaWF0IjoxNjYzMjk5NDIwfQ.qYD84qrWgSEIyGuA2pykjYUUawNpH88Z64bd2zgndP8",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8080/api/v1/public/regis",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"public",
-										"regis"
 									]
 								}
 							},
@@ -729,31 +356,38 @@
 					"item": [
 						{
 							"name": "findAll",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"jobTypeId\": \"1\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/job",
+									"raw": "{{port-8080}}/company/api/job",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
+										"company",
 										"api",
-										"v1",
 										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/company/api/job/7",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"job",
+										"7"
 									]
 								}
 							},
@@ -766,7 +400,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"loi 500 lan nua xem\",\r\n    \"description\": \"loi 500\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"12\",\r\n    \"jobTypeId\": \"1\",\r\n    \"beginningSalary\": \"25000000\",\r\n    \"endingSalary\": \"40000000\"\r\n}",
+									"raw": "{\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"loi 415 lan nua xem 1\",\r\n    \"description\": \"loi 415\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"12\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"25000000\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -774,14 +408,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/job",
+									"raw": "{{port-8080}}/company/api/job",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
+										"company",
 										"api",
-										"v1",
 										"job"
 									]
 								}
@@ -795,7 +428,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"3\",\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"job update\",\r\n    \"description\": \"loi 500\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"12\",\r\n    \"jobTypeId\": \"1\",\r\n    \"beginningSalary\": \"25000000\",\r\n    \"endingSalary\": \"40000000\",\r\n    \"tagsId\": [\r\n        1, 4, 5, 8, 12, 13\r\n    ]\r\n}",
+									"raw": "{\r\n    \"id\": 7,\r\n    \"title\": \"job update done\",\r\n    \"description\": \"loi 500 done\",\r\n    \"jobStartDate\": null,\r\n    \"location\": \"update location done\",\r\n    \"noOfVacancies\": \"1909\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"10\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"25000000\",\r\n    \"tagsId\": [\r\n        4,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"req 1 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 2 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 3 nene\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -803,14 +436,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/job",
+									"raw": "{{port-8080}}/company/api/job",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
+										"company",
 										"api",
-										"v1",
 										"job"
 									]
 								}
@@ -837,14 +469,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{port-8080}}/public/api/v1/company-industry",
+									"raw": "{{port-8080}}/company/api/company-industry",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
-										"public",
+										"company",
 										"api",
-										"v1",
 										"company-industry"
 									]
 								}
@@ -852,6 +483,587 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "insert",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"candidateId\": 421,\r\n    \"companyId\": 22,\r\n    \"content\": \"comment ne` ma' uiiii\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/candidate/api/comment",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"candidate",
+										"api",
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByCompanyId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/candidate/api/comment?companyId=21",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"candidate",
+										"api",
+										"comment"
+									],
+									"query": [
+										{
+											"key": "companyId",
+											"value": "21"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteComment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/candidate/api/comment/delete/2",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"candidate",
+										"api",
+										"comment",
+										"delete",
+										"2"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "upload",
+					"item": [
+						{
+							"name": "image",
+							"item": [
+								{
+									"name": "upload",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/F:/Wallpaper/ipad-air-2020-2560x1440-dark-abstract-23517.jpg"
+												},
+												{
+													"key": "upload_preset",
+													"value": "crlovygx",
+													"type": "text"
+												},
+												{
+													"key": "public_id",
+													"value": "nhn1909",
+													"type": "text"
+												},
+												{
+													"key": "api_key",
+													"value": "249227552583173",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "https://api.cloudinary.com/v1_1/nhn1909/:resource_type/upload",
+											"protocol": "https",
+											"host": [
+												"api",
+												"cloudinary",
+												"com"
+											],
+											"path": [
+												"v1_1",
+												"nhn1909",
+												":resource_type",
+												"upload"
+											],
+											"variable": [
+												{
+													"key": "resource_type",
+													"value": "image"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "candidate",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ungvien1\",\r\n    \"yearsExp\": 2222222,\r\n    \"linkedin\": \"candidate ungvien1 update lan2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addLanguages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng cc\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Đức\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Khóc\",\r\n        \"description\": \"4 kỹ năng\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Tiếng Lmao\",\r\n        \"description\": \"4 kỹ năng\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-language",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-language"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addQualification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"nene 750\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"9.0\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-qualifications",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-qualifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addReference",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Facebook\",\r\n        \"link\": \"fb.com/abc\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Youtube\",\r\n        \"link\": \"youtube.com\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Instagram\",\r\n        \"link\": \"ig.com/abc\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-references",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-references"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addSkill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Java\",\r\n        \"level\": \"Master\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"C#\",\r\n        \"level\": \"Beginner\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Python\",\r\n        \"level\": \"Senior\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien1\",\r\n        \"name\": \"Spring\",\r\n        \"level\": \"Master\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-skills",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTalent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Đàn\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Đấm nhau\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"content\": \"Võ mồm\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-talents",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-talents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addWorkExperience",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"fromDate\": \"\",\r\n        \"toDate\": \"\",\r\n        \"content\": \"TMA Solution\",\r\n        \"position\": \"Product Manager\"\r\n    },\r\n    {\r\n        \"username\": \"ungvien2\",\r\n        \"fromDate\": \"\",\r\n        \"toDate\": \"\",\r\n        \"content\": \"CityNow\",\r\n        \"position\": \"Senior\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/candidate/add-work-exps",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"candidate",
+								"add-work-exps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "applying-job",
+					"item": [
+						{
+							"name": "getByCandidateUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/company/api/applying-job/candidate-user-id/:candidate-user-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"applying-job",
+										"candidate-user-id",
+										":candidate-user-id"
+									],
+									"variable": [
+										{
+											"key": "candidate-user-id",
+											"value": "128"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByJobId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/company/api/applying-job/job-id/:job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"applying-job",
+										"job-id",
+										":job-id"
+									],
+									"query": [
+										{
+											"key": "jobId",
+											"value": "5",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByJobId body",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/company/api/applying-job/job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"applying-job",
+										"job-id"
+									],
+									"query": [
+										{
+											"key": "jobId",
+											"value": "5",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/company",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"company"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/test",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test-array",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/test/test-array",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"test",
+								"test-array"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addJobWithRequirement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyUsername\": \"audi\",\r\n    \"title\": \"test requirements\",\r\n    \"description\": \"requirements\",\r\n    \"jobStartDate\": null,\r\n    \"location\": \"khong biet dau\",\r\n    \"noOfVacancies\": 230,\r\n    \"positionId\": 1,\r\n    \"jobCategoryId\": 12,\r\n    \"jobTypeId\": 1,\r\n    \"salary\": \"25000000\",\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"requirement 1\"\r\n        },\r\n        {\r\n            \"content\": \"requirement 2\"\r\n        },\r\n        {\r\n            \"content\": \"requirement 3\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/test/insert-job",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"test",
+								"insert-job"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

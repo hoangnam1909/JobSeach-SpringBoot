@@ -229,7 +229,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,136),(7,'test add lan nua','loi nua bo m xem','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',NULL,0,'40000000',2,5,2,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,136),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',NULL,0,'25000000',1,12,1,134),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',NULL,0,'25000000',1,12,1,134),(12,'loi 500 lan nua xem','loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16','khong biet',200,'25000000',1,12,1,136),(13,'test requirements','requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00','khong biet dau',230,'25000000',1,12,1,136);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,136),(7,'job update done','loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13','update location done',1909,'25000000',3,10,3,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,136),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',NULL,0,'25000000',1,12,1,134),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',NULL,0,'25000000',1,12,1,134),(12,'loi 500 lan nua xem','loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16','khong biet',200,'25000000',1,12,1,136),(13,'test requirements','requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00','khong biet dau',230,'25000000',1,12,1,136);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,7 +274,7 @@ CREATE TABLE `job_tag` (
   KEY `fk_jobtag_tag_idx` (`tag_id`),
   CONSTRAINT `fk_jobtag_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
   CONSTRAINT `fk_jobtag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +283,7 @@ CREATE TABLE `job_tag` (
 
 LOCK TABLES `job_tag` WRITE;
 /*!40000 ALTER TABLE `job_tag` DISABLE KEYS */;
-INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12);
+INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12),(54,7,4),(55,7,5),(56,7,6);
 /*!40000 ALTER TABLE `job_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -434,7 +434,7 @@ CREATE TABLE `requirement` (
   PRIMARY KEY (`id`),
   KEY `fk_req_job_idx` (`job_id`),
   CONSTRAINT `fk_req_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,7 +443,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (1,'Không được hỏi ngu',13),(2,'Khôn',13),(3,'Hay cười',13),(4,'Chịu đc inner pressure',13);
+INSERT INTO `requirement` VALUES (35,'req 1 nene',7),(36,'req 2 nene',7),(37,'req 3 nene',7);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,4 +608,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-04 14:16:14
+-- Dump completed on 2022-10-04 23:30:31
