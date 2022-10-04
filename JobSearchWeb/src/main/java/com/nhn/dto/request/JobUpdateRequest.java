@@ -16,7 +16,6 @@ import java.util.Set;
 public class JobUpdateRequest {
 
     private int id;
-    private String companyUsername;
     private String title;
     private String description;
     private Date jobStartDate;
@@ -26,6 +25,7 @@ public class JobUpdateRequest {
     private int jobCategoryId;
     private int jobTypeId;
     private String salary;
-    List<Integer> tagsId;
+    private List<Integer> tagsId;
+    private List<RequirementRequest> requirements;
 
 }

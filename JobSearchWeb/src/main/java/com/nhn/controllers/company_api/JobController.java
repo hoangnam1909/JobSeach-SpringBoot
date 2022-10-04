@@ -28,19 +28,7 @@ import java.util.Optional;
 public class JobController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private JobRepository jobRepository;
-
-    @Autowired
-    private PositionRepository positionRepository;
-
-    @Autowired
-    private JobCategoryRepository jobCategoryRepository;
-
-    @Autowired
-    private JobTypeRepository jobTypeRepository;
 
     @Autowired
     private JobService jobService;

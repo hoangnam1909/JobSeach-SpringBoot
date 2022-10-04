@@ -24,6 +24,7 @@ public class JobRequest {
     private int jobCategoryId;
     private int jobTypeId;
     private String salary;
+    private List<Integer> tagsId;
     private List<RequirementRequest> requirements;
 
 }

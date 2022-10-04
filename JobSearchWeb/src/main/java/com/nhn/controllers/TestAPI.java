@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/test")
 public class TestAPI {
@@ -28,6 +31,31 @@ public class TestAPI {
     ResponseEntity<RespondObject> getAll() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new RespondObject("Fail", "No comment found", userService.currentUser()));
+    }
+
+    @GetMapping("/test-array")
+    ResponseEntity<RespondObject> testArray() {
+        List<Integer> currentTags = new ArrayList<>();
+        currentTags.add(1);
+        currentTags.add(4);
+        currentTags.add(5);
+        currentTags.add(7);
+
+        List<Integer> newTags = new ArrayList<>();
+        currentTags.add(1);
+        currentTags.add(5);
+        currentTags.add(3);
+        currentTags.add(8);
+
+        List<Integer> addingTags = currentTags;
+        addingTags.removeAll(newTags);
+
+        for (Integer addingTag : addingTags) {
+            System.err.println(addingTag);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Fail", "No comment found", addingTags));
     }
 
     @PostMapping("/insert-job")
