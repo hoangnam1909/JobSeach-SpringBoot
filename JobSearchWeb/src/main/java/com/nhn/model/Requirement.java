@@ -32,7 +32,6 @@ public class Requirement {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "job_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Job job;
 
     public Requirement(String content, Job job) {

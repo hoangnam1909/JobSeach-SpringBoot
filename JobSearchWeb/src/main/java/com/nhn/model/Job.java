@@ -87,7 +87,7 @@ public class Job {
     @JsonManagedReference
     Set<Tag> tags;
 
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Collection<Requirement> requirements;
 
