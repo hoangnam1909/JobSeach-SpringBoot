@@ -1,10 +1,11 @@
 package com.nhn.validator;
 
-import com.nhn.dto.request.IdRequest;
-import com.nhn.model.Job;
-import com.nhn.model.User;
+import com.nhn.common.Constant;
+import com.nhn.dto.request.ApplyingJobGetRequest;
+import com.nhn.entity.Job;
+import com.nhn.entity.User;
 import com.nhn.repository.JobRepository;
-import com.nhn.service.UserService;
+import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class JobIdValidator implements Validator {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
     private JobRepository jobRepository;
@@ -29,23 +30,36 @@ public class JobIdValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         try {
-            IdRequest idRequest = (IdRequest) target;
-            Optional<Job> job = jobRepository.findById(idRequest.getId());
-            User currentUser = userService.currentUser();
+            ApplyingJobGetRequest applyingJobGetRequest = (ApplyingJobGetRequest) target;
 
-            if (currentUser == null) {
-                errors.rejectValue("id", "has not logged in yet", "please login first");
-                return;
+            Optional<Job> jobOpt = jobRepository.findById(applyingJobGetRequest.getJobId());
+            Optional<User> companyUserOpt = userRepository.findById(applyingJobGetRequest.getCompanyUserId());
+
+            if (companyUserOpt.isPresent()) {
+                User companyUser = companyUserOpt.get();
+
+                if (!companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
+                    errors.rejectValue
+                            ("companyUserId",
+                                    "Company does not have permission",
+                                    "Company does not have permission");
+
+                if (jobOpt.isPresent()) {
+                    Job job = jobOpt.get();
+
+                    if (job.getCompanyUser().getId() != companyUser.getId())
+                        errors.rejectValue
+                                ("jobId",
+                                        "Company does not have permission",
+                                        "Company does not have permission to job with id = " + job.getId());
+                } else {
+                    errors.rejectValue("jobId", "Job is not exist", "Retry with other job id");
+                }
+
+            } else {
+                errors.rejectValue("companyUserId", "Company is not exist", "please login first");
             }
 
-            if (job.isEmpty())
-                errors.rejectValue("id", "job not found", "job not found");
-            else {
-                System.err.println("job company user id = " + job.get().getCompanyUser().getId());
-                System.err.println("current user id = " + currentUser.getId());
-                if (job.get().getCompanyUser().getId() != currentUser.getId())
-                    errors.rejectValue("id", "do not have permission", "do not have permission");
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

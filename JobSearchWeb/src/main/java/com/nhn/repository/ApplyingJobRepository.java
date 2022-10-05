@@ -1,7 +1,7 @@
 package com.nhn.repository;
 
-import com.nhn.model.ApplyingJob;
-import com.nhn.model.ApplyingJobId;
+import com.nhn.entity.ApplyingJob;
+import com.nhn.entity.ApplyingJobId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.nhn.repository;
 
-import com.nhn.model.CompanyIndustry;
+import com.nhn.entity.CompanyIndustry;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

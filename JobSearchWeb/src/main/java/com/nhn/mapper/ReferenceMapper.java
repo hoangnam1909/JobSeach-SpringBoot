@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.ReferenceRequest;
-import com.nhn.model.Reference;
+import com.nhn.entity.Reference;
 import org.springframework.stereotype.Component;
 
 @Component

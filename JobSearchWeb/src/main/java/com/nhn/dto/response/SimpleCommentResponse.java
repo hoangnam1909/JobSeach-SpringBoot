@@ -1,6 +1,5 @@
 package com.nhn.dto.response;
 
-import com.nhn.model.Candidate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

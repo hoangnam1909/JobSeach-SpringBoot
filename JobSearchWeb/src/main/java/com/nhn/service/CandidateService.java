@@ -1,7 +1,7 @@
 package com.nhn.service;
 
 import com.nhn.dto.request.CandidateRequest;
-import com.nhn.model.Candidate;
+import com.nhn.entity.Candidate;
 
 public interface CandidateService {
 

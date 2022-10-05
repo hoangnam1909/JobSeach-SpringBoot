@@ -26,8 +26,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public Boolean sendSimpleMail(EmailDetails details) {
         try {
-            SimpleMailMessage mailMessage
-                    = new SimpleMailMessage();
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             mailMessage.setFrom(sender);
             mailMessage.setTo(details.getRecipient());

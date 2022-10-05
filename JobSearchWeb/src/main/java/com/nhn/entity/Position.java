@@ -1,6 +1,5 @@
-package com.nhn.model;
+package com.nhn.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "job_category", schema = "jobsearchingnew")
+@Table(name = "position", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobCategory {
+public class Position {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -28,8 +27,5 @@ public class JobCategory {
     @Basic
     @Column(name = "description")
     private String description;
-
-//    @OneToMany(mappedBy = "jobCategory")
-//    private Collection<JobEntity> jobsById;
 
 }

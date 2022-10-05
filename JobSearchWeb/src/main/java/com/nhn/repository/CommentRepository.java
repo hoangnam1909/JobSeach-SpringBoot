@@ -1,8 +1,7 @@
 package com.nhn.repository;
 
-import com.nhn.model.Comment;
-import com.nhn.model.Company;
-import org.springframework.data.domain.Sort;
+import com.nhn.entity.Comment;
+import com.nhn.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

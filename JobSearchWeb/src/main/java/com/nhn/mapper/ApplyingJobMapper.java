@@ -1,6 +1,6 @@
 package com.nhn.mapper;
 
-import com.nhn.model.ApplyingJob;
+import com.nhn.entity.ApplyingJob;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

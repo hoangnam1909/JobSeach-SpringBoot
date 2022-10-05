@@ -1,7 +1,7 @@
 package com.nhn.service.impl;
 
-import com.nhn.model.Comment;
-import com.nhn.model.Company;
+import com.nhn.entity.Comment;
+import com.nhn.entity.Company;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;

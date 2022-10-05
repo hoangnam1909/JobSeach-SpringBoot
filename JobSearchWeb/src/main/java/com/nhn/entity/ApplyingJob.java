@@ -1,4 +1,4 @@
-package com.nhn.model;
+package com.nhn.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

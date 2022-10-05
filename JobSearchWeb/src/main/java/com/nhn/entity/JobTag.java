@@ -1,4 +1,4 @@
-package com.nhn.model;
+package com.nhn.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,28 +7,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Objects;
 
 @Entity
-@Table(name = "position", schema = "jobsearchingnew")
+@Table(name = "job_tag", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Position {
+public class JobTag {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
+    @JsonIgnore
     private int id;
 
     @Basic
-    @Column(name = "name")
-    private String name;
+    @Column(name = "job_id")
+    private int jobId;
 
     @Basic
-    @Column(name = "description")
-    private String description;
+    @Column(name = "tag_id")
+    private int tagId;
 
+    public JobTag(int jobId, int tagId) {
+        this.jobId = jobId;
+        this.tagId = tagId;
+    }
 }

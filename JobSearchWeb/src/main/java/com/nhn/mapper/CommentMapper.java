@@ -2,10 +2,10 @@ package com.nhn.mapper;
 
 import com.nhn.dto.request.CommentInsertRequest;
 import com.nhn.dto.response.SimpleCommentResponse;
-import com.nhn.model.Candidate;
-import com.nhn.model.Comment;
-import com.nhn.model.Company;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Comment;
+import com.nhn.entity.Company;
+import com.nhn.entity.User;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;

@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.LanguageRequest;
-import com.nhn.model.Language;
+import com.nhn.entity.Language;
 import org.springframework.stereotype.Component;
 
 @Component

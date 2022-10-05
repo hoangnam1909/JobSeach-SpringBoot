@@ -1,4 +1,4 @@
-package com.nhn.model;
+package com.nhn.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,16 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
 
 @Entity
-@Table(name = "work_experience", schema = "jobsearchingnew")
+@Table(name = "reference", schema = "jobsearchingnew")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkExperience {
+public class Reference {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,20 +24,12 @@ public class WorkExperience {
     private int id;
 
     @Basic
-    @Column(name = "from_date")
-    private Date fromDate;
+    @Column(name = "name")
+    private String name = "n/a";
 
     @Basic
-    @Column(name = "to_date")
-    private Date toDate;
-
-    @Basic
-    @Column(name = "content")
-    private String content;
-
-    @Basic
-    @Column(name = "position")
-    private String position;
+    @Column(name = "link")
+    private String link = "n/a";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id", nullable = false)

@@ -1,9 +1,9 @@
 package com.nhn.controllers.company_api;
 
 import com.nhn.common.RespondObject;
-import com.nhn.dto.request.IdRequest;
+import com.nhn.dto.request.ApplyingJobGetRequest;
 import com.nhn.mapper.ApplyingJobMapper;
-import com.nhn.model.ApplyingJob;
+import com.nhn.entity.ApplyingJob;
 import com.nhn.repository.ApplyingJobRepository;
 import com.nhn.validator.JobIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,37 +29,37 @@ public class ApplyingJobController {
     @Autowired
     private JobIdValidator jobIdValidator;
 
-    @GetMapping("/candidate-user-id/{candidate-user-id}")
-    ResponseEntity<RespondObject> getByCandidateUserId(@PathVariable(name = "candidate-user-id") String candidateUserId) {
-        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdCandidateUserId(Integer.parseInt(candidateUserId));
+//    @GetMapping("/candidate-user-id/{candidate-user-id}")
+//    ResponseEntity<RespondObject> getByCandidateUserId(@PathVariable(name = "candidate-user-id") String candidateUserId) {
+//        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdCandidateUserId(Integer.parseInt(candidateUserId));
+//
+//        if (applyingJobs.isEmpty())
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                    new RespondObject("Fail", "Candidate user id does not exist", candidateUserId));
+//
+//        return ResponseEntity.status(HttpStatus.FOUND).body(
+//                new RespondObject("Found", String.format("Applying job of candidate with userId = %s found", candidateUserId), applyingJobs));
+//    }
 
-        if (applyingJobs.isEmpty())
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Fail", "Candidate user id does not exist", candidateUserId));
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(
-                new RespondObject("Found", String.format("Applying job of candidate with userId = %s found", candidateUserId), applyingJobs));
-    }
-
-    @GetMapping("/job-id")
-    ResponseEntity<RespondObject> getByJobId(@Valid @RequestBody IdRequest request,
+    @GetMapping("")
+    ResponseEntity<RespondObject> getByJobId(@Valid @RequestBody ApplyingJobGetRequest request,
                                              BindingResult result) {
 
         jobIdValidator.validate(request, result);
         if (result.hasErrors()) {
             System.err.println(result.getAllErrors());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new RespondObject("Fail", "Job id invalid", result.getAllErrors()));
+                    .body(new RespondObject("Fail", "Invalid request", result.getAllErrors()));
         }
 
-        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(request.getId());
+        List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(request.getJobId());
 
-        if (applyingJobs.isEmpty())
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Fail", "Job id does not exist", request.getId()));
+        if (applyingJobs.size() == 0)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new RespondObject("Fail", "Applying job not found", request.getJobId()));
 
         return ResponseEntity.status(HttpStatus.FOUND).body(
-                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", request.getId()), applyingJobMapper.removeKey(applyingJobs)));
+                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", request.getJobId()), applyingJobMapper.removeKey(applyingJobs)));
     }
 
 }

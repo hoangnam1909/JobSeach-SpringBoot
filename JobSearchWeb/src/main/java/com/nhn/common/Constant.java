@@ -25,4 +25,5 @@ public interface Constant {
         String DELETED = "DELETED";
 
     }
+
 }

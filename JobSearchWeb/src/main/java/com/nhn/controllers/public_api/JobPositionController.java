@@ -1,7 +1,7 @@
 package com.nhn.controllers.public_api;
 
 import com.nhn.common.RespondObject;
-import com.nhn.model.Position;
+import com.nhn.entity.Position;
 import com.nhn.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

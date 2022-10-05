@@ -1,7 +1,7 @@
 package com.nhn.Util;
 
-import com.nhn.model.Language;
-import com.nhn.model.Skill;
+import com.nhn.entity.Language;
+import com.nhn.entity.Skill;
 import org.json.JSONArray;
 import org.springframework.stereotype.Component;
 

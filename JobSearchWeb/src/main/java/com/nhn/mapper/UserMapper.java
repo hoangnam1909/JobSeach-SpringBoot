@@ -5,9 +5,9 @@ import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.UserSignUpRequest;
 import com.nhn.dto.request.UserUpdateRequest;
-import com.nhn.model.Candidate;
-import com.nhn.model.Company;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Company;
+import com.nhn.entity.User;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,13 +91,7 @@ public class UserMapper {
 
         user.setUsername(req.getUsername());
         user.setPassword(req.getPassword());
-        user.setAvatar(req.getAvatar());
-        user.setFullName(req.getFullName());
         user.setEmail(req.getEmail());
-        user.setPhone(req.getPhone());
-        user.setDob(req.getDob());
-        user.setGender(req.isGender());
-        user.setAddress(req.getAddress());
         user.setRole(req.getRole());
 
         return user;

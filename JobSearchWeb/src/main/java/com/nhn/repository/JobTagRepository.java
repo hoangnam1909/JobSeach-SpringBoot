@@ -1,7 +1,6 @@
 package com.nhn.repository;
 
-import com.nhn.model.Job;
-import com.nhn.model.JobTag;
+import com.nhn.entity.JobTag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

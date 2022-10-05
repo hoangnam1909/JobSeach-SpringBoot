@@ -2,9 +2,9 @@ package com.nhn.service.impl;
 
 import com.nhn.dto.request.SkillRequest;
 import com.nhn.mapper.SkillMapper;
-import com.nhn.model.Candidate;
-import com.nhn.model.Skill;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Skill;
+import com.nhn.entity.User;
 import com.nhn.repository.SkillRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.SkillService;

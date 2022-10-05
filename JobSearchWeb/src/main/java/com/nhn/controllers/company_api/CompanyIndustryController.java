@@ -2,8 +2,7 @@ package com.nhn.controllers.company_api;
 
 
 import com.nhn.common.RespondObject;
-import com.nhn.model.CompanyIndustry;
-import com.nhn.model.User;
+import com.nhn.entity.CompanyIndustry;
 import com.nhn.repository.CompanyIndustryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

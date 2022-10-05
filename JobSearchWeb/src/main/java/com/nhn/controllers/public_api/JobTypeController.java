@@ -1,7 +1,7 @@
 package com.nhn.controllers.public_api;
 
 import com.nhn.common.RespondObject;
-import com.nhn.model.JobType;
+import com.nhn.entity.JobType;
 import com.nhn.repository.JobTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

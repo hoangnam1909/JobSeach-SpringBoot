@@ -1,7 +1,7 @@
 package com.nhn.repository;
 
-import com.nhn.model.Candidate;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

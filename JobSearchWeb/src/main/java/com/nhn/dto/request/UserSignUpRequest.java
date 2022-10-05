@@ -15,13 +15,7 @@ public class UserSignUpRequest {
 
     private String username;
     private String password;
-    private String avatar;
-    private String fullName;
     private String email;
-    private String phone;
-    private Date dob;
-    private boolean gender;
-    private String address;
     private String role;
 
 }

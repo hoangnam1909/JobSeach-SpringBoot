@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdRequest {
+public class ApplyingJobGetRequest {
 
-    int id;
+    int jobId;
+    int companyUserId;
 
 }

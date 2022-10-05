@@ -6,7 +6,7 @@ import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.EmailDetails;
 import com.nhn.dto.request.UserUpdateRequest;
 import com.nhn.mapper.UserMapper;
-import com.nhn.model.User;
+import com.nhn.entity.User;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;

@@ -2,7 +2,7 @@ package com.nhn.mapper;
 
 import com.nhn.dto.request.JobRequest;
 import com.nhn.dto.request.JobUpdateRequest;
-import com.nhn.model.*;
+import com.nhn.entity.*;
 import com.nhn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

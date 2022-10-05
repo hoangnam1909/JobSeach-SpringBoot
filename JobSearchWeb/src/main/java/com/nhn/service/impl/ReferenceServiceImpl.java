@@ -2,9 +2,9 @@ package com.nhn.service.impl;
 
 import com.nhn.dto.request.ReferenceRequest;
 import com.nhn.mapper.ReferenceMapper;
-import com.nhn.model.Candidate;
-import com.nhn.model.Reference;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Reference;
+import com.nhn.entity.User;
 import com.nhn.repository.ReferenceRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.ReferenceService;

@@ -1,7 +1,7 @@
 package com.nhn.common;
 
-import com.nhn.model.Candidate;
-import com.nhn.model.Language;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,9 +2,9 @@ package com.nhn.service.impl;
 
 import com.nhn.dto.request.TalentRequest;
 import com.nhn.mapper.TalentMapper;
-import com.nhn.model.Candidate;
-import com.nhn.model.Talent;
-import com.nhn.model.User;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Talent;
+import com.nhn.entity.User;
 import com.nhn.repository.TalentRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.TalentService;

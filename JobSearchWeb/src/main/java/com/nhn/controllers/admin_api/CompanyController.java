@@ -2,12 +2,10 @@ package com.nhn.controllers.admin_api;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
-import com.nhn.dto.request.CandidateRequest;
 import com.nhn.dto.request.CompanyRequest;
 import com.nhn.mapper.CompanyMapper;
-import com.nhn.model.Candidate;
-import com.nhn.model.Company;
-import com.nhn.model.User;
+import com.nhn.entity.Company;
+import com.nhn.entity.User;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

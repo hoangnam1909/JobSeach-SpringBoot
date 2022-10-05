@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
 import com.nhn.dto.request.CompanyRequest;
-import com.nhn.model.Company;
+import com.nhn.entity.Company;
 import org.springframework.stereotype.Component;
 
 @Component

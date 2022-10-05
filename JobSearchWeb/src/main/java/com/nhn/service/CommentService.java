@@ -1,7 +1,7 @@
 package com.nhn.service;
 
-import com.nhn.model.Comment;
-import com.nhn.model.Company;
+import com.nhn.entity.Comment;
+import com.nhn.entity.Company;
 
 import java.util.List;
 

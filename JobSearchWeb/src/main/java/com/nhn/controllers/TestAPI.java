@@ -2,7 +2,7 @@ package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.JobRequest;
-import com.nhn.model.Job;
+import com.nhn.entity.Job;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;
 import com.nhn.service.UserService;

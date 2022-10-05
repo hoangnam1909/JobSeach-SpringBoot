@@ -2,9 +2,9 @@ package com.nhn.service.impl;
 
 import com.nhn.dto.request.WorkExperienceRequest;
 import com.nhn.mapper.WorkExperienceMapper;
-import com.nhn.model.Candidate;
-import com.nhn.model.User;
-import com.nhn.model.WorkExperience;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.User;
+import com.nhn.entity.WorkExperience;
 import com.nhn.repository.UserRepository;
 import com.nhn.repository.WorkExperienceRepository;
 import com.nhn.service.WorkExperienceService;
