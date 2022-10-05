@@ -21,7 +21,6 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    @JsonIgnore
     private int id;
 
     @Basic
