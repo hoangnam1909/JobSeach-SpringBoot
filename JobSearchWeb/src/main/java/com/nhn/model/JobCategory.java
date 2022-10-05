@@ -19,7 +19,6 @@ public class JobCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    @JsonIgnore
     private int id;
 
     @Basic
