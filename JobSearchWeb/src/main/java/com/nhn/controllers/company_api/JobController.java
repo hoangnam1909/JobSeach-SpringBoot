@@ -39,7 +39,7 @@ public class JobController {
     @Autowired
     private JobMapper jobMapper;
 
-    @GetMapping("")
+    @PostMapping("/get")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
