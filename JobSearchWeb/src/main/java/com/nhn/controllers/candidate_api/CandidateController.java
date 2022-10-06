@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin_api;
+package com.nhn.controllers.candidate_api;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
@@ -10,12 +10,14 @@ import com.nhn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "/admin/api/candidate")
+@RequestMapping(path = "/candidate/api")
 public class CandidateController {
 
     @Autowired
@@ -56,10 +58,10 @@ public class CandidateController {
     }
 
     @PutMapping("")
-    ResponseEntity<RespondObject> updateCandidate(@RequestBody CandidateRequest candidateRequest) {
+    ResponseEntity<RespondObject> updateCandidate(@RequestBody @Valid CandidateRequest request) {
 
         try {
-            Candidate candidate = candidateService.updateCandidate(candidateRequest);
+            Candidate candidate = candidateService.updateCandidate(request);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("OK", "Save candidate successfully", candidate));
         } catch (Exception ex) {
@@ -67,7 +69,6 @@ public class CandidateController {
                     new RespondObject("Failed", "Save candidate failed", ex));
         }
     }
-
 
     // ADD DETAIL
     @PostMapping("/add-languages")

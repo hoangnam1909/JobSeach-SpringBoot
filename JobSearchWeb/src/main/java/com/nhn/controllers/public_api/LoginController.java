@@ -5,13 +5,12 @@ import com.nhn.common.RespondObject;
 import com.nhn.dto.request.EmailDetails;
 import com.nhn.dto.request.LoginRequest;
 import com.nhn.dto.UserDTO;
-import com.nhn.dto.request.UserSignUpRequest;
+import com.nhn.dto.request.UserSignupRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
-import com.nhn.validator.SignupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RestController
 @CrossOrigin
@@ -51,8 +49,8 @@ public class LoginController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
-    private SignupValidator signupValidator;
+//    @Autowired
+//    private UserSignupRequestValidator userSignupRequestValidator;
 
 //    @PostMapping("/authenticated")
 //    public ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
@@ -86,11 +84,11 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<RespondObject> signUp(@Valid @RequestBody UserSignUpRequest request,
+    public ResponseEntity<RespondObject> signUp(@Valid @RequestBody UserSignupRequest request,
                                                 BindingResult result) {
 
         try {
-            signupValidator.validate(request, result);
+//            userSignupRequestValidator.validate(request, result);
             if (result.hasErrors()) {
                 System.err.println(result.getAllErrors());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)

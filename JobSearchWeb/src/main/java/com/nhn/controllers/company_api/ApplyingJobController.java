@@ -2,14 +2,12 @@ package com.nhn.controllers.company_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.ApplyingJobGetRequest;
-import com.nhn.mapper.ApplyingJobMapper;
 import com.nhn.entity.ApplyingJob;
+import com.nhn.mapper.ApplyingJobMapper;
 import com.nhn.repository.ApplyingJobRepository;
-import com.nhn.validator.JobIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,8 +24,8 @@ public class ApplyingJobController {
     @Autowired
     private ApplyingJobMapper applyingJobMapper;
 
-    @Autowired
-    private JobIdValidator jobIdValidator;
+//    @Autowired
+//    private ApplyingJobGetRequestValidator applyingJobGetRequestValidator;
 
 //    @GetMapping("/candidate-user-id/{candidate-user-id}")
 //    ResponseEntity<RespondObject> getByCandidateUserId(@PathVariable(name = "candidate-user-id") String candidateUserId) {
@@ -42,15 +40,7 @@ public class ApplyingJobController {
 //    }
 
     @GetMapping("")
-    ResponseEntity<RespondObject> getByJobId(@Valid @RequestBody ApplyingJobGetRequest request,
-                                             BindingResult result) {
-
-        jobIdValidator.validate(request, result);
-        if (result.hasErrors()) {
-            System.err.println(result.getAllErrors());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new RespondObject("Fail", "Invalid request", result.getAllErrors()));
-        }
+    ResponseEntity<RespondObject> getByJobId(@RequestBody @Valid ApplyingJobGetRequest request) {
 
         List<ApplyingJob> applyingJobs = applyingJobRepository.findByApplyingJobIdJobId(request.getJobId());
 

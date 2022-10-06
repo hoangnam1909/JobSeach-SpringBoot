@@ -5,7 +5,7 @@ import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.LoginRequest;
-import com.nhn.dto.request.UserSignUpRequest;
+import com.nhn.dto.request.UserSignupRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
@@ -35,7 +35,7 @@ public class LoginService {
     @Autowired
     private JwtUtils jwtUtils;
 
-    public UserDTO signUp(UserSignUpRequest request) {
+    public UserDTO signUp(UserSignupRequest request) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         User user = userMapper.toEntity(request);
