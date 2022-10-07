@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -57,7 +58,7 @@ public class JobController {
 
             if (foundJobs.getTotalElements() == 0)
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Fail", "No job found", ""));
+                        new RespondObject("Fail", "No job found", new ArrayList<>()));
 
             if (Integer.parseInt(page) > foundJobs.getTotalPages()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -73,7 +74,7 @@ public class JobController {
                             new RespondObject("OK", "Jobs found", foundJobs)
                     ) :
                     ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                            new RespondObject("FAIL", "No jobs found", "")
+                            new RespondObject("FAIL", "No jobs found", new ArrayList<>())
                     );
         }
     }
