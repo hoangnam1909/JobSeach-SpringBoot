@@ -1,6 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.LanguageRequest;
+import com.nhn.model.request.LanguageRequest;
 
 import java.util.List;
 

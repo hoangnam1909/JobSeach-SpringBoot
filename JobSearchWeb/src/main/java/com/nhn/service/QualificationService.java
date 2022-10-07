@@ -1,6 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.QualificationRequest;
+import com.nhn.model.request.QualificationRequest;
 
 import java.util.List;
 

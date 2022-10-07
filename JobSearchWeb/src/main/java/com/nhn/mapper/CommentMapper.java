@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
-import com.nhn.dto.request.InsertCommentRequest;
-import com.nhn.dto.response.SimpleCommentResponse;
+import com.nhn.model.request.InsertCommentRequest;
+import com.nhn.model.response.SimpleCommentResponse;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Comment;
 import com.nhn.entity.Company;

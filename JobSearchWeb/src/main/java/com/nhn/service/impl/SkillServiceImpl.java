@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.SkillRequest;
+import com.nhn.model.request.SkillRequest;
 import com.nhn.mapper.SkillMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Skill;

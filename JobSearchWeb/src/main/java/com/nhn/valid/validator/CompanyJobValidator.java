@@ -1,6 +1,6 @@
 package com.nhn.valid.validator;
 
-import com.nhn.dto.request.ApplyingJobGetRequest;
+import com.nhn.model.request.ApplyingJobGetRequest;
 import com.nhn.entity.Job;
 import com.nhn.entity.User;
 import com.nhn.repository.JobRepository;

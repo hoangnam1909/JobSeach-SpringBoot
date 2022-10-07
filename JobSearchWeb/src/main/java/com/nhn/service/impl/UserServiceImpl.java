@@ -1,9 +1,9 @@
 package com.nhn.service.impl;
 
 import com.nhn.Util.Util;
-import com.nhn.dto.UserDTO;
-import com.nhn.dto.request.AdminUserInsertRequest;
-import com.nhn.dto.request.authed_request.UpdateUserRequest;
+import com.nhn.model.UserDTO;
+import com.nhn.model.request.AdminUserInsertRequest;
+import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.entity.User;
 import com.nhn.repository.UserRepository;
@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

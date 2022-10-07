@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.ReferenceRequest;
+import com.nhn.model.request.ReferenceRequest;
 import com.nhn.mapper.ReferenceMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Reference;

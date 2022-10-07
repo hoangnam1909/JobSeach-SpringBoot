@@ -1,6 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.ReferenceRequest;
+import com.nhn.model.request.ReferenceRequest;
 
 import java.util.List;
 

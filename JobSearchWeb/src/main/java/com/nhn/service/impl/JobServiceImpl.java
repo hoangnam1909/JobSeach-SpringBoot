@@ -1,8 +1,8 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.JobRequest;
-import com.nhn.dto.request.JobUpdateRequest;
-import com.nhn.dto.request.RequirementRequest;
+import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.JobUpdateRequest;
+import com.nhn.model.request.RequirementRequest;
 import com.nhn.mapper.JobMapper;
 import com.nhn.entity.Job;
 import com.nhn.entity.JobTag;

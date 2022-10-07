@@ -1,8 +1,8 @@
 package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
-import com.nhn.dto.request.JobRequest;
-import com.nhn.dto.request.TestRequest;
+import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.TestRequest;
 import com.nhn.entity.Job;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;
@@ -39,31 +39,6 @@ public class TestAPI {
     ResponseEntity<RespondObject> validRequest(@RequestBody @Valid TestRequest request){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("Ok", "Testing valid request", request));
-    }
-
-    @GetMapping("/test-array")
-    ResponseEntity<RespondObject> testArray() {
-        List<Integer> currentTags = new ArrayList<>();
-        currentTags.add(1);
-        currentTags.add(4);
-        currentTags.add(5);
-        currentTags.add(7);
-
-        List<Integer> newTags = new ArrayList<>();
-        currentTags.add(1);
-        currentTags.add(5);
-        currentTags.add(3);
-        currentTags.add(8);
-
-        List<Integer> addingTags = currentTags;
-        addingTags.removeAll(newTags);
-
-        for (Integer addingTag : addingTags) {
-            System.err.println(addingTag);
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("Fail", "No comment found", addingTags));
     }
 
     @PostMapping("/insert-job")

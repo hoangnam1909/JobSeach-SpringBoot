@@ -1,6 +1,6 @@
 package com.nhn.mapper;
 
-import com.nhn.dto.request.QualificationRequest;
+import com.nhn.model.request.QualificationRequest;
 import com.nhn.entity.Qualification;
 import org.springframework.stereotype.Component;
 

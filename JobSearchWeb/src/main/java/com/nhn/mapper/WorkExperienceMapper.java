@@ -1,6 +1,6 @@
 package com.nhn.mapper;
 
-import com.nhn.dto.request.WorkExperienceRequest;
+import com.nhn.model.request.WorkExperienceRequest;
 import com.nhn.entity.WorkExperience;
 import org.springframework.stereotype.Component;
 

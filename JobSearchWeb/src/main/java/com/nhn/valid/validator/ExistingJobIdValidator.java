@@ -14,7 +14,7 @@ public class ExistingJobIdValidator implements ConstraintValidator<ExistingJobId
 
     @Override
     public boolean isValid(Integer jobId, ConstraintValidatorContext constraintValidatorContext) {
-        return !jobRepository.existsById(jobId);
+        return jobRepository.existsById(jobId);
     }
 
 }

@@ -14,7 +14,7 @@ public class ExistingCompanyIdValidator implements ConstraintValidator<ExistingC
 
     @Override
     public boolean isValid(Integer companyId, ConstraintValidatorContext constraintValidatorContext) {
-        return !companyRepository.existsById(companyId);
+        return companyRepository.existsById(companyId);
     }
 
 }

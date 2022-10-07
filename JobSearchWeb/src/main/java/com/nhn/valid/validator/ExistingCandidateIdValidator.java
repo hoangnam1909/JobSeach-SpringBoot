@@ -14,7 +14,7 @@ public class ExistingCandidateIdValidator implements ConstraintValidator<Existin
 
     @Override
     public boolean isValid(Integer candidateId, ConstraintValidatorContext constraintValidatorContext) {
-        return !candidateRepository.existsById(candidateId);
+        return candidateRepository.existsById(candidateId);
     }
 
 }

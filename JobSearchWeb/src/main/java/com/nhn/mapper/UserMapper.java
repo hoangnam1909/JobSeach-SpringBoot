@@ -1,10 +1,10 @@
 package com.nhn.mapper;
 
 import com.nhn.common.Constant;
-import com.nhn.dto.UserDTO;
-import com.nhn.dto.request.AdminUserInsertRequest;
-import com.nhn.dto.request.UserSignupRequest;
-import com.nhn.dto.request.authed_request.UpdateUserRequest;
+import com.nhn.model.UserDTO;
+import com.nhn.model.request.AdminUserInsertRequest;
+import com.nhn.model.request.UserSignupRequest;
+import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class UserMapper {

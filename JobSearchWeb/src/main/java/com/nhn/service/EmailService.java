@@ -1,6 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.EmailDetails;
+import com.nhn.model.request.EmailDetails;
 
 public interface EmailService {
 

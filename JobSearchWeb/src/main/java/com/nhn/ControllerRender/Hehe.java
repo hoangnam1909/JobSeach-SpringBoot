@@ -1,6 +1,6 @@
 package com.nhn.ControllerRender;
 
-import com.nhn.dto.UserDTO;
+import com.nhn.model.UserDTO;
 import com.nhn.mapper.UserMapper;
 import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

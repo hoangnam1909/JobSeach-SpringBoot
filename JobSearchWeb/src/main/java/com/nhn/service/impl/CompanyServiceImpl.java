@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.UpdateCompanyRequest;
+import com.nhn.model.request.UpdateCompanyRequest;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.mapper.CompanyMapper;

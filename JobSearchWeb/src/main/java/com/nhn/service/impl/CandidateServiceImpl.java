@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.CandidateRequest;
+import com.nhn.model.request.CandidateRequest;
 import com.nhn.mapper.CandidateMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.User;

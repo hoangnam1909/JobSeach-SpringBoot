@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.LanguageRequest;
+import com.nhn.model.request.LanguageRequest;
 import com.nhn.mapper.LanguageMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Language;

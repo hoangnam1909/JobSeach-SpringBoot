@@ -1,6 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.TalentRequest;
+import com.nhn.model.request.TalentRequest;
 
 import java.util.List;
 

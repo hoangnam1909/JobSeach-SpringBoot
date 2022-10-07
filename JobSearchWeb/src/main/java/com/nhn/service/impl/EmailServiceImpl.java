@@ -1,18 +1,15 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.EmailDetails;
+import com.nhn.model.request.EmailDetails;
 import com.nhn.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -26,14 +23,22 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public Boolean sendSimpleMail(EmailDetails details) {
         try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
+//            SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-            mailMessage.setFrom(sender);
-            mailMessage.setTo(details.getRecipient());
-            mailMessage.setText(details.getMsgBody());
-            mailMessage.setSubject(details.getSubject());
+//            mailMessage.setFrom(sender);
+//            mailMessage.setTo(details.getRecipient());
+//            mailMessage.setSubject(details.getSubject());
+//            mailMessage.setText(details.getMsgBody());
 
-            javaMailSender.send(mailMessage);
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom(sender, "Job Search Spring Boot");
+            helper.setTo(details.getRecipient());
+            helper.setSubject(details.getSubject());
+            helper.setText(details.getMsgBody(), true);
+
+            javaMailSender.send(message);
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

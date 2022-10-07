@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.dto.request.QualificationRequest;
+import com.nhn.model.request.QualificationRequest;
 import com.nhn.mapper.QualificationMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Qualification;

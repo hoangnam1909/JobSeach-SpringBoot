@@ -1,7 +1,6 @@
 package com.nhn.service;
 
-import com.nhn.dto.request.LanguageRequest;
-import com.nhn.dto.request.SkillRequest;
+import com.nhn.model.request.SkillRequest;
 
 import java.util.List;
 
