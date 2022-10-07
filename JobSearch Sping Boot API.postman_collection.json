@@ -8,449 +8,11 @@
 	"item": [
 		{
 			"name": "admin",
-			"item": [
-				{
-					"name": "user",
-					"item": [
-						{
-							"name": "findAll",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"ungvien2\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/user",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "findByUsername",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/user/ungvien1",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"user",
-										"ungvien1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "insert",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admin2\",\r\n    \"role\": \"ADMIN\",\r\n    \"gender\": false,\r\n    \"email\": \"nguyenhoangn023@gmail.com\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/user",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "upsert",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"springboot3\",\r\n    \"avatar\": \"avatar ne\",\r\n    \"userType\": \"ROLE_ADMIN\",\r\n    \"active\": 0,\r\n    \"fullName\": \"fullname spring boot\",\r\n    \"email\": null,\r\n    \"phone\": null,\r\n    \"dob\": null,\r\n    \"gender\": null,\r\n    \"address\": null,\r\n    \"candidateId\": 25,\r\n    \"employerId\": null\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/user/121",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"user",
-										"121"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"springboot3\",\r\n    \"password\": \"springboot3\",\r\n    \"userType\": \"ROLE_ADMIN\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/admin/api/v1/user/119",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"admin",
-										"api",
-										"v1",
-										"user",
-										"119"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
+			"item": []
 		},
 		{
 			"name": "public",
 			"item": [
-				{
-					"name": "login",
-					"item": [
-						{
-							"name": "signup",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"audi\",\r\n    \"password\": \"audi\",\r\n    \"avatar\": \"deo co\",\r\n    \"fullName\": \"Audi Automotive manufacture\",\r\n    \"email\": \"1951052125nam@ou.edu.vn\",\r\n    \"phone\": \"01234567\",\r\n    \"dob\": \"2001-09-19\",\r\n    \"gender\": false,\r\n    \"address\": \"Thành phố Hồ Chí Minh\",\r\n    \"role\": \"COMPANY\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/auth/signup",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"auth",
-										"signup"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "authen",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/auth/authenticated",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"auth",
-										"authenticated"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "login",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"company1\",\r\n    \"password\": \"company1\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/auth/login",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "currentUser",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{port-8080}}/auth/current-user",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"auth",
-										"current-user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "logout",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{port-8080}}/auth/logout",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "job",
-					"item": [
-						{
-							"name": "findAll",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/company/api/job",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										"job"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "findById",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/company/api/job/7",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										"job",
-										"7"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "insert",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"loi 415 lan nua xem 1\",\r\n    \"description\": \"loi 415\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"12\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"25000000\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/company/api/job",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										"job"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": 7,\r\n    \"title\": \"job update done\",\r\n    \"description\": \"loi 500 done\",\r\n    \"jobStartDate\": null,\r\n    \"location\": \"update location done\",\r\n    \"noOfVacancies\": \"1909\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"10\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"25000000\",\r\n    \"tagsId\": [\r\n        4,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"req 1 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 2 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 3 nene\"\r\n        }\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/company/api/job",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										"job"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
 				{
 					"name": "company-industry",
 					"item": [
@@ -485,6 +47,80 @@
 					]
 				},
 				{
+					"name": "upload",
+					"item": [
+						{
+							"name": "uploadUserImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user",
+											"value": "{\n    \"username\": \"ungvien8\",\n    \"password\": \"ungvien8\",\n    \"email\": \"ungvien8@gmail.com\",\n    \"role\": \"CANDIDATE\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{port-8080}}/test/test-image",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"test",
+										"test-image"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "getByCompanyId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/public/api/comment?companyId=22",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"public",
+										"api",
+										"comment"
+									],
+									"query": [
+										{
+											"key": "companyId",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "candidate",
+			"item": [
+				{
 					"name": "comment",
 					"item": [
 						{
@@ -494,7 +130,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"candidateId\": 421,\r\n    \"companyId\": 22,\r\n    \"content\": \"comment ne` ma' uiiii\"\r\n}",
+									"raw": "{\r\n    \"companyId\": 22,\r\n    \"candidateId\": 42,\r\n    \"content\": \"comment 22 42\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -510,31 +146,6 @@
 										"candidate",
 										"api",
 										"comment"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getByCompanyId",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/candidate/api/comment?companyId=21",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"candidate",
-										"api",
-										"comment"
-									],
-									"query": [
-										{
-											"key": "companyId",
-											"value": "21"
-										}
 									]
 								}
 							},
@@ -571,89 +182,18 @@
 					]
 				},
 				{
-					"name": "upload",
-					"item": [
-						{
-							"name": "image",
-							"item": [
-								{
-									"name": "upload",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "file",
-													"type": "file",
-													"src": "/F:/Wallpaper/ipad-air-2020-2560x1440-dark-abstract-23517.jpg"
-												},
-												{
-													"key": "upload_preset",
-													"value": "crlovygx",
-													"type": "text"
-												},
-												{
-													"key": "public_id",
-													"value": "nhn1909",
-													"type": "text"
-												},
-												{
-													"key": "api_key",
-													"value": "249227552583173",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "https://api.cloudinary.com/v1_1/nhn1909/:resource_type/upload",
-											"protocol": "https",
-											"host": [
-												"api",
-												"cloudinary",
-												"com"
-											],
-											"path": [
-												"v1_1",
-												"nhn1909",
-												":resource_type",
-												"upload"
-											],
-											"variable": [
-												{
-													"key": "resource_type",
-													"value": "image"
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "candidate",
-			"item": [
-				{
 					"name": "getAll",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{port-8080}}/admin/api/v1/candidate",
+							"raw": "{{port-8080}}/candidate/api",
 							"host": [
 								"{{port-8080}}"
 							],
 							"path": [
-								"admin",
-								"api",
-								"v1",
-								"candidate"
+								"candidate",
+								"api"
 							]
 						}
 					},
@@ -947,7 +487,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 5\r\n}",
+									"raw": "{\r\n    \"jobId\": 100,\r\n    \"companyUserId\": 136\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -955,22 +495,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{port-8080}}/company/api/applying-job/job-id",
+									"raw": "{{port-8080}}/company/api/applying-job",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
 										"company",
 										"api",
-										"applying-job",
-										"job-id"
-									],
-									"query": [
-										{
-											"key": "jobId",
-											"value": "5",
-											"disabled": true
-										}
+										"applying-job"
 									]
 								}
 							},
@@ -984,15 +516,47 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{port-8080}}/admin/api/v1/company",
+							"raw": "{{port-8080}}/company/api",
 							"host": [
 								"{{port-8080}}"
 							],
 							"path": [
-								"admin",
+								"company",
+								"api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyName\": \"BMW Group\",\r\n    \"companySize\": 10001,\r\n    \"contactName\": \"Bayerische Motoren Werke AG\",\r\n    \"contactTel\": \"\",\r\n    \"contactEmail\": \"\",\r\n    \"contactAddress\": \"Petuelring 130Munich, DE\",\r\n    \"introduction\": \"With its four brands BMW, MINI, Rolls-Royce and BMW Motorrad, the BMW Group is the world’s leading premium manufacturer of automobiles and motorcycles and also provides premium financial and mobility services. The BMW Group production network comprises 31 production and assembly facilities in 15 countries; the company has a global sales network in more than 140 countries.\",\r\n    \"foundedYear\": 0,\r\n    \"headquarters\": \"Munich\",\r\n    \"link\": \"https://www.bmwgroup.com/en.html\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/company/api/:username",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"company",
 								"api",
-								"v1",
-								"company"
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "company11"
+								}
 							]
 						}
 					},
@@ -1060,6 +624,492 @@
 							"path": [
 								"test",
 								"insert-job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/test/valid-request",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"test",
+								"valid-request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ungvien8\",\r\n    \"password\": \"ungvien8\",\r\n    \"email\": \"ungvien8@gmail.com\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authen",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/auth/login",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "currentUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{port-8080}}/auth/current-user",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{port-8080}}/auth/logout",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/auth/forgot-password/:username",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "ungvien1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"positionId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/company/api/job/get",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"company",
+								"api",
+								"job",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/company/api/job/7",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"company",
+								"api",
+								"job",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"loi 415 lan nua xem 1\",\r\n    \"description\": \"loi 415\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"12\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"25000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/company/api/job",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"company",
+								"api",
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 7,\r\n    \"title\": \"job update done\",\r\n    \"description\": \"loi 500 done\",\r\n    \"jobStartDate\": null,\r\n    \"location\": \"update location done\",\r\n    \"noOfVacancies\": \"1909\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"10\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"25000000\",\r\n    \"tagsId\": [\r\n        4,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"req 1 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 2 nene\"\r\n        },\r\n        {\r\n            \"content\": \"req 3 nene\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/company/api/job",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"company",
+								"api",
+								"job"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/admin/api/user",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByUsername",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/user/ungvien1",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"user",
+								"ungvien1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admin2\",\r\n    \"role\": \"ADMIN\",\r\n    \"gender\": false,\r\n    \"email\": \"nguyenhoangn023@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/user",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"springboot3\",\r\n    \"avatar\": \"avatar ne\",\r\n    \"fullName\": \"fullname spring boot\",\r\n    \"email\": null,\r\n    \"phone\": null,\r\n    \"dob\": null,\r\n    \"gender\": null,\r\n    \"address\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/authed/api/v1/user/121",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"authed",
+								"api",
+								"v1",
+								"user",
+								"121"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"springboot3\",\r\n    \"password\": \"springboot3\",\r\n    \"userType\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/admin/api/v1/user/119",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"admin",
+								"api",
+								"v1",
+								"user",
+								"119"
 							]
 						}
 					},

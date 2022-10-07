@@ -1,11 +1,14 @@
 package com.nhn.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.nhn.Util.Util;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.entity.User;
+import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Service("userDetailsService")
@@ -31,6 +37,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public UserDTO add(AdminUserInsertRequest request) {
@@ -68,6 +77,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    @Override
+    public User uploadWithAvatar(UserImageRequest userRequest, MultipartFile file) {
+        User user = userMapper.toEntity(userRequest);
+
+        if (!file.isEmpty()) {
+            Map r = null;
+            try {
+                r = this.cloudinary.uploader().upload(file.getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            assert r != null;
+            user.setAvatar((String) r.get("secure_url"));
+        }
+
+        return userRepository.save(user);
     }
 
     @Override

@@ -94,12 +94,15 @@ public class User {
 //    private Collection<Job> jobs;
 
     @PrePersist
-    public void onSave(){
+    public void onSave() {
         if (joinedDate == null)
             joinedDate = new Date();
 
         if (role.equals(Constant.USER_ROLE.COMPANY))
             active = false;
+
+        if (avatar == null)
+            avatar = "https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg";
     }
 
 }

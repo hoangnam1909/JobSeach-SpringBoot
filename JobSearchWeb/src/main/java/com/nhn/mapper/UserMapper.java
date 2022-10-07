@@ -8,6 +8,7 @@ import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
+import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,17 @@ public class UserMapper {
         user.setPassword(req.getPassword());
         user.setEmail(req.getEmail());
         user.setRole(req.getRole());
+
+        return user;
+    }
+
+    public User toEntity(UserImageRequest request) {
+        User user = new User();
+
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setEmail(request.getEmail());
+        user.setRole(request.getRole());
 
         return user;
     }
