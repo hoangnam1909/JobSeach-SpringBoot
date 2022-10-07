@@ -57,12 +57,12 @@ public class JobController {
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
             if (foundJobs.getTotalElements() == 0)
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Fail", "No job found", new ArrayList<>()));
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "No job found", new ArrayList<>()));
 
             if (Integer.parseInt(page) > foundJobs.getTotalPages()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Fail", "Page number of out range", ""));
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "Page number of out range", ""));
             }
 
             return ResponseEntity.status(HttpStatus.OK).body(
@@ -73,8 +73,8 @@ public class JobController {
                     ResponseEntity.status(HttpStatus.OK).body(
                             new RespondObject("OK", "Jobs found", foundJobs)
                     ) :
-                    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                            new RespondObject("FAIL", "No jobs found", new ArrayList<>())
+                    ResponseEntity.status(HttpStatus.OK).body(
+                            new RespondObject("Ok", "No jobs found", new ArrayList<>())
                     );
         }
     }
