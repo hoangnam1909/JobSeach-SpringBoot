@@ -9,7 +9,6 @@ import lombok.*;
 @Data
 public class CandidateRequest {
 
-
     private String username;
     private int yearsExp;
     private String linkedin;

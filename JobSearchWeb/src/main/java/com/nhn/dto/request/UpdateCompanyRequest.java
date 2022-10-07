@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyRequest {
+public class UpdateCompanyRequest {
 
     private String companyName;
     private int companySize;

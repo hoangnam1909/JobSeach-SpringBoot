@@ -1,6 +1,6 @@
 package com.nhn.mapper;
 
-import com.nhn.dto.request.CommentInsertRequest;
+import com.nhn.dto.request.InsertCommentRequest;
 import com.nhn.dto.response.SimpleCommentResponse;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Comment;
@@ -28,7 +28,7 @@ public class CommentMapper {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public Comment toEntity(CommentInsertRequest request) {
+    public Comment toEntity(InsertCommentRequest request) {
         Comment comment = new Comment();
 
         Optional<Company> company = companyRepository.findById(request.getCompanyId());

@@ -4,7 +4,7 @@ import com.nhn.common.Constant;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.UserSignupRequest;
-import com.nhn.dto.request.UserUpdateRequest;
+import com.nhn.dto.request.authed_request.UpdateUserRequest;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
@@ -36,27 +36,15 @@ public class UserMapper {
         return INSTANCE;
     }
 
-    public User toEntity(UserUpdateRequest req) {
-        User user = new User();
+    public User toEntityUpdate(User user, UpdateUserRequest request){
 
-        user.setUsername(req.getUsername());
-        user.setAvatar(req.getAvatar());
-        user.setRole(req.getRole());
-        user.setActive(req.isActive());
-        user.setFullName(req.getFullName());
-        user.setEmail(req.getEmail());
-        user.setPhone(req.getPhone());
-        user.setDob(req.getDob());
-        user.setGender(req.isGender());
-        user.setAddress(req.getAddress());
-
-        Optional<Company> company = companyRepository.findById(req.getCompanyId());
-        if (company.isPresent())
-            user.setCompany(company.get());
-
-        Optional<Candidate> candidate = candidateRepository.findById(req.getCandidateId());
-        if (candidate.isPresent())
-            user.setCandidate(candidate.get());
+        user.setAvatar(request.getAvatar());
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setDob(request.getDob());
+        user.setGender(request.isGender());
+        user.setAddress(request.getAddress());
 
         return user;
     }

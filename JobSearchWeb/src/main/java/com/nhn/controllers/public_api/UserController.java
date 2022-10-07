@@ -1,10 +1,10 @@
-package com.nhn.controllers.admin_api;
+package com.nhn.controllers.public_api;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.AdminUserInsertRequest;
 import com.nhn.dto.request.EmailDetails;
-import com.nhn.dto.request.UserUpdateRequest;
+import com.nhn.dto.request.authed_request.UpdateUserRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.entity.User;
 import com.nhn.repository.UserRepository;
@@ -21,12 +21,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/admin/api/user")
+@RequestMapping(path = "/public/api/user")
 public class UserController {
 
     @Autowired
@@ -98,7 +99,7 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    ResponseEntity<RespondObject> findById(@PathVariable String username) {
+    ResponseEntity<RespondObject> findByUsername(@PathVariable String username) {
         Optional<User> foundUser = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(username));
 
         return foundUser.isPresent() ?
@@ -111,7 +112,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody AdminUserInsertRequest req) {
+    ResponseEntity<RespondObject> insert(@RequestBody @Valid AdminUserInsertRequest req) {
         try {
             UserDTO userSaved = userService.add(req);
 
@@ -138,10 +139,10 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<RespondObject> upsert(@PathVariable int id,
-                                         @RequestBody UserUpdateRequest req) {
-        UserDTO userDTO = userService.updateUser(id, req);
+    @PutMapping("/{username}")
+    ResponseEntity<RespondObject> upsert(@PathVariable String username,
+                                         @RequestBody UpdateUserRequest request) {
+        UserDTO userDTO = userService.updateUser(username, request);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("OK", "Update User successfully", userDTO)
         );

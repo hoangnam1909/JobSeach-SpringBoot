@@ -1,6 +1,6 @@
 package com.nhn.valid;
 
-import com.nhn.valid.validator.CompanyUserIdValidator;
+import com.nhn.valid.validator.UnregisteredUsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = CompanyUserIdValidator.class)
-public @interface CompanyUserId {
+@Constraint(validatedBy = UnregisteredUsernameValidator.class)
+public @interface UnregisteredUsername {
 
-    public String message() default "Invalid company user id";
+    public String message() default "This username '${validatedValue}' is already in use";
 
     public Class<?>[] groups() default {};
 

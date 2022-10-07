@@ -1,25 +1,24 @@
 package com.nhn.mapper;
 
-import com.nhn.dto.request.CompanyRequest;
+import com.nhn.dto.request.UpdateCompanyRequest;
 import com.nhn.entity.Company;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CompanyMapper {
 
-    public Company toEntity(CompanyRequest req) {
-        Company company = new Company();
+    public Company toEntityUpdate(Company company, UpdateCompanyRequest request) {
 
-        company.setCompanyName(req.getCompanyName());
-        company.setCompanySize(req.getCompanySize());
-        company.setContactName(req.getContactName());
-        company.setContactTel(req.getContactTel());
-        company.setContactEmail(req.getContactEmail());
-        company.setContactAddress(req.getContactAddress());
-        company.setIntroduction(req.getIntroduction());
-        company.setFoundedYear(req.getFoundedYear());
-        company.setHeadquarters(req.getHeadquarters());
-        company.setLink(req.getLink());
+        company.setCompanyName(request.getCompanyName());
+        company.setCompanySize(request.getCompanySize());
+        company.setContactName(request.getContactName());
+        company.setContactTel(request.getContactTel());
+        company.setContactEmail(request.getContactEmail());
+        company.setContactAddress(request.getContactAddress());
+        company.setIntroduction(request.getIntroduction());
+        company.setFoundedYear(request.getFoundedYear());
+        company.setHeadquarters(request.getHeadquarters());
+        company.setLink(request.getLink());
 
         return company;
     }

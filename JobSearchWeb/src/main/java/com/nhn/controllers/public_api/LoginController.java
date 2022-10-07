@@ -84,17 +84,9 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<RespondObject> signUp(@Valid @RequestBody UserSignupRequest request,
-                                                BindingResult result) {
+    public ResponseEntity<RespondObject> signUp(@RequestBody @Valid UserSignupRequest request) {
 
         try {
-//            userSignupRequestValidator.validate(request, result);
-            if (result.hasErrors()) {
-                System.err.println(result.getAllErrors());
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new RespondObject("Fail", "Invalid request", result.getAllErrors()));
-            }
-
             UserDTO userSaved = loginService.signUp(request);
 
             if (userSaved != null) {
@@ -121,7 +113,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RespondObject> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<RespondObject> login(@RequestBody @Valid LoginRequest loginRequest) {
 
         Authentication authentication;
 

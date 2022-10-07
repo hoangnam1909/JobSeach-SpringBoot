@@ -2,10 +2,7 @@ package com.nhn.dto.request;
 
 import com.nhn.valid.UnregisteredEmail;
 import com.nhn.valid.UnregisteredUsername;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,20 +10,17 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignupRequest {
+@Data
+public class TestRequest {
 
-    @NotBlank
     @UnregisteredUsername
     private String username;
-
-    @NotBlank
-    private String password;
 
     @NotBlank
     @UnregisteredEmail
     private String email;
 
-    @NotBlank
-    private String role;
+//    @UnregisteredPhoneNumber
+//    private String phone;
 
 }

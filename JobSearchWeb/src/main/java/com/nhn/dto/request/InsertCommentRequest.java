@@ -1,15 +1,13 @@
 package com.nhn.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentInsertRequest {
+@Data
+public class InsertCommentRequest {
 
     private int companyId;
     private int candidateId;

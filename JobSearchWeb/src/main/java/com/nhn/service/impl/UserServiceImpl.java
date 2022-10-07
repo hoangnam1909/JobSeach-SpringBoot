@@ -3,7 +3,7 @@ package com.nhn.service.impl;
 import com.nhn.Util.Util;
 import com.nhn.dto.UserDTO;
 import com.nhn.dto.request.AdminUserInsertRequest;
-import com.nhn.dto.request.UserUpdateRequest;
+import com.nhn.dto.request.authed_request.UpdateUserRequest;
 import com.nhn.mapper.UserMapper;
 import com.nhn.entity.User;
 import com.nhn.repository.UserRepository;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service("userDetailsService")
@@ -32,30 +31,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
     private UserMapper userMapper;
 
     @Override
-    public UserDTO add(AdminUserInsertRequest req) {
+    public UserDTO add(AdminUserInsertRequest request) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        User user = userMapper.toEntity(req);
-        user.setPassword(passwordEncoder.encode(req.getPassword()));
+        User user = userMapper.toEntity(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userMapper.toDTO(userRepository.save(user));
     }
 
     @Override
-    public UserDTO updateUser(int id, UserUpdateRequest req) {
-        Optional<User> user = userRepository.findById(id);
+    public UserDTO updateUser(String username, UpdateUserRequest request) {
+        User user = userRepository.findUserByUsername(username);
 
-        if (user.isPresent()) {
-            User updateUser = userMapper.toEntity(req);
+        if (user != null) {
+            User updateUser = userMapper.toEntityUpdate(user, request);
 
-            if (!Util.isBCrypt(user.get().getPassword()))
-                updateUser.setPassword(user.get().getPassword());
+            if (!Util.isBCrypt(user.getPassword()))
+                updateUser.setPassword(user.getPassword());
 
             return userMapper.toDTO(userRepository.save(updateUser));
         }

@@ -2,6 +2,7 @@ package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
 import com.nhn.dto.request.JobRequest;
+import com.nhn.dto.request.TestRequest;
 import com.nhn.entity.Job;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,12 @@ public class TestAPI {
     ResponseEntity<RespondObject> getAll() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new RespondObject("Fail", "No comment found", userService.currentUser()));
+    }
+
+    @GetMapping("/valid-request")
+    ResponseEntity<RespondObject> validRequest(@RequestBody @Valid TestRequest request){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Ok", "Testing valid request", request));
     }
 
     @GetMapping("/test-array")
