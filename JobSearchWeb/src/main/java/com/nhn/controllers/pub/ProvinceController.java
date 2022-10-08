@@ -1,7 +1,6 @@
 package com.nhn.controllers.pub;
 
 import com.nhn.common.RespondObject;
-import com.nhn.entity.JobType;
 import com.nhn.entity.Province;
 import com.nhn.repository.ProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;

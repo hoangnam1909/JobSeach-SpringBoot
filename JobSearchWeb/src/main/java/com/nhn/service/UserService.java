@@ -1,9 +1,9 @@
 package com.nhn.service;
 
+import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
-import com.nhn.entity.User;
 import com.nhn.model.request.test_request.UserImageRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;

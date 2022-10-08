@@ -1,6 +1,6 @@
 package com.nhn.specifications;
 
-import com.nhn.model.SearchCriteria;
+import com.nhn.common.SearchCriteria;
 import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
 import com.nhn.specifications.key.UserEnum;
@@ -74,6 +74,10 @@ public class SpecificationConverter {
 
         if (params.containsKey(JobEnum.PROVINCE_ID)){
             specification.add(new SearchCriteria(JobEnum.PROVINCE_ID, params.get(JobEnum.PROVINCE_ID), SearchOperation.PROVINCE_ID));
+        }
+
+        if (params.containsKey(JobEnum.IS_APPLYING)){
+            specification.add(new SearchCriteria(JobEnum.IS_APPLYING, params.get(JobEnum.IS_APPLYING), SearchOperation.IS_APPLYING));
         }
 
         return specification;

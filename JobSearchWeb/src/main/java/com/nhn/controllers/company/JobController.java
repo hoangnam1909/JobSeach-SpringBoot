@@ -1,11 +1,11 @@
 package com.nhn.controllers.company;
 
 import com.nhn.common.RespondObject;
+import com.nhn.entity.Job;
+import com.nhn.mapper.JobMapper;
 import com.nhn.model.request.JobRequest;
 import com.nhn.model.request.JobUpdateRequest;
-import com.nhn.mapper.JobMapper;
-import com.nhn.entity.Job;
-import com.nhn.repository.*;
+import com.nhn.repository.JobRepository;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;

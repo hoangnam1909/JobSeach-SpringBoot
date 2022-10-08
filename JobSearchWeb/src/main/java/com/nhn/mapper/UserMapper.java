@@ -1,13 +1,14 @@
 package com.nhn.mapper;
 
 import com.nhn.common.Constant;
+import com.nhn.entity.ApplyJob;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Company;
+import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.UserSignupRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
-import com.nhn.entity.Candidate;
-import com.nhn.entity.Company;
-import com.nhn.entity.User;
 import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
@@ -119,6 +120,16 @@ public class UserMapper {
 
         users.forEach(user -> {
             userList.add(toDTO(user));
+        });
+
+        return userList;
+    }
+
+    public List<User> applyJobToUserList(List<ApplyJob> applyJobs) {
+        List<User> userList = new ArrayList<>();
+
+        applyJobs.forEach(applyJob -> {
+            userList.add(applyJob.getCandidateUser());
         });
 
         return userList;

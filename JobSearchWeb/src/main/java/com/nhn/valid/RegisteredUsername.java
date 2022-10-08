@@ -1,7 +1,6 @@
 package com.nhn.valid;
 
 import com.nhn.valid.validator.RegisteredUsernameValidator;
-import com.nhn.valid.validator.UnregisteredUsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

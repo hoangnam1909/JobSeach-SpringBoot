@@ -1,9 +1,9 @@
 package com.nhn.controllers.candidate;
 
 import com.nhn.common.RespondObject;
-import com.nhn.model.request.InsertCommentRequest;
-import com.nhn.mapper.CommentMapper;
 import com.nhn.entity.Comment;
+import com.nhn.mapper.CommentMapper;
+import com.nhn.model.request.InsertCommentRequest;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/candidate/api/comment")
-public class CommentController {
+public class CandidateCommentController {
 
     @Autowired
     private CommentRepository commentRepository;

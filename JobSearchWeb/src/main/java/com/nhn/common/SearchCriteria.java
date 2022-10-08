@@ -1,7 +1,8 @@
-package com.nhn.model;
+package com.nhn.common;
 
 import com.nhn.specifications.key.SearchOperation;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

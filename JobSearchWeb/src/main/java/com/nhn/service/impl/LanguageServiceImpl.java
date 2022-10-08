@@ -1,10 +1,10 @@
 package com.nhn.service.impl;
 
-import com.nhn.model.request.LanguageRequest;
-import com.nhn.mapper.LanguageMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Language;
 import com.nhn.entity.User;
+import com.nhn.mapper.LanguageMapper;
+import com.nhn.model.request.LanguageRequest;
 import com.nhn.repository.LanguageRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.LanguageService;

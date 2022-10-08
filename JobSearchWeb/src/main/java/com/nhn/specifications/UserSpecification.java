@@ -1,6 +1,6 @@
 package com.nhn.specifications;
 
-import com.nhn.model.SearchCriteria;
+import com.nhn.common.SearchCriteria;
 import com.nhn.entity.User;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;

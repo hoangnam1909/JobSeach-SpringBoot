@@ -1,8 +1,8 @@
 package com.nhn.mapper;
 
+import com.nhn.entity.*;
 import com.nhn.model.request.JobRequest;
 import com.nhn.model.request.JobUpdateRequest;
-import com.nhn.entity.*;
 import com.nhn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

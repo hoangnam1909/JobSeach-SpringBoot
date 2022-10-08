@@ -1,7 +1,9 @@
 package com.nhn.model.request;
 
 import com.nhn.valid.RegisteredUsername;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 

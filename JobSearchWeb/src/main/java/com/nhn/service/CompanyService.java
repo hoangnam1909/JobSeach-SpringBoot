@@ -1,7 +1,7 @@
 package com.nhn.service;
 
-import com.nhn.model.request.UpdateCompanyRequest;
 import com.nhn.entity.Company;
+import com.nhn.model.request.UpdateCompanyRequest;
 
 public interface CompanyService {
 

@@ -1,7 +1,6 @@
 package com.nhn.valid;
 
 import com.nhn.valid.validator.ExistingCandidateIdValidator;
-import com.nhn.valid.validator.ExistingJobIdValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,7 +1,10 @@
 package com.nhn.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +14,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "job", schema = "jobsearchingnew")
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -90,6 +92,18 @@ public class Job {
     @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Collection<Requirement> requirements;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobApp")
+    @JsonManagedReference
+    private Collection<ApplyJob> applyingJobs;
+
+    private int applyJobCounter;
+
+    @PostLoad
+    public void applyJobCount() {
+        applyJobCounter = applyingJobs.size();
+        applyingJobs = null;
+    }
 
     @PrePersist
     public void onSave() {

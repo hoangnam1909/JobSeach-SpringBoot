@@ -1,7 +1,10 @@
 package com.nhn.specifications;
 
-import com.nhn.model.SearchCriteria;
-import com.nhn.entity.*;
+import com.nhn.common.SearchCriteria;
+import com.nhn.entity.Job;
+import com.nhn.entity.JobCategory;
+import com.nhn.entity.JobType;
+import com.nhn.entity.Province;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -97,6 +100,13 @@ public class JobSpecification implements Specification<Job> {
 
                 Join<Province, Job> provinceJobs = root.join("province");
                 predicates.add(builder.equal(provinceJobs.get("id"), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.IS_APPLYING)) {
+
+                if (Boolean.parseBoolean(criteria.getValue().toString())) {
+                    predicates.add(builder.greaterThan(
+                            builder.size(root.get("applyingJobs")), 0));
+                }
 
             }
         }

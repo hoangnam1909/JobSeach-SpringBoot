@@ -1,10 +1,10 @@
 package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
+import com.nhn.entity.Job;
 import com.nhn.entity.User;
 import com.nhn.model.request.JobRequest;
 import com.nhn.model.request.TestRequest;
-import com.nhn.entity.Job;
 import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;

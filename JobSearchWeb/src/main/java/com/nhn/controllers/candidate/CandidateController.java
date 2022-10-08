@@ -2,9 +2,9 @@ package com.nhn.controllers.candidate;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
-import com.nhn.model.request.*;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.User;
+import com.nhn.model.request.*;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.List;
 
 @CrossOrigin
 @RestController

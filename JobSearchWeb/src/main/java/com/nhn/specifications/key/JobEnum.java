@@ -16,4 +16,6 @@ public class JobEnum {
 
     public static final String PROVINCE_ID = "provinceId";
 
+    public static final String IS_APPLYING = "isApplying";
+
 }

@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
-import com.nhn.model.request.UpdateCompanyRequest;
 import com.nhn.entity.Company;
+import com.nhn.model.request.UpdateCompanyRequest;
 import org.springframework.stereotype.Component;
 
 @Component

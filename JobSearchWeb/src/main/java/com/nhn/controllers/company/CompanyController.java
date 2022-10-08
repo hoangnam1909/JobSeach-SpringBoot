@@ -2,10 +2,10 @@ package com.nhn.controllers.company;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
-import com.nhn.model.request.UpdateCompanyRequest;
-import com.nhn.mapper.CompanyMapper;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
+import com.nhn.mapper.CompanyMapper;
+import com.nhn.model.request.UpdateCompanyRequest;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.CompanyService;

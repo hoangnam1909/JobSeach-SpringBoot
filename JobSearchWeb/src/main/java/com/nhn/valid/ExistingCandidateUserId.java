@@ -1,6 +1,6 @@
 package com.nhn.valid;
 
-import com.nhn.valid.validator.ExistingJobIdValidator;
+import com.nhn.valid.validator.ExistingCandidateUserIdValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE_USE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = ExistingJobIdValidator.class)
-public @interface ExistingJobId {
+@Constraint(validatedBy = ExistingCandidateUserIdValidator.class)
+public @interface ExistingCandidateUserId {
 
-    public String message() default "Could not find job with id = ${validatedValue}";
+    public String message() default "Could not find user has CANDIDATE role with user id = ${validatedValue}";
 
     public Class<?>[] groups() default {};
 

@@ -1,10 +1,10 @@
 package com.nhn.service.impl;
 
-import com.nhn.model.request.QualificationRequest;
-import com.nhn.mapper.QualificationMapper;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Qualification;
 import com.nhn.entity.User;
+import com.nhn.mapper.QualificationMapper;
+import com.nhn.model.request.QualificationRequest;
 import com.nhn.repository.QualificationRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.QualificationService;

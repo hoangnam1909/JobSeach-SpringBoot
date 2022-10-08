@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
-import com.nhn.model.request.TalentRequest;
 import com.nhn.entity.Talent;
+import com.nhn.model.request.TalentRequest;
 import org.springframework.stereotype.Component;
 
 @Component
