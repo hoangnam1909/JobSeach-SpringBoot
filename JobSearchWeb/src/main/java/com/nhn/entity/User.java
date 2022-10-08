@@ -43,7 +43,7 @@ public class User {
 
     @Basic
     @Column(name = "role")
-    private String role = Constant.USER_ROLE.NORMAL;
+    private String role;
 
     @Basic
     @Column(name = "active")
@@ -100,6 +100,9 @@ public class User {
 
         if (role.equals(Constant.USER_ROLE.COMPANY))
             active = false;
+
+        if (role.length() == 0)
+            role = Constant.USER_ROLE.NORMAL;
 
         if (avatar == null)
             avatar = "https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg";

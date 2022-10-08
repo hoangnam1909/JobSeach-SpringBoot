@@ -118,21 +118,18 @@ public class AuthController {
 
         try {
             authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             System.err.println("logged in");
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new RespondObject("Ok", "User logged in", authentication.getName())
-                    );
+                    .body(new RespondObject("Ok", "User logged in", authentication.getName()));
         } catch (Exception ex) {
             System.err.println("login failed");
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body(new RespondObject("Failed", "User login failed", "")
-                    );
+                    .body(new RespondObject("Failed", "User login failed", ""));
         }
     }
 
