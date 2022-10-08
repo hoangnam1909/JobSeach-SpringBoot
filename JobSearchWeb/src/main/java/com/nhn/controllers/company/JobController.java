@@ -44,7 +44,7 @@ public class JobController {
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
-
+        System.err.println("get jobs" + page);
         if (params != null) {
             if (Integer.parseInt(page) <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(

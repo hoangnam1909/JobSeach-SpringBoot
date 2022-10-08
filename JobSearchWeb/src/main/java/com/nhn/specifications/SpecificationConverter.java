@@ -72,6 +72,10 @@ public class SpecificationConverter {
             specification.add(new SearchCriteria(JobEnum.POSITION_ID, params.get(JobEnum.POSITION_ID), SearchOperation.POSITION_ID));
         }
 
+        if (params.containsKey(JobEnum.PROVINCE_ID)){
+            specification.add(new SearchCriteria(JobEnum.PROVINCE_ID, params.get(JobEnum.PROVINCE_ID), SearchOperation.PROVINCE_ID));
+        }
+
         return specification;
     }
 

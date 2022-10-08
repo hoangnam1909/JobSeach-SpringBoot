@@ -18,7 +18,8 @@ public class JobRequest {
     private String title;
     private String description;
     private Date jobStartDate;
-    private String location;
+    private String address;
+    private int provinceId;
     private int noOfVacancies;
     private int positionId;
     private int jobCategoryId;

@@ -1,5 +1,6 @@
 package com.nhn.config;
 
+import com.nhn.common.Constant;
 import com.nhn.filter.JwtFilter;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    @Autowired
-//    private JwtFilter jwtFilter;
 
     @Autowired
     private UserService userDetailsService;
@@ -67,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin").hasAuthority("ADMIN")
 //                .antMatchers("/index").permitAll()
 //                .antMatchers("/assets/**").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").hasAuthority(Constant.USER_ROLE.ADMIN)
                 .anyRequest().permitAll()
 //                .antMatchers("/**").permitAll()
                 .and()

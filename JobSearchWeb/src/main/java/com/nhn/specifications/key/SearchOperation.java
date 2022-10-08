@@ -15,6 +15,7 @@ public enum SearchOperation {
     NOT_IN,
     CATEGORY_ID,
     POSITION_ID,
-    JOB_TYPE_ID
+    JOB_TYPE_ID,
+    PROVINCE_ID
 
 }

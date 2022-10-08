@@ -27,13 +27,21 @@ public class JobMapper {
     @Autowired
     private JobTypeRepository jobTypeRepository;
 
+    @Autowired
+    private ProvinceRepository provinceRepository;
+
     public Job toEntity(JobRequest req) {
         Job job = new Job();
 
         job.setTitle(req.getTitle());
         job.setDescription(req.getDescription());
         job.setJobStartDate(req.getJobStartDate());
-        job.setLocation(req.getLocation());
+
+        job.setAddress(req.getAddress());
+
+        Optional<Province> province = provinceRepository.findById(req.getProvinceId());
+        province.ifPresent(job::setProvince);
+
         job.setNoOfVacancies(req.getNoOfVacancies());
 
         Optional<Position> position = positionRepository.findById(req.getPositionId());
@@ -63,7 +71,12 @@ public class JobMapper {
             job.setTitle(req.getTitle());
             job.setDescription(req.getDescription());
             job.setJobStartDate(req.getJobStartDate());
-            job.setLocation(req.getLocation());
+
+            job.setAddress(req.getAddress());
+
+            Optional<Province> province = provinceRepository.findById(req.getProvinceId());
+            province.ifPresent(job::setProvince);
+
             job.setNoOfVacancies(req.getNoOfVacancies());
             job.setSalary(req.getSalary());
 

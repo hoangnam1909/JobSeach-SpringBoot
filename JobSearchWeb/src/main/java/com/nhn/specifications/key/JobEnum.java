@@ -14,4 +14,6 @@ public class JobEnum {
 
     public static final String POSITION_ID = "positionId";
 
+    public static final String PROVINCE_ID = "provinceId";
+
 }

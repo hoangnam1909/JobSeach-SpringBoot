@@ -204,9 +204,10 @@ CREATE TABLE `job` (
   `date_published` datetime DEFAULT NULL,
   `job_start_date` datetime DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL,
-  `location` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `no_of_vacancies` int DEFAULT '0',
   `salary` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `address` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `province_id` int NOT NULL,
   `position_id` int NOT NULL,
   `category_id` int NOT NULL,
   `job_type_id` int NOT NULL,
@@ -216,9 +217,11 @@ CREATE TABLE `job` (
   KEY `fk_job_pos_idx` (`position_id`),
   KEY `fk_job_usercomp_idx` (`user_company_id`),
   KEY `fk_job_jtype_idx` (`job_type_id`),
+  KEY `fk_job_province_idx` (`province_id`),
   CONSTRAINT `fk_job_cate` FOREIGN KEY (`category_id`) REFERENCES `job_category` (`id`),
   CONSTRAINT `fk_job_jtype` FOREIGN KEY (`job_type_id`) REFERENCES `job_type` (`id`),
   CONSTRAINT `fk_job_pos` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
+  CONSTRAINT `fk_job_province` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
   CONSTRAINT `fk_job_usercomp` FOREIGN KEY (`user_company_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,7 +232,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,'Hồ Chí Minh: Etown 2 Building, 364 Cong Hoa St, Tân Bình',10,'11000000',8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,NULL,0,'40000000',1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',NULL,0,'50000000',3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',NULL,0,'50000000',2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',NULL,0,'40000000',1,3,1,136),(7,'job update done','loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13','update location done',1909,'25000000',3,10,3,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',NULL,0,'40000000',3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',NULL,0,'40000000',1,2,1,136),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',NULL,0,'25000000',1,12,1,134),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',NULL,0,'25000000',1,12,1,134),(12,'loi 500 lan nua xem','loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16','khong biet',200,'25000000',1,12,1,136),(13,'test requirements','requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00','khong biet dau',230,'25000000',1,12,1,136);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,134),(3,'job update','loi 500',NULL,NULL,NULL,0,'40000000','address',2,1,12,1,134),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,134),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,134),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,136),(7,'job update done','loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1909,'25000000','address',36,3,10,3,136),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,136),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,136),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,134),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,134),(12,'loi 500 lan nua xem','loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,136),(13,'test requirements','requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00',230,'25000000','address',14,1,12,1,136);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,6 +369,34 @@ INSERT INTO `position` VALUES (1,'Nhân viên',NULL),(2,'Trưởng nhóm',NULL),
 UNLOCK TABLES;
 
 --
+-- Table structure for table `province`
+--
+
+DROP TABLE IF EXISTS `province`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `province` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `full_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `full_name_en` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `code_name` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `province`
+--
+
+LOCK TABLES `province` WRITE;
+/*!40000 ALTER TABLE `province` DISABLE KEYS */;
+INSERT INTO `province` VALUES (1,'Hà Nội','Ha Noi','Thành phố Hà Nội','Ha Noi City','ha_noi'),(2,'Hà Giang','Ha Giang','Tỉnh Hà Giang','Ha Giang Province','ha_giang'),(4,'Cao Bằng','Cao Bang','Tỉnh Cao Bằng','Cao Bang Province','cao_bang'),(6,'Bắc Kạn','Bac Kan','Tỉnh Bắc Kạn','Bac Kan Province','bac_kan'),(8,'Tuyên Quang','Tuyen Quang','Tỉnh Tuyên Quang','Tuyen Quang Province','tuyen_quang'),(10,'Lào Cai','Lao Cai','Tỉnh Lào Cai','Lao Cai Province','lao_cai'),(11,'Điện Biên','Dien Bien','Tỉnh Điện Biên','Dien Bien Province','dien_bien'),(12,'Lai Châu','Lai Chau','Tỉnh Lai Châu','Lai Chau Province','lai_chau'),(14,'Sơn La','Son La','Tỉnh Sơn La','Son La Province','son_la'),(15,'Yên Bái','Yen Bai','Tỉnh Yên Bái','Yen Bai Province','yen_bai'),(17,'Hoà Bình','Hoa Binh','Tỉnh Hoà Bình','Hoa Binh Province','hoa_binh'),(19,'Thái Nguyên','Thai Nguyen','Tỉnh Thái Nguyên','Thai Nguyen Province','thai_nguyen'),(20,'Lạng Sơn','Lang Son','Tỉnh Lạng Sơn','Lang Son Province','lang_son'),(22,'Quảng Ninh','Quang Ninh','Tỉnh Quảng Ninh','Quang Ninh Province','quang_ninh'),(24,'Bắc Giang','Bac Giang','Tỉnh Bắc Giang','Bac Giang Province','bac_giang'),(25,'Phú Thọ','Phu Tho','Tỉnh Phú Thọ','Phu Tho Province','phu_tho'),(26,'Vĩnh Phúc','Vinh Phuc','Tỉnh Vĩnh Phúc','Vinh Phuc Province','vinh_phuc'),(27,'Bắc Ninh','Bac Ninh','Tỉnh Bắc Ninh','Bac Ninh Province','bac_ninh'),(30,'Hải Dương','Hai Duong','Tỉnh Hải Dương','Hai Duong Province','hai_duong'),(31,'Hải Phòng','Hai Phong','Thành phố Hải Phòng','Hai Phong City','hai_phong'),(33,'Hưng Yên','Hung Yen','Tỉnh Hưng Yên','Hung Yen Province','hung_yen'),(34,'Thái Bình','Thai Binh','Tỉnh Thái Bình','Thai Binh Province','thai_binh'),(35,'Hà Nam','Ha Nam','Tỉnh Hà Nam','Ha Nam Province','ha_nam'),(36,'Nam Định','Nam Dinh','Tỉnh Nam Định','Nam Dinh Province','nam_dinh'),(37,'Ninh Bình','Ninh Binh','Tỉnh Ninh Bình','Ninh Binh Province','ninh_binh'),(38,'Thanh Hóa','Thanh Hoa','Tỉnh Thanh Hóa','Thanh Hoa Province','thanh_hoa'),(40,'Nghệ An','Nghe An','Tỉnh Nghệ An','Nghe An Province','nghe_an'),(42,'Hà Tĩnh','Ha Tinh','Tỉnh Hà Tĩnh','Ha Tinh Province','ha_tinh'),(44,'Quảng Bình','Quang Binh','Tỉnh Quảng Bình','Quang Binh Province','quang_binh'),(45,'Quảng Trị','Quang Tri','Tỉnh Quảng Trị','Quang Tri Province','quang_tri'),(46,'Thừa Thiên Huế','Thua Thien Hue','Tỉnh Thừa Thiên Huế','Thua Thien Hue Province','thua_thien_hue'),(48,'Đà Nẵng','Da Nang','Thành phố Đà Nẵng','Da Nang City','da_nang'),(49,'Quảng Nam','Quang Nam','Tỉnh Quảng Nam','Quang Nam Province','quang_nam'),(51,'Quảng Ngãi','Quang Ngai','Tỉnh Quảng Ngãi','Quang Ngai Province','quang_ngai'),(52,'Bình Định','Binh Dinh','Tỉnh Bình Định','Binh Dinh Province','binh_dinh'),(54,'Phú Yên','Phu Yen','Tỉnh Phú Yên','Phu Yen Province','phu_yen'),(56,'Khánh Hòa','Khanh Hoa','Tỉnh Khánh Hòa','Khanh Hoa Province','khanh_hoa'),(58,'Ninh Thuận','Ninh Thuan','Tỉnh Ninh Thuận','Ninh Thuan Province','ninh_thuan'),(60,'Bình Thuận','Binh Thuan','Tỉnh Bình Thuận','Binh Thuan Province','binh_thuan'),(62,'Kon Tum','Kon Tum','Tỉnh Kon Tum','Kon Tum Province','kon_tum'),(64,'Gia Lai','Gia Lai','Tỉnh Gia Lai','Gia Lai Province','gia_lai'),(66,'Đắk Lắk','Dak Lak','Tỉnh Đắk Lắk','Dak Lak Province','dak_lak'),(67,'Đắk Nông','Dak Nong','Tỉnh Đắk Nông','Dak Nong Province','dak_nong'),(68,'Lâm Đồng','Lam Dong','Tỉnh Lâm Đồng','Lam Dong Province','lam_dong'),(70,'Bình Phước','Binh Phuoc','Tỉnh Bình Phước','Binh Phuoc Province','binh_phuoc'),(72,'Tây Ninh','Tay Ninh','Tỉnh Tây Ninh','Tay Ninh Province','tay_ninh'),(74,'Bình Dương','Binh Duong','Tỉnh Bình Dương','Binh Duong Province','binh_duong'),(75,'Đồng Nai','Dong Nai','Tỉnh Đồng Nai','Dong Nai Province','dong_nai'),(77,'Bà Rịa - Vũng Tàu','Ba Ria - Vung Tau','Tỉnh Bà Rịa - Vũng Tàu','Ba Ria - Vung Tau Province','ba_ria_vung_tau'),(79,'Hồ Chí Minh','Ho Chi Minh','Thành phố Hồ Chí Minh','Ho Chi Minh City','ho_chi_minh'),(80,'Long An','Long An','Tỉnh Long An','Long An Province','long_an'),(82,'Tiền Giang','Tien Giang','Tỉnh Tiền Giang','Tien Giang Province','tien_giang'),(83,'Bến Tre','Ben Tre','Tỉnh Bến Tre','Ben Tre Province','ben_tre'),(84,'Trà Vinh','Tra Vinh','Tỉnh Trà Vinh','Tra Vinh Province','tra_vinh'),(86,'Vĩnh Long','Vinh Long','Tỉnh Vĩnh Long','Vinh Long Province','vinh_long'),(87,'Đồng Tháp','Dong Thap','Tỉnh Đồng Tháp','Dong Thap Province','dong_thap'),(89,'An Giang','An Giang','Tỉnh An Giang','An Giang Province','an_giang'),(91,'Kiên Giang','Kien Giang','Tỉnh Kiên Giang','Kien Giang Province','kien_giang'),(92,'Cần Thơ','Can Tho','Thành phố Cần Thơ','Can Tho City','can_tho'),(93,'Hậu Giang','Hau Giang','Tỉnh Hậu Giang','Hau Giang Province','hau_giang'),(94,'Sóc Trăng','Soc Trang','Tỉnh Sóc Trăng','Soc Trang Province','soc_trang'),(95,'Bạc Liêu','Bac Lieu','Tỉnh Bạc Liêu','Bac Lieu Province','bac_lieu'),(96,'Cà Mau','Ca Mau','Tỉnh Cà Mau','Ca Mau Province','ca_mau');
+/*!40000 ALTER TABLE `province` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `qualification`
 --
 
@@ -429,7 +460,7 @@ DROP TABLE IF EXISTS `requirement`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requirement` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `content` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `job_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_req_job_idx` (`job_id`),
@@ -556,7 +587,7 @@ CREATE TABLE `user` (
   KEY `fk_user_employer_idx` (`company_id`),
   CONSTRAINT `fk_user_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -565,7 +596,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','avatar uv1','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','avatar uv2','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL,42,NULL),(134,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','avatar comp1','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL,NULL,21),(136,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','deo co','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22),(137,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW',NULL,'CANDIDATE',1,NULL,'ungvien2@ou.edu.vn',NULL,NULL,0,NULL,'2022-10-07 11:09:02',46,NULL);
+INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','avatar uv1','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','avatar uv2','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL,42,NULL),(134,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','avatar comp1','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL,NULL,21),(136,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','deo co','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22),(137,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW',NULL,'CANDIDATE',1,NULL,'ungvien2@ou.edu.vn',NULL,NULL,0,NULL,'2022-10-07 11:09:02',46,NULL),(138,'ungvien4','ungvien4','https://res.cloudinary.com/nhn1909/image/upload/v1665162109/pllbrvwa6kddf8tugiwe.jpg','CANDIDATE',1,NULL,'ungvien4@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:01:49',NULL,NULL),(139,'ungvien5','ungvien5','https://res.cloudinary.com/nhn1909/image/upload/v1665162306/ma90kivoaapn9aj331h8.jpg','CANDIDATE',1,NULL,'ungvien5@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:05:06',NULL,NULL),(140,'ungvien5','ungvien5',NULL,'CANDIDATE',1,NULL,'ungvien5@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:05:25',NULL,NULL),(141,'ungvien6','ungvien6','https://res.cloudinary.com/nhn1909/image/upload/v1665162377/mjluilfr6eyf2m1f1ohz.jpg','CANDIDATE',1,NULL,'ungvien6@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:06:17',NULL,NULL),(142,'ungvien7','ungvien7','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien7@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:06:41',NULL,NULL),(143,'ungvien8','ungvien8','https://res.cloudinary.com/nhn1909/image/upload/v1665162491/ehvuymd8txxwtpudqcae.jpg','CANDIDATE',1,NULL,'ungvien8@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:08:11',NULL,NULL),(144,'ungvien8','ungvien8','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien8@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:08:23',NULL,NULL),(145,'ungvien8','ungvien8','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien8@gmail.com',NULL,NULL,0,NULL,'2022-10-08 00:09:12',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,4 +639,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-07 16:50:08
+-- Dump completed on 2022-10-08 16:44:20

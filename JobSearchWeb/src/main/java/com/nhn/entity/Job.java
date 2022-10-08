@@ -1,6 +1,5 @@
 package com.nhn.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -49,12 +48,16 @@ public class Job {
     private Date modifiedDate;
 
     @Basic
-    @Column(name = "location")
-    private String location;
-
-    @Basic
     @Column(name = "no_of_vacancies")
     private int noOfVacancies;
+
+    @Basic
+    @Column(name = "address")
+    private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "province_id", referencedColumnName = "id", nullable = false)
+    private Province province;
 
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id", nullable = false)
