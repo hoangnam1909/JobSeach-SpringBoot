@@ -7,6 +7,8 @@ import com.nhn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -99,6 +101,16 @@ public class JobMapper {
         }
 
         return null;
+    }
+
+    public List<Job> applyJobToJobList(List<ApplyJob> applyJobs) {
+        List<Job> jobList = new ArrayList<>();
+
+        applyJobs.forEach(applyJob -> {
+            jobList.add(applyJob.getJobApp());
+        });
+
+        return jobList;
     }
 
 }

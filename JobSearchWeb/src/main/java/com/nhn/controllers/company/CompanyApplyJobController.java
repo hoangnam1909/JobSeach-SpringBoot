@@ -31,20 +31,20 @@ public class CompanyApplyJobController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/{job-id}")
-    ResponseEntity<RespondObject> getCandidateUserApplyJobByJobId(@PathVariable(name = "job-id") @Valid @ExistingJobId int jobId) {
-
-        Optional<Job> job = jobRepository.findById(jobId);
-        List<ApplyJob> applyJobs = applyJobRepository.findAllByJobApp(job.get());
-
-        List<User> candidateUsers = userMapper.applyJobToUserList(applyJobs);
-
-        if (applyJobs.size() == 0)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new RespondObject("Fail", "Applying job not found", jobId));
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(
-                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", jobId), candidateUsers));
-    }
+//    @GetMapping("/{job-id}")
+//    ResponseEntity<RespondObject> getCandidateUserApplyJobByJobId(@PathVariable(name = "job-id") @Valid @ExistingJobId int jobId) {
+//
+//        Optional<Job> job = jobRepository.findById(jobId);
+//        List<ApplyJob> applyJobs = applyJobRepository.findAllByJobApp(job.get());
+//
+//        List<User> candidateUsers = userMapper.applyJobToUserList(applyJobs);
+//
+//        if (applyJobs.size() == 0)
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+//                    new RespondObject("Fail", "Applying job not found", jobId));
+//
+//        return ResponseEntity.status(HttpStatus.FOUND).body(
+//                new RespondObject("Found", String.format("Applying job of job with jobId = %s found", jobId), candidateUsers));
+//    }
 
 }
