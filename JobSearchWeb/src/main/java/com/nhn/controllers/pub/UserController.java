@@ -101,9 +101,9 @@ public class UserController {
 
     @GetMapping("/{username}")
     ResponseEntity<RespondObject> findByUsername(@PathVariable String username) {
-        Optional<User> foundUser = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(username));
+        User foundUser = userRepository.findUserByUsername(username);
 
-        return foundUser.isPresent() ?
+        return foundUser != null ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new RespondObject("OK", "User found", foundUser)
                 ) :
@@ -143,10 +143,16 @@ public class UserController {
     @PutMapping("/{username}")
     ResponseEntity<RespondObject> upsert(@PathVariable String username,
                                          @RequestBody UpdateUserRequest request) {
-        UserDTO userDTO = userService.updateUser(username, request);
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("OK", "Update User successfully", userDTO)
-        );
+        try {
+            UserDTO userDTO = userService.updateUser(username, request);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("OK", "Update User successfully", userDTO)
+            );
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new RespondObject("Error", "Bad request", ex.getMessage())
+            );
+        }
     }
 
     @DeleteMapping("/{id}")
