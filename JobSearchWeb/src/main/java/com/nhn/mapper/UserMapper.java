@@ -37,18 +37,18 @@ public class UserMapper {
         return INSTANCE;
     }
 
-    public User toEntityUpdate(User user, UpdateUserRequest request){
-
-        user.setAvatar(request.getAvatar());
-        user.setFullName(request.getFullName());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setDob(request.getDob());
-        user.setGender(request.isGender());
-        user.setAddress(request.getAddress());
-
-        return user;
-    }
+//    public User toEntityUpdate(User user, UpdateUserRequest request){
+//
+//        user.setAvatar(request.getAvatar());
+//        user.setFullName(request.getFullName());
+//        user.setEmail(request.getEmail());
+//        user.setPhone(request.getPhone());
+//        user.setDob(request.getDob());
+//        user.setGender(request.isGender());
+//        user.setAddress(request.getAddress());
+//
+//        return user;
+//    }
 
     public User toEntity(AdminUserInsertRequest req) {
         User user = new User();
@@ -86,13 +86,16 @@ public class UserMapper {
         return user;
     }
 
-    public User toEntity(UserImageRequest request) {
-        User user = new User();
+    public User toEntity(User user, UpdateUserRequest request) {
 
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
+        user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
-        user.setRole(request.getRole());
+        user.setPhone(request.getPhone());
+        user.setDob(request.getDob());
+
+        System.err.println(Boolean.parseBoolean(request.getGender()));
+        user.setGender(Boolean.parseBoolean(request.getGender()));
+        user.setAddress(request.getAddress());
 
         return user;
     }

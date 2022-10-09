@@ -83,4 +83,24 @@ public class CandidateApplyJobController {
         }
     }
 
+    @DeleteMapping
+    ResponseEntity<RespondObject> deleteApplyJob(@RequestBody @Valid int applyJobId) {
+
+        try {
+            Optional<ApplyJob> applyJob = applyJobRepository.findById(applyJobId);
+            if (applyJob.isPresent()) {
+                applyJobRepository.delete(applyJob.get());
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Deleted", "Applying job deleted", null));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Found", "Do not found", "Do not found apply job with id = " + applyJobId));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new RespondObject("Failed", "Applying job failed", ex.getMessage()));
+        }
+    }
+
 }

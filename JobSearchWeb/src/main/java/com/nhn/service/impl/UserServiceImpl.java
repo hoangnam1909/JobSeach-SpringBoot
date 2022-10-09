@@ -2,13 +2,11 @@ package com.nhn.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.nhn.Util.Util;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
-import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -51,21 +50,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userMapper.toDTO(userRepository.save(user));
     }
 
-    @Override
-    public UserDTO updateUser(String username, UpdateUserRequest request) {
-        User user = userRepository.findUserByUsername(username);
-
-        if (user != null) {
-            User updateUser = userMapper.toEntityUpdate(user, request);
-
-            if (!Util.isBCrypt(user.getPassword()))
-                updateUser.setPassword(user.getPassword());
-
-            return userMapper.toDTO(userRepository.save(updateUser));
-        }
-
-        return null;
-    }
+//    @Override
+//    public UserDTO updateUser(String username, UpdateUserRequest request) {
+//        User user = userRepository.findUserByUsername(username);
+//
+//        if (user != null) {
+//            User updateUser = userMapper.toEntityUpdate(user, request);
+//
+//            if (!Util.isBCrypt(user.getPassword()))
+//                updateUser.setPassword(user.getPassword());
+//
+//            return userMapper.toDTO(userRepository.save(updateUser));
+//        }
+//
+//        return null;
+//    }
 
     @Override
     public User currentUser() {
@@ -80,8 +79,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User uploadWithAvatar(UserImageRequest userRequest, MultipartFile file) {
-        User user = userMapper.toEntity(userRequest);
+    @Transactional
+    public User update(String username, UpdateUserRequest request, MultipartFile file) {
+        User userUpdating = userRepository.findUserByUsername(username);
+
+        User user = userMapper.toEntity(userUpdating, request);
 
         if (!file.isEmpty()) {
             Map r = null;

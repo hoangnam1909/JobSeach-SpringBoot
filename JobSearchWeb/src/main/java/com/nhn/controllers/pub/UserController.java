@@ -12,19 +12,22 @@ import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.UserSpecification;
+import com.nhn.valid.RegisteredUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -140,17 +143,40 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{username}")
-    ResponseEntity<RespondObject> upsert(@PathVariable String username,
-                                         @RequestBody UpdateUserRequest request) {
+//    @PutMapping("/{username}")
+//    ResponseEntity<RespondObject> upsert(@PathVariable String username,
+//                                         @RequestBody UpdateUserRequest request) {
+//        try {
+//            UserDTO userDTO = userService.updateUser(username, request);
+//            return ResponseEntity.status(HttpStatus.OK).body(
+//                    new RespondObject("OK", "Update User successfully", userDTO)
+//            );
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                    new RespondObject("Error", "Bad request", ex.getMessage())
+//            );
+//        }
+//    }
+
+    @PutMapping(value = "/{username}", consumes = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE
+    })
+    @Transactional
+    ResponseEntity<RespondObject> testImage(@PathVariable(name = "username") @Valid @RegisteredUsername String username,
+                                            @RequestPart("user") UpdateUserRequest request,
+                                            @RequestPart("file") MultipartFile file) {
+
         try {
-            UserDTO userDTO = userService.updateUser(username, request);
+            User user = userService.update(username, request, file);
+
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("OK", "Update User successfully", userDTO)
+                    new RespondObject("Ok", "Save user successfully", user)
             );
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Error", "Bad request", ex.getMessage())
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
             );
         }
     }

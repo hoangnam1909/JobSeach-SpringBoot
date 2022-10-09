@@ -55,7 +55,6 @@ public class User {
 
     @Basic
     @Column(name = "email")
-    @Email
     private String email;
 
     @Basic

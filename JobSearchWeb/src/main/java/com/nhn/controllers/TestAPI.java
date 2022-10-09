@@ -37,26 +37,26 @@ public class TestAPI {
                 new RespondObject("Fail", "No comment found", userService.currentUser()));
     }
 
-    @PostMapping(value = "/test-image",
-            consumes = {
-                    MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.MULTIPART_FORM_DATA_VALUE
-            })
-    ResponseEntity<RespondObject> testImage(@RequestPart("user") UserImageRequest request,
-                                            @RequestPart("file") MultipartFile file) {
-
-        try {
-            User user = userService.uploadWithAvatar(request, file);
-
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Save user successfully", user)
-            );
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    new RespondObject("Failed", "Error", ex.getMessage())
-            );
-        }
-    }
+//    @PostMapping(value = "/test-image",
+//            consumes = {
+//                    MediaType.APPLICATION_JSON_VALUE,
+//                    MediaType.MULTIPART_FORM_DATA_VALUE
+//            })
+//    ResponseEntity<RespondObject> testImage(@RequestPart("user") UserImageRequest request,
+//                                            @RequestPart("file") MultipartFile file) {
+//
+//        try {
+//            User user = userService.update(request, file);
+//
+//            return ResponseEntity.status(HttpStatus.OK).body(
+//                    new RespondObject("Ok", "Save user successfully", user)
+//            );
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+//                    new RespondObject("Failed", "Error", ex.getMessage())
+//            );
+//        }
+//    }
 
     @GetMapping("/valid-request")
     ResponseEntity<RespondObject> validRequest(@RequestBody @Valid TestRequest request) {

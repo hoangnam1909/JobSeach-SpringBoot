@@ -13,8 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class UpdateUserRequest {
 
-    private String avatar;
-
     private String fullName;
 
     private String email;
@@ -23,7 +21,7 @@ public class UpdateUserRequest {
 
     private Date dob;
 
-    private boolean gender;
+    private String gender;
 
     private String address;
 
