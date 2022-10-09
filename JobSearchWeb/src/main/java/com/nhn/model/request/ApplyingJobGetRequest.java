@@ -10,13 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@CompanyJob(message = "This job is not from this company ${validatedValue}")
+@CompanyJob
 public class ApplyingJobGetRequest {
 
-    @ExistingJobId(message = "Job id: ${validatedValue} is not present")
+    @ExistingJobId
     Integer jobId;
 
-    @CompanyUserId(message = "Company user id: {validatedValue} is not present")
+    @CompanyUserId
     Integer companyUserId;
 
 }

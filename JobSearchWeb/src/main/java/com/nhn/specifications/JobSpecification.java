@@ -108,7 +108,17 @@ public class JobSpecification implements Specification<Job> {
                             builder.size(root.get("applyingJobs")), 0));
                 }
 
+            } else if (criteria.getOperation().equals(SearchOperation.AVAILABLE)) {
+                System.err.println(root.get(criteria.getKey()).as(Boolean.class));
+                System.err.println(root.get(criteria.getKey()).as(Boolean.class).getClass());
+
+                System.err.println(criteria.getValue());
+                System.err.println(criteria.getValue().getClass());
+                predicates.add(builder.equal(
+                        root.get(criteria.getKey()).as(Boolean.class), criteria.getValue()));
+
             }
+
         }
 
         return builder.and(predicates.toArray(new Predicate[0]));

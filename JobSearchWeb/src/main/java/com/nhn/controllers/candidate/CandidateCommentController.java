@@ -55,11 +55,11 @@ public class CandidateCommentController {
     ResponseEntity<RespondObject> delete(@PathVariable(name = "id") String commentId) {
         Optional<Comment> comment = commentRepository.findById(Integer.valueOf(commentId));
 
-        if (comment.isEmpty())
+        if (comment.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new RespondObject("Fail", "Id does not exist", commentId)
             );
-        else {
+        } else {
             boolean deleteCheck = commentService.delete(Integer.parseInt(commentId));
             if (deleteCheck)
                 return ResponseEntity.status(HttpStatus.OK).body(

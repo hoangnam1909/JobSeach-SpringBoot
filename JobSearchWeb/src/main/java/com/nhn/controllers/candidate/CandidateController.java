@@ -44,28 +44,20 @@ public class CandidateController {
     @Autowired
     private WorkExperienceService workExperienceService;
 
-    @GetMapping("")
-    ResponseEntity<RespondObject> getAll() {
-
-        List<User> candidateUsers = userRepository.findUserByRole(Constant.USER_ROLE.CANDIDATE);
-        return candidateUsers.size() > 0 ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Candidate found", candidateUsers)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Fail", "No candidate found", "")
-                );
-    }
-
-    @PutMapping("")
+    @PutMapping("/update")
     ResponseEntity<RespondObject> updateCandidate(@RequestBody @Valid CandidateRequest request) {
 
         try {
             Candidate candidate = candidateService.updateCandidate(request);
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("OK", "Save candidate successfully", candidate));
+
+            if (candidate != null)
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Save candidate successfully", candidate));
+            else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Failed", "Save candidate failed", ""));
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new RespondObject("Failed", "Save candidate failed", ex));
         }
     }

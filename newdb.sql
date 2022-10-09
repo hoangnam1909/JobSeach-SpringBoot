@@ -44,7 +44,7 @@ CREATE TABLE `apply_job` (
 
 LOCK TABLES `apply_job` WRITE;
 /*!40000 ALTER TABLE `apply_job` DISABLE KEYS */;
-INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','PENDING'),(9,7,129,'2022-05-05 13:19:02','PENDING'),(10,6,128,'2022-05-05 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','PENDING'),(12,7,128,'2022-05-05 13:19:02','PENDING'),(13,13,129,'2022-10-09 00:54:07','PENDING'),(14,11,129,'2022-10-09 01:01:35','PENDING');
+INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','PENDING'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(10,6,128,'2022-05-05 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','PENDING'),(12,7,128,'2022-05-05 13:19:02','PENDING'),(13,13,129,'2022-10-09 00:54:07','PENDING'),(14,11,129,'2022-09-19 01:01:35','PENDING');
 /*!40000 ALTER TABLE `apply_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +202,7 @@ DROP TABLE IF EXISTS `job`;
 CREATE TABLE `job` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `is_available` tinyint NOT NULL DEFAULT '1',
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `date_published` datetime DEFAULT NULL,
   `job_start_date` datetime DEFAULT NULL,
@@ -235,7 +236,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ','We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,134,0),(3,'job update','loi 500',NULL,NULL,NULL,0,'40000000','address',2,1,12,1,134,0),(4,'test tiep ne',NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,134,0),(5,'test tiep ne2',NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,134,0),(6,'test tiep ne33',NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,136,0),(7,'job update done','loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1909,'25000000','address',36,3,10,3,136,0),(8,'loi 500','loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,136,0),(9,'loi 500 lan nua xem','loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,136,0),(10,'loi 415 lan nua xem','loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,134,0),(11,'loi 415 lan nua xem 1','loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,134,0),(12,'loi 500 lan nua xem','loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,136,0),(13,'test requirements','requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00',230,'25000000','address',14,1,12,1,136,0);
+INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ',1,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,134,0),(3,'job update',1,'loi 500',NULL,NULL,NULL,0,'40000000','address',2,1,12,1,134,0),(4,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,134,0),(5,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,134,0),(6,'test tiep ne33',0,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,136,0),(7,'job update done',1,'loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1909,'25000000','address',36,3,10,3,136,0),(8,'loi 500',0,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,136,0),(9,'loi 500 lan nua xem',1,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,136,0),(10,'loi 415 lan nua xem',0,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,134,0),(11,'loi 415 lan nua xem 1',1,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,134,0),(12,'loi 500 lan nua xem',0,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,136,0),(13,'test requirements',1,'requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00',230,'25000000','address',14,1,12,1,136,0);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,7 +600,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','avatar uv1','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','avatar uv2','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL,42,NULL),(134,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','avatar comp1','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL,NULL,21),(136,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','deo co','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22),(137,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW',NULL,'CANDIDATE',1,NULL,'ungvien2@ou.edu.vn',NULL,NULL,0,NULL,'2022-10-07 11:09:02',46,NULL);
+INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','avatar uv1','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','avatar uv2','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL,42,NULL),(134,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','avatar comp1','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL,NULL,21),(136,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','deo co','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22),(137,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02',46,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-09  1:03:33
+-- Dump completed on 2022-10-10  0:46:48

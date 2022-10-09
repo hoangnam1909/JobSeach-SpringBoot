@@ -1,9 +1,7 @@
 package com.nhn.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.nhn.valid.CompanyUsername;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,8 +10,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class JobRequest {
 
+    @CompanyUsername
     private String companyUsername;
     private String title;
     private String description;

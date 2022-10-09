@@ -1,18 +1,18 @@
 package com.nhn.valid;
 
-import com.nhn.valid.validator.ExistingJobIdValidator;
+import com.nhn.valid.validator.DeleteJobRequestValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-@Target({ElementType.TYPE_USE, ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = ExistingJobIdValidator.class)
-public @interface ExistingJobId {
+@Constraint(validatedBy = DeleteJobRequestValidator.class)
+public @interface DeleteJobRequestValid {
 
-    public String message() default "Job id: ${validatedValue} is not present";
+    public String message() default "This job is not from this company ${validatedValue}";
 
     public Class<?>[] groups() default {};
 

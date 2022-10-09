@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = CompanyJobValidator.class)
 public @interface CompanyJob {
 
-    public String message() default "This job is not from this company";
+    public String message() default "This job is not from this company ${validatedValue}";
 
     public Class<?>[] groups() default {};
 

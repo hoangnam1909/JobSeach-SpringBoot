@@ -1,5 +1,6 @@
 package com.nhn.model.request;
 
+import com.nhn.valid.CandidateUsername;
 import lombok.*;
 
 @Getter
@@ -9,9 +10,14 @@ import lombok.*;
 @Data
 public class CandidateRequest {
 
-    private String username;
+    @CandidateUsername
+    private String candidateUsername;
+
     private int yearsExp;
+
     private String linkedin;
+
     private String cv;
+
 
 }

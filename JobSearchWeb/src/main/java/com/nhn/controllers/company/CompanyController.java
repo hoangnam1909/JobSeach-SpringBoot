@@ -33,19 +33,6 @@ public class CompanyController {
     @Autowired
     private CompanyMapper companyMapper;
 
-    @GetMapping("")
-    ResponseEntity<RespondObject> getAll() {
-
-        List<User> candidateUsers = userRepository.findUserByRole(Constant.USER_ROLE.COMPANY);
-        return candidateUsers.size() > 0 ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Companies found", candidateUsers)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Fail", "No companies found", "")
-                );
-    }
-
     @PutMapping("/{username}")
     ResponseEntity<RespondObject> updateCompany(@PathVariable String username,
                                                 @RequestBody UpdateCompanyRequest request) {

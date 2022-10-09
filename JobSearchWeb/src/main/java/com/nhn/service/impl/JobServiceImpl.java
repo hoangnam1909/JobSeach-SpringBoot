@@ -34,7 +34,7 @@ public class JobServiceImpl implements JobService {
     private RequirementRepository requirementRepository;
 
     @Override
-    public Job insert(JobRequest request) {
+    public Job add(JobRequest request) {
         try {
             Job job = jobMapper.toEntity(request);
             Job jobSaved = jobRepository.save(job);
@@ -86,6 +86,25 @@ public class JobServiceImpl implements JobService {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean delete(int jobId) {
+        try {
+            Optional<Job> job = jobRepository.findById(jobId);
+
+            if (job.isPresent()) {
+                Job jobDeleting = job.get();
+                jobDeleting.setAvailable(false);
+
+                jobRepository.save(jobDeleting);
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 

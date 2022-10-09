@@ -25,15 +25,11 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public Candidate updateCandidate(CandidateRequest candidateRequest) {
 
-        Candidate candidate = candidateMapper.toEntity(candidateRequest);
-
-        User user = userRepository.findOneByUsernameEqualsIgnoreCase(candidateRequest.getUsername());
+        User user = userRepository.findOneByUsernameEqualsIgnoreCase(candidateRequest.getCandidateUsername());
         if (user == null)
             return null;
 
-        int candidateId = user.getCandidate().getId();
-        candidate.setId(candidateId);
-
+        Candidate candidate = candidateMapper.toEntity(user.getCandidate(), candidateRequest);
         return candidateRepository.save(candidate);
     }
 

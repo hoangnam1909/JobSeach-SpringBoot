@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CandidateMapper {
 
-    public Candidate toEntity(CandidateRequest req) {
-        Candidate candidate = new Candidate();
+    public Candidate toEntity(Candidate candidate, CandidateRequest request) {
 
-        candidate.setYearsExp(req.getYearsExp());
-        candidate.setLinkedin(req.getLinkedin());
-        candidate.setCv(req.getCv());
+        candidate.setYearsExp(request.getYearsExp());
+        candidate.setLinkedin(request.getLinkedin());
+        candidate.setCv(request.getCv());
 
         return candidate;
     }

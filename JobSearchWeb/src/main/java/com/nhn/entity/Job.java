@@ -81,6 +81,10 @@ public class Job {
     @Column(name = "salary")
     private String salary;
 
+    @Basic
+    @Column(name = "is_available")
+    private boolean available;
+
     @ManyToMany
     @JoinTable(
             name = "job_tag",
@@ -113,6 +117,8 @@ public class Job {
             datePublished = currentDate;
 
         modifiedDate = currentDate;
+
+        available = true;
     }
 
 }

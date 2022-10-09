@@ -1,6 +1,6 @@
 package com.nhn.valid;
 
-import com.nhn.valid.validator.CompanyUserIdValidator;
+import com.nhn.valid.validator.CandidateUsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE_USE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = CompanyUserIdValidator.class)
-public @interface CompanyUserId {
+@Constraint(validatedBy = CandidateUsernameValidator.class)
+public @interface CandidateUsername {
 
-    public String message() default "Company user id: {validatedValue} is not present";
+    public String message() default "Could not find candidate user with username = '${validatedValue}'";
 
     public Class<?>[] groups() default {};
 

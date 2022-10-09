@@ -6,8 +6,10 @@ import com.nhn.model.request.JobUpdateRequest;
 
 public interface JobService {
 
-    Job insert(JobRequest request);
+    Job add(JobRequest request);
 
     Job update(JobUpdateRequest request);
+
+    boolean delete(int jobId);
 
 }

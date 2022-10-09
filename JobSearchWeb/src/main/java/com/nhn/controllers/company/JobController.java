@@ -1,14 +1,18 @@
 package com.nhn.controllers.company;
 
 import com.nhn.common.RespondObject;
+import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
 import com.nhn.mapper.JobMapper;
 import com.nhn.model.request.JobRequest;
 import com.nhn.model.request.JobUpdateRequest;
+import com.nhn.model.request.company.DeleteJobRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
+import com.nhn.specifications.key.JobEnum;
+import com.nhn.specifications.key.SearchOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +50,7 @@ public class JobController {
                                          @RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
         System.err.println("get jobs" + page);
+
         if (params != null) {
             if (Integer.parseInt(page) <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -52,6 +58,8 @@ public class JobController {
             }
 
             JobSpecification specification = specificationConverter.jobSpecification(params);
+            specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
+
             Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
@@ -68,8 +76,14 @@ public class JobController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Jobs found", foundJobs));
         } else {
-            List<Job> foundJobs = jobRepository.findAll();
-            return foundJobs.size() > 0 ?
+            JobSpecification specification = new JobSpecification();
+            specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
+
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
+
+            Page<Job> foundJobs = jobRepository.findAll(specification, paging);
+
+            return foundJobs.getContent().size() > 0 ?
                     ResponseEntity.status(HttpStatus.OK).body(
                             new RespondObject("OK", "Jobs found", foundJobs)
                     ) :
@@ -91,7 +105,7 @@ public class JobController {
     }
 
     @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody JobRequest request) {
+    ResponseEntity<RespondObject> insert(@RequestBody @Valid JobRequest request) {
 
         try {
             Job job = jobMapper.toEntity(request);
@@ -119,6 +133,19 @@ public class JobController {
                     new RespondObject("Fail", "Job update failed", ex.getMessage())
             );
         }
+    }
+
+    @DeleteMapping("")
+    ResponseEntity<RespondObject> delete(@RequestBody @Valid DeleteJobRequest request) {
+        boolean deleteCheck = jobService.delete(request.getJobId());
+
+        if (deleteCheck)
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Job deleted", ""));
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new RespondObject("Fail", "Job delete failed", "")
+            );
     }
 
 }

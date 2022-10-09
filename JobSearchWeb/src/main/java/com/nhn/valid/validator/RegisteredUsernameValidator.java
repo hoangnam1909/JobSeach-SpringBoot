@@ -16,4 +16,5 @@ public class RegisteredUsernameValidator implements ConstraintValidator<Register
     public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
         return userRepository.existsByUsername(username);
     }
+
 }
