@@ -1,20 +1,17 @@
 package com.nhn.controllers.company;
 
-import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Company;
-import com.nhn.entity.User;
-import com.nhn.mapper.CompanyMapper;
 import com.nhn.model.request.UpdateCompanyRequest;
-import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.CompanyService;
+import com.nhn.valid.CompanyUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -25,24 +22,13 @@ public class CompanyController {
     private UserRepository userRepository;
 
     @Autowired
-    private CompanyRepository companyRepository;
-
-    @Autowired
     private CompanyService companyService;
 
-    @Autowired
-    private CompanyMapper companyMapper;
-
     @PutMapping("/{username}")
-    ResponseEntity<RespondObject> updateCompany(@PathVariable String username,
+    ResponseEntity<RespondObject> updateCompany(@PathVariable @Valid @CompanyUsername String username,
                                                 @RequestBody UpdateCompanyRequest request) {
 
         try {
-            if (!userRepository.existsByUsername(username)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Failed", "Could not find user with username = " + username, ""));
-            }
-
             Company company = companyService.update(username, request);
 
             return company != null ?

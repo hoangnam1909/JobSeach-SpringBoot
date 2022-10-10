@@ -85,7 +85,7 @@ public class Job {
     @Column(name = "is_available")
     private boolean available;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "job_tag",
             joinColumns = @JoinColumn(name = "job_id"),
@@ -95,7 +95,7 @@ public class Job {
 
     @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Collection<Requirement> requirements;
+    private Set<Requirement> requirements;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobApp")
     @JsonManagedReference
@@ -111,14 +111,15 @@ public class Job {
 
     @PrePersist
     public void onSave() {
-        Date currentDate = new Date();
-
         if (datePublished == null)
-            datePublished = currentDate;
-
-        modifiedDate = currentDate;
+            datePublished = new Date();
 
         available = true;
+    }
+
+    @PostUpdate
+    public void afterUpdate(){
+        modifiedDate = new Date();
     }
 
 }

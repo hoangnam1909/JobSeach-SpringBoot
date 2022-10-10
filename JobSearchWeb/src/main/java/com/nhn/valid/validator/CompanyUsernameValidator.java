@@ -17,7 +17,7 @@ public class CompanyUsernameValidator implements ConstraintValidator<CompanyUser
     @Override
     public boolean isValid(String companyUsername, ConstraintValidatorContext constraintValidatorContext) {
         User companyUser = userRepository.findUserByUsername(companyUsername);
-
+        System.err.println(companyUser);
         if (companyUser == null)
             return false;
 

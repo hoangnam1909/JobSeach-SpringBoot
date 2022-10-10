@@ -13,6 +13,7 @@ import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
+import com.nhn.valid.CompanyUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,9 +42,6 @@ public class CompanyJobController {
 
     @Autowired
     private SpecificationConverter specificationConverter;
-
-    @Autowired
-    private JobMapper jobMapper;
 
     @PostMapping("/get")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
@@ -92,10 +91,22 @@ public class CompanyJobController {
         }
     }
 
+    @GetMapping("/count/{company-username}")
+    ResponseEntity<RespondObject> count(@PathVariable(name = "company-username") @Valid @CompanyUsername String companyUsername) {
+
+        JobSpecification specification = new JobSpecification();
+        specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
+        specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
+
+//        List<Job> job = jobRepository.findAll(specification);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Job found", "Jobs counted", jobRepository.count(specification)));
+    }
+
     @GetMapping("/{id}")
     ResponseEntity<RespondObject> getById(@PathVariable String id) {
 
-        Optional<Job> job = jobRepository.findById(Integer.parseInt(id));
+        Optional<Job> job = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
         return job.map(value -> ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("Job found", "Job a found with id = " + id, value)
         )).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -103,15 +114,13 @@ public class CompanyJobController {
         ));
     }
 
-    @PostMapping("")
+    @PostMapping("/insert")
     ResponseEntity<RespondObject> insert(@RequestBody @Valid CreateJobRequest request) {
 
         try {
-            Job job = jobMapper.toEntity(request);
-            Job jobSaved = jobRepository.save(job);
-
+            Job job = jobService.add(request);
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Job saved", jobSaved));
+                    new RespondObject("Ok", "Job saved", job));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new RespondObject("Fail", "Save failed", ex.getMessage())
@@ -124,10 +133,9 @@ public class CompanyJobController {
 
         try {
             Job job = jobService.update(request);
-
             return job != null ?
                     ResponseEntity.status(HttpStatus.OK).body(
-                            new RespondObject("Ok", "Job updated", "")
+                            new RespondObject("Ok", "Job updated", job)
                     ) :
                     ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                             new RespondObject("Failed", "Update job failed", null)
@@ -139,7 +147,7 @@ public class CompanyJobController {
         }
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/delete")
     ResponseEntity<RespondObject> delete(@RequestBody @Valid DeleteJobRequest request) {
         boolean deleteCheck = jobService.delete(request.getJobId());
 
@@ -148,8 +156,7 @@ public class CompanyJobController {
                     new RespondObject("Ok", "Job deleted", ""));
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Fail", "Job delete failed", "")
-            );
+                    new RespondObject("Fail", "Job delete failed", ""));
     }
 
 }

@@ -5,6 +5,6 @@ import com.nhn.model.request.UpdateCompanyRequest;
 
 public interface CompanyService {
 
-    Company update(String username, UpdateCompanyRequest request);
+    Company update(String companyUsername, UpdateCompanyRequest request);
 
 }

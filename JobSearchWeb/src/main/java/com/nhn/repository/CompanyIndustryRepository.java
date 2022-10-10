@@ -9,4 +9,6 @@ public interface CompanyIndustryRepository extends JpaRepository<CompanyIndustry
 
     List<CompanyIndustry> findAllByCompanyIdAndIndustryId(int companyId, int industryId);
 
+    void deleteAllByCompanyId(Integer companyId);
+
 }

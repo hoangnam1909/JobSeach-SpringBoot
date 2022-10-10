@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,5 +23,6 @@ public class UpdateCompanyRequest {
     private int foundedYear;
     private String headquarters;
     private String link;
+    private Set<Integer> industryId;
 
 }

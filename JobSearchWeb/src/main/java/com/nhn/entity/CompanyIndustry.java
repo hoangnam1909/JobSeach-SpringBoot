@@ -30,7 +30,12 @@ public class CompanyIndustry {
     @Column(name = "industry_id")
     private int industryId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
+    public CompanyIndustry(int companyId, int industryId) {
+        this.companyId = companyId;
+        this.industryId = industryId;
+    }
+
+    //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
 //    private Company company;
 //

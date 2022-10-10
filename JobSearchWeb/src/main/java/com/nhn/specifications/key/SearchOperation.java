@@ -18,6 +18,7 @@ public enum SearchOperation {
     JOB_TYPE_ID,
     PROVINCE_ID,
     IS_APPLYING,
-    AVAILABLE
+    AVAILABLE,
+    COMPANY_USERNAME
 
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,7 +26,7 @@ public class CreateJobRequest {
     private int jobCategoryId;
     private int jobTypeId;
     private String salary;
-    private List<Integer> tagsId;
-    private List<RequirementRequest> requirements;
+    private Set<Integer> tagsId;
+    private Set<RequirementRequest> requirements;
 
 }
