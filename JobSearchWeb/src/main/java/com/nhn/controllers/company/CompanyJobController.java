@@ -4,7 +4,7 @@ import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
 import com.nhn.mapper.JobMapper;
-import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
 import com.nhn.model.request.company.DeleteJobRequest;
 import com.nhn.repository.JobRepository;
@@ -24,14 +24,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/company/api/job")
-public class JobController {
+public class CompanyJobController {
 
     @Autowired
     private JobRepository jobRepository;
@@ -105,7 +104,7 @@ public class JobController {
     }
 
     @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody @Valid JobRequest request) {
+    ResponseEntity<RespondObject> insert(@RequestBody @Valid CreateJobRequest request) {
 
         try {
             Job job = jobMapper.toEntity(request);
@@ -120,14 +119,19 @@ public class JobController {
         }
     }
 
-    @PutMapping("")
-    ResponseEntity<RespondObject> update(@RequestBody JobUpdateRequest request) {
+    @PutMapping("/update")
+    ResponseEntity<RespondObject> update(@RequestBody @Valid JobUpdateRequest request) {
 
         try {
             Job job = jobService.update(request);
 
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Job updated", job));
+            return job != null ?
+                    ResponseEntity.status(HttpStatus.OK).body(
+                            new RespondObject("Ok", "Job updated", "")
+                    ) :
+                    ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                            new RespondObject("Failed", "Update job failed", null)
+                    );
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new RespondObject("Fail", "Job update failed", ex.getMessage())

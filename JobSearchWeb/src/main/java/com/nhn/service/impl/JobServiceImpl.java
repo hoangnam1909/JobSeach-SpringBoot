@@ -4,7 +4,7 @@ import com.nhn.entity.Job;
 import com.nhn.entity.JobTag;
 import com.nhn.entity.Requirement;
 import com.nhn.mapper.JobMapper;
-import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
 import com.nhn.model.request.RequirementRequest;
 import com.nhn.repository.JobRepository;
@@ -34,7 +34,7 @@ public class JobServiceImpl implements JobService {
     private RequirementRepository requirementRepository;
 
     @Override
-    public Job add(JobRequest request) {
+    public Job add(CreateJobRequest request) {
         try {
             Job job = jobMapper.toEntity(request);
             Job jobSaved = jobRepository.save(job);
@@ -63,15 +63,15 @@ public class JobServiceImpl implements JobService {
     public Job update(JobUpdateRequest request) {
         try {
             Optional<Job> jobWithId = jobRepository.findById(request.getId());
-            Job job = jobMapper.toEntity(request);
 
             if (jobWithId.isPresent()) {
+                Job job = jobMapper.toEntity(jobWithId.get(), request);
 
                 jobTagRepository.deleteAll(jobTagRepository.findAllByJobId(request.getId()));
                 for (Integer tagId : request.getTagsId())
                     jobTagRepository.save(new JobTag(request.getId(), tagId));
 
-                requirementRepository.deleteAllByJobId(request.getId());
+                requirementRepository.deleteAll(requirementRepository.findAllByJobId(request.getId()));
                 for (RequirementRequest requirementRequest : request.getRequirements())
                     requirementRepository.save(new Requirement(requirementRequest.getContent(), job));
 
@@ -79,6 +79,8 @@ public class JobServiceImpl implements JobService {
                 jobRepository.flush();
 
                 Optional<Job> jobUpdated = jobRepository.findById(request.getId());
+                jobRepository.flush();
+
                 return jobUpdated.orElse(null);
             }
 

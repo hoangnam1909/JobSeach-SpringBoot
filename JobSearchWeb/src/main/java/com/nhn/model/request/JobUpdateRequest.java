@@ -1,5 +1,6 @@
 package com.nhn.model.request;
 
+import com.nhn.valid.ExistingJobId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class JobUpdateRequest {
 
+    @ExistingJobId
     private int id;
     private String title;
     private String description;

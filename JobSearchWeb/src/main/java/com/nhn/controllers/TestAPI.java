@@ -2,7 +2,7 @@ package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Job;
-import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.TestRequest;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;
@@ -61,7 +61,7 @@ public class TestAPI {
     }
 
     @PostMapping("/insert-job")
-    ResponseEntity<RespondObject> insert(@RequestBody JobRequest request) {
+    ResponseEntity<RespondObject> insert(@RequestBody CreateJobRequest request) {
 
         try {
             Job job = jobService.add(request);

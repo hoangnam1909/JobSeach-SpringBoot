@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class JobRequest {
+public class CreateJobRequest {
 
     @CompanyUsername
     private String companyUsername;

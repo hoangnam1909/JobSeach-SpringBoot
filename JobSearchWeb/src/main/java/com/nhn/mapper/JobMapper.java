@@ -1,7 +1,7 @@
 package com.nhn.mapper;
 
 import com.nhn.entity.*;
-import com.nhn.model.request.JobRequest;
+import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
 import com.nhn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class JobMapper {
     @Autowired
     private ProvinceRepository provinceRepository;
 
-    public Job toEntity(JobRequest req) {
+    public Job toEntity(CreateJobRequest req) {
         Job job = new Job();
 
         job.setTitle(req.getTitle());
@@ -63,44 +63,36 @@ public class JobMapper {
         return job;
     }
 
-    public Job toEntity(JobUpdateRequest req) {
-        Optional<Job> jobById = jobRepository.findById(req.getId());
+    public Job toEntity(Job job, JobUpdateRequest request) {
 
-        if (jobById.isPresent()) {
-            Job job = jobById.get();
+        job.setTitle(request.getTitle());
+        job.setDescription(request.getDescription());
+        job.setJobStartDate(request.getJobStartDate());
 
-//            job.setId(req.getId());
-            job.setTitle(req.getTitle());
-            job.setDescription(req.getDescription());
-            job.setJobStartDate(req.getJobStartDate());
+        job.setAddress(request.getAddress());
 
-            job.setAddress(req.getAddress());
+        Optional<Province> province = provinceRepository.findById(request.getProvinceId());
+        province.ifPresent(job::setProvince);
 
-            Optional<Province> province = provinceRepository.findById(req.getProvinceId());
-            province.ifPresent(job::setProvince);
+        job.setNoOfVacancies(request.getNoOfVacancies());
+        job.setSalary(request.getSalary());
 
-            job.setNoOfVacancies(req.getNoOfVacancies());
-            job.setSalary(req.getSalary());
-
-            if (job.getPosition().getId() != req.getPositionId()) {
-                Optional<Position> position = positionRepository.findById(req.getPositionId());
-                position.ifPresent(job::setPosition);
-            }
-
-            if (job.getJobCategory().getId() != req.getJobCategoryId()) {
-                Optional<JobCategory> jobCategory = jobCategoryRepository.findById(req.getJobCategoryId());
-                jobCategory.ifPresent(job::setJobCategory);
-            }
-
-            if (job.getJobType().getId() != req.getJobTypeId()) {
-                Optional<JobType> jobType = jobTypeRepository.findById(req.getJobTypeId());
-                jobType.ifPresent(job::setJobType);
-            }
-
-            return job;
+        if (job.getPosition().getId() != request.getPositionId()) {
+            Optional<Position> position = positionRepository.findById(request.getPositionId());
+            position.ifPresent(job::setPosition);
         }
 
-        return null;
+        if (job.getJobCategory().getId() != request.getJobCategoryId()) {
+            Optional<JobCategory> jobCategory = jobCategoryRepository.findById(request.getJobCategoryId());
+            jobCategory.ifPresent(job::setJobCategory);
+        }
+
+        if (job.getJobType().getId() != request.getJobTypeId()) {
+            Optional<JobType> jobType = jobTypeRepository.findById(request.getJobTypeId());
+            jobType.ifPresent(job::setJobType);
+        }
+
+        return job;
     }
 
     public List<Job> applyJobToJobList(List<ApplyJob> applyJobs) {
