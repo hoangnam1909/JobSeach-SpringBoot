@@ -34,7 +34,7 @@ CREATE TABLE `apply_job` (
   KEY `fk_app_job_idx` (`job_id`),
   KEY `fk_app_canduser_idx` (`candidate_user_id`),
   CONSTRAINT `fk_app_canduser` FOREIGN KEY (`candidate_user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_app_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
+  CONSTRAINT `fk_app_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -44,7 +44,7 @@ CREATE TABLE `apply_job` (
 
 LOCK TABLES `apply_job` WRITE;
 /*!40000 ALTER TABLE `apply_job` DISABLE KEYS */;
-INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','PENDING'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(10,6,128,'2022-05-05 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','PENDING'),(12,7,128,'2022-05-05 13:19:02','PENDING'),(13,13,129,'2022-10-09 00:54:07','PENDING'),(14,11,129,'2022-09-19 01:01:35','PENDING');
+INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','PENDING'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(10,6,128,'2022-05-05 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','PENDING'),(12,7,128,'2022-05-05 13:19:02','PENDING'),(14,11,129,'2022-09-19 01:01:35','PENDING');
 /*!40000 ALTER TABLE `apply_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,2222222,'candidate ungvien1 update lan2',NULL),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,11111,'updat','link cv'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (21,'BMW Group',10001,'Bayerische Motoren Werke AG','','','Petuelring 130Munich, DE','With its four brands BMW, MINI, Rolls-Royce and BMW Motorrad, the BMW Group is the world’s leading premium manufacturer of automobiles and motorcycles and also provides premium financial and mobility services. The BMW Group production network comprises 31 production and assembly facilities in 15 countries; the company has a global sales network in more than 140 countries.',0,'Munich','https://www.bmwgroup.com/en.html'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,'AUDI AG',NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!',0,'Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','http://www.audi.com');
+INSERT INTO `company` VALUES (21,'BMW Group',10000,'company updt1','company updt1','company updt1','company updt1','company updt1',0,'company updt1','company updt1'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,'AUDI AG',NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!',0,'Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','http://www.audi.com');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `company_industry` (
   KEY `fk_comind_ind_idx` (`industry_id`),
   CONSTRAINT `fk_comind_com` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   CONSTRAINT `fk_comind_ind` FOREIGN KEY (`industry_id`) REFERENCES `industry` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `company_industry` (
 
 LOCK TABLES `company_industry` WRITE;
 /*!40000 ALTER TABLE `company_industry` DISABLE KEYS */;
-INSERT INTO `company_industry` VALUES (1,21,1),(2,21,2),(3,21,15),(4,21,3);
+INSERT INTO `company_industry` VALUES (7,22,15),(10,21,18),(11,21,15);
 /*!40000 ALTER TABLE `company_industry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +201,8 @@ DROP TABLE IF EXISTS `job`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `job` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `user_company_id` int NOT NULL,
+  `title` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `is_available` tinyint NOT NULL DEFAULT '1',
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `date_published` datetime DEFAULT NULL,
@@ -214,7 +215,6 @@ CREATE TABLE `job` (
   `position_id` int NOT NULL,
   `category_id` int NOT NULL,
   `job_type_id` int NOT NULL,
-  `user_company_id` int NOT NULL,
   `apply_job_counter` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_job_cate_idx` (`category_id`),
@@ -227,7 +227,7 @@ CREATE TABLE `job` (
   CONSTRAINT `fk_job_pos` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
   CONSTRAINT `fk_job_province` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
   CONSTRAINT `fk_job_usercomp` FOREIGN KEY (`user_company_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,'Java Developer (All Levels) ',1,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,134,0),(3,'job update',1,'loi 500',NULL,NULL,NULL,0,'40000000','address',2,1,12,1,134,0),(4,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,134,0),(5,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,134,0),(6,'test tiep ne33',0,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,136,0),(7,'job update done',1,'loi 500 done','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1909,'25000000','address',36,3,10,3,136,0),(8,'loi 500',0,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,136,0),(9,'loi 500 lan nua xem',1,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,136,0),(10,'loi 415 lan nua xem',0,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,134,0),(11,'loi 415 lan nua xem 1',1,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,134,0),(12,'loi 500 lan nua xem',0,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,136,0),(13,'test requirements',1,'requirements','2022-10-04 14:07:00',NULL,'2022-10-04 14:07:00',230,'25000000','address',14,1,12,1,136,0);
+INSERT INTO `job` VALUES (1,134,'Java Developer (All Levels) ',0,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,0),(3,134,'Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:',NULL,NULL,'2022-10-10 23:26:04',10,'10000000','14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình',79,8,1,1,0),(4,134,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,0),(5,134,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,0),(6,136,'test tiep ne33',1,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,0),(7,136,'company job updt',0,'company job updt','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1021,'999999','thị trấn Ea Súp, huyện Ea Súp',66,4,4,4,2),(8,136,'loi 500',1,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,0),(9,136,'loi 500 lan nua xem',0,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,0),(10,134,'loi 415 lan nua xem',1,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,0),(11,134,'loi 415 lan nua xem 1',0,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,0),(12,136,'loi 500 lan nua xem',1,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,0);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,9 +279,9 @@ CREATE TABLE `job_tag` (
   PRIMARY KEY (`id`),
   KEY `fk_jobtag_job_idx` (`job_id`),
   KEY `fk_jobtag_tag_idx` (`tag_id`),
-  CONSTRAINT `fk_jobtag_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`),
+  CONSTRAINT `fk_jobtag_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_jobtag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +290,7 @@ CREATE TABLE `job_tag` (
 
 LOCK TABLES `job_tag` WRITE;
 /*!40000 ALTER TABLE `job_tag` DISABLE KEYS */;
-INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12),(54,7,4),(55,7,5),(56,7,6);
+INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12),(103,7,1),(104,7,6),(105,7,7),(200,3,1),(201,3,4),(202,3,6),(203,3,12),(204,3,13);
 /*!40000 ALTER TABLE `job_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,7 +436,7 @@ DROP TABLE IF EXISTS `reference`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reference` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `candidate_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -464,12 +464,12 @@ DROP TABLE IF EXISTS `requirement`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requirement` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `content` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `job_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_req_job_idx` (`job_id`),
-  CONSTRAINT `fk_req_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  CONSTRAINT `fk_req_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -478,7 +478,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (35,'req 1 nene',7),(36,'req 2 nene',7),(37,'req 3 nene',7);
+INSERT INTO `requirement` VALUES (56,'khong qqqqq',7),(109,'Chăm sóc Khách hàng',3),(110,'Tiếp nhận, hoàn thành hồ sơ vay, hướng dẫn thủ tục giải ngân cho khách hàng',3),(111,'Tư vấn làm hồ sơ vay tín chấp cho khách hàng, không cần thu hồi nợ',3),(112,'Data khách hàng đăng ký vay có sẵn',3),(113,'update',3);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-10  0:46:48
+-- Dump completed on 2022-10-11  0:17:50
