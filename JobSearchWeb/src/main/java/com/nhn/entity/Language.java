@@ -36,9 +36,9 @@ public class Language {
     @JsonBackReference
     private Candidate candidate;
 
-    public Language(String name, String description) {
+    public Language(String name, String description, Candidate candidate) {
         this.name = name;
         this.description = description;
+        this.candidate = candidate;
     }
-
 }

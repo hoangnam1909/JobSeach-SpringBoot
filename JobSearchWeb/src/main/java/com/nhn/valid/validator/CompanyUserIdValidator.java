@@ -18,7 +18,11 @@ public class CompanyUserIdValidator implements ConstraintValidator<CompanyUserId
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
         Optional<User> companyUser = userRepository.findById(value);
-        return companyUser.map(user -> user.getRole().equals(Constant.USER_ROLE.COMPANY)).orElse(false);
+        if (companyUser.isEmpty())
+            return false;
+        System.err.println("in CompanyUserIdValidator");
+        System.err.println(companyUser.get().getRole().equals(Constant.USER_ROLE.COMPANY));
+        return companyUser.get().getRole().equals(Constant.USER_ROLE.COMPANY);
     }
 
 }

@@ -1,18 +1,20 @@
 package com.nhn.controllers.company;
 
+import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
-import com.nhn.model.request.company.CompanyJobRequest;
+import com.nhn.entity.User;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
+import com.nhn.model.request.company.CompanyJobRequest;
 import com.nhn.repository.JobRepository;
+import com.nhn.repository.UserRepository;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
-import com.nhn.valid.CompanyUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +36,9 @@ import java.util.Optional;
 public class CompanyJobController {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private JobRepository jobRepository;
 
     @Autowired
@@ -43,7 +48,11 @@ public class CompanyJobController {
     private SpecificationConverter specificationConverter;
 
     @GetMapping("/get-list/{company-username}")
-    ResponseEntity<RespondObject> getAllList(@PathVariable(name = "company-username") String companyUsername) {
+    ResponseEntity<RespondObject> getAllList(@PathVariable(name = "company-username") String companyUsername) throws Exception {
+
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
+            throw new Exception("Could not find company user with user = 'Company username'");
 
         JobSpecification specification = new JobSpecification();
         specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
@@ -64,7 +73,12 @@ public class CompanyJobController {
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @PathVariable(name = "company-username") String companyUsername,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
-                                         @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
+                                         @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
+
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
+            throw new Exception("Could not find company user with user = 'Company username'");
+
         System.err.println("get jobs" + page);
 
         if (params != null) {
@@ -111,13 +125,16 @@ public class CompanyJobController {
     }
 
     @GetMapping("/count/{company-username}")
-    ResponseEntity<RespondObject> count(@PathVariable(name = "company-username") @Valid @CompanyUsername String companyUsername) {
+    ResponseEntity<RespondObject> count(@PathVariable(name = "company-username") String companyUsername) throws Exception {
+
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
+            throw new Exception("Could not find company user with user = 'Company username'");
 
         JobSpecification specification = new JobSpecification();
         specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
         specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-//        List<Job> job = jobRepository.findAll(specification);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("Job found", "Jobs counted", jobRepository.count(specification)));
     }

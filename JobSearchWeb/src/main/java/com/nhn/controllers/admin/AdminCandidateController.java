@@ -39,13 +39,11 @@ public class AdminCandidateController {
     ResponseEntity<RespondObject> getAll(@PathVariable(name = "candidate-user-id") @Valid @ExistingCandidateUserId int candidateUserId) {
 
         Optional<User> candidateUsers = userRepository.findById(candidateUserId);
-        return candidateUsers.isPresent() ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Candidate found", candidateUsers)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Fail", "No candidate found", "")
-                );
+        return candidateUsers.map(user -> ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Ok", "Candidate found", user)
+        )).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new RespondObject("Fail", "No candidate found", "")
+        ));
     }
 
 }

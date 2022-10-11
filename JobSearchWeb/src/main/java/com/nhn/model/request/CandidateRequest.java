@@ -23,14 +23,14 @@ public class CandidateRequest {
 
     List<LanguageRequest> languageRequests;
 
-//    List<QualificationRequest> qualificationRequests;
-//
-//    List<ReferenceRequest> referenceRequests;
-//
-//    List<SkillRequest> skillRequests;
-//
-//    List<TalentRequest> talentRequests;
-//
-//    List<WorkExperienceRequest> workExperienceRequests;
+    List<QualificationRequest> qualificationRequests;
+
+    List<ReferenceRequest> referenceRequests;
+
+    List<SkillRequest> skillRequests;
+
+    List<TalentRequest> talentRequests;
+
+    List<WorkExperienceRequest> workExperienceRequests;
 
 }

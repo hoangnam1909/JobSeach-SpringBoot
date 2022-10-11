@@ -32,4 +32,8 @@ public class Qualification {
     @JsonBackReference
     private Candidate candidate;
 
+    public Qualification(String name, Candidate candidate) {
+        this.name = name;
+        this.candidate = candidate;
+    }
 }

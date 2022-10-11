@@ -36,4 +36,10 @@ public class Reference {
     @JsonBackReference
     private Candidate candidate;
 
+    public Reference(String name, String link, Candidate candidate) {
+        this.name = name;
+        this.link = link;
+        this.candidate = candidate;
+    }
+
 }

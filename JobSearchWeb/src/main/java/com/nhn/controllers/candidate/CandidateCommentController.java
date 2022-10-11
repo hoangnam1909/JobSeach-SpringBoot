@@ -28,7 +28,7 @@ public class CandidateCommentController {
     @Autowired
     private CommentMapper commentMapper;
 
-    @PostMapping("")
+    @PostMapping("/add")
     ResponseEntity<RespondObject> insert(@RequestBody @Valid InsertCommentRequest request) {
 
         try {
@@ -51,16 +51,16 @@ public class CandidateCommentController {
         }
     }
 
-    @PutMapping("/delete/{id}")
-    ResponseEntity<RespondObject> delete(@PathVariable(name = "id") String commentId) {
-        Optional<Comment> comment = commentRepository.findById(Integer.valueOf(commentId));
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<RespondObject> delete(@PathVariable(name = "id") int commentId) {
+        Optional<Comment> comment = commentRepository.findById(commentId);
 
         if (comment.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new RespondObject("Fail", "Id does not exist", commentId)
             );
         } else {
-            boolean deleteCheck = commentService.delete(Integer.parseInt(commentId));
+            boolean deleteCheck = commentService.delete(commentId);
             if (deleteCheck)
                 return ResponseEntity.status(HttpStatus.OK).body(
                         new RespondObject("Ok", "Comment deleted", "")

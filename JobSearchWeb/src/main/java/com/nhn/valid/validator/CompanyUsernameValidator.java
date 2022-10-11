@@ -16,12 +16,18 @@ public class CompanyUsernameValidator implements ConstraintValidator<CompanyUser
 
     @Override
     public boolean isValid(String companyUsername, ConstraintValidatorContext constraintValidatorContext) {
-        User companyUser = userRepository.findUserByUsername(companyUsername);
-        System.err.println(companyUser);
-        if (companyUser == null)
-            return false;
 
-        return companyUser.getRole().equals(Constant.USER_ROLE.COMPANY);
+        try {
+            User companyUser = userRepository.findUserByUsername(companyUsername);
+
+            if (companyUser == null)
+                return false;
+
+            return companyUser.getRole().equals(Constant.USER_ROLE.COMPANY);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 }

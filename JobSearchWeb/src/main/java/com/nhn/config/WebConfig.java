@@ -5,6 +5,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 @Configuration
 public class WebConfig {
@@ -22,6 +23,11 @@ public class WebConfig {
                 "api_secret", "T4aMw9N8UUkaSkcpDA-vgORB_Qg",
                 "secure", true
         ));
+    }
+
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
     }
 
 }

@@ -10,6 +10,10 @@
 			"name": "admin",
 			"item": [
 				{
+					"name": "candidate",
+					"item": []
+				},
+				{
 					"name": "company",
 					"item": [
 						{
@@ -26,6 +30,44 @@
 										"admin",
 										"api",
 										"company"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "candidate",
+			"item": [
+				{
+					"name": "self",
+					"item": [
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"candidateUsername\": \"ungvien11\",\r\n    \"yearsExp\": 11111,\r\n    \"linkedin\": \"updat\",\r\n    \"cv\": \"link cv\",\r\n    \"languageRequests\": [\r\n        {\r\n            \"name\": \"Tieng Viet\",\r\n            \"description\": \"tieng me de\"\r\n        },\r\n        {\r\n            \"name\": \"Tieng Anh\",\r\n            \"description\": \"hoc ngu lam\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/candidate/api/update",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"candidate",
+										"api",
+										"update"
 									]
 								}
 							},
@@ -106,156 +148,6 @@
 					"name": "job",
 					"item": [
 						{
-							"name": "applyJob",
-							"item": [
-								{
-									"name": "getApplyJob",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"jobId\": 6,\r\n    \"companyUsername\": \"audi\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "getCandidatesApplyJob",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/:job-id/candidates",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job",
-												":job-id",
-												"candidates"
-											],
-											"variable": [
-												{
-													"key": "job-id",
-													"value": "6"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "approve",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/approve",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job",
-												"approve"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "cancel",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/cancel",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job",
-												"cancel"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/delete",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job",
-												"delete"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
 							"name": "self",
 							"item": [
 								{
@@ -279,6 +171,26 @@
 													"key": "id",
 													"value": ""
 												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getAllList",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/company/api/job/get-list",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"job",
+												"get-list"
 											]
 										}
 									},
@@ -440,39 +352,156 @@
 									"response": []
 								}
 							]
-						}
-					]
-				},
-				{
-					"name": "industry",
-					"item": [
+						},
 						{
-							"name": "insert",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"companyId\": \"22\",\r\n    \"industryId\": \"15\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "applyJob",
+							"item": [
+								{
+									"name": "getApplyJob",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"jobId\": 6,\r\n    \"companyUsername\": \"audi\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "{{port-8080}}/company/api/company-industry",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										"company-industry"
-									]
+								{
+									"name": "getCandidatesApplyJob",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job/:job-id/candidates",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job",
+												":job-id",
+												"candidates"
+											],
+											"variable": [
+												{
+													"key": "job-id",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "approve",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job/approve",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job",
+												"approve"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "cancel",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job/cancel",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job",
+												"cancel"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job/delete",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job",
+												"delete"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				}

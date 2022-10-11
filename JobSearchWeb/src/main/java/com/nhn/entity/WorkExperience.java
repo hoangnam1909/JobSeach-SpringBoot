@@ -45,4 +45,11 @@ public class WorkExperience {
     @JsonBackReference
     private Candidate candidate;
 
+    public WorkExperience(Date fromDate, Date toDate, String content, String position, Candidate candidate) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.content = content;
+        this.position = position;
+        this.candidate = candidate;
+    }
 }

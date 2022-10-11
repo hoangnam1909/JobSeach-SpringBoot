@@ -32,4 +32,8 @@ public class Talent {
     @JsonBackReference
     private Candidate candidate;
 
+    public Talent(String content, Candidate candidate) {
+        this.content = content;
+        this.candidate = candidate;
+    }
 }
