@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ApplyJobRepository extends JpaRepository<ApplyJob, Integer> {
 
-    List<ApplyJob> findByJobApp(Job job);
+    List<ApplyJob> findByJobAppliedOrderByCreatedDateDesc(Job job);
 
     List<ApplyJob> findByCandidateUserOrderByCreatedDateDesc(User candidateUser);
 

@@ -3,10 +3,9 @@ package com.nhn.controllers.company;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
-import com.nhn.mapper.JobMapper;
+import com.nhn.model.request.company.CompanyJobRequest;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
-import com.nhn.model.request.company.DeleteJobRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -148,7 +146,7 @@ public class CompanyJobController {
     }
 
     @DeleteMapping("/delete")
-    ResponseEntity<RespondObject> delete(@RequestBody @Valid DeleteJobRequest request) {
+    ResponseEntity<RespondObject> delete(@RequestBody @Valid CompanyJobRequest request) {
         boolean deleteCheck = jobService.delete(request.getJobId());
 
         if (deleteCheck)

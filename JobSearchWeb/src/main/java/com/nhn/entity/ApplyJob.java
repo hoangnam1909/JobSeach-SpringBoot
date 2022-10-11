@@ -34,7 +34,7 @@ public class ApplyJob {
     @ManyToOne
     @JoinColumn(name = "job_id", referencedColumnName = "id", nullable = false)
 //    @JsonBackReference
-    private Job jobApp;
+    private Job jobApplied;
 
     @ManyToOne
     @JoinColumn(name = "candidate_user_id", referencedColumnName = "id", nullable = false)
@@ -47,7 +47,7 @@ public class ApplyJob {
         if (createdDate == null)
             createdDate = currentDate;
 
-        status = Constant.STATUS.PENDING;
+        status = Constant.APPLYING_STATUS.PENDING;
     }
 
 }

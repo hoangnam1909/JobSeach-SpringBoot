@@ -1,6 +1,7 @@
 package com.nhn.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nhn.common.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -78,10 +79,12 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;

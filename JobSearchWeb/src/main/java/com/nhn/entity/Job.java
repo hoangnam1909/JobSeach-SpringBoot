@@ -97,7 +97,7 @@ public class Job {
     @JsonManagedReference
     private Set<Requirement> requirements;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobApp")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobApplied")
     @JsonManagedReference
     private Collection<ApplyJob> applyingJobs;
 

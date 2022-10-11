@@ -24,7 +24,7 @@ public class ApplyJobMapper {
         ApplyJob applyJob = new ApplyJob();
 
         Optional<Job> job = jobRepository.findById(request.getJobId());
-        job.ifPresent(applyJob::setJobApp);
+        job.ifPresent(applyJob::setJobApplied);
 
         Optional<User> user = userRepository.findById(request.getCandidateUserId());
         user.ifPresent(applyJob::setCandidateUser);

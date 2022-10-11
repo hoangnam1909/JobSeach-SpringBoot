@@ -14,7 +14,7 @@ public interface Constant {
 
     }
 
-    interface STATUS {
+    interface APPLYING_STATUS {
 
         String PENDING = "PENDING";
 

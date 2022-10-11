@@ -1,7 +1,7 @@
-package com.nhn.model.request;
+package com.nhn.model.request.company;
 
 import com.nhn.valid.CompanyJob;
-import com.nhn.valid.CompanyUserId;
+import com.nhn.valid.CompanyUsername;
 import com.nhn.valid.ExistingJobId;
 import lombok.*;
 
@@ -11,12 +11,12 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @CompanyJob
-public class ApplyingJobGetRequest {
+public class CompanyJobRequest {
 
     @ExistingJobId
     Integer jobId;
 
-    @CompanyUserId
-    Integer companyUserId;
+    @CompanyUsername
+    String companyUsername;
 
 }

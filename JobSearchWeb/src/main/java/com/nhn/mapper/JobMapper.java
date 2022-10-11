@@ -18,9 +18,6 @@ public class JobMapper {
     private UserRepository userRepository;
 
     @Autowired
-    private JobRepository jobRepository;
-
-    @Autowired
     private PositionRepository positionRepository;
 
     @Autowired
@@ -99,7 +96,7 @@ public class JobMapper {
         List<Job> jobList = new ArrayList<>();
 
         applyJobs.forEach(applyJob -> {
-            jobList.add(applyJob.getJobApp());
+            jobList.add(applyJob.getJobApplied());
         });
 
         return jobList;
