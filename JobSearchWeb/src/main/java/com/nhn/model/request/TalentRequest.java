@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TalentRequest {
 
-    private String username;
-
     private String content;
 
 }

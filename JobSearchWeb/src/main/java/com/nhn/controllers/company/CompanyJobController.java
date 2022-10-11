@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,6 +41,23 @@ public class CompanyJobController {
 
     @Autowired
     private SpecificationConverter specificationConverter;
+
+    @GetMapping("/get-list")
+    ResponseEntity<RespondObject> getAllList() {
+
+        JobSpecification specification = new JobSpecification();
+        specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
+
+        List<Job> foundJobs = jobRepository.findAll(specification);
+
+        return foundJobs.size() > 0 ?
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Jobs found", foundJobs)
+                ) :
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "No jobs found", new ArrayList<>())
+                );
+    }
 
     @PostMapping("/get")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,

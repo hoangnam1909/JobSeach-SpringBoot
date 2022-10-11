@@ -3,6 +3,8 @@ package com.nhn.model.request;
 import com.nhn.valid.CandidateUsername;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,5 +21,16 @@ public class CandidateRequest {
 
     private String cv;
 
+    List<LanguageRequest> languageRequests;
+
+//    List<QualificationRequest> qualificationRequests;
+//
+//    List<ReferenceRequest> referenceRequests;
+//
+//    List<SkillRequest> skillRequests;
+//
+//    List<TalentRequest> talentRequests;
+//
+//    List<WorkExperienceRequest> workExperienceRequests;
 
 }

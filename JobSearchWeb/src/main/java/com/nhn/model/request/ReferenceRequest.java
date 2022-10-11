@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReferenceRequest {
 
-    private String username;
-
     private String name;
 
     private String link;

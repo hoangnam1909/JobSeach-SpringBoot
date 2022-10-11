@@ -13,8 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class WorkExperienceRequest {
 
-    private String username;
-
     private Date fromDate;
 
     private Date toDate;

@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SkillRequest {
 
-    private String username;
-
     private String name;
 
     private String level;
