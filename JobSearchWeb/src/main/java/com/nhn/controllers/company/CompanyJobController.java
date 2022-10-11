@@ -42,10 +42,11 @@ public class CompanyJobController {
     @Autowired
     private SpecificationConverter specificationConverter;
 
-    @GetMapping("/get-list")
-    ResponseEntity<RespondObject> getAllList() {
+    @GetMapping("/get-list/{company-username}")
+    ResponseEntity<RespondObject> getAllList(@PathVariable(name = "company-username") String companyUsername) {
 
         JobSpecification specification = new JobSpecification();
+        specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
         specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
         List<Job> foundJobs = jobRepository.findAll(specification);
@@ -59,8 +60,9 @@ public class CompanyJobController {
                 );
     }
 
-    @PostMapping("/get")
+    @PostMapping("/get/{company-username}")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
+                                         @PathVariable(name = "company-username") String companyUsername,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
         System.err.println("get jobs" + page);
@@ -72,6 +74,7 @@ public class CompanyJobController {
             }
 
             JobSpecification specification = specificationConverter.jobSpecification(params);
+            specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
             Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
