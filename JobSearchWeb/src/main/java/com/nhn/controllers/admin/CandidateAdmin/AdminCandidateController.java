@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin;
+package com.nhn.controllers.admin.CandidateAdmin;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;

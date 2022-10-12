@@ -32,4 +32,5 @@ public class JobTag {
         this.jobId = jobId;
         this.tagId = tagId;
     }
+
 }

@@ -51,6 +51,9 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    /*
+        Chứng thực với access token
+    */
     @PostMapping("/authenticated")
     ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) {
 
@@ -69,6 +72,9 @@ public class AuthController {
         );
     }
 
+    /*
+        Lấy ra thông tin của user đang đăng nhập
+    */
     @GetMapping("/current-user")
     ResponseEntity<RespondObject> getCurrentUser() {
         try {
@@ -82,6 +88,9 @@ public class AuthController {
         }
     }
 
+    /*
+        Đăng ký
+    */
     @PostMapping("/signup")
     ResponseEntity<RespondObject> signUp(@RequestBody @Valid UserSignupRequest request) {
 
@@ -111,6 +120,9 @@ public class AuthController {
         }
     }
 
+    /*
+        Đăng nhập thường
+     */
     @PostMapping("/login")
     ResponseEntity<RespondObject> login(@RequestBody @Valid LoginRequest loginRequest) {
 
@@ -133,6 +145,9 @@ public class AuthController {
         }
     }
 
+    /*
+        Quên mật khẩu
+     */
     @PutMapping("/forgot-password/{username}")
     ResponseEntity<RespondObject> forgotPassword(@PathVariable(name = "username") String username) {
 
@@ -154,6 +169,9 @@ public class AuthController {
         }
     }
 
+    /*
+        Đăng xuất
+     */
     @GetMapping("/logout")
     ResponseEntity<RespondObject> logout() {
 

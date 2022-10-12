@@ -23,7 +23,7 @@ public class AuthedUserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping(value = "/{username}", consumes = {
+    @PutMapping(value = "/update-user-info/{username}", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })

@@ -33,6 +33,9 @@ public class CompanyApplyJobController {
     @Autowired
     private ApplyJobService applyJobService;
 
+    /*
+        Nhà tuyển dụng lấy ra đơn ứng tuyển theo job id
+    */
     @GetMapping("")
     ResponseEntity<RespondObject> getApplyJobByJobId(@RequestBody @Valid CompanyJobRequest request) {
 
@@ -54,6 +57,9 @@ public class CompanyApplyJobController {
         }
     }
 
+    /*
+        Nhà tuyển dụng lấy ra các ứng viên đã ứng tuyển theo job id
+    */
     @GetMapping("/{job-id}/candidates")
     ResponseEntity<RespondObject> getCandidates(@PathVariable(name = "job-id") int jobId) {
 
@@ -80,6 +86,9 @@ public class CompanyApplyJobController {
         }
     }
 
+    /*
+        Nhà tuyển dụng xác nhận đơn ứng tuyển
+    */
     @PutMapping("/approve")
     ResponseEntity<RespondObject> accept(@RequestBody @Valid CompanyActionApplyJobRequest request) {
 
@@ -91,6 +100,9 @@ public class CompanyApplyJobController {
                         new RespondObject("Failed", "Apply job approve failed", false));
     }
 
+    /*
+        Nhà tuyển dụng chặn đơn ứng tuyển
+    */
     @PutMapping("/block")
     ResponseEntity<RespondObject> block(@RequestBody @Valid CompanyActionApplyJobRequest request) {
 

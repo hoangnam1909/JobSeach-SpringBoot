@@ -19,6 +19,9 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
+    /*
+        Ứng viên cập nhật thông tin ứng viên
+    */
     @PutMapping("/update")
     ResponseEntity<RespondObject> updateCandidate(@RequestBody @Valid CandidateRequest request) {
 

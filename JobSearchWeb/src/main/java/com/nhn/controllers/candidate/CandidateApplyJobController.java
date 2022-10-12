@@ -35,6 +35,9 @@ public class CandidateApplyJobController {
     @Autowired
     private ApplyJobService applyJobService;
 
+    /*
+        lấy ra danh sách ApplyJob của candidate user với candidateUsername truyền vào
+    */
     @GetMapping("/{candidate-username}")
     ResponseEntity<RespondObject> getJobApplying(@PathVariable(name = "candidate-username") String candidateUsername) {
 
@@ -59,6 +62,9 @@ public class CandidateApplyJobController {
         }
     }
 
+    /*
+        ứng viên nộp đơn ứng tuyển
+    */
     @PostMapping("")
     ResponseEntity<RespondObject> applyJob(@RequestBody @Valid CandidateApplyJobRequest request) {
 
@@ -81,6 +87,9 @@ public class CandidateApplyJobController {
         }
     }
 
+    /*
+        ứng viên huỷ đơn ứng tuyển
+    */
     @PutMapping("/cancel")
     ResponseEntity<RespondObject> cancel(@RequestBody @Valid CandidateActionApplyJobRequest request) {
 

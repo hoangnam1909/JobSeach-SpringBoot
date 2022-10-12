@@ -21,30 +21,11 @@ import java.util.Optional;
 public class CompanyController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private CompanyRepository companyRepository;
-
-    @Autowired
     private CompanyService companyService;
 
-//    @GetMapping("{id}")
-//    ResponseEntity<RespondObject> get(@PathVariable(name = "id") int id) {
-//
-//        try {
-//            Optional<Company> company = companyRepository.findById(id);
-//
-//            return company.map(value -> ResponseEntity.status(HttpStatus.OK).body(
-//                            new RespondObject("OK", "Company found", value)))
-//                    .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                            new RespondObject("Fail", "Company not found", "")));
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                    new RespondObject("Failed", "Save company failed", ex));
-//        }
-//    }
-
+    /*
+        Nhà tuyển dụng cập nhật thông tin nhà tuyển dụng
+    */
     @PutMapping("/{username}")
     ResponseEntity<RespondObject> updateCompany(@PathVariable @Valid @CompanyUsername String username,
                                                 @RequestBody UpdateCompanyRequest request) {

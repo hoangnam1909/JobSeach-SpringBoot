@@ -47,6 +47,9 @@ public class CompanyJobController {
     @Autowired
     private SpecificationConverter specificationConverter;
 
+    /*
+        Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng
+    */
     @GetMapping("/get-list/{company-username}")
     ResponseEntity<RespondObject> getAllList(@PathVariable(name = "company-username") String companyUsername) throws Exception {
 
@@ -69,6 +72,9 @@ public class CompanyJobController {
                 );
     }
 
+    /*
+        Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng có phân trang và các điều kiện kèm theo
+    */
     @PostMapping("/get/{company-username}")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @PathVariable(name = "company-username") String companyUsername,
@@ -124,6 +130,9 @@ public class CompanyJobController {
         }
     }
 
+    /*
+        Nhà tuyển dụng đếm số tin tuyển dụng hiện khả dụng
+    */
     @GetMapping("/count/{company-username}")
     ResponseEntity<RespondObject> count(@PathVariable(name = "company-username") String companyUsername) throws Exception {
 
@@ -139,6 +148,9 @@ public class CompanyJobController {
                 new RespondObject("Job found", "Jobs counted", jobRepository.count(specification)));
     }
 
+    /*
+        Nhà tuyển dụng lấy ra tin tuyển dụng
+    */
     @GetMapping("/{id}")
     ResponseEntity<RespondObject> getById(@PathVariable String id) {
 
@@ -150,6 +162,9 @@ public class CompanyJobController {
         ));
     }
 
+    /*
+        Nhà tuyển dụng thêm tin tuyển dụng
+    */
     @PostMapping("/insert")
     ResponseEntity<RespondObject> insert(@RequestBody @Valid CreateJobRequest request) {
 
@@ -164,6 +179,9 @@ public class CompanyJobController {
         }
     }
 
+    /*
+        Nhà tuyển dụng cập nhật tin tuyển dụng
+    */
     @PutMapping("/update")
     ResponseEntity<RespondObject> update(@RequestBody @Valid JobUpdateRequest request) {
 
@@ -183,6 +201,9 @@ public class CompanyJobController {
         }
     }
 
+    /*
+        Nhà tuyển dụng xoá tin tuyển dụng
+    */
     @DeleteMapping("/delete")
     ResponseEntity<RespondObject> delete(@RequestBody @Valid CompanyJobRequest request) {
         boolean deleteCheck = jobService.delete(request.getJobId());

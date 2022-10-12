@@ -28,6 +28,9 @@ public class CandidateCommentController {
     @Autowired
     private CommentMapper commentMapper;
 
+    /*
+        Ứng viên thêm comment vào trang của nhà tuyển dụng
+    */
     @PostMapping("/add")
     ResponseEntity<RespondObject> insert(@RequestBody @Valid InsertCommentRequest request) {
 
@@ -51,6 +54,9 @@ public class CandidateCommentController {
         }
     }
 
+    /*
+        Ứng viên xoá comment
+    */
     @DeleteMapping("/delete/{comment-id}")
     ResponseEntity<RespondObject> delete(@PathVariable(name = "comment-id") int commentId) {
         Optional<Comment> comment = commentRepository.findById(commentId);
