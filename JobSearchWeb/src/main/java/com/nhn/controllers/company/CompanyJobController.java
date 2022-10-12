@@ -64,11 +64,11 @@ public class CompanyJobController {
         List<Job> foundJobs = jobRepository.findAll(specification);
 
         return foundJobs.size() > 0 ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Jobs found", foundJobs)
+                ResponseEntity.status(HttpStatus.FOUND).body(
+                        new RespondObject("Found", "Jobs found", foundJobs)
                 ) :
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "No jobs found", new ArrayList<>())
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Not found", "No jobs found", new ArrayList<>())
                 );
     }
 
@@ -102,16 +102,16 @@ public class CompanyJobController {
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
             if (foundJobs.getTotalElements() == 0)
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "No job found", new ArrayList<>()));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Not found", "No job found", new ArrayList<>()));
 
             if (Integer.parseInt(page) > foundJobs.getTotalPages()) {
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Page number of out range", ""));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Bad request", "Page number of out range", "Page number = " + page));
             }
 
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Jobs found", foundJobs));
+            return ResponseEntity.status(HttpStatus.FOUND).body(
+                    new RespondObject("Found", "Jobs found", foundJobs));
         } else {
             JobSpecification specification = new JobSpecification();
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
@@ -121,11 +121,11 @@ public class CompanyJobController {
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
             return foundJobs.getContent().size() > 0 ?
-                    ResponseEntity.status(HttpStatus.OK).body(
-                            new RespondObject("OK", "Jobs found", foundJobs)
+                    ResponseEntity.status(HttpStatus.FOUND).body(
+                            new RespondObject("Found", "Jobs found", foundJobs)
                     ) :
-                    ResponseEntity.status(HttpStatus.OK).body(
-                            new RespondObject("Ok", "No jobs found", new ArrayList<>())
+                    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                            new RespondObject("Not found", "No jobs found", new ArrayList<>())
                     );
         }
     }
