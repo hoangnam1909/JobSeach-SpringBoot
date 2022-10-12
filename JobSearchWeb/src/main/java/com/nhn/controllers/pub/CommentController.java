@@ -1,5 +1,6 @@
 package com.nhn.controllers.pub;
 
+import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
 import com.nhn.entity.User;
@@ -31,14 +32,13 @@ public class CommentController {
     private UserRepository userRepository;
 
     @GetMapping("")
-    ResponseEntity<RespondObject> getAll(@PathVariable(name = "company-user-id") @Valid @CompanyUserId Integer companyUserId,
+    ResponseEntity<RespondObject> getAll(@PathVariable(name = "company-user-id") Integer companyUserId,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
-                                         @RequestParam(name = "size", required = false, defaultValue = "5") String size) {
+                                         @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
 
         Optional<User> companyUser = userRepository.findById(companyUserId);
-//        if (companyUser.isEmpty())
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                    new RespondObject("Not found", "Company not found", null));
+        if (companyUser.isEmpty() || !companyUser.get().getRole().equals(Constant.USER_ROLE.COMPANY))
+            throw new Exception("Could not find company user with user = 'Company username'");
 
         Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
         Page<Comment> comments = commentRepository.findAllByCompany(companyUser.get().getCompany(), paging);

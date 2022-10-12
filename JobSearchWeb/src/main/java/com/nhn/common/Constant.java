@@ -21,8 +21,7 @@ public interface Constant {
         String APPROVED = "APPROVED";
 
         String CANCELLED = "CANCELLED";
-
-        String DELETED = "DELETED";
+        String BLOCKED = "BLOCKED";
 
     }
 

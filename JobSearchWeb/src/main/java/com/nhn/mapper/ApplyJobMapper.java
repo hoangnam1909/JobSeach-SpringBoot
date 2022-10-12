@@ -20,14 +20,18 @@ public class ApplyJobMapper {
     @Autowired
     private UserRepository userRepository;
 
-    public ApplyJob toEntity(CandidateApplyJobRequest request){
+    public ApplyJob toEntity(CandidateApplyJobRequest request) {
         ApplyJob applyJob = new ApplyJob();
 
         Optional<Job> job = jobRepository.findById(request.getJobId());
-        job.ifPresent(applyJob::setJobApplied);
+        User candidateUser = userRepository.findUserByUsername(request.getCandidateUsername());
 
-        Optional<User> user = userRepository.findById(request.getCandidateUserId());
-        user.ifPresent(applyJob::setCandidateUser);
+        if (job.isPresent() && candidateUser != null) {
+            job.ifPresent(applyJob::setJobApplied);
+            applyJob.setCandidateUser(candidateUser);
+        } else {
+            return null;
+        }
 
         return applyJob;
     }

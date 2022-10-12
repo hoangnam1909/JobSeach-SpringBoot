@@ -29,20 +29,21 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping("{id}")
-    ResponseEntity<RespondObject> get(@PathVariable(name = "id") int id) {
-
-        try {
-            Optional<Company> company = companyRepository.findById(id);
-
-            return company.map(value -> ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("OK", "Save company successfully", value))).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Fail", "Save company failed", "")));
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new RespondObject("Failed", "Save company failed", ex));
-        }
-    }
+//    @GetMapping("{id}")
+//    ResponseEntity<RespondObject> get(@PathVariable(name = "id") int id) {
+//
+//        try {
+//            Optional<Company> company = companyRepository.findById(id);
+//
+//            return company.map(value -> ResponseEntity.status(HttpStatus.OK).body(
+//                            new RespondObject("OK", "Company found", value)))
+//                    .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                            new RespondObject("Fail", "Company not found", "")));
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                    new RespondObject("Failed", "Save company failed", ex));
+//        }
+//    }
 
     @PutMapping("/{username}")
     ResponseEntity<RespondObject> updateCompany(@PathVariable @Valid @CompanyUsername String username,

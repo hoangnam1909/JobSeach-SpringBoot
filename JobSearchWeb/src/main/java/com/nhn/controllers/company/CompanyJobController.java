@@ -52,7 +52,7 @@ public class CompanyJobController {
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
-            throw new Exception("Could not find company user with user = 'Company username'");
+            throw new Exception(String.format("Could not find company user with user = '%s'", companyUsername));
 
         JobSpecification specification = new JobSpecification();
         specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
@@ -77,7 +77,7 @@ public class CompanyJobController {
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
-            throw new Exception("Could not find company user with user = 'Company username'");
+            throw new Exception(String.format("Could not find company user with user = '%s'", companyUsername));
 
         System.err.println("get jobs" + page);
 
@@ -129,7 +129,7 @@ public class CompanyJobController {
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
-            throw new Exception("Could not find company user with user = 'Company username'");
+            throw new Exception(String.format("Could not find company user with user = '%s'", companyUsername));
 
         JobSpecification specification = new JobSpecification();
         specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));

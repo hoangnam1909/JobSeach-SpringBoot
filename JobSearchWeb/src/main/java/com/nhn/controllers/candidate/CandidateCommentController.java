@@ -51,8 +51,8 @@ public class CandidateCommentController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    ResponseEntity<RespondObject> delete(@PathVariable(name = "id") int commentId) {
+    @DeleteMapping("/delete/{comment-id}")
+    ResponseEntity<RespondObject> delete(@PathVariable(name = "comment-id") int commentId) {
         Optional<Comment> comment = commentRepository.findById(commentId);
 
         if (comment.isEmpty()) {

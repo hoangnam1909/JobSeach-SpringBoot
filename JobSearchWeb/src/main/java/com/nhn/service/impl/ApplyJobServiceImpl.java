@@ -2,7 +2,7 @@ package com.nhn.service.impl;
 
 import com.nhn.common.Constant;
 import com.nhn.entity.ApplyJob;
-import com.nhn.model.request.company.ActionApplyJobRequest;
+import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 import com.nhn.repository.ApplyJobRepository;
 import com.nhn.service.ApplyJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class ApplyJobServiceImpl implements ApplyJobService {
     private ApplyJobRepository applyJobRepository;
 
     @Override
-    public boolean approve(ActionApplyJobRequest request) {
+    public boolean approve(CompanyActionApplyJobRequest request) {
         Optional<ApplyJob> applyJob = applyJobRepository.findById(request.getApplyJobId());
 
         if (applyJob.isPresent()){
@@ -32,8 +32,8 @@ public class ApplyJobServiceImpl implements ApplyJobService {
     }
 
     @Override
-    public boolean cancel(ActionApplyJobRequest request) {
-        Optional<ApplyJob> applyJob = applyJobRepository.findById(request.getApplyJobId());
+    public boolean cancel(int applyJobId) {
+        Optional<ApplyJob> applyJob = applyJobRepository.findById(applyJobId);
 
         if (applyJob.isPresent()){
             ApplyJob applyJobApproved = applyJob.get();
@@ -47,12 +47,12 @@ public class ApplyJobServiceImpl implements ApplyJobService {
     }
 
     @Override
-    public boolean delete(ActionApplyJobRequest request) {
+    public boolean block(CompanyActionApplyJobRequest request) {
         Optional<ApplyJob> applyJob = applyJobRepository.findById(request.getApplyJobId());
 
         if (applyJob.isPresent()){
             ApplyJob applyJobApproved = applyJob.get();
-            applyJobApproved.setStatus(Constant.APPLYING_STATUS.DELETED);
+            applyJobApproved.setStatus(Constant.APPLYING_STATUS.BLOCKED);
             applyJobRepository.save(applyJobApproved);
 
             return true;

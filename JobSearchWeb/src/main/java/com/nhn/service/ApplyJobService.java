@@ -1,13 +1,13 @@
 package com.nhn.service;
 
-import com.nhn.model.request.company.ActionApplyJobRequest;
+import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 
 public interface ApplyJobService {
 
-    boolean approve(ActionApplyJobRequest request);
+    boolean approve(CompanyActionApplyJobRequest request);
 
-    boolean cancel(ActionApplyJobRequest request);
+    boolean cancel(int applyJobId);
 
-    boolean delete(ActionApplyJobRequest request);
+    boolean block(CompanyActionApplyJobRequest request);
 
 }

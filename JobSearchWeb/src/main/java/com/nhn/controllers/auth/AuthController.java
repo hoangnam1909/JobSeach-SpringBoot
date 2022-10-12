@@ -1,4 +1,4 @@
-package com.nhn.controllers.pub;
+package com.nhn.controllers.auth;
 
 import com.nhn.Util.EmailUtil;
 import com.nhn.Util.JwtUtils;

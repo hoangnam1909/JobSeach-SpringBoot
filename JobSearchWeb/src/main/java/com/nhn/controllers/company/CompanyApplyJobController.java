@@ -4,7 +4,7 @@ import com.nhn.common.RespondObject;
 import com.nhn.entity.ApplyJob;
 import com.nhn.entity.Job;
 import com.nhn.entity.User;
-import com.nhn.model.request.company.ActionApplyJobRequest;
+import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 import com.nhn.model.request.company.CompanyJobRequest;
 import com.nhn.repository.ApplyJobRepository;
 import com.nhn.repository.JobRepository;
@@ -81,7 +81,7 @@ public class CompanyApplyJobController {
     }
 
     @PutMapping("/approve")
-    ResponseEntity<RespondObject> accept(@RequestBody @Valid ActionApplyJobRequest request) {
+    ResponseEntity<RespondObject> accept(@RequestBody @Valid CompanyActionApplyJobRequest request) {
 
         return applyJobService.approve(request) ?
                 ResponseEntity.status(HttpStatus.OK).body(
@@ -91,26 +91,15 @@ public class CompanyApplyJobController {
                         new RespondObject("Failed", "Apply job approve failed", false));
     }
 
-    @PutMapping("/cancel")
-    ResponseEntity<RespondObject> cancel(@RequestBody @Valid ActionApplyJobRequest request) {
+    @PutMapping("/block")
+    ResponseEntity<RespondObject> block(@RequestBody @Valid CompanyActionApplyJobRequest request) {
 
-        return applyJobService.cancel(request) ?
+        return applyJobService.block(request) ?
                 ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Cancelled", true))
+                        new RespondObject("Approved", "Apply job blocked", true))
                 :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Failed", "Apply job cancel failed", false));
-    }
-
-    @PutMapping("/delete")
-    ResponseEntity<RespondObject> delete(@RequestBody @Valid ActionApplyJobRequest request) {
-
-        return applyJobService.delete(request) ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Approved", "Apply job deleted", true))
-                :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Failed", "Apply job delete failed", false));
+                        new RespondObject("Failed", "Apply job block failed", false));
     }
 
 }
