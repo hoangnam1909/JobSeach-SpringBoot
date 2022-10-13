@@ -11,7 +11,6 @@ public class CandidateMapper {
 
         candidate.setYearsExp(request.getYearsExp());
         candidate.setLinkedin(request.getLinkedin());
-        candidate.setCv(request.getCv());
 
         return candidate;
     }

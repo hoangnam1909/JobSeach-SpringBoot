@@ -1,5 +1,7 @@
 package com.nhn.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.nhn.entity.*;
 import com.nhn.mapper.CandidateMapper;
 import com.nhn.model.request.*;
@@ -7,9 +9,12 @@ import com.nhn.repository.*;
 import com.nhn.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -41,72 +46,75 @@ public class CandidateServiceImpl implements CandidateService {
     @Autowired
     private CandidateMapper candidateMapper;
 
-    @Override
-    public Candidate updateCandidate(CandidateRequest candidateRequest) {
+    @Autowired
+    private Cloudinary cloudinary;
 
-        User user = userRepository.findUserByUsername(candidateRequest.getCandidateUsername());
+    @Override
+    public Candidate update(CandidateRequest request, MultipartFile file) {
+
+        User user = userRepository.findUserByUsername(request.getCandidateUsername());
         if (user == null)
             return null;
 
-        Candidate candidate = candidateMapper.toEntity(user.getCandidate(), candidateRequest);
+        Candidate candidate = candidateMapper.toEntity(user.getCandidate(), request);
         if (candidate == null)
             return null;
         try {
             // languages
-            if (candidateRequest.getLanguageRequests() != null) {
+            if (request.getLanguageRequests() != null) {
                 List<Language> languageList = new ArrayList<>();
                 languageRepository.deleteAll(candidate.getLanguages());
-                for (LanguageRequest languageRequest : candidateRequest.getLanguageRequests())
+                for (LanguageRequest languageRequest : request.getLanguageRequests())
                     languageList.add(languageRepository.
                             save(new Language(languageRequest.getName(), languageRequest.getDescription(), candidate)));
                 candidate.setLanguages(languageList);
             }
 
             // qualifications
-            if (candidateRequest.getQualificationRequests() != null) {
+            if (request.getQualificationRequests() != null) {
                 List<Qualification> qualificationList = new ArrayList<>();
                 qualificationRepository.deleteAll(candidate.getQualifications());
-                for (QualificationRequest qualificationRequest : candidateRequest.getQualificationRequests())
+                for (QualificationRequest qualificationRequest : request.getQualificationRequests())
                     qualificationList.add(qualificationRepository.
                             save(new Qualification(qualificationRequest.getName(), candidate)));
                 candidate.setQualifications(qualificationList);
             }
 
             // reference
-            if (candidateRequest.getReferenceRequests() != null) {
+            if (request.getReferenceRequests() != null) {
                 List<Reference> referenceList = new ArrayList<>();
                 referenceRepository.deleteAll(candidate.getReferences());
-                for (ReferenceRequest referenceRequest : candidateRequest.getReferenceRequests())
+                for (ReferenceRequest referenceRequest : request.getReferenceRequests())
                     referenceList.add(referenceRepository.
                             save(new Reference(referenceRequest.getName(), referenceRequest.getLink(), candidate)));
                 candidate.setReferences(referenceList);
             }
 
             // skills
-            if (candidateRequest.getSkillRequests() != null) {
+            if (request.getSkillRequests() != null) {
                 List<Skill> skillList = new ArrayList<>();
                 skillRepository.deleteAll(candidate.getSkills());
-                for (SkillRequest skillRequest : candidateRequest.getSkillRequests())
+                for (SkillRequest skillRequest : request.getSkillRequests())
                     skillList.add(skillRepository.
                             save(new Skill(skillRequest.getName(), skillRequest.getLevel(), candidate)));
                 candidate.setSkills(skillList);
             }
 
             // talents
-            if (candidateRequest.getTalentRequests() != null) {
+            if (request.getTalentRequests() != null) {
                 List<Talent> talentList = new ArrayList<>();
                 talentRepository.deleteAll(candidate.getTalents());
-                for (TalentRequest talentRequest : candidateRequest.getTalentRequests())
+                for (TalentRequest talentRequest : request.getTalentRequests())
                     talentList.add(talentRepository.
                             save(new Talent(talentRequest.getContent(), candidate)));
                 candidate.setTalents(talentList);
             }
 
             // work experience
-            if (candidateRequest.getWorkExperienceRequests() != null) {
+            if (request.getWorkExperienceRequests() != null) {
                 List<WorkExperience> workExperienceList = new ArrayList<>();
                 workExperienceRepository.deleteAll(candidate.getWorkExperiences());
-                for (WorkExperienceRequest workExperienceRequest : candidateRequest.getWorkExperienceRequests())
+                for (WorkExperienceRequest workExperienceRequest : request.getWorkExperienceRequests())
                     workExperienceList.add(workExperienceRepository.
                             save(new WorkExperience(workExperienceRequest.getFromDate(),
                                     workExperienceRequest.getToDate(),
@@ -116,6 +124,20 @@ public class CandidateServiceImpl implements CandidateService {
                             ));
                 candidate.setWorkExperiences(workExperienceList);
             }
+
+            if (!file.isEmpty()) {
+                Map r = null;
+                try {
+                    r = this.cloudinary.uploader().upload(file.getBytes(),
+                            ObjectUtils.asMap("resource_type", "auto"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                assert r != null;
+                candidate.setCv((String) r.get("secure_url"));
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

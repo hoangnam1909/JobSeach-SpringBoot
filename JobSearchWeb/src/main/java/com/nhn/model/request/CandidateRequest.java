@@ -19,8 +19,6 @@ public class CandidateRequest {
 
     private String linkedin;
 
-    private String cv;
-
     List<LanguageRequest> languageRequests;
 
     List<QualificationRequest> qualificationRequests;

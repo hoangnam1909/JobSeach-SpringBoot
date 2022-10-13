@@ -1,9 +1,7 @@
 package com.nhn.model.request.authed_request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.nhn.valid.RegisteredUsername;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,7 +9,11 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class UpdateUserRequest {
+
+    @RegisteredUsername
+    private String username;
 
     private String fullName;
 

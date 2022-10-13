@@ -23,17 +23,16 @@ public class AuthedUserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping(value = "/update-user-info/{username}", consumes = {
+    @PutMapping(value = "/update-user-info", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })
     @Transactional
-    ResponseEntity<RespondObject> updateProfile(@PathVariable(name = "username") @Valid @RegisteredUsername String username,
-                                                @RequestPart("user") UpdateUserRequest request,
+    ResponseEntity<RespondObject> updateProfile(@RequestPart("user") @Valid UpdateUserRequest request,
                                                 @RequestPart("file") MultipartFile file) {
 
         try {
-            User user = userService.update(username, request, file);
+            User user = userService.update(request, file);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save user successfully", user)
