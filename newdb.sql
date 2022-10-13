@@ -35,7 +35,7 @@ CREATE TABLE `apply_job` (
   KEY `fk_app_canduser_idx` (`candidate_user_id`),
   CONSTRAINT `fk_app_canduser` FOREIGN KEY (`candidate_user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `fk_app_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `apply_job` (
 
 LOCK TABLES `apply_job` WRITE;
 /*!40000 ALTER TABLE `apply_job` DISABLE KEYS */;
-INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','PENDING'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(10,6,128,'2022-05-05 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','PENDING'),(12,7,128,'2022-05-05 13:19:02','PENDING'),(14,11,129,'2022-09-19 01:01:35','PENDING');
+INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','APPROVED'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','APPROVED'),(12,7,128,'2022-05-05 13:19:02','CANCELLED'),(14,11,129,'2022-09-19 01:01:35','PENDING'),(15,6,128,'2022-10-12 10:45:18','BLOCKED'),(17,11,137,'2022-10-12 11:30:22','PENDING'),(18,5,128,'2022-05-15 13:19:02','PENDING'),(19,5,137,'2022-09-19 19:29:12','PENDING'),(20,5,146,'2022-05-05 03:09:43','PENDING'),(21,5,147,'2022-09-19 12:09:02','PENDING'),(22,5,148,'2022-09-19 13:19:02','PENDING');
 /*!40000 ALTER TABLE `apply_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `candidate` (
   `linkedin` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `cv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,11111,'updat','link cv'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,0,NULL,NULL),(48,0,NULL,NULL),(49,0,NULL,NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `comment` (
   KEY `fk_cmt_cand_idx` (`candidate_id`),
   CONSTRAINT `fk_cmt_cand` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`),
   CONSTRAINT `fk_cmt_comp` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1),(2,21,41,'cmt comp_id = 21 uv1','2022-09-29 16:36:01',1),(3,21,42,'cmt comp_id = 21 uv2','2022-09-29 16:36:01',1),(4,22,42,'comment 22 42','2022-10-07 15:38:57',1);
+INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1),(2,21,41,'cmt comp_id = 21 uv1','2022-09-29 16:36:01',1),(3,21,42,'cmt comp_id = 21 uv2','2022-10-11 16:36:01',1),(4,22,42,'comment 22 42','2022-10-07 15:38:57',1),(5,22,41,'128cand comment 136comp','2022-10-10 23:44:18',0);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +236,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,134,'Java Developer (All Levels) ',0,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,0),(3,134,'Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:',NULL,NULL,'2022-10-10 23:26:04',10,'10000000','14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình',79,8,1,1,0),(4,134,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,0),(5,134,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,0),(6,136,'test tiep ne33',1,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,0),(7,136,'company job updt',0,'company job updt','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1021,'999999','thị trấn Ea Súp, huyện Ea Súp',66,4,4,4,2),(8,136,'loi 500',1,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,0),(9,136,'loi 500 lan nua xem',0,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,0),(10,134,'loi 415 lan nua xem',1,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,0),(11,134,'loi 415 lan nua xem 1',0,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,0),(12,136,'loi 500 lan nua xem',1,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,0);
+INSERT INTO `job` VALUES (1,134,'Java Developer (All Levels) ',0,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,0),(3,134,'Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:',NULL,NULL,'2022-10-10 23:26:04',10,'10000000','14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình',79,8,1,1,0),(4,134,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,0),(5,134,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,1),(6,136,'test tiep ne33',1,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,2),(7,136,'company job updt',0,'company job updt','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1021,'999999','thị trấn Ea Súp, huyện Ea Súp',66,4,4,4,2),(8,136,'loi 500',1,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,0),(9,136,'loi 500 lan nua xem',0,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,0),(10,134,'loi 415 lan nua xem',1,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,0),(11,134,'loi 415 lan nua xem 1',0,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,1),(12,136,'loi 500 lan nua xem',1,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,0);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `language` (
   PRIMARY KEY (`id`),
   KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(36,'Tiếng cc','4 kỹ năng',41),(37,'Tiếng Đức','4 kỹ năng',41),(38,'Tiếng Khóc','4 kỹ năng',41),(39,'Tiếng Lmao','4 kỹ năng',41);
+INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41);
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +414,7 @@ CREATE TABLE `qualification` (
   PRIMARY KEY (`id`),
   KEY `fk_qualification_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_qualification_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +423,7 @@ CREATE TABLE `qualification` (
 
 LOCK TABLES `qualification` WRITE;
 /*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
-INSERT INTO `qualification` VALUES (7,'nene 750',41),(8,'9.0',41);
+INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41);
 /*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +442,7 @@ CREATE TABLE `reference` (
   PRIMARY KEY (`id`),
   KEY `fk_reference_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_reference_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +451,7 @@ CREATE TABLE `reference` (
 
 LOCK TABLES `reference` WRITE;
 /*!40000 ALTER TABLE `reference` DISABLE KEYS */;
-INSERT INTO `reference` VALUES (13,'Facebook','n/a',41),(14,'Youtube','n/a',41),(15,'Instagram','n/a',41);
+INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41);
 /*!40000 ALTER TABLE `reference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +497,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -506,7 +506,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (1,'Java','Master',42),(2,'Java','Master',41),(3,'C#','Beginner',41),(4,'Python','Senior',41),(5,'Spring','Master',41);
+INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +548,7 @@ CREATE TABLE `talent` (
   PRIMARY KEY (`id`),
   KEY `fk_talent_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_talent_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +557,7 @@ CREATE TABLE `talent` (
 
 LOCK TABLES `talent` WRITE;
 /*!40000 ALTER TABLE `talent` DISABLE KEYS */;
-INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42);
+INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41);
 /*!40000 ALTER TABLE `talent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,6 +570,8 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `candidate_id` int DEFAULT NULL,
+  `company_id` int DEFAULT NULL,
   `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `avatar` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -582,8 +584,6 @@ CREATE TABLE `user` (
   `gender` tinyint DEFAULT '0',
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `joined_date` datetime DEFAULT NULL,
-  `candidate_id` int DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_oq7f070s2fgswrf8v0kwou0qd` (`candidate_id`),
   UNIQUE KEY `UK_ggbcixcrmm7q2anlgt4jm9htm` (`company_id`),
@@ -591,7 +591,7 @@ CREATE TABLE `user` (
   KEY `fk_user_employer_idx` (`company_id`),
   CONSTRAINT `fk_user_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -600,7 +600,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02',NULL,NULL),(128,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','avatar uv1','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL,41,NULL),(129,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','avatar uv2','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL,42,NULL),(134,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','avatar comp1','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL,NULL,21),(136,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','deo co','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56',NULL,22),(137,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02',46,NULL);
+INSERT INTO `user` VALUES (4,NULL,NULL,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02'),(128,41,NULL,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','https://res.cloudinary.com/nhn1909/image/upload/v1651837336/v0uuuznv4ncflu3i8itl.webp','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL),(129,42,NULL,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','https://res.cloudinary.com/nhn1909/image/upload/v1651888409/ly3ymky09bwbqhxzuvso.jpg','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL),(134,NULL,21,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','https://res.cloudinary.com/nhn1909/image/upload/v1651908635/jfvfqvmwniucfe28lcez.jpg','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL),(136,NULL,22,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','https://res.cloudinary.com/nhn1909/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56'),(137,46,NULL,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02'),(146,47,NULL,'ungvien4','$2a$10$cpCdGksuwrWmK10b146Q/OGlQwXLpHRK9fskXr0hA/gOWdlTXvxCW','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien4@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:19:36'),(147,48,NULL,'ungvien5','$2a$10$O4zm4ilIF7fkbIOp50T7UOTu6YErOKrFRGEca3xhGdr14IAHDtVEG','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien5@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:19:54'),(148,49,NULL,'ungvien6','$2a$10$aK5UQynWBys.AG94l2tP1.ZjiV2N8d6JVaU8.3GO57jmOJJaYp8Qy','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien6@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:20:05');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-11  0:17:50
+-- Dump completed on 2022-10-13 23:10:21

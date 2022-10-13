@@ -50,7 +50,7 @@ public class CompanyApplyJobController {
                         new RespondObject("Found", "Apply job found", applyJobs));
             else
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Not found", "Apply job not found", applyJobs));
+                        new RespondObject("Not found", "No application from candidate", applyJobs));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new RespondObject("Failed", String.format("Get applying job of job with jobId = %d found", request.getJobId()), new ArrayList<>()));
@@ -79,7 +79,7 @@ public class CompanyApplyJobController {
                         new RespondObject("Found", String.format("Candidate applied to job with id = %d found", jobId), candidateUsers));
             else
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Not found", "Apply job not found", new ArrayList<>()));
+                        new RespondObject("Not found", "No application from candidate", new ArrayList<>()));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new RespondObject("Failed", "jobId", new ArrayList<>()));

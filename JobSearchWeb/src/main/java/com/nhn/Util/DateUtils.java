@@ -25,11 +25,21 @@ public class DateUtils {
         return cal.getTime();
     }
 
-    public static Set<Date> distinctDate(List<Date> dateList) throws ParseException {
-        Set<Date> setDateList = new HashSet<>(dateList);
-        Set<Date> dateListResult = new HashSet<>(dateList);
+    public static List<Date> listRemoveTime(List<Date> dates) {
+        List<Date> dateListResult= new ArrayList<>();
 
-        for (Date date : setDateList) {
+        for (Date date : dates){
+            dateListResult.add(removeTime(date));
+        }
+
+        return dateListResult;
+    }
+
+    public static List<Date> distinctDate(List<Date> dateList) throws ParseException {
+        List<Date> dateListRaw = listRemoveTime(dateList);
+        List<Date> dateListResult = new ArrayList<>();
+
+        for (Date date : dateList) {
             dateListResult.add(DateUtils.removeTime(getDateByMillisecond(date.toString())));
         }
 

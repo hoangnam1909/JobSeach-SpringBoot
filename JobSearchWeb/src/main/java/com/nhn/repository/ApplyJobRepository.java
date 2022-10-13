@@ -15,6 +15,8 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob, Integer> {
 
     List<ApplyJob> findByJobAppliedOrderByCreatedDateDesc(Job job);
 
+    List<ApplyJob> findByJobApplied(Job job);
+
     ApplyJob findApplyJobByJobAppliedAndCandidateUser(Job job, User candidateUser);
 
     List<ApplyJob> findByCandidateUserOrderByCreatedDateDesc(User candidateUser);
