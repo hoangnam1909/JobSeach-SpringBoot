@@ -154,12 +154,20 @@ public class CompanyJobController {
     @GetMapping("/{id}")
     ResponseEntity<RespondObject> getById(@PathVariable String id) {
 
-        Optional<Job> job = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
-        return job.map(value -> ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("Job found", "Job a found with id = " + id, value)
-        )).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                new RespondObject("Processed", "No jobs found", "No data")
-        ));
+        Optional<Job> jobOptional = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
+
+        if (jobOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new RespondObject("Processed", "No job found", "No data"));
+        } else {
+            Job job = jobOptional.get();
+            if (job.isAvailable())
+                return ResponseEntity.status(HttpStatus.FOUND).body(
+                        new RespondObject("Found", "Found job with id = " + id, job));
+            else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Bad Request", String.format("Job with id = %s is unavailable", id), job));
+        }
     }
 
     /*
