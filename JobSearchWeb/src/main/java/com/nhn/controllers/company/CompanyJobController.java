@@ -64,8 +64,8 @@ public class CompanyJobController {
         List<Job> foundJobs = jobRepository.findAll(specification);
 
         return foundJobs.size() > 0 ?
-                ResponseEntity.status(HttpStatus.FOUND).body(
-                        new RespondObject("Found", "Jobs found", foundJobs)
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "Jobs found", foundJobs)
                 ) :
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject("Not found", "No jobs found", new ArrayList<>())
@@ -110,8 +110,8 @@ public class CompanyJobController {
                         new RespondObject("Bad request", "Page number of out range", "Page number = " + page));
             }
 
-            return ResponseEntity.status(HttpStatus.FOUND).body(
-                    new RespondObject("Found", "Jobs found", foundJobs));
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Jobs found", foundJobs));
         } else {
             JobSpecification specification = new JobSpecification();
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
@@ -121,8 +121,8 @@ public class CompanyJobController {
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
             return foundJobs.getContent().size() > 0 ?
-                    ResponseEntity.status(HttpStatus.FOUND).body(
-                            new RespondObject("Found", "Jobs found", foundJobs)
+                    ResponseEntity.status(HttpStatus.OK).body(
+                            new RespondObject("Ok", "Jobs found", foundJobs)
                     ) :
                     ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                             new RespondObject("Not found", "No jobs found", new ArrayList<>())
@@ -162,8 +162,8 @@ public class CompanyJobController {
         } else {
             Job job = jobOptional.get();
             if (job.isAvailable())
-                return ResponseEntity.status(HttpStatus.FOUND).body(
-                        new RespondObject("Found", "Found job with id = " + id, job));
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "Found job with id = " + id, job));
             else
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new RespondObject("Bad Request", String.format("Job with id = %s is unavailable", id), job));

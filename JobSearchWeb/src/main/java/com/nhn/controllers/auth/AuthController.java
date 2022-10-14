@@ -15,6 +15,7 @@ import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -64,6 +66,7 @@ public class AuthController {
                 authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.err.println("logged in");
             } catch (Exception ex) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         loginService.login(loginRequest)
@@ -71,8 +74,7 @@ public class AuthController {
             }
 
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
-            );
+                    new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername())));
         } else {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
@@ -115,7 +117,10 @@ public class AuthController {
         Lấy ra thông tin của user đang đăng nhập
     */
     @GetMapping("/current-user")
-    ResponseEntity<RespondObject> getCurrentUser() {
+    ResponseEntity<RespondObject> getCurrentUser(@RequestHeader(name = "Authorization") String accessToken) {
+
+        System.err.println("accessToken = " + accessToken);
+
         try {
             UserDTO userDTO = userMapper.toDTO(userService.currentUser());
 
@@ -123,7 +128,7 @@ public class AuthController {
                     new RespondObject("Ok", "User logged in", userDTO));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(
-                    new RespondObject("Failed", "User not found", ex));
+                    new RespondObject("Failed", "User not found", ""));
         }
     }
 
