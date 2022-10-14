@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -54,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // hasAuthority for jwt
+
         http
                 .authorizeRequests()
 //                .antMatchers("/authenticated").permitAll()
@@ -64,10 +67,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin").hasAuthority("ADMIN")
 //                .antMatchers("/index").permitAll()
 //                .antMatchers("/assets/**").permitAll()
-                .antMatchers("/admin/**").hasAuthority(Constant.USER_ROLE.ADMIN)
-                .anyRequest().permitAll()
+                .antMatchers("/admin/api/**").hasAuthority(Constant.USER_ROLE.ADMIN)
+                .antMatchers("/candidate/api/**").hasAuthority(Constant.USER_ROLE.CANDIDATE)
+                .antMatchers("/company/api/**").hasAuthority(Constant.USER_ROLE.COMPANY)
+                .antMatchers("/auth/**", "/public/**").permitAll()
+                .anyRequest().authenticated()
 //                .antMatchers("/**").permitAll()
-                .and()
 
 //                .formLogin().permitAll()
 //                .loginPage("/login")
@@ -76,15 +81,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .defaultSuccessUrl("/success")
 //                .failureUrl("/error")
 
-//                .and()
+                .and()
                 .csrf().disable()
                 .exceptionHandling()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;
 
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

@@ -57,22 +57,58 @@ public class AuthController {
     @PostMapping("/authenticated")
     ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication;
+        if (userService.currentUser() == null) {
+            Authentication authentication;
 
-        try {
-            authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            try {
+                authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } catch (Exception ex) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        loginService.login(loginRequest)
+                );
+            }
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    loginService.login(loginRequest)
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
             );
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(new RespondObject("Login failed", "User logged in, please logout and try again", ""));
         }
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername()))
-        );
+    /*
+        Đăng nhập thường
+     */
+    @PostMapping("/login")
+    ResponseEntity<RespondObject> login(@RequestBody @Valid LoginRequest loginRequest) {
+
+        if (userService.currentUser() == null) {
+            Authentication authentication;
+
+            try {
+                authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.err.println("logged in");
+
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(new RespondObject("Ok", "User logged in", authentication.getName()));
+            } catch (Exception ex) {
+                System.err.println("login failed");
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new RespondObject("Login failed", "User login failed", ""));
+            }
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(new RespondObject("Login failed", "User logged in, please logout and try again", ""));
+        }
     }
 
     /*
@@ -120,37 +156,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new RespondObject("Failed", "Error", ex.getMessage())
             );
-        }
-    }
-
-    /*
-        Đăng nhập thường
-     */
-    @PostMapping("/login")
-    ResponseEntity<RespondObject> login(@RequestBody @Valid LoginRequest loginRequest) {
-
-        if (userService.currentUser() == null) {
-            Authentication authentication;
-
-            try {
-                authentication = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                System.err.println("logged in");
-
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(new RespondObject("Ok", "User logged in", authentication.getName()));
-            } catch (Exception ex) {
-                System.err.println("login failed");
-                return ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(new RespondObject("Login failed", "User login failed", ""));
-            }
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body(new RespondObject("Login failed", "User logged in, please logout and try again", ""));
         }
     }
 
