@@ -16,7 +16,20 @@
 							"name": "getAll",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTc1ODcxOSwiaWF0IjoxNjY1NzIyNzE5fQ.I9grCDpUyNUoBrKUiUeGN0zM3KJrXKEJ9cAd6q04nAg",
+										"type": "text",
+										"disabled": true
+									}
+								],
 								"url": {
 									"raw": "{{port-8080}}/admin/api/candidate",
 									"host": [
@@ -50,7 +63,7 @@
 									"variable": [
 										{
 											"key": "candidate-user-id",
-											"value": "128"
+											"value": "146"
 										}
 									]
 								}
@@ -97,23 +110,30 @@
 								"method": "PUT",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"candidateUsername\": \"ungvien1\",\r\n    \"yearsExp\": 10,\r\n    \"linkedin\": \"all properties\",\r\n    \"cv\": \"all properties\",\r\n    \"languageRequests\": [\r\n        {\r\n            \"name\": \"Tieng Viet\",\r\n            \"description\": \"tieng me de\"\r\n        },\r\n        {\r\n            \"name\": \"Tieng Anh\",\r\n            \"description\": \"hoc ngu lam\"\r\n        }\r\n    ],\r\n    \"qualificationRequests\": [\r\n        {\r\n            \"name\": \"Hoc ngu nhat lop\"\r\n        },\r\n        {\r\n            \"name\": \"Hoc ngu cap huyen\"\r\n        },\r\n        {\r\n            \"name\": \"Hoc ngu cap tinh\"\r\n        }\r\n    ],\r\n    \"referenceRequests\": [\r\n        {\r\n            \"name\": \"Facebook\",\r\n            \"link\": \"fb.com/huhu\"\r\n        },\r\n        {\r\n            \"name\": \"Instagram\",\r\n            \"link\": \"ig.com/huhu\"\r\n        }\r\n    ],\r\n    \"skillRequests\": [\r\n        {\r\n            \"name\": \"Dev óp\",\r\n            \"level\": \"Mát tờ\"\r\n        },\r\n        {\r\n            \"name\": \"Tét tơ\",\r\n            \"level\": \"rớt môn\"\r\n        }\r\n    ],\r\n    \"talentRequests\": [\r\n        {\r\n            \"content\": \"Xiếc\"\r\n        },\r\n        {\r\n            \"content\": \"Hát\"\r\n        },\r\n        {\r\n            \"content\": \"Học ngu\"\r\n        }\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user",
+											"value": "{\n    \"candidateUsername\": \"ungvien4\",\n    \"yearsExp\": 10,\n    \"linkedin\": \"ungvien4 link\",\n    \"languageRequests\": [\n        {\n            \"name\": \"Tieng Viet\",\n            \"description\": \"tieng me de\"\n        },\n        {\n            \"name\": \"Tieng Anh\",\n            \"description\": \"hoc ngu lam\"\n        }\n    ],\n    \"qualificationRequests\": [\n        {\n            \"name\": \"Hoc ngu nhat lop\"\n        },\n        {\n            \"name\": \"Hoc ngu cap huyen\"\n        },\n        {\n            \"name\": \"Hoc ngu cap tinh\"\n        }\n    ],\n    \"referenceRequests\": [\n        {\n            \"name\": \"Facebook\",\n            \"link\": \"fb.com/huhu\"\n        },\n        {\n            \"name\": \"Instagram\",\n            \"link\": \"ig.com/huhu\"\n        }\n    ],\n    \"skillRequests\": [\n        {\n            \"name\": \"Dev óp\",\n            \"level\": \"Mát tờ\"\n        },\n        {\n            \"name\": \"Tét tơ\",\n            \"level\": \"rớt môn\"\n        }\n    ],\n    \"talentRequests\": [\n        {\n            \"content\": \"Xiếc\"\n        },\n        {\n            \"content\": \"Hát\"\n        },\n        {\n            \"content\": \"Học ngu\"\n        }\n    ]\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/nguye/OneDrive/Pictures/1024x1024.jpg"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{port-8080}}/candidate/api/update",
+									"raw": "{{port-8080}}/candidate/api/update-candidate-info",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
 										"candidate",
 										"api",
-										"update"
+										"update-candidate-info"
 									]
 								}
 							},
@@ -187,6 +207,17 @@
 					"item": [
 						{
 							"name": "get",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -706,6 +737,38 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "stat",
+					"item": [
+						{
+							"name": "stat",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/company/api/stat/job-applied/:job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"stat",
+										"job-applied",
+										":job-id"
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -725,19 +788,19 @@
 									"formdata": [
 										{
 											"key": "user",
-											"value": "{\n    \"fullName\": \"update img1\",\n    \"email\": \"update1 email\",\n    \"phone\": \"update1 phone\",\n    \"dob\": \"957978000000\",\n    \"gender\": \"true\",\n    \"address\": \"update img1\"\n}",
+											"value": "{\n    \"username\": \"ungvien4\",\n    \"fullName\": \"ungvien4 fullnameU\",\n    \"email\": \"ungvien4 emailU\",\n    \"phone\": \"ungvien4 phoneU\",\n    \"dob\": \"999978000000\",\n    \"gender\": \"true\",\n    \"address\": \"ungvien4 img1U\"\n}",
 											"contentType": "application/json",
 											"type": "text"
 										},
 										{
 											"key": "file",
 											"type": "file",
-											"src": []
+											"src": "/F:/Meme/121589640_1141472859582081_1513285303663997621_n.jpg"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{port-8080}}/authed/api/user/:username",
+									"raw": "{{port-8080}}/authed/api/user/update-user-info",
 									"host": [
 										"{{port-8080}}"
 									],
@@ -745,13 +808,7 @@
 										"authed",
 										"api",
 										"user",
-										":username"
-									],
-									"variable": [
-										{
-											"key": "username",
-											"value": "ungvien3"
-										}
+										"update-user-info"
 									]
 								}
 							},
@@ -805,7 +862,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien8\",\r\n    \"password\": \"ungvien8\",\r\n    \"email\": \"ungvien8@gmail.com\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
+							"raw": "{\r\n    \"username\": \"ungvien6\",\r\n    \"password\": \"ungvien6\",\r\n    \"email\": \"ungvien6@gmail.com\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
