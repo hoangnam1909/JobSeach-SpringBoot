@@ -1,5 +1,6 @@
 package com.nhn.controllers.company;
 
+import com.nhn.Util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
@@ -24,6 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +49,50 @@ public class CompanyJobController {
     @Autowired
     private SpecificationConverter specificationConverter;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private HttpServletRequest servletRequest;
+
+    /*
+        Nhà tuyển dụng lấy ra tin tuyển dụng theo id
+    */
+    @GetMapping("/{id}")
+    ResponseEntity<RespondObject> getById(@PathVariable String id) {
+
+        Optional<Job> jobOptional = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
+
+        if (jobOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new RespondObject("Processed", "No job found", "No data"));
+        } else {
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String companyUsername = jwtUtils.extractUsername(accessToken);
+            User companyUser = userRepository.findUserByUsername(companyUsername);
+
+            Job job = jobOptional.get();
+            if (job.isAvailable()) {
+                if (companyUser != null && companyUser.getId() == job.getCompanyUser().getId())
+                    return ResponseEntity.status(HttpStatus.OK).body(
+                            new RespondObject("Ok", "Found job with id = " + id, job));
+                else
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+                            new RespondObject("Forbidden", String.format("Job with id = %s is not yours", id), null));
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Bad Request", String.format("Job with id = %s is unavailable", id), job));
+        }
+    }
+
     /*
         Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng
     */
-    @GetMapping("/get-list/{company-username}")
-    ResponseEntity<RespondObject> getAllList(@PathVariable(name = "company-username") String companyUsername) throws Exception {
+    @GetMapping("/get-list")
+    ResponseEntity<RespondObject> getAllList() throws Exception {
+
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
@@ -75,11 +116,13 @@ public class CompanyJobController {
     /*
         Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng có phân trang và các điều kiện kèm theo
     */
-    @PostMapping("/get/{company-username}")
+    @PostMapping("/get")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
-                                         @PathVariable(name = "company-username") String companyUsername,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
+
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
@@ -114,6 +157,7 @@ public class CompanyJobController {
                     new RespondObject("Ok", "Jobs found", foundJobs));
         } else {
             JobSpecification specification = new JobSpecification();
+            specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
             Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
@@ -133,8 +177,11 @@ public class CompanyJobController {
     /*
         Nhà tuyển dụng đếm số tin tuyển dụng hiện khả dụng
     */
-    @GetMapping("/count/{company-username}")
-    ResponseEntity<RespondObject> count(@PathVariable(name = "company-username") String companyUsername) throws Exception {
+    @GetMapping("/count")
+    ResponseEntity<RespondObject> count() throws Exception {
+
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
 
         User companyUser = userRepository.findUserByUsername(companyUsername);
         if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
@@ -149,35 +196,16 @@ public class CompanyJobController {
     }
 
     /*
-        Nhà tuyển dụng lấy ra tin tuyển dụng
-    */
-    @GetMapping("/{id}")
-    ResponseEntity<RespondObject> getById(@PathVariable String id) {
-
-        Optional<Job> jobOptional = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
-
-        if (jobOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new RespondObject("Processed", "No job found", "No data"));
-        } else {
-            Job job = jobOptional.get();
-            if (job.isAvailable())
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Found job with id = " + id, job));
-            else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Bad Request", String.format("Job with id = %s is unavailable", id), job));
-        }
-    }
-
-    /*
         Nhà tuyển dụng thêm tin tuyển dụng
     */
     @PostMapping("/insert")
-    ResponseEntity<RespondObject> insert(@RequestBody @Valid CreateJobRequest request) {
+    ResponseEntity<RespondObject> insert(@RequestBody CreateJobRequest request) {
 
         try {
-            Job job = jobService.add(request);
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String companyUsername = jwtUtils.extractUsername(accessToken);
+
+            Job job = jobService.add(companyUsername, request);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Job saved", job));
         } catch (Exception ex) {
@@ -194,8 +222,18 @@ public class CompanyJobController {
     ResponseEntity<RespondObject> update(@RequestBody @Valid JobUpdateRequest request) {
 
         try {
-            Job job = jobService.update(request);
-            return job != null ?
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String companyUsername = jwtUtils.extractUsername(accessToken);
+            User companyUser = userRepository.findUserByUsername(companyUsername);
+
+            Optional<Job> job = jobRepository.findById(request.getId());
+
+            if (job.get().getCompanyUser().getId() != companyUser.getId())
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+                        new RespondObject("Forbidden", String.format("Job with id = %s is not yours", request.getId()), null));
+
+            Job jobUpdated = jobService.update(request);
+            return jobUpdated != null ?
                     ResponseEntity.status(HttpStatus.OK).body(
                             new RespondObject("Ok", "Job updated", job)
                     ) :
@@ -214,8 +252,18 @@ public class CompanyJobController {
     */
     @DeleteMapping("/delete")
     ResponseEntity<RespondObject> delete(@RequestBody @Valid CompanyJobRequest request) {
-        boolean deleteCheck = jobService.delete(request.getJobId());
 
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+
+        Optional<Job> job = jobRepository.findById(request.getJobId());
+
+        if (job.get().getCompanyUser().getId() != companyUser.getId())
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+                    new RespondObject("Forbidden", String.format("Job with id = %s is not yours", request.getJobId()), null));
+
+        boolean deleteCheck = jobService.delete(request.getJobId());
         if (deleteCheck)
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Job deleted", ""));

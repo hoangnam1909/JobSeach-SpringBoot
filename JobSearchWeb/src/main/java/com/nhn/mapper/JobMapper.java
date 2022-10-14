@@ -52,8 +52,8 @@ public class JobMapper {
         Optional<JobType> jobType = jobTypeRepository.findById(req.getJobTypeId());
         jobType.ifPresent(job::setJobType);
 
-        Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
-        userCompany.ifPresent(job::setCompanyUser);
+//        Optional<User> userCompany = Optional.ofNullable(userRepository.findOneByUsernameEqualsIgnoreCase(req.getCompanyUsername()));
+//        userCompany.ifPresent(job::setCompanyUser);
 
         job.setSalary(req.getSalary());
 

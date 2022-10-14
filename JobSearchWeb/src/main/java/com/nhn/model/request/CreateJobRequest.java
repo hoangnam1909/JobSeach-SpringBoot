@@ -14,8 +14,8 @@ import java.util.Set;
 @Data
 public class CreateJobRequest {
 
-    @CompanyUsername
-    private String companyUsername;
+//    @CompanyUsername
+//    private String companyUsername;
     private String title;
     private String description;
     private Date jobStartDate;

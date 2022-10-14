@@ -8,10 +8,7 @@ import com.nhn.mapper.JobMapper;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
 import com.nhn.model.request.RequirementRequest;
-import com.nhn.repository.CompanyIndustryRepository;
-import com.nhn.repository.JobRepository;
-import com.nhn.repository.JobTagRepository;
-import com.nhn.repository.RequirementRepository;
+import com.nhn.repository.*;
 import com.nhn.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +29,9 @@ public class JobServiceImpl implements JobService {
     private JobRepository jobRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private JobTagRepository jobTagRepository;
 
     @Autowired
@@ -39,9 +39,11 @@ public class JobServiceImpl implements JobService {
 
     @Override
     @Transactional
-    public Job add(CreateJobRequest request) {
+    public Job add(String companyUsername, CreateJobRequest request) {
         try {
             Job job = jobMapper.toEntity(request);
+            job.setCompanyUser(userRepository.findUserByUsername(companyUsername));
+
             Job jobSaved = jobRepository.save(job);
             jobRepository.flush();
 

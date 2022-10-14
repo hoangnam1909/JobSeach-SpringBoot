@@ -84,19 +84,19 @@ public class TestAPI {
                 new RespondObject("Ok", "Testing valid request", request));
     }
 
-    @PostMapping("/insert-job")
-    ResponseEntity<RespondObject> insert(@RequestBody CreateJobRequest request) {
-
-        try {
-            Job job = jobService.add(request);
-
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Job saved", job));
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    new RespondObject("Fail", "Save failed", ex.getMessage())
-            );
-        }
-    }
+//    @PostMapping("/insert-job")
+//    ResponseEntity<RespondObject> insert(@RequestBody CreateJobRequest request) {
+//
+//        try {
+//            Job job = jobService.add(request);
+//
+//            return ResponseEntity.status(HttpStatus.OK).body(
+//                    new RespondObject("Ok", "Job saved", job));
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+//                    new RespondObject("Fail", "Save failed", ex.getMessage())
+//            );
+//        }
+//    }
 
 }

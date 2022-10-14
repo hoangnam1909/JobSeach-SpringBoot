@@ -84,11 +84,13 @@ public class AuthController {
                 accessTokenMap.put("role", user.getRole());
                 accessTokenMap.put("accessToken", jwtUtils.generateToken(loginRequest.getUsername(), user.getRole()));
 
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "User logged in", accessTokenMap));
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(new RespondObject("Ok", "User logged in", accessTokenMap));
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
-                        new RespondObject("Bad request", "User login failed", null));
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(new RespondObject("Bad request", "User login failed", null));
             }
         } else {
             return ResponseEntity

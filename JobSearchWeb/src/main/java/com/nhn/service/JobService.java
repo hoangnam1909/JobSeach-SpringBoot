@@ -6,7 +6,7 @@ import com.nhn.model.request.JobUpdateRequest;
 
 public interface JobService {
 
-    Job add(CreateJobRequest request);
+    Job add(String companyUsername, CreateJobRequest request);
 
     Job update(JobUpdateRequest request);
 
