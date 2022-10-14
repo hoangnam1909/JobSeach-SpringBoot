@@ -57,10 +57,13 @@ public class AuthController {
     @PostMapping("/authenticated")
     ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) {
 
+        Authentication authentication;
+
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-            );
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     loginService.login(loginRequest)
