@@ -70,7 +70,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,0,NULL,NULL),(48,0,NULL,NULL),(49,0,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,10,'ungvien4 link','https://res.cloudinary.com/nhn1909/image/upload/v1665760711/jcbieum3pg4dykcmeuvh.jpg'),(48,0,NULL,NULL),(49,0,NULL,NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (21,'BMW Group',10000,'company updt1','company updt1','company updt1','company updt1','company updt1',0,'company updt1','company updt1'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,'AUDI AG',NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!',0,'Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','http://www.audi.com');
+INSERT INTO `company` VALUES (21,'BMW Group Update',10000,'company updt1','company updt1','company updt1','company updt1','company updt1',0,'company updt1','company updt1'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,'AUDI AG',NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!',0,'Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','http://www.audi.com');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `company_industry` (
   KEY `fk_comind_ind_idx` (`industry_id`),
   CONSTRAINT `fk_comind_com` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   CONSTRAINT `fk_comind_ind` FOREIGN KEY (`industry_id`) REFERENCES `industry` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `company_industry` (
 
 LOCK TABLES `company_industry` WRITE;
 /*!40000 ALTER TABLE `company_industry` DISABLE KEYS */;
-INSERT INTO `company_industry` VALUES (7,22,15),(10,21,18),(11,21,15);
+INSERT INTO `company_industry` VALUES (7,22,15),(12,21,18),(13,21,15);
 /*!40000 ALTER TABLE `company_industry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `language` (
   PRIMARY KEY (`id`),
   KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41);
+INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41),(50,'Tieng Viet','tieng me de',47),(51,'Tieng Anh','hoc ngu lam',47);
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +414,7 @@ CREATE TABLE `qualification` (
   PRIMARY KEY (`id`),
   KEY `fk_qualification_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_qualification_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +423,7 @@ CREATE TABLE `qualification` (
 
 LOCK TABLES `qualification` WRITE;
 /*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
-INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41);
+INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41),(21,'Hoc ngu nhat lop',47),(22,'Hoc ngu cap huyen',47),(23,'Hoc ngu cap tinh',47);
 /*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +442,7 @@ CREATE TABLE `reference` (
   PRIMARY KEY (`id`),
   KEY `fk_reference_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_reference_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +451,7 @@ CREATE TABLE `reference` (
 
 LOCK TABLES `reference` WRITE;
 /*!40000 ALTER TABLE `reference` DISABLE KEYS */;
-INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41);
+INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41),(24,'Facebook','fb.com/huhu',47),(25,'Instagram','ig.com/huhu',47);
 /*!40000 ALTER TABLE `reference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +497,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -506,7 +506,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41);
+INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41),(14,'Dev óp','Mát tờ',47),(15,'Tét tơ','rớt môn',47);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +548,7 @@ CREATE TABLE `talent` (
   PRIMARY KEY (`id`),
   KEY `fk_talent_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_talent_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +557,7 @@ CREATE TABLE `talent` (
 
 LOCK TABLES `talent` WRITE;
 /*!40000 ALTER TABLE `talent` DISABLE KEYS */;
-INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41);
+INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41),(16,'Xiếc',47),(17,'Hát',47),(18,'Học ngu',47);
 /*!40000 ALTER TABLE `talent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +600,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,NULL,NULL,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02'),(128,41,NULL,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','https://res.cloudinary.com/nhn1909/image/upload/v1651837336/v0uuuznv4ncflu3i8itl.webp','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL),(129,42,NULL,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','https://res.cloudinary.com/nhn1909/image/upload/v1651888409/ly3ymky09bwbqhxzuvso.jpg','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL),(134,NULL,21,'company1','$2a$12$yRMyqmkqVqM6w.y.q3Cjfur04XTX.mbfBFc44jYu1.LiC0WcFTfAe','https://res.cloudinary.com/nhn1909/image/upload/v1651908635/jfvfqvmwniucfe28lcez.jpg','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL),(136,NULL,22,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','https://res.cloudinary.com/nhn1909/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56'),(137,46,NULL,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02'),(146,47,NULL,'ungvien4','$2a$10$cpCdGksuwrWmK10b146Q/OGlQwXLpHRK9fskXr0hA/gOWdlTXvxCW','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien4@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:19:36'),(147,48,NULL,'ungvien5','$2a$10$O4zm4ilIF7fkbIOp50T7UOTu6YErOKrFRGEca3xhGdr14IAHDtVEG','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien5@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:19:54'),(148,49,NULL,'ungvien6','$2a$10$aK5UQynWBys.AG94l2tP1.ZjiV2N8d6JVaU8.3GO57jmOJJaYp8Qy','https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg','CANDIDATE',1,NULL,'ungvien6@gmail.com',NULL,NULL,0,NULL,'2022-10-13 22:20:05');
+INSERT INTO `user` VALUES (4,NULL,NULL,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02'),(128,41,NULL,'ungvien1','$2a$12$SnrpM8T0.RaIV26UtpVbdud2cnPPiFPxudUwSA6/ewaTTwrkKk4eW','https://res.cloudinary.com/nhn1909/image/upload/v1651837336/v0uuuznv4ncflu3i8itl.webp','CANDIDATE',1,'ungvien1','nguyenhoangn023@gmail.com',NULL,NULL,1,NULL,NULL),(129,42,NULL,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','https://res.cloudinary.com/nhn1909/image/upload/v1651888409/ly3ymky09bwbqhxzuvso.jpg','CANDIDATE',0,'ungvien2','ungvien2@gmail.com',NULL,NULL,0,NULL,NULL),(134,NULL,21,'bmw','$2a$10$mVM7SYjwyP1.Ay/w11gOX.SzAQDsb3uwaAQVZ39kZMBSzqfAOq.nq','https://res.cloudinary.com/nhn1909/image/upload/v1651908635/jfvfqvmwniucfe28lcez.jpg','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL),(136,NULL,22,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','https://res.cloudinary.com/nhn1909/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56'),(137,46,NULL,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02'),(146,47,NULL,'ungvien4','$2a$10$cpCdGksuwrWmK10b146Q/OGlQwXLpHRK9fskXr0hA/gOWdlTXvxCW','https://res.cloudinary.com/nhn1909/image/upload/v1665681659/wxrl9km2jzflyn2gtivl.jpg','CANDIDATE',1,'ungvien4 fullnameU','ungvien4 emailU','ungvien4 phoneU','2001-09-09',1,'ungvien4 img1U','2022-10-13 22:19:36'),(147,48,NULL,'ungvien5','$2a$10$O4zm4ilIF7fkbIOp50T7UOTu6YErOKrFRGEca3xhGdr14IAHDtVEG','https://res.cloudinary.com/nhn1909/image/upload/v1665764409/vx019dcu1vchcmlybz2p.jpg','CANDIDATE',1,'ungvien5 check fullnameU','ungvien5@gmail.com','01122667788','2001-09-01',1,'ungvien5qq img1U','2022-10-13 22:19:54'),(148,49,NULL,'ungvien6','$2a$10$aK5UQynWBys.AG94l2tP1.ZjiV2N8d6JVaU8.3GO57jmOJJaYp8Qy','https://res.cloudinary.com/nhn1909/image/upload/v1665763667/llvt6gz7iojeaovonrcb.jpg','CANDIDATE',1,'ungvien6 check fullnameU','ungvien6@gmail.com','01122334455','2001-09-09',1,'ungvien6qq img1U','2022-10-13 22:20:05');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-13 23:10:21
+-- Dump completed on 2022-10-14 23:58:43
