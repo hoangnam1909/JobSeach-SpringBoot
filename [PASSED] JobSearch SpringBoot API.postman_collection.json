@@ -158,6 +158,48 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "job",
+					"item": [
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/job/:job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"job",
+										":job-id"
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -496,9 +538,20 @@
 									"name": "getAllList",
 									"request": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/job/get-list/:company-username",
+											"raw": "{{port-8080}}/company/api/job/get-list",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -506,14 +559,7 @@
 												"company",
 												"api",
 												"job",
-												"get-list",
-												":company-username"
-											],
-											"variable": [
-												{
-													"key": "company-username",
-													"value": "audi"
-												}
+												"get-list"
 											]
 										}
 									},
@@ -523,9 +569,20 @@
 									"name": "countJobs",
 									"request": {
 										"method": "GET",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/job/count/:company-username",
+											"raw": "{{port-8080}}/company/api/job/count",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -533,27 +590,31 @@
 												"company",
 												"api",
 												"job",
-												"count",
-												":company-username"
-											],
-											"variable": [
-												{
-													"key": "company-username",
-													"value": "company1"
-												}
+												"count"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "get",
+									"name": "getByCondition",
 									"request": {
 										"method": "POST",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
-											"raw": "{}",
+											"raw": "{\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -561,7 +622,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{port-8080}}/company/api/job/get/:company-username",
+											"raw": "{{port-8080}}/company/api/job/get",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -569,8 +630,7 @@
 												"company",
 												"api",
 												"job",
-												"get",
-												":company-username"
+												"get"
 											],
 											"query": [
 												{
@@ -580,14 +640,8 @@
 												},
 												{
 													"key": "size",
-													"value": "59",
+													"value": "4",
 													"disabled": true
-												}
-											],
-											"variable": [
-												{
-													"key": "company-username",
-													"value": "audi"
 												}
 											]
 										}
@@ -598,10 +652,21 @@
 									"name": "insert",
 									"request": {
 										"method": "POST",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"companyUsername\": \"company1\",\r\n    \"title\": \"job fixing done1\",\r\n    \"description\": \"loi 500\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"update address\",\r\n    \"provinceId\": \"17\",\r\n    \"noOfVacancies\": \"1909\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"7\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"12000000\",\r\n    \"tagsId\": [\r\n        5,\r\n        6,\r\n        7,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"req done1\"\r\n        },\r\n        {\r\n            \"content\": \"req done1\"\r\n        }\r\n    ]\r\n}",
+											"raw": "{\r\n    \"title\": \"Sale BMW\",\r\n    \"description\": \"Bán xe BMW Q7\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"Quận 7\",\r\n    \"provinceId\": \"79\",\r\n    \"noOfVacancies\": \"100\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"7\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"42000000\",\r\n    \"tagsId\": [\r\n        7,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Biết về xe Audi Q Series\"\r\n        },\r\n        {\r\n            \"content\": \"Am hiểu về lịch sử của BMW\"\r\n        }\r\n    ]\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -627,10 +692,21 @@
 									"name": "update",
 									"request": {
 										"method": "PUT",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id\": 3,\r\n    \"title\": \"Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)\",\r\n    \"description\": \"Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình\",\r\n    \"provinceId\": \"79\",\r\n    \"noOfVacancies\": \"10\",\r\n    \"positionId\": \"8\",\r\n    \"jobCategoryId\": \"1\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"10000000\",\r\n    \"tagsId\": [\r\n        4,6,12,13,1\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Chăm sóc Khách hàng\"\r\n        },\r\n        {\r\n            \"content\": \"Tư vấn làm hồ sơ vay tín chấp cho khách hàng, không cần thu hồi nợ\"\r\n        },\r\n        {\r\n            \"content\": \"Data khách hàng đăng ký vay có sẵn\"\r\n        },\r\n        {\r\n            \"content\": \"Tiếp nhận, hoàn thành hồ sơ vay, hướng dẫn thủ tục giải ngân cho khách hàng\"\r\n        },\r\n        {\r\n            \"content\": \"update\"\r\n        }\r\n    ]\r\n}",
+											"raw": "{\r\n    \"id\": 5,\r\n    \"title\": \"Nhân Viên Digital Marketing Thu Nhập Upto 20 Triệu\",\r\n    \"description\": \"Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"\",\r\n    \"provinceId\": \"79\",\r\n    \"noOfVacancies\": \"40\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"27\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"20000000\",\r\n    \"tagsId\": [\r\n        4,6,2,1\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Nghiên cứu nhu cầu của các đối tượng khách hàng để xây dựng kế hoạch marketing phù hợp.\"\r\n        },\r\n        {\r\n            \"content\": \"Quản trị nội dung và các hoạt động trên website\"\r\n        },\r\n        {\r\n            \"content\": \"Triển khai các chiến lược đã được phê duyệt\"\r\n        },\r\n        {\r\n            \"content\": \"Thống kê, đo lường và báo cáo kết quả đạt được được các chiến lược đã triển khai\"\r\n        },\r\n        {\r\n            \"content\": \"Phối hợp với các phòng ban liên quan để đảm bảo tiến độ công việc\"\r\n        }\r\n        ,\r\n        {\r\n            \"content\": \"Req Update\"\r\n        }\r\n    ]\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -653,21 +729,23 @@
 									"response": []
 								},
 								{
-									"name": "update",
+									"name": "delete",
 									"request": {
 										"method": "DELETE",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"jobId\": 1000,\r\n    \"companyUsername\": \"concac\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
 											}
-										},
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/job/delete",
+											"raw": "{{port-8080}}/company/api/job/delete/:job-id",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -675,7 +753,14 @@
 												"company",
 												"api",
 												"job",
-												"delete"
+												"delete",
+												":job-id"
+											],
+											"variable": [
+												{
+													"key": "job-id",
+													"value": ""
+												}
 											]
 										}
 									},
@@ -688,42 +773,22 @@
 							"item": [
 								{
 									"name": "getApplyJob",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
 									"request": {
 										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"jobId\": 6,\r\n    \"companyUsername\": \"audi\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
 											}
-										},
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"company",
-												"api",
-												"apply-job"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "getCandidatesApplyJob",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/:job-id/candidates",
+											"raw": "{{port-8080}}/company/api/apply-job/job/:job-id",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -731,13 +796,52 @@
 												"company",
 												"api",
 												"apply-job",
+												"job",
+												":job-id"
+											],
+											"variable": [
+												{
+													"key": "job-id",
+													"value": "12"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getCandidates",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/company/api/apply-job/job/:job-id/candidates",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"company",
+												"api",
+												"apply-job",
+												"job",
 												":job-id",
 												"candidates"
 											],
 											"variable": [
 												{
 													"key": "job-id",
-													"value": "6"
+													"value": "5"
 												}
 											]
 										}
@@ -748,18 +852,20 @@
 									"name": "approve",
 									"request": {
 										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 11,\r\n    \"companyUsername\": \"audi\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
 											}
-										},
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/approve",
+											"raw": "{{port-8080}}/company/api/apply-job/approve/:apply-job-id",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -767,28 +873,37 @@
 												"company",
 												"api",
 												"apply-job",
-												"approve"
+												"approve",
+												":apply-job-id"
+											],
+											"variable": [
+												{
+													"key": "apply-job-id",
+													"value": "18"
+												}
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "cancel",
+									"name": "block",
 									"request": {
 										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{bmwToken}}",
+												"type": "text"
 											}
-										},
+										],
 										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/cancel",
+											"raw": "{{port-8080}}/company/api/apply-job/block/:apply-job-id",
 											"host": [
 												"{{port-8080}}"
 											],
@@ -796,36 +911,14 @@
 												"company",
 												"api",
 												"apply-job",
-												"cancel"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"applyJobId\": 7,\r\n    \"companyUsername\": \"company1\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{port-8080}}/company/api/apply-job/delete",
-											"host": [
-												"{{port-8080}}"
+												"block",
+												":apply-job-id"
 											],
-											"path": [
-												"company",
-												"api",
-												"apply-job",
-												"delete"
+											"variable": [
+												{
+													"key": "apply-job-id",
+													"value": "18"
+												}
 											]
 										}
 									},
@@ -860,6 +953,41 @@
 											"key": "job-id",
 											"value": "5"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{bmwToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/company/api/comment",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"comment"
 									]
 								}
 							},
@@ -996,7 +1124,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien5\",\r\n    \"password\": \"ungvien5\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1121,31 +1249,31 @@
 			]
 		},
 		{
-			"name": "public (IP)",
+			"name": "public",
 			"item": [
 				{
 					"name": "comment",
 					"item": [
 						{
-							"name": "get",
+							"name": "getByCompanyId",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{port-8080}}/public/api/:company-user-id/comment",
+									"raw": "{{port-8080}}/public/api/comment/:company-id",
 									"host": [
 										"{{port-8080}}"
 									],
 									"path": [
 										"public",
 										"api",
-										":company-user-id",
-										"comment"
+										"comment",
+										":company-id"
 									],
 									"variable": [
 										{
-											"key": "company-user-id",
-											"value": "136"
+											"key": "company-id",
+											"value": "21"
 										}
 									]
 								}
@@ -1158,7 +1286,7 @@
 					"name": "company",
 					"item": [
 						{
-							"name": "get",
+							"name": "getDetail",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1189,83 +1317,112 @@
 					"name": "job",
 					"item": [
 						{
-							"name": "getList",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/public/api/job/get-list",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"public",
-										"api",
-										"job",
-										"get-list"
-									]
+							"name": "self",
+							"item": [
+								{
+									"name": "getList",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/job/get-list",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"job",
+												"get-list"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
+						},
+						{
+							"name": "add-on",
+							"item": [
+								{
+									"name": "getJobCategories",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/job-category",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"job-category"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getJobTypes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/job-type",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"job-type"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getJobPositions",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/job-position",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"job-position"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getProvinces",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/province",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"province"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
-				},
-				{
-					"name": "getJobCategory",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{port-8080}}/public/api/job-category",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"public",
-								"api",
-								"job-category"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getJobType",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{port-8080}}/public/api/job-type",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"public",
-								"api",
-								"job-type"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getJobPosition",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{port-8080}}/public/api/job-position",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"public",
-								"api",
-								"job-position"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}

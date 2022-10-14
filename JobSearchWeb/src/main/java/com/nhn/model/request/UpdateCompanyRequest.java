@@ -14,15 +14,26 @@ import java.util.Set;
 public class UpdateCompanyRequest {
 
     private String companyName;
+
     private int companySize;
+
     private String contactName;
+
     private String contactTel;
+
     private String contactEmail;
+
     private String contactAddress;
+
     private String introduction;
+
     private int foundedYear;
+
     private String headquarters;
+
     private String link;
+
     private Set<Integer> industryId;
+
 
 }

@@ -1,13 +1,12 @@
-package com.nhn.controllers.pub;
+package com.nhn.controllers.company;
 
+import com.nhn.Util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
 import com.nhn.entity.User;
 import com.nhn.repository.CommentRepository;
 import com.nhn.repository.UserRepository;
-import com.nhn.valid.CompanyUserId;
-import com.nhn.valid.CompanyUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,13 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/public/api/{company-user-id}/comment")
-public class CommentController {
+@RequestMapping(path = "/company/api/comment")
+public class CompanyCommentController {
 
     @Autowired
     private CommentRepository commentRepository;
@@ -31,17 +29,25 @@ public class CommentController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private HttpServletRequest servletRequest;
+
     @GetMapping("")
-    ResponseEntity<RespondObject> getAll(@PathVariable(name = "company-user-id") Integer companyUserId,
-                                         @RequestParam(name = "page", defaultValue = "1") String page,
+    ResponseEntity<RespondObject> getAll(@RequestParam(name = "page", defaultValue = "1") String page,
                                          @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
 
-        Optional<User> companyUser = userRepository.findById(companyUserId);
-        if (companyUser.isEmpty() || !companyUser.get().getRole().equals(Constant.USER_ROLE.COMPANY))
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
+
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
             throw new Exception("Could not find company user with user = 'Company username'");
 
         Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
-        Page<Comment> comments = commentRepository.findAllByCompany(companyUser.get().getCompany(), paging);
+        Page<Comment> comments = commentRepository.findAllByCompany(companyUser.getCompany(), paging);
 
         return comments.getTotalElements() != 0 ?
                 ResponseEntity.status(HttpStatus.OK).body(

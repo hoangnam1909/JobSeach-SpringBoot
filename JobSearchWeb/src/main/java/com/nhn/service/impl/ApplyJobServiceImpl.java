@@ -17,12 +17,27 @@ public class ApplyJobServiceImpl implements ApplyJobService {
     private ApplyJobRepository applyJobRepository;
 
     @Override
-    public boolean approve(CompanyActionApplyJobRequest request) {
-        Optional<ApplyJob> applyJob = applyJobRepository.findById(request.getApplyJobId());
+    public boolean approve(int applyJobId) {
+        Optional<ApplyJob> applyJob = applyJobRepository.findById(applyJobId);
 
         if (applyJob.isPresent()){
             ApplyJob applyJobApproved = applyJob.get();
             applyJobApproved.setStatus(Constant.APPLYING_STATUS.APPROVED);
+            applyJobRepository.save(applyJobApproved);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean block(int applyJobId) {
+        Optional<ApplyJob> applyJob = applyJobRepository.findById(applyJobId);
+
+        if (applyJob.isPresent()){
+            ApplyJob applyJobApproved = applyJob.get();
+            applyJobApproved.setStatus(Constant.APPLYING_STATUS.BLOCKED);
             applyJobRepository.save(applyJobApproved);
 
             return true;
@@ -38,21 +53,6 @@ public class ApplyJobServiceImpl implements ApplyJobService {
         if (applyJob.isPresent()){
             ApplyJob applyJobApproved = applyJob.get();
             applyJobApproved.setStatus(Constant.APPLYING_STATUS.CANCELLED);
-            applyJobRepository.save(applyJobApproved);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean block(CompanyActionApplyJobRequest request) {
-        Optional<ApplyJob> applyJob = applyJobRepository.findById(request.getApplyJobId());
-
-        if (applyJob.isPresent()){
-            ApplyJob applyJobApproved = applyJob.get();
-            applyJobApproved.setStatus(Constant.APPLYING_STATUS.BLOCKED);
             applyJobRepository.save(applyJobApproved);
 
             return true;

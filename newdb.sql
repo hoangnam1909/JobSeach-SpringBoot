@@ -44,7 +44,7 @@ CREATE TABLE `apply_job` (
 
 LOCK TABLES `apply_job` WRITE;
 /*!40000 ALTER TABLE `apply_job` DISABLE KEYS */;
-INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','APPROVED'),(9,7,129,'2022-05-02 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','APPROVED'),(12,7,128,'2022-05-05 13:19:02','CANCELLED'),(14,11,129,'2022-09-19 01:01:35','PENDING'),(15,6,128,'2022-10-12 10:45:18','BLOCKED'),(17,11,137,'2022-10-12 11:30:22','PENDING'),(18,5,128,'2022-05-15 13:19:02','PENDING'),(19,5,137,'2022-09-19 19:29:12','PENDING'),(20,5,146,'2022-05-05 03:09:43','PENDING'),(21,5,147,'2022-09-19 12:09:02','PENDING'),(22,5,148,'2022-09-19 13:19:02','PENDING');
+INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','APPROVED'),(9,12,129,'2022-05-02 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','APPROVED'),(12,12,128,'2022-05-05 13:19:02','CANCELLED'),(14,11,129,'2022-09-19 01:01:35','PENDING'),(15,6,128,'2022-10-12 10:45:18','BLOCKED'),(17,11,137,'2022-10-12 11:30:22','PENDING'),(18,5,128,'2022-05-15 13:19:02','APPROVED'),(19,5,137,'2022-09-19 19:29:12','PENDING'),(20,5,146,'2022-05-05 03:09:43','PENDING'),(21,5,147,'2022-09-19 12:09:02','PENDING'),(22,5,148,'2022-09-19 13:19:02','PENDING');
 /*!40000 ALTER TABLE `apply_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `job` (
   CONSTRAINT `fk_job_pos` FOREIGN KEY (`position_id`) REFERENCES `position` (`id`),
   CONSTRAINT `fk_job_province` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
   CONSTRAINT `fk_job_usercomp` FOREIGN KEY (`user_company_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,134,'Java Developer (All Levels) ',0,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,0),(3,134,'Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:',NULL,NULL,'2022-10-10 23:26:04',10,'10000000','14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình',79,8,1,1,0),(4,134,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,0),(5,134,'test tiep ne2',1,NULL,'2022-09-22 21:37:26',NULL,'2022-09-22 21:37:26',0,'50000000','address',44,2,3,2,1),(6,136,'test tiep ne33',1,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,2),(7,136,'company job updt',0,'company job updt','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1021,'999999','thị trấn Ea Súp, huyện Ea Súp',66,4,4,4,2),(8,136,'loi 500',1,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,0),(9,136,'loi 500 lan nua xem',0,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,0),(10,134,'loi 415 lan nua xem',1,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,0),(11,134,'loi 415 lan nua xem 1',0,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,1),(12,136,'loi 500 lan nua xem',1,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,0);
+INSERT INTO `job` VALUES (1,134,'Java Developer (All Levels) ',1,'We\'re looking for 10 Java Developers (all levels: Senior, Junior, Fresher).',NULL,NULL,NULL,10,'11000000','address',1,8,2,1,0),(3,134,'Telesales Mảng Tài Chính (Nhận Sinh Viên Mới Ra Trường - Không Yêu Cầu Kinh Nghiệm)',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:',NULL,NULL,'2022-10-10 23:26:04',10,'10000000','14F tòa nhà Pico Plaza, số 20 Cộng Hoà, Phường 12, Quận Tân Bình',79,8,1,1,0),(4,134,'test tiep ne',0,NULL,'2022-09-22 16:54:44',NULL,'2022-09-22 16:54:44',0,'50000000','address',15,3,2,1,0),(5,134,'Nhân Viên Digital Marketing Thu Nhập Upto 20 Triệu',1,'Cơ hội cho các bạn Sinh viên mới ra trường muốn thử sức lĩnh vực tài chính, gia tăng thu nhập và học hỏi kinh nghiệm ở môi trường chuyên nghiệp:','2022-09-22 21:37:26',NULL,'2022-10-15 00:42:14',40,'20000000','',79,1,27,1,6),(6,136,'test tiep ne33',1,NULL,'2022-09-22 21:56:25',NULL,'2022-09-22 21:56:25',0,'40000000','address',75,1,3,1,2),(7,136,'company job updt',0,'company job updt','2022-09-22 21:58:13',NULL,'2022-09-22 21:58:13',1021,'999999','thị trấn Ea Súp, huyện Ea Súp',66,4,4,4,2),(8,136,'loi 500',1,'loi 500','2022-09-22 22:01:56',NULL,'2022-09-22 22:01:56',0,'40000000','address',1,3,5,3,0),(9,136,'loi 500 lan nua xem',0,'loi 500','2022-09-22 22:10:35',NULL,'2022-09-22 22:10:35',0,'40000000','address',79,1,2,1,0),(10,134,'loi 415 lan nua xem',1,'loi 415','2022-10-04 00:19:07',NULL,'2022-10-04 00:19:07',0,'25000000','address',56,1,12,1,0),(11,134,'loi 415 lan nua xem 1',0,'loi 415','2022-10-04 08:26:36',NULL,'2022-10-04 08:26:36',0,'25000000','address',79,1,12,1,1),(12,136,'loi 500 lan nua xem',1,'loi 500','2022-10-04 13:57:16',NULL,'2022-10-04 13:57:16',200,'25000000','address',79,1,12,1,0),(41,134,'Sale BMW',1,'Bán xe BMW i8','2022-10-15 00:17:38',NULL,NULL,100,'42000000','Quận 7',79,3,7,3,0),(43,134,'Sale BMW',1,'Bán xe BMW Q7','2022-10-15 00:25:23',NULL,NULL,100,'42000000','Quận 7',79,3,7,3,0);
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +281,7 @@ CREATE TABLE `job_tag` (
   KEY `fk_jobtag_tag_idx` (`tag_id`),
   CONSTRAINT `fk_jobtag_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_jobtag_tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +290,7 @@ CREATE TABLE `job_tag` (
 
 LOCK TABLES `job_tag` WRITE;
 /*!40000 ALTER TABLE `job_tag` DISABLE KEYS */;
-INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12),(103,7,1),(104,7,6),(105,7,7),(200,3,1),(201,3,4),(202,3,6),(203,3,12),(204,3,13);
+INSERT INTO `job_tag` VALUES (1,1,1),(2,1,3),(3,1,5),(4,1,7),(5,1,12),(103,7,1),(104,7,6),(105,7,7),(200,3,1),(201,3,4),(202,3,6),(203,3,12),(204,3,13),(205,41,5),(206,41,6),(207,41,7),(211,43,5),(212,43,6),(213,43,7),(222,5,1),(223,5,2),(224,5,4),(225,5,6);
 /*!40000 ALTER TABLE `job_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,7 +469,7 @@ CREATE TABLE `requirement` (
   PRIMARY KEY (`id`),
   KEY `fk_req_job_idx` (`job_id`),
   CONSTRAINT `fk_req_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -478,7 +478,7 @@ CREATE TABLE `requirement` (
 
 LOCK TABLES `requirement` WRITE;
 /*!40000 ALTER TABLE `requirement` DISABLE KEYS */;
-INSERT INTO `requirement` VALUES (56,'khong qqqqq',7),(109,'Chăm sóc Khách hàng',3),(110,'Tiếp nhận, hoàn thành hồ sơ vay, hướng dẫn thủ tục giải ngân cho khách hàng',3),(111,'Tư vấn làm hồ sơ vay tín chấp cho khách hàng, không cần thu hồi nợ',3),(112,'Data khách hàng đăng ký vay có sẵn',3),(113,'update',3);
+INSERT INTO `requirement` VALUES (56,'khong qqqqq',7),(109,'Chăm sóc Khách hàng',3),(110,'Tiếp nhận, hoàn thành hồ sơ vay, hướng dẫn thủ tục giải ngân cho khách hàng',3),(111,'Tư vấn làm hồ sơ vay tín chấp cho khách hàng, không cần thu hồi nợ',3),(112,'Data khách hàng đăng ký vay có sẵn',3),(113,'update',3),(114,'Biết về xe oto',41),(115,'Am hiểu về lịch sử của BMW',41),(118,'Biết về xe Audi Q Series',43),(119,'Am hiểu về lịch sử của BMW',43),(131,'Quản trị nội dung và các hoạt động trên website',5),(132,'Nghiên cứu nhu cầu của các đối tượng khách hàng để xây dựng kế hoạch marketing phù hợp.',5),(133,'Req Update',5),(134,'Triển khai các chiến lược đã được phê duyệt',5),(135,'Thống kê, đo lường và báo cáo kết quả đạt được được các chiến lược đã triển khai',5),(136,'Phối hợp với các phòng ban liên quan để đảm bảo tiến độ công việc',5);
 /*!40000 ALTER TABLE `requirement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-14 23:58:43
+-- Dump completed on 2022-10-15  2:06:19

@@ -4,10 +4,11 @@ import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 
 public interface ApplyJobService {
 
-    boolean approve(CompanyActionApplyJobRequest request);
+    boolean approve(int applyJobId);
+
+    boolean block(int applyJobId);
 
     boolean cancel(int applyJobId);
 
-    boolean block(CompanyActionApplyJobRequest request);
 
 }

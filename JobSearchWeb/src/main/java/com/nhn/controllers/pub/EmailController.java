@@ -13,7 +13,7 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @PostMapping("/sendMail")
+    @PostMapping("/send-mail")
     public boolean sendMail(@RequestBody EmailDetails details) {
         return emailService.sendSimpleMail(details);
     }

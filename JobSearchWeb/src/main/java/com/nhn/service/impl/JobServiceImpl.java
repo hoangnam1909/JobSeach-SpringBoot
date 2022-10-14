@@ -37,6 +37,9 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private RequirementRepository requirementRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     @Transactional
     public Job add(String companyUsername, CreateJobRequest request) {
@@ -54,16 +57,14 @@ public class JobServiceImpl implements JobService {
                 requirementRepository.save(new Requirement(requirementRequest.getContent(), job));
 
             jobRepository.flush();
+            entityManager.refresh(jobSaved);
             return jobSaved;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-
     }
 
-    // 1 4  5  7
-    // 1 5 *3 *8
     @Override
     @Transactional
     public Job update(JobUpdateRequest request) {
@@ -85,9 +86,16 @@ public class JobServiceImpl implements JobService {
                 jobRepository.flush();
 
                 Optional<Job> jobUpdated = jobRepository.findById(request.getId());
-                jobRepository.flush();
 
-                return jobUpdated.orElse(null);
+                if (jobUpdated.isPresent()) {
+                    jobRepository.flush();
+                    Job jobResult = jobUpdated.get();
+                    entityManager.refresh(jobResult);
+
+                    return jobResult;
+                } else {
+                    return null;
+                }
             }
 
             return null;

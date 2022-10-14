@@ -98,6 +98,11 @@ public class JobSpecification implements Specification<Job> {
                 Join<Province, Job> provinceJobs = root.join("province");
                 predicates.add(builder.equal(provinceJobs.get("id"), criteria.getValue().toString()));
 
+            } else if (criteria.getOperation().equals(SearchOperation.POSITION_ID)) {
+
+                Join<Position, Job> positionJobs = root.join("position");
+                predicates.add(builder.equal(positionJobs.get("id"), criteria.getValue().toString()));
+
             } else if (criteria.getOperation().equals(SearchOperation.COMPANY_USERNAME)) {
 
                 Join<User, Job> companyUserJobs = root.join("companyUser");

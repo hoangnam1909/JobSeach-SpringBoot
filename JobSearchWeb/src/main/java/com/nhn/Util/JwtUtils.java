@@ -32,9 +32,9 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
+//    private Boolean isTokenExpired(String token) {
+//        return extractExpiration(token).before(new Date());
+//    }
 
     public String generateToken(String username, String role) {
         Map<String, Object> claims = new HashMap<>();
@@ -56,7 +56,8 @@ public class JwtUtils {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()));
     }
 
 }

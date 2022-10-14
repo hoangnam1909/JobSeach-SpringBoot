@@ -89,7 +89,7 @@ public class CompanyJobController {
         Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng
     */
     @GetMapping("/get-list")
-    ResponseEntity<RespondObject> getAllList() throws Exception {
+    ResponseEntity<RespondObject> getList() throws Exception {
 
         String accessToken = servletRequest.getHeader("authorization").substring(4);
         String companyUsername = jwtUtils.extractUsername(accessToken);
@@ -111,6 +111,27 @@ public class CompanyJobController {
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject("Not found", "No jobs found", new ArrayList<>())
                 );
+    }
+
+    /*
+        Nhà tuyển dụng đếm số tin tuyển dụng hiện khả dụng
+    */
+    @GetMapping("/count")
+    ResponseEntity<RespondObject> count() throws Exception {
+
+        String accessToken = servletRequest.getHeader("authorization").substring(4);
+        String companyUsername = jwtUtils.extractUsername(accessToken);
+
+        User companyUser = userRepository.findUserByUsername(companyUsername);
+        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
+            throw new Exception(String.format("Could not find company user with user = '%s'", companyUsername));
+
+        JobSpecification specification = new JobSpecification();
+        specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
+        specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("Job found", "Jobs counted", jobRepository.count(specification)));
     }
 
     /*
@@ -175,27 +196,6 @@ public class CompanyJobController {
     }
 
     /*
-        Nhà tuyển dụng đếm số tin tuyển dụng hiện khả dụng
-    */
-    @GetMapping("/count")
-    ResponseEntity<RespondObject> count() throws Exception {
-
-        String accessToken = servletRequest.getHeader("authorization").substring(4);
-        String companyUsername = jwtUtils.extractUsername(accessToken);
-
-        User companyUser = userRepository.findUserByUsername(companyUsername);
-        if (companyUser == null || !companyUser.getRole().equals(Constant.USER_ROLE.COMPANY))
-            throw new Exception(String.format("Could not find company user with user = '%s'", companyUsername));
-
-        JobSpecification specification = new JobSpecification();
-        specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
-        specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
-
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject("Job found", "Jobs counted", jobRepository.count(specification)));
-    }
-
-    /*
         Nhà tuyển dụng thêm tin tuyển dụng
     */
     @PostMapping("/insert")
@@ -235,7 +235,7 @@ public class CompanyJobController {
             Job jobUpdated = jobService.update(request);
             return jobUpdated != null ?
                     ResponseEntity.status(HttpStatus.OK).body(
-                            new RespondObject("Ok", "Job updated", job)
+                            new RespondObject("Ok", "Job updated", job.get())
                     ) :
                     ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                             new RespondObject("Failed", "Update job failed", null)
@@ -250,20 +250,20 @@ public class CompanyJobController {
     /*
         Nhà tuyển dụng xoá tin tuyển dụng
     */
-    @DeleteMapping("/delete")
-    ResponseEntity<RespondObject> delete(@RequestBody @Valid CompanyJobRequest request) {
+    @DeleteMapping("/delete/{job-id}")
+    ResponseEntity<RespondObject> delete(@PathVariable(name = "job-id") int jobId) {
 
         String accessToken = servletRequest.getHeader("authorization").substring(4);
         String companyUsername = jwtUtils.extractUsername(accessToken);
         User companyUser = userRepository.findUserByUsername(companyUsername);
 
-        Optional<Job> job = jobRepository.findById(request.getJobId());
+        Optional<Job> job = jobRepository.findById(jobId);
 
         if (job.get().getCompanyUser().getId() != companyUser.getId())
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
-                    new RespondObject("Forbidden", String.format("Job with id = %s is not yours", request.getJobId()), null));
+                    new RespondObject("Forbidden", String.format("Job with id = %s is not yours", jobId), null));
 
-        boolean deleteCheck = jobService.delete(request.getJobId());
+        boolean deleteCheck = jobService.delete(jobId);
         if (deleteCheck)
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Job deleted", ""));

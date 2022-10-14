@@ -29,8 +29,8 @@ public class PublicCommentController {
     @Autowired
     private CommentMapper commentMapper;
 
-    @GetMapping("")
-    ResponseEntity<RespondObject> getByCompanyId(@RequestParam(name = "companyId") @Valid Integer companyId) {
+    @GetMapping("/{company-id}")
+    ResponseEntity<RespondObject> getByCompanyId(@PathVariable(name = "company-id") int companyId) {
         Optional<Company> company = companyRepository.findById(companyId);
 
         if (company.isEmpty())
