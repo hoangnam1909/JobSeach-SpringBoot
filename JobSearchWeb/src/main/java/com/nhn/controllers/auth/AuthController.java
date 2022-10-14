@@ -24,7 +24,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin
@@ -53,6 +55,9 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private HttpServletRequest servletRequest;
+
     /*
         Chứng thực với access token
     */
@@ -73,8 +78,18 @@ public class AuthController {
                 );
             }
 
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "User logged in", jwtUtils.generateToken(loginRequest.getUsername())));
+            User user = userRepository.findUserByUsername(loginRequest.getUsername());
+            if (user != null) {
+                Map<String, String> accessTokenMap = new HashMap<>();
+                accessTokenMap.put("role", user.getRole());
+                accessTokenMap.put("accessToken", jwtUtils.generateToken(loginRequest.getUsername(), user.getRole()));
+
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "User logged in", accessTokenMap));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
+                        new RespondObject("Bad request", "User login failed", null));
+            }
         } else {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
@@ -117,15 +132,18 @@ public class AuthController {
         Lấy ra thông tin của user đang đăng nhập
     */
     @GetMapping("/current-user")
-    ResponseEntity<RespondObject> getCurrentUser(@RequestHeader(name = "Authorization") String accessToken) {
-
-        System.err.println("accessToken = " + accessToken);
+    ResponseEntity<RespondObject> getCurrentUser() {
 
         try {
-            UserDTO userDTO = userMapper.toDTO(userService.currentUser());
+            String username = servletRequest.getHeader("authorization").substring(4);
+            UserDTO userDTO = userMapper.toDTO(userRepository.findUserByUsername(username));
 
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "User logged in", userDTO));
+            if (userDTO != null)
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "User logged in", userDTO));
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Not found", "User not found", null));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(
                     new RespondObject("Failed", "User not found", ""));

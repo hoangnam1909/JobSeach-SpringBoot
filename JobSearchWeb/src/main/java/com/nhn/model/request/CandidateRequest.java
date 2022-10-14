@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 public class CandidateRequest {
 
-    @CandidateUsername
-    private String candidateUsername;
+//    @CandidateUsername
+//    private String candidateUsername;
 
     private int yearsExp;
 

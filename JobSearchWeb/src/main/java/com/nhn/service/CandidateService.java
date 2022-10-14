@@ -6,6 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface CandidateService {
 
-    Candidate update(CandidateRequest request, MultipartFile file);
+    Candidate update(String username, CandidateRequest request, MultipartFile file);
 
 }

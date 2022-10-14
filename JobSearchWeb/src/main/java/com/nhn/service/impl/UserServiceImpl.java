@@ -80,8 +80,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public User update(UpdateUserRequest request, MultipartFile file) {
-        User userUpdating = userRepository.findUserByUsername(request.getUsername());
+    public User update(String username, UpdateUserRequest request, MultipartFile file) {
+        User userUpdating = userRepository.findUserByUsername(username);
 
         User user = userMapper.toEntity(userUpdating, request);
 

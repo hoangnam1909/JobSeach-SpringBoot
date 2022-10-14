@@ -1,18 +1,26 @@
 package com.nhn.controllers;
 
+import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Job;
+import com.nhn.entity.User;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.TestRequest;
+import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.JobService;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/test")
@@ -27,10 +35,26 @@ public class TestAPI {
     @Autowired
     private UserService userService;
 
-    @GetMapping("")
-    ResponseEntity<RespondObject> getAll() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                new RespondObject("Fail", "No comment found", userService.currentUser()));
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    HttpServletRequest servletRequest;
+
+    @PutMapping(value = "/access-token", consumes = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE
+    })
+    @Transactional
+    ResponseEntity<RespondObject> updateProfile(@RequestHeader String authorization) {
+
+        System.err.println(servletRequest.getHeader("authorization").substring(4));
+        String username = jwtUtils.extractUsername(servletRequest.getHeader("authorization").substring(4));
+        System.err.println(username);
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Failed", "username", username)
+            );
     }
 
 //    @PostMapping(value = "/test-image",

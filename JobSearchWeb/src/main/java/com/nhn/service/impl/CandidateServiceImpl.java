@@ -50,9 +50,9 @@ public class CandidateServiceImpl implements CandidateService {
     private Cloudinary cloudinary;
 
     @Override
-    public Candidate update(CandidateRequest request, MultipartFile file) {
+    public Candidate update(String username, CandidateRequest request, MultipartFile file) {
 
-        User user = userRepository.findUserByUsername(request.getCandidateUsername());
+        User user = userRepository.findUserByUsername(username);
         if (user == null)
             return null;
 

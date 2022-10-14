@@ -1,5 +1,6 @@
 package com.nhn.controllers.candidate;
 
+import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Candidate;
 import com.nhn.model.request.CandidateRequest;
@@ -23,16 +24,22 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @PutMapping(value = "/update-candidate-info", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })
     @Transactional
-    ResponseEntity<RespondObject> update(@RequestPart("user") @Valid CandidateRequest request,
+    ResponseEntity<RespondObject> update(@RequestHeader(name = "Authorization") String accessToken,
+                                         @RequestPart("user") CandidateRequest request,
                                          @RequestPart("file") MultipartFile file) {
 
         try {
-            Candidate candidate = candidateService.update(request, file);
+            String username = jwtUtils.extractUsername(accessToken);
+            System.err.println(username);
+            Candidate candidate = candidateService.update(username, request, file);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save candidate info successfully", candidate)

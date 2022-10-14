@@ -1,10 +1,10 @@
 package com.nhn.controllers.authed;
 
+import com.nhn.Util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.service.UserService;
-import com.nhn.valid.RegisteredUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @CrossOrigin
@@ -23,6 +24,12 @@ public class AuthedUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private HttpServletRequest servletRequest;
+
     @PutMapping(value = "/update-user-info", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
@@ -32,7 +39,10 @@ public class AuthedUserController {
                                                 @RequestPart("file") MultipartFile file) {
 
         try {
-            User user = userService.update(request, file);
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String username = jwtUtils.extractUsername(accessToken);
+
+            User user = userService.update(username, request, file);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save user successfully", user)

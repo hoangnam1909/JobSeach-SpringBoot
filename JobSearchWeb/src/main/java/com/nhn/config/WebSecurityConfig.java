@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/api/**").hasAuthority(Constant.USER_ROLE.ADMIN)
                 .antMatchers("/candidate/api/**").hasAuthority(Constant.USER_ROLE.CANDIDATE)
                 .antMatchers("/company/api/**").hasAuthority(Constant.USER_ROLE.COMPANY)
-                .antMatchers("/auth/**", "/public/**").permitAll()
+                .antMatchers("/auth/**", "/authed/api/**", "/public/**").permitAll()
                 .anyRequest().authenticated()
 //                .antMatchers("/**").permitAll()
 
