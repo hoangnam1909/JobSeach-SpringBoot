@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin.CompanyAdmin;
+package com.nhn.controllers.admin.company_admin;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;

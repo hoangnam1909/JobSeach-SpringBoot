@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin.UserAdmin;
+package com.nhn.controllers.admin.user_admin;
 
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
@@ -6,24 +6,19 @@ import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.EmailDetails;
-import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.UserSpecification;
-import com.nhn.valid.RegisteredUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;

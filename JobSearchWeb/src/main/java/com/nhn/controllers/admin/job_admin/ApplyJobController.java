@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin;
+package com.nhn.controllers.admin.job_admin;
 
 import com.nhn.common.RespondObject;
 import com.nhn.repository.ApplyJobRepository;

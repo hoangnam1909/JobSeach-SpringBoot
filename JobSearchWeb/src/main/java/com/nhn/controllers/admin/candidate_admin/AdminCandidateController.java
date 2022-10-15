@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin.CandidateAdmin;
+package com.nhn.controllers.admin.candidate_admin;
 
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;

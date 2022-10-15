@@ -1,4 +1,4 @@
-package com.nhn.controllers.admin.JobAdmin;
+package com.nhn.controllers.admin.job_admin;
 
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Job;
@@ -23,12 +23,10 @@ public class JobController {
         jobRepository.flush();
         Optional<Job> job = jobRepository.findById(jobId);
 
-        if (job.isPresent())
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Candidate found", job.get()));
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Candidate not found", null));
+        return job.map(value -> ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "Jobs found", value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Not found", "Jobs not found", null)));
     }
 
 }
