@@ -1,0 +1,44 @@
+{
+	"id": "cc30b42e-90c8-4dd8-8aa7-a51ee933c59b",
+	"values": [
+		{
+			"key": "port-8080",
+			"value": "http://localhost:8080",
+			"enabled": true
+		},
+		{
+			"key": "adminToken",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY2NTgxMzY3OX0.XgCTUVppatujMwBF_uvUtA3gF1Buwm0YSCEGdsAYHX0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bmwToken",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJibXciLCJpYXQiOjE2NjU4MTM2NjV9.NeWz9BHzd3KiJDB5cXymL3PDbpJUMkFdiG72TWfK0UM",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "audiToken",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdWRpIiwiaWF0IjoxNjY1ODEzNzM3fQ.MjE4mvnUr0QU7IzesZ4O7tcnqntb3YrB2tiPR6Ona_8",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ungvien1Token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuMSIsImlhdCI6MTY2NTgxMzc1Mn0.TvxaL7Cmv2AVFtFipCYL6BFzVj2RxGGnPVokrTos514",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "ungvien5Token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuNSIsImlhdCI6MTY2NTgxMzY0OH0.yacz_SxswKiSbVzSEBvG_9rLWqDZuB2-WNFInBE-sWE",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-10-15T15:18:32.989Z",
+	"_postman_exported_using": "Postman/10.0.29"
+}
