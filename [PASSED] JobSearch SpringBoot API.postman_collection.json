@@ -72,7 +72,7 @@
 									"variable": [
 										{
 											"key": "candidate-user-id",
-											"value": "146"
+											"value": "147"
 										}
 									]
 								}
@@ -161,7 +161,7 @@
 			]
 		},
 		{
-			"name": "candidate",
+			"name": "[PASSED] candidate",
 			"item": [
 				{
 					"name": "self",
@@ -179,7 +179,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuNiIsImV4cCI6MTY2NTg0NjUyOSwiaWF0IjoxNjY1NzYwMTI5fQ.rpZ9JoPYCjRfbOCRimsC2IZl1cOGYvOnfyxsYfYisEA",
+										"value": "nhn {{ungvien5Token}}",
 										"type": "text"
 									}
 								],
@@ -188,14 +188,14 @@
 									"formdata": [
 										{
 											"key": "user",
-											"value": "{\n    \"candidateUsername\": \"ungvien4\",\n    \"yearsExp\": 10,\n    \"linkedin\": \"ungvien4 link\",\n    \"languageRequests\": [\n        {\n            \"name\": \"Tieng Viet\",\n            \"description\": \"tieng me de\"\n        },\n        {\n            \"name\": \"Tieng Anh\",\n            \"description\": \"hoc ngu lam\"\n        }\n    ],\n    \"qualificationRequests\": [\n        {\n            \"name\": \"Hoc ngu nhat lop\"\n        },\n        {\n            \"name\": \"Hoc ngu cap huyen\"\n        },\n        {\n            \"name\": \"Hoc ngu cap tinh\"\n        }\n    ],\n    \"referenceRequests\": [\n        {\n            \"name\": \"Facebook\",\n            \"link\": \"fb.com/huhu\"\n        },\n        {\n            \"name\": \"Instagram\",\n            \"link\": \"ig.com/huhu\"\n        }\n    ],\n    \"skillRequests\": [\n        {\n            \"name\": \"Dev óp\",\n            \"level\": \"Mát tờ\"\n        },\n        {\n            \"name\": \"Tét tơ\",\n            \"level\": \"rớt môn\"\n        }\n    ],\n    \"talentRequests\": [\n        {\n            \"content\": \"Xiếc\"\n        },\n        {\n            \"content\": \"Hát\"\n        },\n        {\n            \"content\": \"Học ngu\"\n        }\n    ]\n}",
+											"value": "{\n    \"yearsExp\": 3,\n    \"linkedin\": \"ungvien5 LinkedIn\",\n    \"languageRequests\": [\n        {\n            \"name\": \"Tiếng Việt\",\n            \"description\": \"Tiếng mẹ đẻ\"\n        },\n        {\n            \"name\": \"Tiếng Anh\",\n            \"description\": \"hoc ngu lam\"\n        }\n    ],\n    \"qualificationRequests\": [\n        {\n            \"name\": \"GPA Đại học trên 3.6\"\n        },\n        {\n            \"name\": \"Sinh viên 5 tốt\"\n        }\n    ],\n    \"referenceRequests\": [\n        {\n            \"name\": \"Facebook\",\n            \"link\": \"fb.com/ungvien5\"\n        },\n        {\n            \"name\": \"Instagram\",\n            \"link\": \"ig.com/ungvien5\"\n        }\n    ],\n    \"skillRequests\": [\n        {\n            \"name\": \"Back-end Java\",\n            \"level\": \"Master\"\n        },\n        {\n            \"name\": \"Front-end ReactJS\",\n            \"level\": \"Beginner\"\n        }\n    ],\n    \"talentRequests\": [\n        {\n            \"content\": \"Chơi CSGO\"\n        }\n    ]\n}",
 											"contentType": "application/json",
 											"type": "text"
 										},
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/nguye/OneDrive/Pictures/kfc-logo-vector-format-available-ai-illustrator-kfc-logo-125010855.jpg"
+											"src": "/F:/Image/DRL/Inked261363375_5097096650359341_2810782825471596896_n_LI.jpg"
 										}
 									]
 								},
@@ -222,10 +222,21 @@
 							"name": "add",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{ungvien5Token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"companyId\": 22,\r\n    \"candidateId\": 41,\r\n    \"content\": \"128cand comment 136comp\"\r\n}",
+									"raw": "{\r\n    \"companyUserId\": 134,\r\n    \"content\": \"ungvien5 comment bmw\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -294,42 +305,18 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/candidate/api/apply-job/:candidate-username",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"candidate",
-										"api",
-										"apply-job",
-										":candidate-username"
-									],
-									"variable": [
-										{
-											"key": "candidate-username",
-											"value": "ungvien1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "apply",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"jobId\": 11,\r\n    \"candidateUsername\": \"ungvien3\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{ungvien5Token}}",
+										"type": "text"
 									}
-								},
+								],
 								"url": {
 									"raw": "{{port-8080}}/candidate/api/apply-job",
 									"host": [
@@ -345,21 +332,23 @@
 							"response": []
 						},
 						{
-							"name": "cancel",
+							"name": "send",
 							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"applyJobId\": 12,\r\n    \"candidateUsername\":\"ungvien1\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{ungvien5Token}}",
+										"type": "text"
 									}
-								},
+								],
 								"url": {
-									"raw": "{{port-8080}}/candidate/api/apply-job/cancel",
+									"raw": "{{port-8080}}/candidate/api/apply-job/send/:job-id",
 									"host": [
 										"{{port-8080}}"
 									],
@@ -367,7 +356,52 @@
 										"candidate",
 										"api",
 										"apply-job",
-										"cancel"
+										"send",
+										":job-id"
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancel",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{ungvien5Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/candidate/api/apply-job/cancel/:apply-job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"candidate",
+										"api",
+										"apply-job",
+										"cancel",
+										":apply-job-id"
+									],
+									"variable": [
+										{
+											"key": "apply-job-id",
+											"value": "21"
+										}
 									]
 								}
 							},
@@ -892,7 +926,18 @@
 							"name": "stat",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{audiToken}}",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{port-8080}}/company/api/stat/job-applied/:job-id",
 									"host": [
@@ -908,7 +953,7 @@
 									"variable": [
 										{
 											"key": "job-id",
-											"value": "5"
+											"value": "12"
 										}
 									]
 								}
@@ -1013,8 +1058,90 @@
 			]
 		},
 		{
-			"name": "auth",
+			"name": "[PASSED] auth",
 			"item": [
+				{
+					"name": "authenticate",
+					"item": [
+						{
+							"name": "authenticate",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/auth/login",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/auth/logout",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "currentUser",
 					"request": {
@@ -1030,7 +1157,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "nhn  {{bmwToken}}",
+								"value": "nhn  {{ungvien1Token}}",
 								"type": "text"
 							}
 						],
@@ -1102,83 +1229,6 @@
 					"response": []
 				},
 				{
-					"name": "authenticated",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Authorization",
-								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{port-8080}}/auth/login",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "logout",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Authorization",
-								"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{port-8080}}/auth/logout",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"auth",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "forgotPassword",
 					"request": {
 						"method": "PUT",
@@ -1212,12 +1262,12 @@
 					"name": "comment",
 					"item": [
 						{
-							"name": "getByCompanyId",
+							"name": "getByCompanyUserId",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{port-8080}}/public/api/comment/:company-id",
+									"raw": "{{port-8080}}/public/api/comment/:company-user-id",
 									"host": [
 										"{{port-8080}}"
 									],
@@ -1225,12 +1275,12 @@
 										"public",
 										"api",
 										"comment",
-										":company-id"
+										":company-user-id"
 									],
 									"variable": [
 										{
-											"key": "company-id",
-											"value": "21"
+											"key": "company-user-id",
+											"value": "134"
 										}
 									]
 								}
@@ -1278,9 +1328,21 @@
 							"item": [
 								{
 									"name": "getList",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
 									"request": {
 										"method": "GET",
 										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{port-8080}}/public/api/job/get-list",
 											"host": [
@@ -1373,25 +1435,6 @@
 									"response": []
 								},
 								{
-									"name": "getJobTypes",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{port-8080}}/public/api/job-type",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"public",
-												"api",
-												"job-type"
-											]
-										}
-									},
-									"response": []
-								},
-								{
 									"name": "getJobPositions",
 									"request": {
 										"method": "GET",
@@ -1405,6 +1448,25 @@
 												"public",
 												"api",
 												"job-position"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getJobTypes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{port-8080}}/public/api/job-type",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"public",
+												"api",
+												"job-type"
 											]
 										}
 									},

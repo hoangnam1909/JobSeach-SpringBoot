@@ -35,7 +35,7 @@ CREATE TABLE `apply_job` (
   KEY `fk_app_canduser_idx` (`candidate_user_id`),
   CONSTRAINT `fk_app_canduser` FOREIGN KEY (`candidate_user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `fk_app_job` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `apply_job` (
 
 LOCK TABLES `apply_job` WRITE;
 /*!40000 ALTER TABLE `apply_job` DISABLE KEYS */;
-INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','APPROVED'),(9,12,129,'2022-05-02 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','APPROVED'),(12,12,128,'2022-05-05 13:19:02','CANCELLED'),(14,11,129,'2022-09-19 01:01:35','PENDING'),(15,6,128,'2022-10-12 10:45:18','BLOCKED'),(17,11,137,'2022-10-12 11:30:22','PENDING'),(18,5,128,'2022-05-15 13:19:02','APPROVED'),(19,5,137,'2022-09-19 19:29:12','PENDING'),(20,5,146,'2022-05-05 03:09:43','PENDING'),(21,5,147,'2022-09-19 12:09:02','PENDING'),(22,5,148,'2022-09-19 13:19:02','PENDING');
+INSERT INTO `apply_job` VALUES (7,5,129,'2022-05-05 13:19:02','APPROVED'),(9,12,129,'2022-05-02 13:19:02','PENDING'),(11,6,137,'2022-05-05 13:19:02','APPROVED'),(12,12,128,'2022-05-05 13:19:02','CANCELLED'),(14,11,129,'2022-09-19 01:01:35','PENDING'),(15,6,128,'2022-10-12 10:45:18','BLOCKED'),(17,11,137,'2022-10-12 11:30:22','PENDING'),(18,5,128,'2022-05-15 13:19:02','APPROVED'),(19,5,137,'2022-09-19 19:29:12','PENDING'),(20,5,146,'2022-05-05 03:09:43','PENDING'),(21,5,147,'2022-09-19 12:09:02','CANCELLED'),(22,5,148,'2022-09-19 13:19:02','PENDING'),(24,3,147,'2022-10-16 02:19:45','PENDING');
 /*!40000 ALTER TABLE `apply_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,10,'ungvien4 link','https://res.cloudinary.com/nhn1909/image/upload/v1665760711/jcbieum3pg4dykcmeuvh.jpg'),(48,0,NULL,NULL),(49,0,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,10,'ungvien4 link','https://res.cloudinary.com/nhn1909/image/upload/v1665760711/jcbieum3pg4dykcmeuvh.jpg'),(48,3,'ungvien5 LinkedIn','https://res.cloudinary.com/nhn1909/image/upload/v1665850946/rrohi1lmglfjrjina9ec.jpg'),(49,0,NULL,NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `comment` (
   KEY `fk_cmt_cand_idx` (`candidate_id`),
   CONSTRAINT `fk_cmt_cand` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`),
   CONSTRAINT `fk_cmt_comp` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1),(2,21,41,'cmt comp_id = 21 uv1','2022-09-29 16:36:01',1),(3,21,42,'cmt comp_id = 21 uv2','2022-10-11 16:36:01',1),(4,22,42,'comment 22 42','2022-10-07 15:38:57',1),(5,22,41,'128cand comment 136comp','2022-10-10 23:44:18',0);
+INSERT INTO `comment` VALUES (1,22,41,'comment ne` ma\' uiiii','2022-09-29 16:36:01',1),(2,21,41,'cmt comp_id = 21 uv1','2022-09-29 16:36:01',1),(3,21,42,'cmt comp_id = 21 uv2','2022-10-11 16:36:01',1),(4,22,42,'comment 22 42','2022-10-07 15:38:57',1),(5,22,41,'128cand comment 136comp','2022-10-10 23:44:18',0),(6,21,48,'ungvien5 comment bmw','2022-10-16 01:35:49',1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `language` (
   PRIMARY KEY (`id`),
   KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +343,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41),(50,'Tieng Viet','tieng me de',47),(51,'Tieng Anh','hoc ngu lam',47);
+INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41),(50,'Tieng Viet','tieng me de',47),(51,'Tieng Anh','hoc ngu lam',47),(52,'Tiếng Việt','Tiếng mẹ đẻ',48),(53,'Tiếng Anh','hoc ngu lam',48);
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +414,7 @@ CREATE TABLE `qualification` (
   PRIMARY KEY (`id`),
   KEY `fk_qualification_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_qualification_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +423,7 @@ CREATE TABLE `qualification` (
 
 LOCK TABLES `qualification` WRITE;
 /*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
-INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41),(21,'Hoc ngu nhat lop',47),(22,'Hoc ngu cap huyen',47),(23,'Hoc ngu cap tinh',47);
+INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41),(21,'Hoc ngu nhat lop',47),(22,'Hoc ngu cap huyen',47),(23,'Hoc ngu cap tinh',47),(24,'GPA Đại học trên 3.6',48),(25,'Sinh viên 5 tốt',48);
 /*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +442,7 @@ CREATE TABLE `reference` (
   PRIMARY KEY (`id`),
   KEY `fk_reference_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_reference_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +451,7 @@ CREATE TABLE `reference` (
 
 LOCK TABLES `reference` WRITE;
 /*!40000 ALTER TABLE `reference` DISABLE KEYS */;
-INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41),(24,'Facebook','fb.com/huhu',47),(25,'Instagram','ig.com/huhu',47);
+INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41),(24,'Facebook','fb.com/huhu',47),(25,'Instagram','ig.com/huhu',47),(26,'Facebook','fb.com/ungvien5',48),(27,'Instagram','ig.com/ungvien5',48);
 /*!40000 ALTER TABLE `reference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +497,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -506,7 +506,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41),(14,'Dev óp','Mát tờ',47),(15,'Tét tơ','rớt môn',47);
+INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41),(14,'Dev óp','Mát tờ',47),(15,'Tét tơ','rớt môn',47),(16,'Back-end Java','Master',48),(17,'Front-end ReactJS','Beginner',48);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +548,7 @@ CREATE TABLE `talent` (
   PRIMARY KEY (`id`),
   KEY `fk_talent_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_talent_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +557,7 @@ CREATE TABLE `talent` (
 
 LOCK TABLES `talent` WRITE;
 /*!40000 ALTER TABLE `talent` DISABLE KEYS */;
-INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41),(16,'Xiếc',47),(17,'Hát',47),(18,'Học ngu',47);
+INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41),(16,'Xiếc',47),(17,'Hát',47),(18,'Học ngu',47),(19,'Chơi CSGO',48);
 /*!40000 ALTER TABLE `talent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-15  2:06:19
+-- Dump completed on 2022-10-16  2:42:26
