@@ -9,6 +9,7 @@ import com.nhn.model.UserDTO;
 import com.nhn.model.request.EmailDetails;
 import com.nhn.model.request.LoginRequest;
 import com.nhn.model.request.UserSignupRequest;
+import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
@@ -139,12 +140,13 @@ public class AuthController {
     ResponseEntity<RespondObject> getCurrentUser() {
 
         try {
-            String username = servletRequest.getHeader("authorization").substring(4);
-            UserDTO userDTO = userMapper.toDTO(userRepository.findUserByUsername(username));
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String username = jwtUtils.extractUsername(accessToken);
+            CurrentUserResponse response = userMapper.toCurrentUserResponse(userRepository.findUserByUsername(username));
 
-            if (userDTO != null)
+            if (response != null)
                 return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "User logged in", userDTO));
+                        new RespondObject("Ok", "User logged in", response));
             else
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject("Not found", "User not found", null));

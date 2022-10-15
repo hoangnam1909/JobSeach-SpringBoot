@@ -1,4 +1,4 @@
-package com.nhn.controllers.pub;
+package com.nhn.controllers.admin.UserAdmin;
 
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
@@ -31,7 +31,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/public/api/user")
+@RequestMapping(path = "/admin/api/user")
 public class UserController {
 
     @Autowired

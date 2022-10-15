@@ -10,6 +10,7 @@ import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.UserSignupRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.model.request.test_request.UserImageRequest;
+import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,29 @@ public class UserMapper {
         user.setAddress(request.getAddress());
 
         return user;
+    }
+
+    public CurrentUserResponse toCurrentUserResponse(User user) {
+        CurrentUserResponse response = new CurrentUserResponse();
+
+        response.setUsername(user.getUsername());
+        response.setAvatar(user.getAvatar());
+        response.setRole(user.getRole());
+        response.setFullName(user.getFullName());
+        response.setEmail(user.getEmail());
+        response.setPhone(user.getPhone());
+        response.setDob(user.getDob());
+        response.setGender(user.isGender());
+        response.setAddress(user.getAddress());
+        response.setJoinedDate(user.getJoinedDate());
+
+        if (user.getCandidate() != null)
+            response.setCandidate(user.getCandidate());
+
+        if (user.getCompany() != null)
+            response.setCompany(user.getCompany());
+
+        return response;
     }
 
     public UserDTO toDTO(User user) {
