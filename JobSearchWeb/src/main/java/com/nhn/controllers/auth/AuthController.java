@@ -62,7 +62,7 @@ public class AuthController {
         Chứng thực với access token
     */
     @PostMapping("/authenticated")
-    ResponseEntity<RespondObject> generateToken(@RequestBody LoginRequest loginRequest) {
+    ResponseEntity<RespondObject> generateToken(@RequestBody @Valid LoginRequest loginRequest) {
 
         if (userService.currentUser() == null) {
             Authentication authentication;
@@ -81,8 +81,10 @@ public class AuthController {
             User user = userRepository.findUserByUsername(loginRequest.getUsername());
             if (user != null) {
                 Map<String, String> accessTokenMap = new HashMap<>();
+                accessTokenMap.put("username", user.getUsername());
                 accessTokenMap.put("role", user.getRole());
-                accessTokenMap.put("accessToken", jwtUtils.generateToken(loginRequest.getUsername(), user.getRole()));
+                accessTokenMap.put("avatar", user.getAvatar());
+                accessTokenMap.put("accessToken", jwtUtils.generateToken(user));
 
                 return ResponseEntity
                         .status(HttpStatus.OK)

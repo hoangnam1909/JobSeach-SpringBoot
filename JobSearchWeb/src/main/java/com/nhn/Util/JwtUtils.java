@@ -1,5 +1,6 @@
 package com.nhn.Util;
 
+import com.nhn.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,6 +29,7 @@ public class JwtUtils {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
@@ -36,11 +38,9 @@ public class JwtUtils {
 //        return extractExpiration(token).before(new Date());
 //    }
 
-    public String generateToken(String username, String role) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role);
-
-        return createToken(claims, username);
+        return createToken(claims, user.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
