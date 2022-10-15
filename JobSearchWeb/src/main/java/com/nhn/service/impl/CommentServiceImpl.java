@@ -2,6 +2,9 @@ package com.nhn.service.impl;
 
 import com.nhn.entity.Comment;
 import com.nhn.entity.Company;
+import com.nhn.mapper.CommentMapper;
+import com.nhn.model.request.InsertCommentRequest;
+import com.nhn.model.response.SimpleCommentResponse;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
     @Override
     public List<Comment> findAllIsAvailableByCompany(Company company) {
         List<Comment> comments = commentRepository.findAllByCompany(company);
@@ -23,6 +29,18 @@ public class CommentServiceImpl implements CommentService {
         comments.removeIf(comment -> (!comment.isAvailable()));
 
         return comments;
+    }
+
+    @Override
+    public SimpleCommentResponse add(String candidateUsername, InsertCommentRequest request) {
+        Comment comment = commentMapper.toEntity(candidateUsername, request);
+
+        if (comment == null) {
+            return null;
+        } else {
+            Comment commentChecking = commentRepository.save(comment);
+            return commentMapper.toResponse(commentChecking);
+        }
     }
 
     @Override

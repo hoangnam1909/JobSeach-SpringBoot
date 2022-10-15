@@ -1,5 +1,6 @@
 package com.nhn.mapper;
 
+import com.nhn.common.Constant;
 import com.nhn.entity.Candidate;
 import com.nhn.entity.Comment;
 import com.nhn.entity.Company;
@@ -22,24 +23,18 @@ public class CommentMapper {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private CompanyRepository companyRepository;
-
-    @Autowired
-    private CandidateRepository candidateRepository;
-
-    public Comment toEntity(InsertCommentRequest request) {
+    public Comment toEntity(String candidateUsername, InsertCommentRequest request) {
         Comment comment = new Comment();
 
-        Optional<Company> company = companyRepository.findById(request.getCompanyId());
-        if (company.isPresent())
-            comment.setCompany(company.get());
+        Optional<User> companyUser = userRepository.findById(request.getCompanyUserId());
+        if (companyUser.isPresent())
+            comment.setCompany(companyUser.get().getCompany());
         else
             return null;
 
-        Optional<Candidate> candidate = candidateRepository.findById(request.getCandidateId());
-        if (candidate.isPresent())
-            comment.setCandidate(candidate.get());
+        User candidateUser = userRepository.findUserByUsername(candidateUsername);
+        if (candidateUser != null && candidateUser.getRole().equals(Constant.USER_ROLE.CANDIDATE))
+            comment.setCandidate(candidateUser.getCandidate());
         else
             return null;
 

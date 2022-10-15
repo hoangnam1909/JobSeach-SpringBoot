@@ -8,7 +8,6 @@ import com.nhn.entity.Job;
 import com.nhn.entity.User;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
-import com.nhn.model.request.company.CompanyJobRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.JobService;

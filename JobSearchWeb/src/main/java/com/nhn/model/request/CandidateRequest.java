@@ -3,6 +3,7 @@ package com.nhn.model.request;
 import com.nhn.valid.CandidateUsername;
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Getter
@@ -12,9 +13,7 @@ import java.util.List;
 @Data
 public class CandidateRequest {
 
-//    @CandidateUsername
-//    private String candidateUsername;
-
+    @Min(1)
     private int yearsExp;
 
     private String linkedin;

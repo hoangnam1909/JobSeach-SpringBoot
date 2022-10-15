@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @CrossOrigin
@@ -27,19 +28,22 @@ public class CandidateController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private HttpServletRequest servletRequest;
+
     @PutMapping(value = "/update-candidate-info", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })
     @Transactional
-    ResponseEntity<RespondObject> update(@RequestHeader(name = "Authorization") String accessToken,
-                                         @RequestPart("user") CandidateRequest request,
+    ResponseEntity<RespondObject> update(@RequestPart("user") @Valid CandidateRequest request,
                                          @RequestPart("file") MultipartFile file) {
 
         try {
-            String username = jwtUtils.extractUsername(accessToken);
-            System.err.println(username);
-            Candidate candidate = candidateService.update(username, request, file);
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String candidateUsername = jwtUtils.extractUsername(accessToken);
+
+            Candidate candidate = candidateService.update(candidateUsername, request, file);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save candidate info successfully", candidate)
@@ -51,26 +55,5 @@ public class CandidateController {
             );
         }
     }
-
-    /*
-        Ứng viên cập nhật thông tin ứng viên
-    */
-//    @PutMapping("/update")
-//    ResponseEntity<RespondObject> updateCandidate(@RequestBody @Valid CandidateRequest request) {
-//
-//        try {
-//            Candidate candidate = candidateService.update(request);
-//
-//            if (candidate != null)
-//                return ResponseEntity.status(HttpStatus.OK).body(
-//                        new RespondObject("OK", "Save candidate successfully", candidate));
-//            else
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                        new RespondObject("Failed", "Save candidate failed", ""));
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-//                    new RespondObject("Failed", "Save candidate failed", ex));
-//        }
-//    }
 
 }

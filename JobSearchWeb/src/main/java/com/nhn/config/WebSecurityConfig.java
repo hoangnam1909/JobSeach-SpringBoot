@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // hasAuthority for jwt
 
         http
+                .cors()
+                .and()
                 .authorizeRequests()
 //                .antMatchers("/authenticated").permitAll()
 //                .antMatchers("/current-user").permitAll()

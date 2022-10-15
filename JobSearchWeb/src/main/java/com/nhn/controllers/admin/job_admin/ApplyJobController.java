@@ -20,7 +20,7 @@ public class ApplyJobController {
 
     @GetMapping("")
     ResponseEntity<RespondObject> getCandidateUserApplyJobByJobId() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 new RespondObject("Found", "msg", applyJobRepository.findAll()));
     }
 

@@ -1,5 +1,6 @@
 package com.nhn.model.request;
 
+import com.nhn.valid.CompanyUserId;
 import com.nhn.valid.ExistingCandidateId;
 import com.nhn.valid.ExistingCompanyId;
 import lombok.*;
@@ -11,11 +12,8 @@ import lombok.*;
 @Data
 public class InsertCommentRequest {
 
-    @ExistingCompanyId
-    private Integer companyId;
-
-    @ExistingCandidateId
-    private Integer candidateId;
+    @CompanyUserId
+    private Integer companyUserId;
 
     private String content;
 
