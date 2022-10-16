@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface RequirementRepository extends JpaRepository<Requirement, Integer> {
 
-    void deleteAllByJobId(int jobId);
-
     List<Requirement> findAllByJobId(int jobId);
 
 }

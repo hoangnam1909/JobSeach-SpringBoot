@@ -137,9 +137,9 @@ public class CompanyJobController {
         Nhà tuyển dụng lấy ra danh sách tất cả tin tuyển dụng có phân trang và các điều kiện kèm theo
     */
     @PostMapping("/get")
-    ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
-                                         @RequestParam(name = "page", defaultValue = "1") String page,
-                                         @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
+    ResponseEntity<RespondObject> getWithCondition(@RequestBody(required = false) Map<String, String> params,
+                                                   @RequestParam(name = "page", defaultValue = "1") String page,
+                                                   @RequestParam(name = "size", required = false, defaultValue = "5") String size) throws Exception {
 
         String accessToken = servletRequest.getHeader("authorization").substring(4);
         String companyUsername = jwtUtils.extractUsername(accessToken);
