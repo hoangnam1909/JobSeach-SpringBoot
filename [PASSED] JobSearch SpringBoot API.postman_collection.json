@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "[PASSED] admin",
+			"name": "admin",
 			"item": [
 				{
 					"name": "candidate",
@@ -161,7 +161,7 @@
 			]
 		},
 		{
-			"name": "[PASSED] candidate",
+			"name": "candidate",
 			"item": [
 				{
 					"name": "self",
@@ -418,31 +418,6 @@
 					"name": "self",
 					"item": [
 						{
-							"name": "get",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{port-8080}}/company/api/:id",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "21"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "update",
 							"request": {
 								"method": "PUT",
@@ -500,7 +475,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJibXciLCJyb2xlIjoiQ09NUEFOWSIsImV4cCI6MTY2NTg1MTUxMywiaWF0IjoxNjY1NzY1MTEzfQ.GKejn6ihw6k4zHAByizfDXe59vD4P2yanKmDaOem5-0",
+												"value": "nhn  {{bmwToken}}",
 												"type": "text"
 											}
 										],
@@ -537,7 +512,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{bmwToken}}",
+												"value": "nhn {{audiToken}}",
 												"type": "text"
 											}
 										],
@@ -568,7 +543,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{bmwToken}}",
+												"value": "nhn {{audiToken}}",
 												"type": "text"
 											}
 										],
@@ -750,7 +725,7 @@
 											"variable": [
 												{
 													"key": "job-id",
-													"value": ""
+													"value": "41"
 												}
 											]
 										}
@@ -793,7 +768,7 @@
 											"variable": [
 												{
 													"key": "job-id",
-													"value": "12"
+													"value": "5"
 												}
 											]
 										}
@@ -934,7 +909,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn {{audiToken}}",
+										"value": "nhn {{bmwToken}}",
 										"type": "text"
 									}
 								],
@@ -953,7 +928,7 @@
 									"variable": [
 										{
 											"key": "job-id",
-											"value": "12"
+											"value": "5"
 										}
 									]
 								}
@@ -1018,7 +993,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuNSIsInJvbGUiOiJDQU5ESURBVEUiLCJleHAiOjE2NjU4NTA3MDksImlhdCI6MTY2NTc2NDMwOX0.2euOxWvUBOqBNOzfKp-xT2pJFLjTW6fc9x_6ipLpkxk",
+										"value": "nhn {{ungvien5Token}}",
 										"type": "text"
 									}
 								],
