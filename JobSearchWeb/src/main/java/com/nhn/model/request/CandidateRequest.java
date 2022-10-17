@@ -1,6 +1,5 @@
 package com.nhn.model.request;
 
-import com.nhn.valid.CandidateUsername;
 import lombok.*;
 
 import javax.validation.constraints.Min;

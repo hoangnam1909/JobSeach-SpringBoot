@@ -1,13 +1,10 @@
 package com.nhn.controllers.pub;
 
-import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
 import com.nhn.entity.User;
 import com.nhn.repository.JobRepository;
-import com.nhn.repository.UserRepository;
-import com.nhn.service.JobService;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.key.JobEnum;
@@ -24,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -35,6 +33,26 @@ public class PublicJobController {
 
     @Autowired
     private SpecificationConverter specificationConverter;
+
+    @GetMapping("/{id}")
+    ResponseEntity<RespondObject> getById(@PathVariable String id) {
+
+        Optional<Job> jobOptional = jobRepository.findByIdAndAvailableIsTrue(Integer.parseInt(id));
+
+        if (jobOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new RespondObject("Processed", "No job found", "No data"));
+        } else {
+            Job job = jobOptional.get();
+            if (job.isAvailable()) {
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("Ok", "Found job with id = " + id, job));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new RespondObject("Bad Request", String.format("Job with id = %s is unavailable", id), job));
+            }
+        }
+    }
 
     @GetMapping("/get-list")
     ResponseEntity<RespondObject> getAllList() {

@@ -3,10 +3,8 @@ package com.nhn.controllers.pub;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
-import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.mapper.CommentMapper;
-import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

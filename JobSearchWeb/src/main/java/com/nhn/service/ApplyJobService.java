@@ -1,7 +1,6 @@
 package com.nhn.service;
 
 import com.nhn.entity.ApplyJob;
-import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 
 public interface ApplyJobService {
 

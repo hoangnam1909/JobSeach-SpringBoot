@@ -4,7 +4,6 @@ import com.nhn.common.Constant;
 import com.nhn.entity.ApplyJob;
 import com.nhn.entity.User;
 import com.nhn.mapper.ApplyJobMapper;
-import com.nhn.model.request.company.CompanyActionApplyJobRequest;
 import com.nhn.repository.ApplyJobRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.ApplyJobService;

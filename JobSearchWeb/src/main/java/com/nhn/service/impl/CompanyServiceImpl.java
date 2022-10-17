@@ -2,7 +2,6 @@ package com.nhn.service.impl;
 
 import com.nhn.entity.Company;
 import com.nhn.entity.CompanyIndustry;
-import com.nhn.entity.JobTag;
 import com.nhn.entity.User;
 import com.nhn.mapper.CompanyMapper;
 import com.nhn.model.request.UpdateCompanyRequest;

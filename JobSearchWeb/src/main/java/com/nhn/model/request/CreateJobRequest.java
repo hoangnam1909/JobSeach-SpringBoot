@@ -1,10 +1,8 @@
 package com.nhn.model.request;
 
-import com.nhn.valid.CompanyUsername;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Getter

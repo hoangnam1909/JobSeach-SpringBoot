@@ -1,6 +1,5 @@
 package com.nhn.model.request.authed_request;
 
-import com.nhn.valid.RegisteredUsername;
 import lombok.*;
 
 import javax.validation.constraints.Email;

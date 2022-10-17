@@ -1183,7 +1183,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien1\",\r\n    \"password\": \"ungvien1\"\r\n}",
+							"raw": "{\r\n    \"username\": \"ungvien1\",\r\n    \"password\": \"cccc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1467,6 +1467,37 @@
 									"response": []
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{port-8080}}/public/api/user/:id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"public",
+										"api",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "136"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}

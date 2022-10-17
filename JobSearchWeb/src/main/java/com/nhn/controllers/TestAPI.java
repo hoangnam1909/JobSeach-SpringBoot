@@ -1,14 +1,12 @@
 package com.nhn.controllers;
 
 import com.nhn.common.RespondObject;
-import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
 import com.nhn.entity.Job_;
 import com.nhn.entity.Requirement;
+import com.nhn.model.request.LoginRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.repository.RequirementRepository;
-import com.nhn.specifications.key.JobEnum;
-import com.nhn.specifications.key.SearchOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +75,12 @@ public class TestAPI {
                 :
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject("Not found", "No jobs found with title like: " + title, new ArrayList<>()));
+    }
+
+    @PostMapping("/validator")
+    ResponseEntity<RespondObject> validator(@RequestBody @Valid LoginRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("OK", "Username valid true", request.getUsername()));
     }
 
 }

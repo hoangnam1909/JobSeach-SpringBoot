@@ -9,7 +9,6 @@ import com.nhn.model.UserDTO;
 import com.nhn.model.request.AdminUserInsertRequest;
 import com.nhn.model.request.UserSignupRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
-import com.nhn.model.request.test_request.UserImageRequest;
 import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;

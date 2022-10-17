@@ -6,7 +6,6 @@ import com.nhn.common.RespondObject;
 import com.nhn.entity.ApplyJob;
 import com.nhn.entity.User;
 import com.nhn.mapper.ApplyJobMapper;
-import com.nhn.model.request.candidate.CandidateActionApplyJobRequest;
 import com.nhn.model.response.CandidateApplyJobResponse;
 import com.nhn.repository.ApplyJobRepository;
 import com.nhn.repository.UserRepository;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
