@@ -429,13 +429,13 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJibXciLCJyb2xlIjoiQ09NUEFOWSIsImV4cCI6MTY2NTg1MTUxMywiaWF0IjoxNjY1NzY1MTEzfQ.GKejn6ihw6k4zHAByizfDXe59vD4P2yanKmDaOem5-0",
+										"value": "nhn {{fptToken}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"companyName\": \"BMW Group Update\",\r\n    \"companySize\": 10000,\r\n    \"contactName\": \"company updt1\",\r\n    \"contactTel\": \"company updt1\",\r\n    \"contactEmail\": \"company updt1\",\r\n    \"contactAddress\": \"company updt1\",\r\n    \"introduction\": \"company updt1\",\r\n    \"foundedYear\": 0,\r\n    \"headquarters\": \"company updt1\",\r\n    \"link\": \"company updt1\",\r\n    \"industryId\": [\r\n        15,\r\n        18\r\n    ]\r\n}",
+									"raw": "{\r\n    \"companyName\": \"FPT Software\",\r\n    \"companySize\": 10000,\r\n    \"contactName\": \"FPT\",\r\n    \"contactTel\": \"02437689048\",\r\n    \"contactEmail\": \"recruitment@fsoft.com.vn\",\r\n    \"contactAddress\": \"FPT Cau Giay Building, Duy Tan Street, Dich Vong Hau Ward, Cau Giay District, Hanoi City, Vietnam\",\r\n    \"introduction\": \"FPT Software là công ty thành viên thuộc Tập đoàn FPT. Được thành lập từ năm 1999, FPT Software hiện là công ty chuyên cung cấp các dịch vụ và giải pháp phần mềm cho các khách hàng quốc tế, với hơn 20.000 nhân viên, hiện diện tại 27 quốc gia trên toàn cầu. Nhiều năm liền, FPT Software được bình chọn là Nhà Tuyển dụng được yêu thích nhất và nằm trong TOP các công ty có môi trường làm việc tốt nhất châu Á.\",\r\n    \"foundedYear\": 1999,\r\n    \"headquarters\": \"FPT Tower, No.10 Pham Van Bach Street, Dich Vong Ward, Cau Giay District, Hanoi City, Vietnam\",\r\n    \"link\": \"https://www.fpt-software.com/\",\r\n    \"industryId\": [\r\n        12,23,25\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -626,13 +626,13 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{bmwToken}}",
+												"value": "nhn {{fptToken}}",
 												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"title\": \"Sale BMW\",\r\n    \"description\": \"Bán xe BMW Q7\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"Quận 7\",\r\n    \"provinceId\": \"79\",\r\n    \"noOfVacancies\": \"100\",\r\n    \"positionId\": \"3\",\r\n    \"jobCategoryId\": \"7\",\r\n    \"jobTypeId\": \"3\",\r\n    \"salary\": \"42000000\",\r\n    \"tagsId\": [\r\n        7,\r\n        5,\r\n        6\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Biết về xe Audi Q Series\"\r\n        },\r\n        {\r\n            \"content\": \"Am hiểu về lịch sử của BMW\"\r\n        }\r\n    ]\r\n}",
+											"raw": "{\r\n    \"title\": \"Admin Intern\",\r\n    \"description\": \"Hỗ trợ team EX Design trong các task admin, bao gồm: Book phòng họp, request logistics (nếu cần). Sắp xếp lịch họp và gửi meeting request. Xử lý hồ sơ thanh toán. Một số công việc khác theo yêu cầu của mentor.\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"\",\r\n    \"provinceId\": \"1\",\r\n    \"noOfVacancies\": \"1\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"24\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"\",\r\n    \"tagsId\": [],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Tiếng Anh tốt (không yêu cầu phải giao tiếp)\"\r\n        },\r\n        {\r\n            \"content\": \"Có hứng thú về Content Creative, Social Media, Event Planner...\"\r\n        },\r\n        {\r\n            \"content\": \"Ngoan và chịu khó\"\r\n        }\r\n    ]\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -993,7 +993,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn {{ungvien5Token}}",
+										"value": "nhn {{fptToken}}",
 										"type": "text"
 									}
 								],
@@ -1002,14 +1002,14 @@
 									"formdata": [
 										{
 											"key": "user",
-											"value": "{\n    \"fullName\": \"ungvien5 check fullnameU\",\n    \"email\": \"ungvien5@gmail.com\",\n    \"phone\": \"01122667788\",\n    \"dob\": \"999278000000\",\n    \"gender\": true,\n    \"address\": \"ungvien5qq img1U\"\n}",
+											"value": "{\n    \"fullName\": \"Fpt employer\",\n    \"email\": \"fpt.employer1@gmail.com\",\n    \"phone\": \"0321483243\",\n    \"dob\": \"0\",\n    \"gender\": false,\n    \"address\": \"\"\n}",
 											"contentType": "application/json",
 											"type": "text"
 										},
 										{
 											"key": "file",
 											"type": "file",
-											"src": []
+											"src": "/F:/Learning/Đồ án ngành/company/y-nghia-logo-fpt-lan-3.jpg"
 										}
 									]
 								},
@@ -1033,90 +1033,8 @@
 			]
 		},
 		{
-			"name": "[PASSED] auth",
+			"name": "auth",
 			"item": [
-				{
-					"name": "authenticate",
-					"item": [
-						{
-							"name": "authenticate",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI4ODI3MSwiaWF0IjoxNjYzMjUyMjcxfQ.FSblWIq3sCE5kouhpPH4iQzkU3BepoVgVAc2x87d5Vs",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{port-8080}}/auth/login",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "logout",
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MzI5NDA3OSwiaWF0IjoxNjYzMjU4MDc5fQ.HC1drwBqXapqb4zT0WJlBxNfs-XtDEk6v7LYjXVaku4",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{port-8080}}/auth/logout",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
 				{
 					"name": "currentUser",
 					"request": {
@@ -1156,7 +1074,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien6\",\r\n    \"password\": \"ungvien6\",\r\n    \"email\": \"ungvien6@gmail.com\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
+							"raw": "{\r\n    \"username\": \"fpt\",\r\n    \"password\": \"fpt\",\r\n    \"email\": \"fpt@gmail.com\",\r\n    \"role\": \"COMPANY\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1183,7 +1101,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien1\",\r\n    \"password\": \"cccc\"\r\n}",
+							"raw": "{\r\n    \"username\": \"fpt\",\r\n    \"password\": \"fpt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1286,7 +1204,7 @@
 									"variable": [
 										{
 											"key": "company-user-id",
-											"value": "136"
+											"value": "151"
 										}
 									]
 								}
