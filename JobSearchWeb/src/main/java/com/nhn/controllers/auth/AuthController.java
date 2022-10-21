@@ -80,6 +80,11 @@ public class AuthController {
 
             User user = userRepository.findUserByUsername(loginRequest.getUsername());
             if (user != null) {
+                if (user.getCompany() != null && !user.isActive())
+                    return ResponseEntity
+                            .status(HttpStatus.BAD_REQUEST)
+                            .body(new RespondObject("Account deactivated", "Company user deactivated", null));
+
                 Map<String, String> accessTokenMap = new HashMap<>();
                 accessTokenMap.put("username", user.getUsername());
                 accessTokenMap.put("role", user.getRole());

@@ -4,7 +4,7 @@ import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
-import com.nhn.model.request.AdminUserInsertRequest;
+import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
 import com.nhn.model.request.EmailDetails;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
@@ -110,33 +110,33 @@ public class UserController {
                 );
     }
 
-    @PostMapping("")
-    ResponseEntity<RespondObject> insert(@RequestBody @Valid AdminUserInsertRequest req) {
-        try {
-            UserDTO userSaved = userService.add(req);
-
-            if (userSaved != null) {
-                EmailDetails emailDetails = new EmailDetails();
-                emailDetails.setRecipient(userSaved.getEmail());
-                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
-                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
-
-                emailService.sendSimpleMail(emailDetails);
-
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Save user successfully", userSaved)
-                );
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                        new RespondObject("Failed", "Save user failed", "")
-                );
-            }
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    new RespondObject("Failed", "Error", ex.getMessage())
-            );
-        }
-    }
+//    @PostMapping("")
+//    ResponseEntity<RespondObject> insert(@RequestBody @Valid AdminUserInsertRequest req) {
+//        try {
+//            UserDTO userSaved = userService.add(req);
+//
+//            if (userSaved != null) {
+//                EmailDetails emailDetails = new EmailDetails();
+//                emailDetails.setRecipient(userSaved.getEmail());
+//                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
+//                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
+//
+//                emailService.sendSimpleMail(emailDetails);
+//
+//                return ResponseEntity.status(HttpStatus.OK).body(
+//                        new RespondObject("OK", "Save user successfully", userSaved)
+//                );
+//            } else {
+//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+//                        new RespondObject("Failed", "Save user failed", "")
+//                );
+//            }
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+//                    new RespondObject("Failed", "Error", ex.getMessage())
+//            );
+//        }
+//    }
 
 //    @PutMapping("/{username}")
 //    ResponseEntity<RespondObject> upsert(@PathVariable String username,

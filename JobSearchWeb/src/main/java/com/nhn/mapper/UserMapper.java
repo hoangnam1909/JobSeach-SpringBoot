@@ -6,7 +6,8 @@ import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
-import com.nhn.model.request.AdminUserInsertRequest;
+import com.nhn.model.request.admin_request.candidate.AdminAddUserRequest;
+import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
 import com.nhn.model.request.UserSignupRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.model.response.CurrentUserResponse;
@@ -68,6 +69,30 @@ public class UserMapper {
             Company company = new Company();
             user.setCompany(companyRepository.save(company));
         } else if (req.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+            Candidate candidate = new Candidate();
+            user.setCandidate(candidateRepository.save(candidate));
+        }
+
+        return user;
+    }
+
+    public User toEntity(AdminAddUserRequest request, String role) {
+        User user = new User();
+
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setRole(role);
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setDob(request.getDob());
+        user.setGender(request.isGender());
+        user.setAddress(request.getAddress());
+
+        if (role.equals(Constant.USER_ROLE.COMPANY)) {
+            Company company = new Company();
+            user.setCompany(companyRepository.save(company));
+        } else if (role.equals(Constant.USER_ROLE.CANDIDATE)) {
             Candidate candidate = new Candidate();
             user.setCandidate(candidateRepository.save(candidate));
         }
