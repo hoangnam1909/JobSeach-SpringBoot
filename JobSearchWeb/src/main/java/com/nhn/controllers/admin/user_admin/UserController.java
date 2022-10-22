@@ -44,20 +44,6 @@ public class UserController {
     @Autowired
     private SpecificationConverter specificationConverter;
 
-//    @GetMapping("/username/{username}")
-//    ResponseEntity<RespondObject> findByFullNameAndGender(@PathVariable("username") String username) {
-////        Specification<User> specifications = Specification.where(UserSpecification.containsUsername(username));
-//        List<UserDTO> userDTOS = userMapper.toDTOList(userRepository.findAll(where(containsUsername(username))));
-//
-//        return !userDTOS.isEmpty() ?
-//                ResponseEntity.status(HttpStatus.OK).body(
-//                        new RespondObject("OK", "Users found", userDTOS)
-//                ) :
-//                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-//                        new RespondObject("FAIL", "Users not found", "")
-//                );
-//    }
-
     @GetMapping("")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @RequestParam(name = "page", defaultValue = "1") String page) {
@@ -109,72 +95,6 @@ public class UserController {
                         new RespondObject("FAIL", "User not found", "")
                 );
     }
-
-//    @PostMapping("")
-//    ResponseEntity<RespondObject> insert(@RequestBody @Valid AdminUserInsertRequest req) {
-//        try {
-//            UserDTO userSaved = userService.add(req);
-//
-//            if (userSaved != null) {
-//                EmailDetails emailDetails = new EmailDetails();
-//                emailDetails.setRecipient(userSaved.getEmail());
-//                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
-//                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
-//
-//                emailService.sendSimpleMail(emailDetails);
-//
-//                return ResponseEntity.status(HttpStatus.OK).body(
-//                        new RespondObject("OK", "Save user successfully", userSaved)
-//                );
-//            } else {
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-//                        new RespondObject("Failed", "Save user failed", "")
-//                );
-//            }
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-//                    new RespondObject("Failed", "Error", ex.getMessage())
-//            );
-//        }
-//    }
-
-//    @PutMapping("/{username}")
-//    ResponseEntity<RespondObject> upsert(@PathVariable String username,
-//                                         @RequestBody UpdateUserRequest request) {
-//        try {
-//            UserDTO userDTO = userService.updateUser(username, request);
-//            return ResponseEntity.status(HttpStatus.OK).body(
-//                    new RespondObject("OK", "Update User successfully", userDTO)
-//            );
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-//                    new RespondObject("Error", "Bad request", ex.getMessage())
-//            );
-//        }
-//    }
-
-//    @PutMapping(value = "/{username}", consumes = {
-//            MediaType.APPLICATION_JSON_VALUE,
-//            MediaType.MULTIPART_FORM_DATA_VALUE
-//    })
-//    @Transactional
-//    ResponseEntity<RespondObject> testImage(@PathVariable(name = "username") @Valid @RegisteredUsername String username,
-//                                            @RequestPart("user") UpdateUserRequest request,
-//                                            @RequestPart("file") MultipartFile file) {
-//
-//        try {
-//            User user = userService.update(request, file);
-//
-//            return ResponseEntity.status(HttpStatus.OK).body(
-//                    new RespondObject("Ok", "Save user successfully", user)
-//            );
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-//                    new RespondObject("Failed", "Error", ex.getMessage())
-//            );
-//        }
-//    }
 
     @DeleteMapping("/{id}")
     ResponseEntity<RespondObject> delete(@PathVariable int id) {

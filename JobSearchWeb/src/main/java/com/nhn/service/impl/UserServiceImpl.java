@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public UserDTO add(User user, MultipartFile file) {
+    public UserDTO addOrUpdate(User user, MultipartFile file) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String rawPassword = user.getPassword();
         System.err.println(rawPassword);

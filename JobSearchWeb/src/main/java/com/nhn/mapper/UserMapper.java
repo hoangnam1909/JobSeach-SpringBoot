@@ -7,12 +7,14 @@ import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.admin_request.candidate.AdminAddUserRequest;
+import com.nhn.model.request.admin_request.candidate.AdminUpdateUserRequest;
 import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
 import com.nhn.model.request.UserSignupRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
+import com.nhn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,9 @@ import java.util.List;
 
 @Component
 public class UserMapper {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -96,6 +101,25 @@ public class UserMapper {
             Candidate candidate = new Candidate();
             user.setCandidate(candidateRepository.save(candidate));
         }
+
+        return user;
+    }
+
+    public User toEntity(AdminUpdateUserRequest request, String role) {
+        User user = userRepository.findUserByIdAndRole(request.getId(), Constant.USER_ROLE.CANDIDATE);
+        if (user == null)
+            return null;
+
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setRole(Constant.USER_ROLE.CANDIDATE);
+        user.setActive(request.isActive());
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setDob(request.getDob());
+        user.setGender(request.isGender());
+        user.setAddress(request.getAddress());
 
         return user;
     }
