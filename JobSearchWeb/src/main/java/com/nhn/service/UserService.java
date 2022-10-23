@@ -16,4 +16,8 @@ public interface UserService extends UserDetailsService {
 
     User update(String username, UpdateUserRequest request, MultipartFile file);
 
+    User updateProfileInfo(String username, UpdateUserRequest request);
+
+    User updateAvatar(String username, MultipartFile file);
+
 }

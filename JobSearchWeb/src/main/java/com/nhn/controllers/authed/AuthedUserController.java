@@ -55,4 +55,48 @@ public class AuthedUserController {
         }
     }
 
+    @PutMapping("/update-profile-info")
+    @Transactional
+    ResponseEntity<RespondObject> updateProfileInfo(@RequestPart("user") @Valid UpdateUserRequest request) {
+
+        try {
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String username = jwtUtils.extractUsername(accessToken);
+
+            User user = userService.updateProfileInfo(username, request);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save user successfully", user)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
+    @PutMapping(value = "/update-user-avatar", consumes = {
+            MediaType.MULTIPART_FORM_DATA_VALUE
+    })
+    @Transactional
+    ResponseEntity<RespondObject> updateProfileAvatar(@RequestPart("file") MultipartFile file) {
+
+        try {
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String username = jwtUtils.extractUsername(accessToken);
+
+            User user = userService.updateAvatar(username, file);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save user successfully", user)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
 }

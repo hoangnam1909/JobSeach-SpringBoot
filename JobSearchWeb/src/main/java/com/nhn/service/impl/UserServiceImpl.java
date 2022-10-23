@@ -117,6 +117,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User updateProfileInfo(String username, UpdateUserRequest request) {
+        User userUpdating = userRepository.findUserByUsername(username);
+        User user = userMapper.toEntity(userUpdating, request);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateAvatar(String username, MultipartFile file) {
+        User user = userRepository.findUserByUsername(username);
+
+        if (!file.isEmpty()) {
+            Map r = null;
+            try {
+                r = this.cloudinary.uploader().upload(file.getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            assert r != null;
+            user.setAvatar((String) r.get("secure_url"));
+        }
+
+        return userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.userRepository.findByUsername(username);
         if (users.isEmpty())
