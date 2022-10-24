@@ -57,7 +57,7 @@ public class CandidateController {
 
     @PutMapping("/update-candidate-info")
     @Transactional
-    ResponseEntity<RespondObject> updateCandidateInfo(@RequestPart("user") @Valid CandidateRequest request) {
+    ResponseEntity<RespondObject> updateCandidateInfo(@RequestBody @Valid CandidateRequest request) {
 
         try {
             String accessToken = servletRequest.getHeader("authorization").substring(4);

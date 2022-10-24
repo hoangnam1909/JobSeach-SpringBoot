@@ -57,7 +57,7 @@ public class AuthedUserController {
 
     @PutMapping("/update-profile-info")
     @Transactional
-    ResponseEntity<RespondObject> updateProfileInfo(@RequestPart("user") @Valid UpdateUserRequest request) {
+    ResponseEntity<RespondObject> updateProfileInfo(@RequestBody @Valid UpdateUserRequest request) {
 
         try {
             String accessToken = servletRequest.getHeader("authorization").substring(4);
