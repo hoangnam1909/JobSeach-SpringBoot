@@ -1288,6 +1288,78 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "industry",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{bmwToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/company/api/industry",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"industry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{bmwToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/company/api/industry/:industry-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"industry",
+										":industry-id"
+									],
+									"variable": [
+										{
+											"key": "industry-id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
