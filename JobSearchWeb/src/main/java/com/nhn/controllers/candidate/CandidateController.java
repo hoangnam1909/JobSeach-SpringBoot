@@ -30,7 +30,7 @@ public class CandidateController {
     @Autowired
     private HttpServletRequest servletRequest;
 
-    @PutMapping(value = "/update-candidate-info", consumes = {
+    @PutMapping(value = "/old/update-candidate-info", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })
@@ -46,6 +46,50 @@ public class CandidateController {
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save candidate info successfully", candidate)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
+    @PutMapping("/update-candidate-info")
+    @Transactional
+    ResponseEntity<RespondObject> updateCandidateInfo(@RequestPart("user") @Valid CandidateRequest request) {
+
+        try {
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String candidateUsername = jwtUtils.extractUsername(accessToken);
+
+            Candidate candidate = candidateService.updateInfo(candidateUsername, request);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save candidate info successfully", candidate)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
+    @PutMapping(value = "/update-candidate-cv", consumes = {
+            MediaType.MULTIPART_FORM_DATA_VALUE
+    })
+    @Transactional
+    ResponseEntity<RespondObject> updateCandidateCV(@RequestPart("file") MultipartFile file) {
+
+        try {
+            String accessToken = servletRequest.getHeader("authorization").substring(4);
+            String candidateUsername = jwtUtils.extractUsername(accessToken);
+
+            Candidate candidate = candidateService.updateCV(candidateUsername, file);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save candidate cv successfully", candidate)
             );
         } catch (Exception ex) {
             ex.printStackTrace();
