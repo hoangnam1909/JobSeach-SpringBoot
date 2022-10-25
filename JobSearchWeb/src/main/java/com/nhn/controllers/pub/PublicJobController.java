@@ -88,7 +88,7 @@ public class PublicJobController {
             JobSpecification specification = specificationConverter.jobSpecification(params);
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by(Job_.DATE_PUBLISHED).descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
@@ -107,7 +107,7 @@ public class PublicJobController {
             JobSpecification specification = new JobSpecification();
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by(Job_.DATE_PUBLISHED).descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
