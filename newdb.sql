@@ -70,7 +70,7 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,10,'ungvien4 link','https://res.cloudinary.com/nhn1909/image/upload/v1665760711/jcbieum3pg4dykcmeuvh.jpg'),(48,3,'ungvien5 LinkedIn','https://res.cloudinary.com/nhn1909/image/upload/v1665850946/rrohi1lmglfjrjina9ec.jpg'),(49,0,NULL,NULL),(50,0,NULL,NULL),(51,0,NULL,NULL),(52,0,NULL,NULL);
+INSERT INTO `candidate` VALUES (1,10,NULL,NULL),(39,3,'link','cv ne hehe'),(40,NULL,NULL,NULL),(41,10,'all properties','all properties'),(42,190901,'test add lang skill2',NULL),(44,0,NULL,NULL),(45,0,NULL,NULL),(46,0,NULL,NULL),(47,10,'ungvien4 link','https://res.cloudinary.com/nhn1909/image/upload/v1665760711/jcbieum3pg4dykcmeuvh.jpg'),(48,7,'ungvien5 LinkedIn updatebody','https://res.cloudinary.com/nhn1909/image/upload/v1666621276/d3fsyv7zn1c3bokirfqu.png'),(49,0,NULL,NULL),(50,0,NULL,NULL),(51,0,NULL,NULL),(52,0,NULL,NULL);
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,13 +117,12 @@ CREATE TABLE `company` (
   `id` int NOT NULL AUTO_INCREMENT,
   `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `company_size` int DEFAULT '0',
-  `contact_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_tel` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `contact_address` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
   `introduction` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
-  `founded_year` int DEFAULT '0',
   `headquarters` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `founded_year` date DEFAULT NULL,
   `link` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -135,7 +134,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (21,'BMW Group Update',10000,'company updt1','company updt1','company updt1','company updt1','company updt1',0,'company updt1','company updt1'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,'AUDI AG',NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!',0,'Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','http://www.audi.com'),(23,'M-Service (MOMO)',499,'Công Ty Cổ Phần Dịch Vụ Di Động Trực Tuyến','02854147667','hotro@momo.vn','Lầu 6, Toà nhà Phú Mỹ Hưng, số 8 Hoàng Văn Thái, khu phố 1, Phường Tân Phú, Quận 7, Thành phố Hồ Chí Minh','Công ty Cổ phần Dịch vụ Di Động Trực tuyến (viết tắt M_Service) là công FinTech được thành lập từ 2007. M_Service hoạt động chính trong lĩnh vực thanh toán trên di động (mobile payment) dưới thương hiệu MoMo. Công ty đã được Ngân hàng Nhà nước Việt Nam cấp phép cung cấp dịch vụ Ví điện tử và Dịch vụ chuyển tiền, thu hộ/chi hộ…',2007,'Tầng 6, tòa nhà Mercury, số 444 Hoàng Hoa Thám, Phường Thụy Khuê, Quận Tây Hồ, Thành phố Hà Nội','https://momo.vn'),(24,'Intel Corporation',10000,'Intel','02854147667','ApplyAssistance@intel.com','Lot I2, D1 Road, Saigon Hi-Tech Park District 9','Tập đoàn Intel thành lập năm 1968 tại Santa Clara, California, Hoa Kỳ, là nhà sản xuất các sản phẩm như chip vi xử lý cho máy tính, bo mạch chủ, ổ nhớ flash, card mạng và các thiết bị máy tính khác.',1968,'Santa Clara, California, Hoa Kỳ','https://www.intel.vn'),(25,'FPT Software',10000,'FPT','02437689048','recruitment@fsoft.com.vn','FPT Cau Giay Building, Duy Tan Street, Dich Vong Hau Ward, Cau Giay District, Hanoi City, Vietnam','FPT Software là công ty thành viên thuộc Tập đoàn FPT. Được thành lập từ năm 1999, FPT Software hiện là công ty chuyên cung cấp các dịch vụ và giải pháp phần mềm cho các khách hàng quốc tế, với hơn 20.000 nhân viên, hiện diện tại 27 quốc gia trên toàn cầu. Nhiều năm liền, FPT Software được bình chọn là Nhà Tuyển dụng được yêu thích nhất và nằm trong TOP các công ty có môi trường làm việc tốt nhất châu Á.',1999,'FPT Tower, No.10 Pham Van Bach Street, Dich Vong Ward, Cau Giay District, Hanoi City, Vietnam','https://www.fpt-software.com/'),(26,'n/a',0,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL);
+INSERT INTO `company` VALUES (21,'BMW Group Update',10000,'company updt1','company updt1','company updt1','company updt1','company updt1','1984-01-01','company updt1'),(22,'Audi AG Aktiengesellschaft - Motor Vehicle Manufacturing',10001,NULL,NULL,'NSU Straße 1, Neckarsulm, Baden-Wuerttemberg 74148, DE','#WeAreProgress ++ Progress is in our DNA. It’s not just in our cars, but also in us. The focus at Audi is on us – the people – and we are shaping the future of mobility together. With our inner drive. With the aim to continuously improve. With our mindset, courage and confidence. Because progress develops in the mind – and in the heart!','Auto-Union-Straße 1, Ingolstadt, Bayern 85045, DE','1958-01-01','http://www.audi.com'),(23,'M-Service (MOMO)',499,'02854147667','hotro@momo.vn','Lầu 6, Toà nhà Phú Mỹ Hưng, số 8 Hoàng Văn Thái, khu phố 1, Phường Tân Phú, Quận 7, Thành phố Hồ Chí Minh','Công ty Cổ phần Dịch vụ Di Động Trực tuyến (viết tắt M_Service) là công FinTech được thành lập từ 2007. M_Service hoạt động chính trong lĩnh vực thanh toán trên di động (mobile payment) dưới thương hiệu MoMo. Công ty đã được Ngân hàng Nhà nước Việt Nam cấp phép cung cấp dịch vụ Ví điện tử và Dịch vụ chuyển tiền, thu hộ/chi hộ…','Tầng 6, tòa nhà Mercury, số 444 Hoàng Hoa Thám, Phường Thụy Khuê, Quận Tây Hồ, Thành phố Hà Nội','1865-01-01','https://momo.vn'),(24,'Intel Corporation',10000,'02854147667','ApplyAssistance@intel.com','Lot I2, D1 Road, Saigon Hi-Tech Park District 9','Tập đoàn Intel thành lập năm 1968 tại Santa Clara, California, Hoa Kỳ, là nhà sản xuất các sản phẩm như chip vi xử lý cho máy tính, bo mạch chủ, ổ nhớ flash, card mạng và các thiết bị máy tính khác.','Santa Clara, California, Hoa Kỳ','1968-01-01','https://www.intel.vn'),(25,'FPT Software',10000,'02437689048','recruitment@fsoft.com.vn','FPT Cau Giay Building, Duy Tan Street, Dich Vong Hau Ward, Cau Giay District, Hanoi City, Vietnam','FPT Software là công ty thành viên thuộc Tập đoàn FPT. Được thành lập từ năm 1999, FPT Software hiện là công ty chuyên cung cấp các dịch vụ và giải pháp phần mềm cho các khách hàng quốc tế, với hơn 20.000 nhân viên, hiện diện tại 27 quốc gia trên toàn cầu. Nhiều năm liền, FPT Software được bình chọn là Nhà Tuyển dụng được yêu thích nhất và nằm trong TOP các công ty có môi trường làm việc tốt nhất châu Á.','FPT Tower, No.10 Pham Van Bach Street, Dich Vong Ward, Cau Giay District, Hanoi City, Vietnam','2001-01-01','https://www.fpt-software.com/'),(26,'TikTok',5000,'','business-servicesupport@tiktok.com','Tầng 6, 29A Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP Hồ Chí Minh. Danh sách công ty tại Quận 1, TP Hồ Chí Minh, Việt Nam','TikTok is the leading destination for short-form mobile video. Our mission is to inspire creativity and bring joy. TikTok has global offices including Los Angeles, New York, London, Paris, Berlin, Dubai, Mumbai, Singapore, Jakarta, Seoul, and Tokyo.','Santa Monica Blvd, Los Angeles, California US','2014-01-01','https://www.tiktok.com/');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +154,7 @@ CREATE TABLE `company_industry` (
   KEY `fk_comind_ind_idx` (`industry_id`),
   CONSTRAINT `fk_comind_com` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   CONSTRAINT `fk_comind_ind` FOREIGN KEY (`industry_id`) REFERENCES `industry` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +163,7 @@ CREATE TABLE `company_industry` (
 
 LOCK TABLES `company_industry` WRITE;
 /*!40000 ALTER TABLE `company_industry` DISABLE KEYS */;
-INSERT INTO `company_industry` VALUES (7,22,15),(12,21,18),(13,21,15),(14,23,4),(15,23,24),(16,23,25),(17,24,18),(18,24,4),(19,24,23),(20,24,25),(21,24,11),(22,24,12),(23,25,23),(24,25,25),(25,25,12);
+INSERT INTO `company_industry` VALUES (7,22,15),(12,21,18),(13,21,15),(14,23,4),(15,23,24),(16,23,25),(17,24,18),(18,24,4),(19,24,23),(20,24,25),(21,24,11),(22,24,12),(23,25,23),(24,25,25),(25,25,12),(26,26,26),(27,26,12);
 /*!40000 ALTER TABLE `company_industry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +333,7 @@ CREATE TABLE `language` (
   PRIMARY KEY (`id`),
   KEY `fk_language_candidate` (`candidate_id`),
   CONSTRAINT `fk_language_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +342,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41),(50,'Tieng Viet','tieng me de',47),(51,'Tieng Anh','hoc ngu lam',47),(52,'Tiếng Việt','Tiếng mẹ đẻ',48),(53,'Tiếng Anh','hoc ngu lam',48);
+INSERT INTO `language` VALUES (24,'Tiếng Nga','',42),(25,'Tiếng Pháp','',42),(26,'Tiếng Hàn','',42),(46,'Tieng Viet','tieng me de',41),(47,'Tieng Anh','hoc ngu lam',41),(50,'Tieng Viet','tieng me de',47),(51,'Tieng Anh','hoc ngu lam',47),(58,'Tiếng Việt','Tiếng mẹ đẻ',48),(59,'Tiếng Anh','hoc ngu lam updatebody',48);
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +413,7 @@ CREATE TABLE `qualification` (
   PRIMARY KEY (`id`),
   KEY `fk_qualification_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_qualification_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +422,7 @@ CREATE TABLE `qualification` (
 
 LOCK TABLES `qualification` WRITE;
 /*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
-INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41),(21,'Hoc ngu nhat lop',47),(22,'Hoc ngu cap huyen',47),(23,'Hoc ngu cap tinh',47),(24,'GPA Đại học trên 3.6',48),(25,'Sinh viên 5 tốt',48);
+INSERT INTO `qualification` VALUES (15,'Hoc ngu nhat lop',41),(16,'Hoc ngu cap huyen',41),(17,'Hoc ngu cap tinh',41),(21,'Hoc ngu nhat lop',47),(22,'Hoc ngu cap huyen',47),(23,'Hoc ngu cap tinh',47),(30,'GPA Đại học trên 3.6',48),(31,'Sinh viên 5 tốt updatebody',48);
 /*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +441,7 @@ CREATE TABLE `reference` (
   PRIMARY KEY (`id`),
   KEY `fk_reference_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_reference_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +450,7 @@ CREATE TABLE `reference` (
 
 LOCK TABLES `reference` WRITE;
 /*!40000 ALTER TABLE `reference` DISABLE KEYS */;
-INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41),(24,'Facebook','fb.com/huhu',47),(25,'Instagram','ig.com/huhu',47),(26,'Facebook','fb.com/ungvien5',48),(27,'Instagram','ig.com/ungvien5',48);
+INSERT INTO `reference` VALUES (20,'Facebook','fb.com/huhu',41),(21,'Instagram','ig.com/huhu',41),(24,'Facebook','fb.com/huhu',47),(25,'Instagram','ig.com/huhu',47),(32,'Facebook','fb.com/ungvien5',48),(33,'Instagram','ig.com/ungvien5',48);
 /*!40000 ALTER TABLE `reference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,7 +496,7 @@ CREATE TABLE `skill` (
   PRIMARY KEY (`id`),
   KEY `fk_skill_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_skill_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -506,7 +505,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41),(14,'Dev óp','Mát tờ',47),(15,'Tét tơ','rớt môn',47),(16,'Back-end Java','Master',48),(17,'Front-end ReactJS','Beginner',48);
+INSERT INTO `skill` VALUES (1,'Java','Master',42),(10,'Dev óp','Mát tờ',41),(11,'Tét tơ','rớt môn',41),(14,'Dev óp','Mát tờ',47),(15,'Tét tơ','rớt môn',47),(22,'Back-end Java','Master',48),(23,'Front-end ReactJS','Beginner',48);
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +547,7 @@ CREATE TABLE `talent` (
   PRIMARY KEY (`id`),
   KEY `fk_talent_candidate_idx` (`candidate_id`),
   CONSTRAINT `fk_talent_candidate` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +556,7 @@ CREATE TABLE `talent` (
 
 LOCK TABLES `talent` WRITE;
 /*!40000 ALTER TABLE `talent` DISABLE KEYS */;
-INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41),(16,'Xiếc',47),(17,'Hát',47),(18,'Học ngu',47),(19,'Chơi CSGO',48);
+INSERT INTO `talent` VALUES (1,'Đàn',42),(2,'Đấm nhau',42),(3,'Võ mồm',42),(10,'Xiếc',41),(11,'Hát',41),(12,'Học ngu',41),(16,'Xiếc',47),(17,'Hát',47),(18,'Học ngu',47),(22,'Chơi CSGO giỏi updatebody',48);
 /*!40000 ALTER TABLE `talent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +599,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,NULL,NULL,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02'),(128,41,NULL,'ungvien8','$2a$10$iZD92COHYJBWRwX6te.deeESKJ4wVx8PMa4jwPhKYH0Vgcp/aFPdK','https://res.cloudinary.com/nhn1909/image/upload/v1666431249/zecxigoii1i37s5ehhk0.jpg','CANDIDATE',1,'Ứng viên 8','ungvien8@gmail.com','0484329391','1970-01-01',0,'Ứng viên 8 địa chỉ',NULL),(129,42,NULL,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','https://res.cloudinary.com/nhn1909/image/upload/v1666541363/um08rtunh2n2lfhw7kbi.jpg','CANDIDATE',0,'Ứng viên 2 update','ungvien2.update@gmail.com','0547657465','1970-01-01',1,'Địa chỉ của ứng viên 2 đây',NULL),(134,NULL,21,'bmw','$2a$10$mVM7SYjwyP1.Ay/w11gOX.SzAQDsb3uwaAQVZ39kZMBSzqfAOq.nq','https://res.cloudinary.com/nhn1909/image/upload/v1651908635/jfvfqvmwniucfe28lcez.jpg','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL),(136,NULL,22,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','https://res.cloudinary.com/nhn1909/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56'),(137,46,NULL,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02'),(146,47,NULL,'ungvien4','$2a$10$cpCdGksuwrWmK10b146Q/OGlQwXLpHRK9fskXr0hA/gOWdlTXvxCW','https://res.cloudinary.com/nhn1909/image/upload/v1665681659/wxrl9km2jzflyn2gtivl.jpg','CANDIDATE',1,'ungvien4 fullnameU','ungvien4 emailU','ungvien4 phoneU','2001-09-09',1,'ungvien4 img1U','2022-10-13 22:19:36'),(147,48,NULL,'ungvien5','$2a$10$O4zm4ilIF7fkbIOp50T7UOTu6YErOKrFRGEca3xhGdr14IAHDtVEG','https://res.cloudinary.com/nhn1909/image/upload/v1665764409/vx019dcu1vchcmlybz2p.jpg','CANDIDATE',1,'ungvien5 check fullnameU','ungvien5@gmail.com','01122667788','2001-09-01',1,'ungvien5qq img1U','2022-10-13 22:19:54'),(148,49,NULL,'ungvien6','$2a$10$aK5UQynWBys.AG94l2tP1.ZjiV2N8d6JVaU8.3GO57jmOJJaYp8Qy','https://res.cloudinary.com/nhn1909/image/upload/v1665763667/llvt6gz7iojeaovonrcb.jpg','CANDIDATE',1,'ungvien6 check fullnameU','ungvien6@gmail.com','01122334455','2001-09-09',1,'ungvien6qq img1U','2022-10-13 22:20:05'),(149,NULL,23,'momo','$2a$10$SSy9rLaiejiZy1yNb1Xj5uU6ye4n9BuHd2hWCo9zE/1T3NPV28sR6','https://res.cloudinary.com/nhn1909/image/upload/v1666168826/ngeau7hurdmrnamfvgpu.png','COMPANY',0,'momo company','momo@gmail.com','02854147667','1970-01-01',1,'Lầu 6, Toà nhà Phú Mỹ Hưng, số 8 Hoàng Văn Thái, khu phố 1, Phường Tân Phú, Quận 7, Thành phố Hồ Chí Minh','2022-10-19 15:32:07'),(150,NULL,24,'intel','$2a$10$wEMBufn1tSeh2LBp7MeavO.0H03w..QW8GI3dWoHCZx9ebIYQbwaS','https://res.cloudinary.com/nhn1909/image/upload/v1666170593/w1tt9qwlgqiefweg5e9j.png','COMPANY',0,'Intel employer','intel.employer1@gmail.com','0321843386','1970-01-01',1,'','2022-10-19 16:01:19'),(151,NULL,25,'fpt','$2a$10$mWvtSQ3OC3fNPaRXIZbJqO0wDMgjNBvrvpWf0CWw69j6FgE2OWH3y','https://res.cloudinary.com/nhn1909/image/upload/v1666171508/jd0wa8ct3spcghxhfeoc.jpg','COMPANY',0,'Fpt employer','fpt.employer1@gmail.com','0321483243','1970-01-01',0,'','2022-10-19 16:19:13'),(152,52,NULL,'ungvien7','$2a$10$135gveVKVuTE9nY9mY30UeEROVLtdZO4DsvYtgXSrC.S4gI/zgbee','https://res.cloudinary.com/nhn1909/image/upload/v1666364414/mde5wf9l1nk8yhqc7vty.jpg','CANDIDATE',0,'Ứng viên 7','ungvien7@gmail.com','0485729391','1970-01-01',1,'Ứng viên 7 địa chỉ','2022-10-21 22:00:14'),(154,NULL,26,'companyAdminTest','$2a$10$RX/WLBp7kd7Anyh2UYN1pOQPwP2Vxxsver8gzQQiMv3D2Q9a6xq7q','https://res.cloudinary.com/nhn1909/image/upload/v1666365626/b83cmdqqw9qgqwcz6ivp.jpg','COMPANY',1,'companyAdminTest','companyAdminTest@gmail.com','0485722391','1970-01-01',0,'companyAdminTest địa chỉ','2022-10-21 22:20:26');
+INSERT INTO `user` VALUES (4,NULL,NULL,'admin','$2a$10$hZnZYzt2JVptfVGAOK59POfuGAT/Ba1f5YI8dDY/qQGfuUDFB8CKu','https://res.cloudinary.com/dxorabap0/image/upload/v1659263863/nelb30hnkj3iljs45vqb.jpg','ADMIN',1,'Nguyễn Hoàng Nam','admin@gmail.com','014324325','2001-09-19',0,'quận Bình Thạnh, thành phố Hồ Chí Minh','2022-05-05 13:19:02'),(128,41,NULL,'ungvien8','$2a$10$iZD92COHYJBWRwX6te.deeESKJ4wVx8PMa4jwPhKYH0Vgcp/aFPdK','https://res.cloudinary.com/nhn1909/image/upload/v1666431249/zecxigoii1i37s5ehhk0.jpg','CANDIDATE',1,'Ứng viên 8','ungvien8@gmail.com','0484329391','1970-01-01',0,'Ứng viên 8 địa chỉ',NULL),(129,42,NULL,'ungvien2','$2a$12$qI7rd2J91n4qTfdXq9iHzeTtszwP16Gv9PJDkh4l1HkSzqN2o/sVq','https://res.cloudinary.com/nhn1909/image/upload/v1666541363/um08rtunh2n2lfhw7kbi.jpg','CANDIDATE',0,'Ứng viên 2 update body','ungvien2.updatebody@gmail.com','0547657333','2022-10-07',0,'Địa chỉ của ứng viên 2 update body đây',NULL),(134,NULL,21,'bmw','$2a$10$mVM7SYjwyP1.Ay/w11gOX.SzAQDsb3uwaAQVZ39kZMBSzqfAOq.nq','https://res.cloudinary.com/nhn1909/image/upload/v1651908635/jfvfqvmwniucfe28lcez.jpg','COMPANY',0,NULL,'company@gmail.com',NULL,NULL,0,NULL,NULL),(136,NULL,22,'audi','$2a$12$pilX/gx1.tPviGdIj1X4ouSo3.2nswjEX8lDwvHoMcVxMZVouFBjy','https://res.cloudinary.com/nhn1909/image/upload/v1651837322/tslkce327ci4n33bakug.jpg','COMPANY',0,'Audi Automotive manufacture','audi@gmail.com','01234567','2001-09-19',0,'Thành phố Hồ Chí Minh','2022-09-23 00:22:56'),(137,46,NULL,'ungvien3','$2a$10$ss0i7xM1Ux8Pfa6C2yEM3.E/dJJIbe95wK/TX0kxQ2GN0bpE3xXeW','https://res.cloudinary.com/nhn1909/image/upload/v1665305687/ervwexpzqr6gdoyxneeh.jpg','CANDIDATE',1,'update img1','update1 email','update1 phone','2000-05-11',1,'update img1','2022-10-07 11:09:02'),(146,47,NULL,'ungvien4','$2a$10$cpCdGksuwrWmK10b146Q/OGlQwXLpHRK9fskXr0hA/gOWdlTXvxCW','https://res.cloudinary.com/nhn1909/image/upload/v1665681659/wxrl9km2jzflyn2gtivl.jpg','CANDIDATE',1,'ungvien4 fullnameU','ungvien4 emailU','ungvien4 phoneU','2001-09-09',1,'ungvien4 img1U','2022-10-13 22:19:36'),(147,48,NULL,'ungvien5','$2a$10$O4zm4ilIF7fkbIOp50T7UOTu6YErOKrFRGEca3xhGdr14IAHDtVEG','https://res.cloudinary.com/nhn1909/image/upload/v1665764409/vx019dcu1vchcmlybz2p.jpg','CANDIDATE',1,'ungvien5 check fullnameU','ungvien5@gmail.com','01122667788','2001-09-01',1,'ungvien5qq img1U','2022-10-13 22:19:54'),(148,49,NULL,'ungvien6','$2a$10$aK5UQynWBys.AG94l2tP1.ZjiV2N8d6JVaU8.3GO57jmOJJaYp8Qy','https://res.cloudinary.com/nhn1909/image/upload/v1665763667/llvt6gz7iojeaovonrcb.jpg','CANDIDATE',1,'ungvien6 check fullnameU','ungvien6@gmail.com','01122334455','2001-09-09',1,'ungvien6qq img1U','2022-10-13 22:20:05'),(149,NULL,23,'momo','$2a$10$SSy9rLaiejiZy1yNb1Xj5uU6ye4n9BuHd2hWCo9zE/1T3NPV28sR6','https://res.cloudinary.com/nhn1909/image/upload/v1666168826/ngeau7hurdmrnamfvgpu.png','COMPANY',0,'momo company','momo@gmail.com','02854147667','1970-01-01',1,'Lầu 6, Toà nhà Phú Mỹ Hưng, số 8 Hoàng Văn Thái, khu phố 1, Phường Tân Phú, Quận 7, Thành phố Hồ Chí Minh','2022-10-19 15:32:07'),(150,NULL,24,'intel','$2a$10$wEMBufn1tSeh2LBp7MeavO.0H03w..QW8GI3dWoHCZx9ebIYQbwaS','https://res.cloudinary.com/nhn1909/image/upload/v1666170593/w1tt9qwlgqiefweg5e9j.png','COMPANY',0,'Intel employer','intel.employer1@gmail.com','0321843386','1970-01-01',1,'','2022-10-19 16:01:19'),(151,NULL,25,'fpt','$2a$10$mWvtSQ3OC3fNPaRXIZbJqO0wDMgjNBvrvpWf0CWw69j6FgE2OWH3y','https://res.cloudinary.com/nhn1909/image/upload/v1666171508/jd0wa8ct3spcghxhfeoc.jpg','COMPANY',0,'Fpt employer','fpt.employer1@gmail.com','0321483243','1970-01-01',0,'','2022-10-19 16:19:13'),(152,52,NULL,'ungvien7','$2a$10$135gveVKVuTE9nY9mY30UeEROVLtdZO4DsvYtgXSrC.S4gI/zgbee','https://res.cloudinary.com/nhn1909/image/upload/v1666364414/mde5wf9l1nk8yhqc7vty.jpg','CANDIDATE',0,'Ứng viên 7','ungvien7@gmail.com','0485729391','1970-01-01',1,'Ứng viên 7 địa chỉ','2022-10-21 22:00:14'),(154,NULL,26,'tiktok','$2a$10$dv8btLkxaO5528t/3AAgMujFU7xYY6pE8BjXUMtQ8//ZUO09J1XDa','https://res.cloudinary.com/nhn1909/image/upload/v1666365626/b83cmdqqw9qgqwcz6ivp.jpg','COMPANY',1,'companyAdminTest','companyAdminTest@gmail.com','0485722391','1970-01-01',0,'companyAdminTest địa chỉ','2022-10-21 22:20:26');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -621,7 +620,7 @@ CREATE TABLE `work_experience` (
   PRIMARY KEY (`id`),
   KEY `fk_candidate_id_idx` (`candidate_id`),
   CONSTRAINT `fk_candidate_id` FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -630,7 +629,7 @@ CREATE TABLE `work_experience` (
 
 LOCK TABLES `work_experience` WRITE;
 /*!40000 ALTER TABLE `work_experience` DISABLE KEYS */;
-INSERT INTO `work_experience` VALUES (3,NULL,NULL,'TMA','Intern',1),(4,NULL,NULL,'Viettel','Fresher',1),(5,NULL,NULL,'TMA Solution','Product Manager',42),(6,NULL,NULL,'CityNow','Senior',42);
+INSERT INTO `work_experience` VALUES (3,NULL,NULL,'TMA','Intern',1),(4,NULL,NULL,'Viettel','Fresher',1),(5,NULL,NULL,'TMA Solution','Product Manager',42),(6,NULL,NULL,'CityNow','Senior',42),(7,'1970-01-02','1970-01-07','Proplayer CSGO','IGL',48);
 /*!40000 ALTER TABLE `work_experience` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -643,4 +642,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-23 23:18:27
+-- Dump completed on 2022-10-25 14:19:33

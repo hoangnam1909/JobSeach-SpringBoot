@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -32,10 +33,6 @@ public class Company {
     private int companySize;
 
     @Basic
-    @Column(name = "contact_name")
-    private String contactName;
-
-    @Basic
     @Column(name = "contact_tel")
     private String contactTel;
 
@@ -53,7 +50,7 @@ public class Company {
 
     @Basic
     @Column(name = "founded_year")
-    private int foundedYear;
+    private Date foundedYear;
 
     @Basic
     @Column(name = "headquarters")

@@ -15,7 +15,46 @@
 				},
 				{
 					"name": "company",
-					"item": []
+					"item": [
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{tiktokToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companyName\": \"TikTok\",\r\n    \"companySize\": 5000,\r\n    \"contactTel\": \"\",\r\n    \"contactEmail\": \"business-servicesupport@tiktok.com\",\r\n    \"contactAddress\": \"Tầng 6, 29A Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP Hồ Chí Minh. Danh sách công ty tại Quận 1, TP Hồ Chí Minh, Việt Nam\",\r\n    \"introduction\": \"TikTok is the leading destination for short-form mobile video. Our mission is to inspire creativity and bring joy. TikTok has global offices including Los Angeles, New York, London, Paris, Berlin, Dubai, Mumbai, Singapore, Jakarta, Seoul, and Tokyo.\",\r\n    \"foundedYear\": 1388509200000,\r\n    \"headquarters\": \"Santa Monica Blvd, Los Angeles, California US\",\r\n    \"link\": \"https://www.tiktok.com/\",\r\n    \"industryId\": [\r\n        12,26\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/company/api",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "job",
@@ -826,13 +865,13 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn {{fptToken}}",
+										"value": "nhn {{tiktokToken}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"companyName\": \"FPT Software\",\r\n    \"companySize\": 10000,\r\n    \"contactName\": \"FPT\",\r\n    \"contactTel\": \"02437689048\",\r\n    \"contactEmail\": \"recruitment@fsoft.com.vn\",\r\n    \"contactAddress\": \"FPT Cau Giay Building, Duy Tan Street, Dich Vong Hau Ward, Cau Giay District, Hanoi City, Vietnam\",\r\n    \"introduction\": \"FPT Software là công ty thành viên thuộc Tập đoàn FPT. Được thành lập từ năm 1999, FPT Software hiện là công ty chuyên cung cấp các dịch vụ và giải pháp phần mềm cho các khách hàng quốc tế, với hơn 20.000 nhân viên, hiện diện tại 27 quốc gia trên toàn cầu. Nhiều năm liền, FPT Software được bình chọn là Nhà Tuyển dụng được yêu thích nhất và nằm trong TOP các công ty có môi trường làm việc tốt nhất châu Á.\",\r\n    \"foundedYear\": 1999,\r\n    \"headquarters\": \"FPT Tower, No.10 Pham Van Bach Street, Dich Vong Ward, Cau Giay District, Hanoi City, Vietnam\",\r\n    \"link\": \"https://www.fpt-software.com/\",\r\n    \"industryId\": [\r\n        12,23,25\r\n    ]\r\n}",
+									"raw": "{\r\n    \"companyName\": \"TikTok\",\r\n    \"companySize\": 5000,\r\n    \"contactTel\": \"\",\r\n    \"contactEmail\": \"business-servicesupport@tiktok.com\",\r\n    \"contactAddress\": \"Tầng 6, 29A Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP Hồ Chí Minh. Danh sách công ty tại Quận 1, TP Hồ Chí Minh, Việt Nam\",\r\n    \"introduction\": \"TikTok is the leading destination for short-form mobile video. Our mission is to inspire creativity and bring joy. TikTok has global offices including Los Angeles, New York, London, Paris, Berlin, Dubai, Mumbai, Singapore, Jakarta, Seoul, and Tokyo.\",\r\n    \"foundedYear\": 1388509200000,\r\n    \"headquarters\": \"Santa Monica Blvd, Los Angeles, California US\",\r\n    \"link\": \"https://www.tiktok.com/\",\r\n    \"industryId\": [\r\n        12,26\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1653,7 +1692,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ungvien2\",\r\n    \"password\": \"ungvien2\"\r\n}",
+							"raw": "{\r\n    \"username\": \"tiktok\",\r\n    \"password\": \"tiktok\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

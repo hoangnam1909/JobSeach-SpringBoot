@@ -11,7 +11,6 @@ public class CompanyMapper {
 
         company.setCompanyName(request.getCompanyName());
         company.setCompanySize(request.getCompanySize());
-        company.setContactName(request.getContactName());
         company.setContactTel(request.getContactTel());
         company.setContactEmail(request.getContactEmail());
         company.setContactAddress(request.getContactAddress());

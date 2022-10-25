@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -27,7 +28,7 @@ public class UpdateCompanyRequest {
 
     private String introduction;
 
-    private int foundedYear;
+    private Date foundedYear;
 
     private String headquarters;
 
