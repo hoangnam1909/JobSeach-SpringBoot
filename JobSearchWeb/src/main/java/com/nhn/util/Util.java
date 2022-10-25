@@ -1,4 +1,4 @@
-package com.nhn.Util;
+package com.nhn.util;
 
 import java.util.regex.Pattern;
 

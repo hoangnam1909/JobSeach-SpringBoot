@@ -1,7 +1,7 @@
 package com.nhn.controllers.company;
 
-import com.nhn.Util.DateUtils;
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.DateUtils;
+import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.ApplyJob;
 import com.nhn.entity.Job;

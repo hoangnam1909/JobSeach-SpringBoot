@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a4fd3142-eb79-4cd1-ba36-4b237aa7cc2d",
+		"_postman_id": "62c90ca8-adc0-4eca-a6ec-29b4cdc3e9b4",
 		"name": "[PASSED] JobSearch SpringBoot API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20495476"
@@ -948,7 +948,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{audiToken}}",
+												"value": "nhn {{fptToken}}",
 												"type": "text"
 											}
 										],
@@ -1659,6 +1659,33 @@
 					"response": []
 				},
 				{
+					"name": "refreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"a8a5912c-41b8-49bd-bf7a-f4a63470f081\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/auth/refresh-token",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "signup",
 					"request": {
 						"method": "POST",
@@ -1692,7 +1719,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tiktok\",\r\n    \"password\": \"tiktok\"\r\n}",
+							"raw": "{\r\n    \"username\": \"fpt\",\r\n    \"password\": \"fpt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

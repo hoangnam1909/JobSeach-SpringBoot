@@ -1,7 +1,7 @@
 package com.nhn.controllers.auth;
 
-import com.nhn.Util.EmailUtil;
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.EmailUtil;
+import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
@@ -14,6 +14,7 @@ import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -90,6 +92,7 @@ public class AuthController {
                 accessTokenMap.put("role", user.getRole());
                 accessTokenMap.put("avatar", user.getAvatar());
                 accessTokenMap.put("accessToken", jwtUtils.generateToken(user));
+                accessTokenMap.put("refreshToken", user.getRefreshToken());
 
                 return ResponseEntity
                         .status(HttpStatus.OK)
@@ -103,6 +106,48 @@ public class AuthController {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body(new RespondObject("Login failed", "User logged in, please logout and try again", ""));
+        }
+    }
+
+    @GetMapping("/generate-refresh-token")
+    public ResponseEntity<RespondObject> generateRefreshToken() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new RespondObject("Ok", "Refresh token", UUID.randomUUID().toString()));
+    }
+
+    /*
+            Đăng nhập thường
+     */
+    @PostMapping("/refresh-token")
+    public ResponseEntity<RespondObject> refreshToken(@RequestBody Map<String, String> request) {
+
+        String refreshToken = request.get("refreshToken");
+        User user = userRepository.findUserByRefreshToken(refreshToken);
+        if (user == null)
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new RespondObject("Not found", "No refresh token found", refreshToken));
+
+        if (user.isActive()) {
+            Map<String, String> accessTokenMap = new HashMap<>();
+            accessTokenMap.put("username", user.getUsername());
+            accessTokenMap.put("role", user.getRole());
+            accessTokenMap.put("avatar", user.getAvatar());
+            accessTokenMap.put("accessToken", jwtUtils.generateToken(user));
+
+            String newRefreshToken = UUID.randomUUID().toString();
+            user.setRefreshToken(newRefreshToken);
+            userRepository.save(user);
+            accessTokenMap.put("refreshToken", newRefreshToken);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new RespondObject("Ok", "New access token", accessTokenMap));
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(new RespondObject("Failed", "Account disabled", null));
         }
     }
 

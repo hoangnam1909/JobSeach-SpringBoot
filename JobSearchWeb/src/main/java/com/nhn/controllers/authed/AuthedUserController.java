@@ -1,6 +1,6 @@
 package com.nhn.controllers.authed;
 
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.model.request.authed_request.UpdateUserRequest;

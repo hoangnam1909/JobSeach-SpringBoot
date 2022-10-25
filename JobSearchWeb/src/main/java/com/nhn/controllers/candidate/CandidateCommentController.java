@@ -1,6 +1,6 @@
 package com.nhn.controllers.candidate;
 
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
 import com.nhn.mapper.CommentMapper;

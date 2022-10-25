@@ -1,6 +1,6 @@
 package com.nhn.filter;
 
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.JwtUtils;
 import com.nhn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

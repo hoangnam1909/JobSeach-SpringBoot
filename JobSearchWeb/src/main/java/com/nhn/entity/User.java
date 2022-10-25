@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user", schema = "jobsearchingnew")
@@ -73,6 +74,10 @@ public class User {
     private String address;
 
     @Basic
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    @Basic
     @Column(name = "joined_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
@@ -106,6 +111,8 @@ public class User {
 
         if (avatar == null)
             avatar = "https://res.cloudinary.com/nhn1909/image/upload/v1642074622/tb-avatar-none_r1c2ye.jpg";
+
+        refreshToken = UUID.randomUUID().toString();
     }
 
 }

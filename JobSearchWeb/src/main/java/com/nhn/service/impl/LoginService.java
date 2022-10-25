@@ -1,6 +1,6 @@
 package com.nhn.service.impl;
 
-import com.nhn.Util.JwtUtils;
+import com.nhn.util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Candidate;

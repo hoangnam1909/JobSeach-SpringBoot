@@ -20,5 +20,7 @@ public class JobEnum {
     public static final String IS_APPLYING = "isApplying";
 
     public static final String AVAILABLE = "available";
+    public static final String DATE_PUBLISHED = "datePublished";
+
 
 }

@@ -3,6 +3,7 @@ package com.nhn.controllers.pub;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
+import com.nhn.entity.Job_;
 import com.nhn.entity.User;
 import com.nhn.repository.JobRepository;
 import com.nhn.specifications.JobSpecification;
@@ -60,7 +61,7 @@ public class PublicJobController {
         JobSpecification specification = new JobSpecification();
         specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-        List<Job> foundJobs = jobRepository.findAll(specification);
+        List<Job> foundJobs = jobRepository.findAll(specification, Sort.by(Job_.DATE_PUBLISHED).descending());
 
         return foundJobs.size() > 0 ?
                 ResponseEntity.status(HttpStatus.OK).body(
@@ -87,7 +88,7 @@ public class PublicJobController {
             JobSpecification specification = specificationConverter.jobSpecification(params);
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
@@ -106,7 +107,7 @@ public class PublicJobController {
             JobSpecification specification = new JobSpecification();
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 

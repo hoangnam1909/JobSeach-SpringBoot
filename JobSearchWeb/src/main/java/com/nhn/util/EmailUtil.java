@@ -1,4 +1,4 @@
-package com.nhn.Util;
+package com.nhn.util;
 
 import com.nhn.entity.User;
 import com.nhn.model.request.EmailDetails;

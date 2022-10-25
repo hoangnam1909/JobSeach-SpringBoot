@@ -1,9 +1,10 @@
-package com.nhn.Util;
+package com.nhn.util;
 
 import com.nhn.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,18 @@ import java.util.function.Function;
 @Service
 public class JwtUtils {
 
-    private final String secret = "javatechie";
+    private String secret;
+    private int jwtExpirationInMs;
+
+    @Value("${jwt.secret}")
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    @Value("${jwt.expirationDateInMs}")
+    public void setJwtExpirationInMs(int jwtExpirationInMs) {
+        this.jwtExpirationInMs = jwtExpirationInMs;
+    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -30,13 +42,13 @@ public class JwtUtils {
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-//    private Boolean isTokenExpired(String token) {
-//        return extractExpiration(token).before(new Date());
-//    }
+    public Boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
@@ -49,15 +61,15 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // exp sau 10h
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs * 60L)) // so phut
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-        return (username.equals(userDetails.getUsername()));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+//        return (username.equals(userDetails.getUsername()));
     }
 
 }
