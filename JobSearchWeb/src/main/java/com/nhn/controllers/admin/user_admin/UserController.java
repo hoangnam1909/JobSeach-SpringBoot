@@ -3,9 +3,6 @@ package com.nhn.controllers.admin.user_admin;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
-import com.nhn.model.UserDTO;
-import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
-import com.nhn.model.request.EmailDetails;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
@@ -20,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 

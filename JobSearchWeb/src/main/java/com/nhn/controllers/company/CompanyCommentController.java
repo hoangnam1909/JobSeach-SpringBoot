@@ -1,12 +1,12 @@
 package com.nhn.controllers.company;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
 import com.nhn.entity.User;
 import com.nhn.repository.CommentRepository;
 import com.nhn.repository.UserRepository;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

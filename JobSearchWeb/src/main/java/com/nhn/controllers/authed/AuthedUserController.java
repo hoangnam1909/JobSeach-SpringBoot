@@ -1,10 +1,10 @@
 package com.nhn.controllers.authed;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.service.UserService;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

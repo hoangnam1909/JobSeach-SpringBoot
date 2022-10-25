@@ -1,10 +1,10 @@
 package com.nhn.controllers.candidate;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Candidate;
 import com.nhn.model.request.CandidateRequest;
 import com.nhn.service.CandidateService;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,6 +1,5 @@
 package com.nhn.service.impl;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Candidate;
@@ -13,6 +12,7 @@ import com.nhn.model.request.UserSignupRequest;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

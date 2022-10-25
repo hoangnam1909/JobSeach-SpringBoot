@@ -4,7 +4,6 @@ import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
 import com.nhn.entity.Job_;
-import com.nhn.entity.User;
 import com.nhn.repository.JobRepository;
 import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;

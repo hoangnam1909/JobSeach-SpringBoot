@@ -1,6 +1,5 @@
 package com.nhn.controllers.company;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.ApplyJob;
 import com.nhn.entity.Job;
@@ -9,6 +8,7 @@ import com.nhn.repository.ApplyJobRepository;
 import com.nhn.repository.JobRepository;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.ApplyJobService;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

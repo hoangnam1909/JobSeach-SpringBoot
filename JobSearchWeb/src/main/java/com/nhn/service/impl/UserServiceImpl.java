@@ -5,8 +5,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
-import com.nhn.model.request.admin_request.candidate.AdminAddUserRequest;
-import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;

@@ -1,10 +1,10 @@
 package com.nhn.controllers.company;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Company;
 import com.nhn.model.request.UpdateCompanyRequest;
 import com.nhn.service.CompanyService;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

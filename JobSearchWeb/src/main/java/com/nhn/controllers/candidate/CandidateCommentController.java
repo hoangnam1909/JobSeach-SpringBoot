@@ -1,6 +1,5 @@
 package com.nhn.controllers.candidate;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Comment;
 import com.nhn.mapper.CommentMapper;
@@ -8,6 +7,7 @@ import com.nhn.model.request.InsertCommentRequest;
 import com.nhn.model.response.SimpleCommentResponse;
 import com.nhn.repository.CommentRepository;
 import com.nhn.service.CommentService;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

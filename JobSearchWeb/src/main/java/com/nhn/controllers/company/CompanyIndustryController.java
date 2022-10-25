@@ -2,8 +2,6 @@ package com.nhn.controllers.company;
 
 import com.nhn.common.RespondObject;
 import com.nhn.entity.Industry;
-import com.nhn.entity.Job;
-import com.nhn.entity.User;
 import com.nhn.repository.IndustryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

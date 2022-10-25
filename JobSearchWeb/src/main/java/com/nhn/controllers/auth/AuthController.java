@@ -1,7 +1,5 @@
 package com.nhn.controllers.auth;
 
-import com.nhn.util.EmailUtil;
-import com.nhn.util.JwtUtils;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
@@ -14,7 +12,8 @@ import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
-import io.jsonwebtoken.impl.DefaultClaims;
+import com.nhn.util.EmailUtil;
+import com.nhn.util.JwtUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

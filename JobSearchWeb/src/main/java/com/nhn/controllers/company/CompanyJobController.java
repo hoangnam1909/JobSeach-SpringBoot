@@ -1,6 +1,5 @@
 package com.nhn.controllers.company;
 
-import com.nhn.util.JwtUtils;
 import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
@@ -15,6 +14,7 @@ import com.nhn.specifications.JobSpecification;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
+import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
