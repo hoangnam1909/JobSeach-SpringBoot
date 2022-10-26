@@ -1,5 +1,6 @@
 package com.nhn.controllers.admin.user_admin;
 
+import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
@@ -58,6 +59,30 @@ public class AdminUserController {
                 :
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject(HttpStatus.NOT_FOUND.name(), "No users found", ""));
+    }
+
+    @GetMapping("/get-all-company")
+    ResponseEntity<RespondObject> getAllCompany() {
+
+        List<User> users = userRepository.findAllByRole(Constant.USER_ROLE.COMPANY);
+        return users.size() > 0 ?
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject(HttpStatus.OK.name(), "Company users found", users))
+                :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject(HttpStatus.NOT_FOUND.name(), "No company users found", ""));
+    }
+
+    @GetMapping("/get-all-candidate")
+    ResponseEntity<RespondObject> getAllCandidate() {
+
+        List<User> users = userRepository.findAllByRole(Constant.USER_ROLE.CANDIDATE);
+        return users.size() > 0 ?
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject(HttpStatus.OK.name(), "Candidate users found", users))
+                :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject(HttpStatus.NOT_FOUND.name(), "No candidate users found", ""));
     }
 
     @PostMapping("/get")

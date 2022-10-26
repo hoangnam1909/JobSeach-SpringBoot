@@ -47,6 +47,68 @@
 									"response": []
 								},
 								{
+									"name": "getAllCompany",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/get-all-company",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"get-all-company"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getAllCandidate",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/get-all-candidate",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"get-all-candidate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "getByUserId",
 									"request": {
 										"method": "GET",
