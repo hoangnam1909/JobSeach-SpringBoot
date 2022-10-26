@@ -156,7 +156,6 @@ public class UserMapper {
 
         user.setGender(request.isGender());
         user.setAddress(request.getAddress());
-        user.setRole(request.getRole());
         user.setActive(request.isActive());
 
         return user;

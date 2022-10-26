@@ -31,8 +31,6 @@ public class AdminUpdateUserRequest {
 
     private String address;
 
-    private String role;
-
     private boolean active;
 
 }
