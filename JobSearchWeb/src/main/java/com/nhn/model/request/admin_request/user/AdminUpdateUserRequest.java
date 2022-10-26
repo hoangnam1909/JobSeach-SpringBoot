@@ -14,7 +14,6 @@ import java.util.Date;
 @Data
 public class AdminUpdateUserRequest {
 
-    @NotBlank
     private String rawPassword;
 
     private String fullName;
