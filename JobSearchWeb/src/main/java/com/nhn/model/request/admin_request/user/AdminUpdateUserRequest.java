@@ -1,8 +1,5 @@
-package com.nhn.model.request.admin_request.candidate;
+package com.nhn.model.request.admin_request.user;
 
-import com.nhn.valid.UnregisteredEmail;
-import com.nhn.valid.UnregisteredPhoneNumber;
-import com.nhn.valid.UnregisteredUsername;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -17,25 +14,15 @@ import java.util.Date;
 @Data
 public class AdminUpdateUserRequest {
 
-    private int id;
-
     @NotBlank
-    @UnregisteredUsername
-    private String username;
-
-    @NotBlank
-    private String password;
-
-    @NotBlank
-    @Email
-    @UnregisteredEmail
-    private String email;
-
-    private boolean active;
+    private String rawPassword;
 
     private String fullName;
 
-    @UnregisteredPhoneNumber
+    @NotBlank
+    @Email
+    private String email;
+
     @Size(min = 9, max = 12)
     private String phone;
 
@@ -44,5 +31,9 @@ public class AdminUpdateUserRequest {
     private boolean gender;
 
     private String address;
+
+    private String role;
+
+    private boolean active;
 
 }

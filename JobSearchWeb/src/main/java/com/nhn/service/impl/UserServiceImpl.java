@@ -4,7 +4,6 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
-import com.nhn.model.UserDTO;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.UserService;
@@ -16,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,30 +36,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private Cloudinary cloudinary;
-
-    @Override
-    @Transactional
-    public UserDTO addOrUpdate(User user, MultipartFile file) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String rawPassword = user.getPassword();
-        System.err.println(rawPassword);
-        user.setPassword(passwordEncoder.encode(rawPassword));
-
-        if (!file.isEmpty()) {
-            Map r = null;
-            try {
-                r = this.cloudinary.uploader().upload(file.getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            assert r != null;
-            user.setAvatar((String) r.get("secure_url"));
-        }
-
-        return userMapper.toDTO(userRepository.save(user));
-    }
 
 //    @Override
 //    public UserDTO updateUser(String username, UpdateUserRequest request) {

@@ -10,49 +10,496 @@
 			"name": "admin",
 			"item": [
 				{
-					"name": "candidate",
-					"item": []
-				},
-				{
-					"name": "company",
+					"name": "user",
 					"item": [
 						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "nhn {{tiktokToken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"companyName\": \"TikTok\",\r\n    \"companySize\": 5000,\r\n    \"contactTel\": \"\",\r\n    \"contactEmail\": \"business-servicesupport@tiktok.com\",\r\n    \"contactAddress\": \"Tầng 6, 29A Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP Hồ Chí Minh. Danh sách công ty tại Quận 1, TP Hồ Chí Minh, Việt Nam\",\r\n    \"introduction\": \"TikTok is the leading destination for short-form mobile video. Our mission is to inspire creativity and bring joy. TikTok has global offices including Los Angeles, New York, London, Paris, Berlin, Dubai, Mumbai, Singapore, Jakarta, Seoul, and Tokyo.\",\r\n    \"foundedYear\": 1388509200000,\r\n    \"headquarters\": \"Santa Monica Blvd, Los Angeles, California US\",\r\n    \"link\": \"https://www.tiktok.com/\",\r\n    \"industryId\": [\r\n        12,26\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "self",
+							"item": [
+								{
+									"name": "getAll",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/get-all",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"get-all"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "{{port-8080}}/company/api",
-									"host": [
-										"{{port-8080}}"
-									],
-									"path": [
-										"company",
-										"api"
-									]
+								{
+									"name": "getByUserId",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/:user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												":user-id"
+											],
+											"variable": [
+												{
+													"key": "user-id",
+													"value": "155"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getByCondition",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/get",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"get"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "size",
+													"value": "5",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "addUserInfo",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"ungvien9\",\r\n    \"rawPassword\": \"ungvien9\",\r\n    \"email\": \"ungvien9@gmail.com\",\r\n    \"fullName\": \"Ứng viên 9\",\r\n    \"phone\": \"05473237333\",\r\n    \"dob\": 1665115742000,\r\n    \"gender\": true,\r\n    \"address\": \"Địa chỉ của ứng viên 9\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/add/user-info",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"add",
+												"user-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserInfo",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"rawPassword\": \"ungvien9update\",\r\n    \"fullName\": \"Ứng viên 9 update\",\r\n    \"email\": \"ungvien9update@gmail.com\",\r\n    \"phone\": \"05473237333\",\r\n    \"dob\": 1665115742000,\r\n    \"gender\": true,\r\n    \"address\": \"Địa chỉ của ứng viên 9update\",\r\n    \"role\": \"CANDIDATE\",\r\n    \"active\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/update-user-info/:user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"update-user-info",
+												":user-id"
+											],
+											"variable": [
+												{
+													"key": "user-id",
+													"value": "155"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateUserAvatar",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/F:/Meme/jerry.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/update-user-avatar/:user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"update-user-avatar",
+												":user-id"
+											],
+											"variable": [
+												{
+													"key": "user-id",
+													"value": "155"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "activate",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/activate/:user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"activate",
+												":user-id"
+											],
+											"variable": [
+												{
+													"key": "user-id",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deactivate",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/deactivate/:user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"deactivate",
+												":user-id"
+											],
+											"variable": [
+												{
+													"key": "user-id",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
+						},
+						{
+							"name": "candidate",
+							"item": [
+								{
+									"name": "updateCandidateInfo",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"yearsExp\": 5,\r\n    \"linkedin\": \"ungvien3 LinkedIn updatebody\",\r\n    \"languageRequests\": [\r\n        {\r\n            \"name\": \"Tiếng Việt\",\r\n            \"description\": \"Tiếng mẹ đẻ\"\r\n        }\r\n    ],\r\n    \"qualificationRequests\": [\r\n        {\r\n            \"name\": \"GPA Đại học trên 3.2\"\r\n        },\r\n        {\r\n            \"name\": \"Sinh viên 5 tốt\"\r\n        },\r\n        {\r\n            \"name\": \"Học bổng đầu vào\"\r\n        }\r\n    ],\r\n    \"referenceRequests\": [\r\n        {\r\n            \"name\": \"Facebook\",\r\n            \"link\": \"fb.com/ungvien3\"\r\n        },\r\n        {\r\n            \"name\": \"Youtube\",\r\n            \"link\": \"youtube.com/ungvien3\"\r\n        }\r\n    ],\r\n    \"skillRequests\": [\r\n        {\r\n            \"name\": \"Back-end Java\",\r\n            \"level\": \"Master\"\r\n        }\r\n    ],\r\n    \"talentRequests\": [\r\n        {\r\n            \"content\": \"Chơi cầu lông giỏi\"\r\n        }\r\n    ],\r\n    \"workExperienceRequests\": [\r\n        {\r\n            \"fromDate\": 12312543232,\r\n            \"toDate\": 534565435878,\r\n            \"content\": \"Proplayer CSGO\",\r\n            \"position\": \"IGL\"\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/candidate/update-candidate-info/:candidate-user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"candidate",
+												"update-candidate-info",
+												":candidate-user-id"
+											],
+											"variable": [
+												{
+													"key": "candidate-user-id",
+													"value": "137"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateCandidateCV",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/F:/Meme/cfd9fc0733e84b631884c6cea2c65ba9.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/candidate/update-candidate-cv/:candidate-user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"candidate",
+												"update-candidate-cv",
+												":candidate-user-id"
+											],
+											"variable": [
+												{
+													"key": "candidate-user-id",
+													"value": "137"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "company",
+							"item": [
+								{
+									"name": "update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{tiktokToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"companyName\": \"TikTok\",\r\n    \"companySize\": 5000,\r\n    \"contactTel\": \"\",\r\n    \"contactEmail\": \"business-servicesupport@tiktok.com\",\r\n    \"contactAddress\": \"Tầng 6, 29A Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, TP Hồ Chí Minh. Danh sách công ty tại Quận 1, TP Hồ Chí Minh, Việt Nam\",\r\n    \"introduction\": \"TikTok is the leading destination for short-form mobile video. Our mission is to inspire creativity and bring joy. TikTok has global offices including Los Angeles, New York, London, Paris, Berlin, Dubai, Mumbai, Singapore, Jakarta, Seoul, and Tokyo.\",\r\n    \"foundedYear\": 1388509200000,\r\n    \"headquarters\": \"Santa Monica Blvd, Los Angeles, California US\",\r\n    \"link\": \"https://www.tiktok.com/\",\r\n    \"industryId\": [\r\n        12,26\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/company/update/:company-user-id",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"company",
+												"update",
+												":company-user-id"
+											],
+											"variable": [
+												{
+													"key": "company-user-id",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
@@ -242,422 +689,6 @@
 								}
 							},
 							"response": []
-						}
-					]
-				},
-				{
-					"name": "user",
-					"item": [
-						{
-							"name": "candidate",
-							"item": [
-								{
-									"name": "getAll",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/candidate/user",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"candidate",
-												"user"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "getById",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/candidate/user/:candidate-user-id",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"candidate",
-												"user",
-												":candidate-user-id"
-											],
-											"variable": [
-												{
-													"key": "candidate-user-id",
-													"value": "129"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "add",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "user",
-													"value": "{\n    \"username\": \"ungvien8\",\n    \"password\": \"ungvien8\",\n    \"email\": \"ungvien8@gmail.com\",\n    \"fullName\": \"Ứng viên 8\",\n    \"phone\": \"0484329391\",\n    \"dob\": 0,\n    \"gender\": true,\n    \"address\": \"Ứng viên 8 địa chỉ\"\n}",
-													"contentType": "application/json",
-													"type": "text"
-												},
-												{
-													"key": "file",
-													"type": "file",
-													"src": "/F:/Meme/103495389_277595140147247_3695696655521040767_n.jpg"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{port-8080}}/admin/api/candidate/user/add",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"candidate",
-												"user",
-												"add"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "user",
-													"value": "{\n    \"id\": 128,\n    \"username\": \"ungvien8\",\n    \"password\": \"ungvien8\",\n    \"email\": \"ungvien8@gmail.com\",\n    \"active\": true,\n    \"fullName\": \"Ứng viên 8\",\n    \"phone\": \"0484329391\",\n    \"dob\": 0,\n    \"gender\": false,\n    \"address\": \"Ứng viên 8 địa chỉ\"\n}",
-													"contentType": "application/json",
-													"type": "text"
-												},
-												{
-													"key": "file",
-													"type": "file",
-													"src": "/F:/Meme/103495389_277595140147247_3695696655521040767_n.jpg"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{port-8080}}/admin/api/candidate/user/update",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"candidate",
-												"user",
-												"update"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/candidate/user/:candidate-user-id",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"candidate",
-												"user",
-												":candidate-user-id"
-											],
-											"variable": [
-												{
-													"key": "candidate-user-id",
-													"value": "152"
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "company",
-							"item": [
-								{
-									"name": "get",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/company/user",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"company",
-												"user"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "getById",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/company/user/:company-user-id",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"company",
-												"user",
-												":company-user-id"
-											],
-											"variable": [
-												{
-													"key": "company-user-id",
-													"value": "154"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "add",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "formdata",
-											"formdata": [
-												{
-													"key": "user",
-													"value": "{\n    \"username\": \"companyAdminTest\",\n    \"password\": \"companyAdminTest\",\n    \"email\": \"companyAdminTest@gmail.com\",\n    \"fullName\": \"companyAdminTest\",\n    \"phone\": \"0485722391\",\n    \"dob\": 0,\n    \"gender\": false,\n    \"address\": \"companyAdminTest địa chỉ\"\n}",
-													"contentType": "application/json",
-													"type": "text"
-												},
-												{
-													"key": "file",
-													"type": "file",
-													"src": "/F:/Meme/110281652_112533577210345_8584033319832485576_n.jpg"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{port-8080}}/admin/api/company/user/add",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"company",
-												"user",
-												"add"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "activate",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/company/user/activate/:candidate-user-id",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"company",
-												"user",
-												"activate",
-												":candidate-user-id"
-											],
-											"variable": [
-												{
-													"key": "candidate-user-id",
-													"value": "154"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "deactivate",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "nhn {{adminToken}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{port-8080}}/admin/api/company/user/deactivate/:candidate-user-id",
-											"host": [
-												"{{port-8080}}"
-											],
-											"path": [
-												"admin",
-												"api",
-												"company",
-												"user",
-												"deactivate",
-												":candidate-user-id"
-											],
-											"variable": [
-												{
-													"key": "candidate-user-id",
-													"value": "154"
-												}
-											]
-										}
-									},
-									"response": []
-								}
-							]
 						}
 					]
 				}

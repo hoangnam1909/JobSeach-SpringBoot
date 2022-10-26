@@ -28,7 +28,59 @@ public class AdminCandidateController {
     @Autowired
     private CandidateService candidateService;
 
-    @PutMapping(value = "/update/{candidate-user-id}", consumes = {
+    @PutMapping("/update-candidate-info/{candidate-user-id}")
+    @Transactional
+    ResponseEntity<RespondObject> updateCandidateInfo(@PathVariable(name = "candidate-user-id") int candidateUserId,
+                                                      @RequestBody @Valid CandidateRequest request) {
+
+        try {
+            User user = userRepository.findUserByIdAndRole(candidateUserId, Constant.USER_ROLE.CANDIDATE);
+            if (user == null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Fail", "No candidate found", ""));
+
+            Candidate candidate = candidateService.updateInfo(user.getUsername(), request);
+
+            User candidateUser = userRepository.findOneByCandidate(candidate);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save candidate info successfully", candidateUser)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
+    @PutMapping(value = "/update-candidate-cv/{candidate-user-id}", consumes = {
+            MediaType.MULTIPART_FORM_DATA_VALUE
+    })
+    @Transactional
+    ResponseEntity<RespondObject> updateCandidateCV(@PathVariable(name = "candidate-user-id") int candidateUserId,
+                                                    @RequestPart("file") MultipartFile file) {
+
+        try {
+            User user = userRepository.findUserByIdAndRole(candidateUserId, Constant.USER_ROLE.CANDIDATE);
+            if (user == null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("Fail", "No candidate found", ""));
+
+            Candidate candidate = candidateService.updateCV(user.getUsername(), file);
+
+            User candidateUser = userRepository.findOneByCandidate(candidate);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save candidate cv successfully", candidateUser)
+            );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage())
+            );
+        }
+    }
+
+    @PutMapping(value = "/old/update/{candidate-user-id}", consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE
     })

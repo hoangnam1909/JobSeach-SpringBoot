@@ -7,9 +7,8 @@ import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.UserSignupRequest;
-import com.nhn.model.request.admin_request.candidate.AdminAddUserRequest;
-import com.nhn.model.request.admin_request.candidate.AdminUpdateUserRequest;
-import com.nhn.model.request.admin_request.user.AdminUserInsertRequest;
+import com.nhn.model.request.admin_request.user.AdminAddUserRequest;
+import com.nhn.model.request.admin_request.user.AdminUpdateUserRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
 import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.CandidateRepository;
@@ -56,36 +55,35 @@ public class UserMapper {
 //        return user;
 //    }
 
-    public User toEntity(AdminUserInsertRequest req) {
-        User user = new User();
-
-        user.setUsername(req.getUsername());
-        user.setAvatar(req.getAvatar());
-        user.setRole(req.getRole());
-        user.setActive(req.isActive());
-        user.setFullName(req.getFullName());
-        user.setEmail(req.getEmail());
-        user.setPhone(req.getPhone());
-        user.setDob(req.getDob());
-        user.setGender(req.isGender());
-        user.setAddress(req.getAddress());
-
-        if (req.getRole().equals(Constant.USER_ROLE.COMPANY)) {
-            Company company = new Company();
-            user.setCompany(companyRepository.save(company));
-        } else if (req.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
-            Candidate candidate = new Candidate();
-            user.setCandidate(candidateRepository.save(candidate));
-        }
-
-        return user;
-    }
+//    public User toEntity(AdminAddUserRequest req) {
+//        User user = new User();
+//
+//        user.setUsername(req.getUsername());
+//        user.setAvatar(req.getAvatar());
+//        user.setRole(req.getRole());
+//        user.setActive(req.isActive());
+//        user.setFullName(req.getFullName());
+//        user.setEmail(req.getEmail());
+//        user.setPhone(req.getPhone());
+//        user.setDob(req.getDob());
+//        user.setGender(req.isGender());
+//        user.setAddress(req.getAddress());
+//
+//        if (req.getRole().equals(Constant.USER_ROLE.COMPANY)) {
+//            Company company = new Company();
+//            user.setCompany(companyRepository.save(company));
+//        } else if (req.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+//            Candidate candidate = new Candidate();
+//            user.setCandidate(candidateRepository.save(candidate));
+//        }
+//
+//        return user;
+//    }
 
     public User toEntity(AdminAddUserRequest request, String role) {
         User user = new User();
 
         user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
         user.setRole(role);
         user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
@@ -105,24 +103,24 @@ public class UserMapper {
         return user;
     }
 
-    public User toEntity(AdminUpdateUserRequest request, String role) {
-        User user = userRepository.findUserByIdAndRole(request.getId(), Constant.USER_ROLE.CANDIDATE);
-        if (user == null)
-            return null;
-
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
-        user.setRole(Constant.USER_ROLE.CANDIDATE);
-        user.setActive(request.isActive());
-        user.setFullName(request.getFullName());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setDob(request.getDob());
-        user.setGender(request.isGender());
-        user.setAddress(request.getAddress());
-
-        return user;
-    }
+//    public User toEntity(AdminUpdateUserRequest request, String role) {
+//        User user = userRepository.findUserByIdAndRole(request.getId(), Constant.USER_ROLE.CANDIDATE);
+//        if (user == null)
+//            return null;
+//
+//        user.setUsername(request.getUsername());
+//        user.setPassword(request.getPassword());
+//        user.setRole(Constant.USER_ROLE.CANDIDATE);
+//        user.setActive(request.isActive());
+//        user.setFullName(request.getFullName());
+//        user.setEmail(request.getEmail());
+//        user.setPhone(request.getPhone());
+//        user.setDob(request.getDob());
+//        user.setGender(request.isGender());
+//        user.setAddress(request.getAddress());
+//
+//        return user;
+//    }
 
     public User toEntity(UserSignupRequest req) {
         User user = new User();
@@ -145,6 +143,21 @@ public class UserMapper {
         System.err.println(Boolean.parseBoolean(request.getGender()));
         user.setGender(Boolean.parseBoolean(request.getGender()));
         user.setAddress(request.getAddress());
+
+        return user;
+    }
+
+    public User toEntity(User user, AdminUpdateUserRequest request) {
+
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setDob(request.getDob());
+
+        user.setGender(request.isGender());
+        user.setAddress(request.getAddress());
+        user.setRole(request.getRole());
+        user.setActive(request.isActive());
 
         return user;
     }

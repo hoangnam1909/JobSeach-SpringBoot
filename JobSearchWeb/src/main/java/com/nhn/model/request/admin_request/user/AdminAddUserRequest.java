@@ -1,4 +1,4 @@
-package com.nhn.model.request.admin_request.candidate;
+package com.nhn.model.request.admin_request.user;
 
 import com.nhn.valid.UnregisteredEmail;
 import com.nhn.valid.UnregisteredPhoneNumber;
@@ -22,7 +22,7 @@ public class AdminAddUserRequest {
     private String username;
 
     @NotBlank
-    private String password;
+    private String rawPassword;
 
     @NotBlank
     @Email
@@ -40,4 +40,7 @@ public class AdminAddUserRequest {
     private boolean gender;
 
     private String address;
+
+    private String role;
+
 }
