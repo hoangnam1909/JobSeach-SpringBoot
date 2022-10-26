@@ -89,7 +89,154 @@
 									"variable": [
 										{
 											"key": "job-id",
-											"value": "5"
+											"value": "12"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/job/get-list",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"job",
+										"get-list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2Njc2ODcxMywiaWF0IjoxNjY2NzY1MTEzfQ.0SZOmo4Qjcu8umyuKr4-FzKoWZgv_SblP54JBy2FPJw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 12,\r\n    \"title\": \"Sales Administrator - Audi\",\r\n    \"description\": \"Do you want to develop your career working for one of the largest, most progressive motor retailers in the UK? If you are a meticulous professional with experience of sales administration, preferably within the automotive industry, then Milton Keynes Audi are looking for you!\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"\",\r\n    \"provinceId\": \"1\",\r\n    \"noOfVacancies\": \"1\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"27\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"200000000\",\r\n    \"available\": false,\r\n    \"tagsId\": [\r\n        4,\r\n        6,\r\n        2\r\n    ],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"A working knowledge of commercial database systems.\"\r\n        },\r\n        {\r\n            \"content\": \"Strong organisational, communication and interpersonal skills.\"\r\n        },\r\n        {\r\n            \"content\": \"Excellent administration, typing and data entry skills.\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/admin/api/job/update",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"job",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "enable",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/job/enable/:job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"job",
+										"enable",
+										":job-id"
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disable",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/job/disable/:job-id",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"job",
+										"disable",
+										":job-id"
+									],
+									"variable": [
+										{
+											"key": "job-id",
+											"value": "6"
 										}
 									]
 								}
@@ -948,7 +1095,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{fptToken}}",
+												"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcHQiLCJleHAiOjE2NjY3NjY5NTgsImlhdCI6MTY2Njc2MzM1OH0.F6mr-gytc59Dygc8ZxK7WfLpMP79AqH5zgjnUYOusg4",
 												"type": "text"
 											}
 										],
@@ -1583,14 +1730,13 @@
 								"method": "PUT",
 								"header": [
 									{
-										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
 										"key": "Content-Type",
 										"value": "application/json",
 										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn {{ungvien2Token}}",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuMiIsImV4cCI6MTY2Njc2NDE4NCwiaWF0IjoxNjY2NzYwNTg0fQ.7A9ASAvVgnTOAkmTv2n1mWu2rgXYj9E68qbjpk3W3iM",
 										"type": "text"
 									}
 								],
@@ -1600,7 +1746,7 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/F:/Meme/124267951_176449637357456_7782263520772672697_n.jpg"
+											"src": "/C:/Users/nguye/OneDrive/Pictures/parks-and-rec-zoom-background-templates-design-404a59f912de18fe6537bf28aa1e9b04_screen.jpg"
 										}
 									]
 								},
@@ -1719,7 +1865,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"fpt\",\r\n    \"password\": \"fpt\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

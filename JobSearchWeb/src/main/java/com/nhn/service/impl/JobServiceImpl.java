@@ -7,6 +7,7 @@ import com.nhn.mapper.JobMapper;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
 import com.nhn.model.request.RequirementRequest;
+import com.nhn.model.request.admin_request.job.AdminUpdateJobRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.repository.JobTagRepository;
 import com.nhn.repository.RequirementRepository;
@@ -40,6 +41,46 @@ public class JobServiceImpl implements JobService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    @Transactional
+    public Job update(AdminUpdateJobRequest request) {
+        try {
+            Optional<Job> jobOptional = jobRepository.findById(request.getId());
+
+            if (jobOptional.isPresent()) {
+                Job job = jobMapper.toEntity(request);
+
+                jobTagRepository.deleteAll(jobTagRepository.findAllByJobId(request.getId()));
+                for (Integer tagId : request.getTagsId())
+                    jobTagRepository.save(new JobTag(request.getId(), tagId));
+
+                requirementRepository.deleteAll(requirementRepository.findAllByJobId(request.getId()));
+                for (RequirementRequest requirementRequest : request.getRequirements())
+                    requirementRepository.save(new Requirement(requirementRequest.getContent(), job));
+
+                jobRepository.save(job);
+                jobRepository.flush();
+
+                Optional<Job> jobUpdated = jobRepository.findById(request.getId());
+
+                if (jobUpdated.isPresent()) {
+                    jobRepository.flush();
+                    Job jobResult = jobUpdated.get();
+                    entityManager.refresh(jobResult);
+
+                    return jobResult;
+                } else {
+                    return null;
+                }
+            }
+
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     @Transactional

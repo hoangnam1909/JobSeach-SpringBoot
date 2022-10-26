@@ -3,6 +3,7 @@ package com.nhn.mapper;
 import com.nhn.entity.*;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
+import com.nhn.model.request.admin_request.job.AdminUpdateJobRequest;
 import com.nhn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ public class JobMapper {
     private PositionRepository positionRepository;
 
     @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
     private JobCategoryRepository jobCategoryRepository;
 
     @Autowired
@@ -28,6 +32,39 @@ public class JobMapper {
 
     @Autowired
     private ProvinceRepository provinceRepository;
+
+    public Job toEntity(AdminUpdateJobRequest req) {
+        Optional<Job> jobOptional = jobRepository.findById(req.getId());
+        if (jobOptional.isEmpty())
+            return null;
+
+        Job job = jobOptional.get();
+
+        job.setTitle(req.getTitle());
+        job.setDescription(req.getDescription());
+        job.setJobStartDate(req.getJobStartDate());
+
+        job.setAddress(req.getAddress());
+
+        Optional<Province> province = provinceRepository.findById(req.getProvinceId());
+        province.ifPresent(job::setProvince);
+
+        job.setNoOfVacancies(req.getNoOfVacancies());
+
+        Optional<Position> position = positionRepository.findById(req.getPositionId());
+        position.ifPresent(job::setPosition);
+
+        Optional<JobCategory> jobCategory = jobCategoryRepository.findById(req.getJobCategoryId());
+        jobCategory.ifPresent(job::setJobCategory);
+
+        Optional<JobType> jobType = jobTypeRepository.findById(req.getJobTypeId());
+        jobType.ifPresent(job::setJobType);
+
+        job.setSalary(req.getSalary());
+        job.setAvailable(req.isAvailable());
+
+        return job;
+    }
 
     public Job toEntity(CreateJobRequest req) {
         Job job = new Job();
