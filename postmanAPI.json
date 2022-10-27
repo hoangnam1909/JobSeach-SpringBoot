@@ -1760,6 +1760,56 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "candidate",
+					"item": [
+						{
+							"name": "searchCandidate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn  {{audiToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gender\": false,\r\n    \"yearsExp\": 3,\r\n    \"cv\": false\r\n}"
+								},
+								"url": {
+									"raw": "{{port-8080}}/company/api/candidate/search?page=1&size=10",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"company",
+										"api",
+										"candidate",
+										"search"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -2022,23 +2072,52 @@
 				{
 					"name": "forgotPassword",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{port-8080}}/auth/forgot-password/:username",
+							"raw": "{{port-8080}}/auth/forgot-password",
 							"host": [
 								"{{port-8080}}"
 							],
 							"path": [
 								"auth",
-								"forgot-password",
-								":username"
-							],
-							"variable": [
-								{
-									"key": "username",
-									"value": "ungvien1"
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateOTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\",\r\n    \"otp\": \"100074\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{port-8080}}/auth/validate-otp",
+							"host": [
+								"{{port-8080}}"
+							],
+							"path": [
+								"auth",
+								"validate-otp"
 							]
 						}
 					},

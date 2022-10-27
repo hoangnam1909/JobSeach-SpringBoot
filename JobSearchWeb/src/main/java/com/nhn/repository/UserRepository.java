@@ -14,6 +14,8 @@ public interface UserRepository extends JpaRepository<User, Integer>,
 
     User findUserByRefreshToken(String refreshToken);
 
+    User findUserByResetPasswordToken(String resetPasswordToken);
+
     List<User> findAllByRole(String role);
 
     User findUserByIdAndRole(int id, String role);

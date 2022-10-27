@@ -1,14 +1,11 @@
 package com.nhn.specifications;
 
 import com.nhn.common.SearchCriteria;
-import com.nhn.entity.User;
+import com.nhn.entity.*;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +86,27 @@ public class UserSpecification implements Specification<User> {
 
                 predicates.add(builder.not(root.get(criteria.getKey())).in(criteria.getValue()));
 
+            } else if (criteria.getOperation().equals(SearchOperation.YEARS_EXP)) {
+
+                Join<Candidate, User> candidateUserJoin = root.join("candidate");
+                predicates.add(builder.greaterThanOrEqualTo(candidateUserJoin.get(Candidate_.YEARS_EXP), criteria.getValue().toString()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.GENDER)) {
+
+                predicates.add(builder.equal(
+                        root.get(criteria.getKey()).as(Boolean.class), criteria.getValue()));
+
+            } else if (criteria.getOperation().equals(SearchOperation.CV)) {
+
+                Join<Candidate, User> candidateUserJoin = root.join("candidate");
+                System.err.println(Boolean.parseBoolean(criteria.getValue().toString()));
+                if (Boolean.parseBoolean(criteria.getValue().toString())) {
+                    System.err.println("is not empty");
+                    predicates.add(builder.isNotNull(candidateUserJoin.get(Candidate_.CV)));
+                } else {
+                    System.err.println("is empty");
+                    predicates.add(builder.isNull(candidateUserJoin.get(Candidate_.CV)));
+                }
             }
         }
 

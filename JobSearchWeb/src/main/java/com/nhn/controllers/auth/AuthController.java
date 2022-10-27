@@ -12,6 +12,7 @@ import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
 import com.nhn.service.UserService;
 import com.nhn.service.impl.LoginService;
+import com.nhn.service.impl.OTPService;
 import com.nhn.util.EmailUtil;
 import com.nhn.util.JwtUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -58,6 +59,9 @@ public class AuthController {
 
     @Autowired
     private HttpServletRequest servletRequest;
+
+    @Autowired
+    private OTPService otpService;
 
     /*
         Chứng thực với access token
@@ -115,9 +119,6 @@ public class AuthController {
                 .body(new RespondObject("Ok", "Refresh token", UUID.randomUUID().toString()));
     }
 
-    /*
-            Đăng nhập thường
-     */
     @PostMapping("/refresh-token")
     public ResponseEntity<RespondObject> refreshToken(@RequestBody Map<String, String> request) {
 
@@ -150,9 +151,6 @@ public class AuthController {
         }
     }
 
-    /*
-        Đăng nhập thường
-     */
     @PostMapping("/login")
     ResponseEntity<RespondObject> login(@RequestBody @Valid LoginRequest loginRequest) {
 
@@ -182,7 +180,7 @@ public class AuthController {
     }
 
     /*
-        Lấy ra thông tin của user đang đăng nhập
+        Lấy thông tin của user đang đăng nhập
     */
     @GetMapping("/current-user")
     ResponseEntity<RespondObject> getCurrentUser() {
@@ -239,25 +237,78 @@ public class AuthController {
     /*
         Quên mật khẩu
      */
-    @PutMapping("/forgot-password/{username}")
-    ResponseEntity<RespondObject> forgotPassword(@PathVariable(name = "username") String username) {
+    @PostMapping("/forgot-password")
+    ResponseEntity<RespondObject> forgotPassword(@RequestBody Map<String, String> map) {
+        String email = map.get("email");
+//        String otp = RandomStringUtils.randomNumeric(6);
 
-        User user = userRepository.findUserByUsername(username);
+        User user = userRepository.findUserByEmail(email);
         if (user == null)
             return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new RespondObject("Failed", "Could not find user with email = " + email, ""));
+
+        int otp = otpService.generateOTP(email);
+        EmailDetails emailDetails = EmailUtil.otpMailForm(user, String.valueOf(otp));
+        emailService.sendSimpleMail(emailDetails);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new RespondObject("Ok", "A verification code has been sent to email " + user.getEmail(), ""));
+    }
+
+    @PostMapping("/validate-otp")
+    ResponseEntity<RespondObject> validateOtp(@RequestBody Map<String, String> map) {
+        String email = map.get("email");
+        int otp = Integer.parseInt(map.get("otp"));
+//        String otp = RandomStringUtils.randomNumeric(6);
+
+        //Validate the Otp
+        if (otp >= 0) {
+
+            int serverOtp = otpService.getOtp(email);
+            if (serverOtp > 0) {
+                if (otp == serverOtp) {
+                    otpService.clearOTP(email);
+
+                    String token = UUID.randomUUID().toString();
+                    if (userService.updateResetPassword(email, token)) {
+                        return ResponseEntity
+                                .status(HttpStatus.OK)
+                                .body(new RespondObject(HttpStatus.OK.name(), "Reset password token", token));
+                    } else {
+                        return ResponseEntity
+                                .status(HttpStatus.BAD_REQUEST)
+                                .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "Update reset password failed", ""));
+                    }
+                } else {
+                    return ResponseEntity
+                            .status(HttpStatus.BAD_REQUEST)
+                            .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "OTP FAILED", ""));
+                }
+            } else {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "OTP FAILED", ""));
+            }
+        } else {
+            return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(new RespondObject("Failed", "Could not find user with username = " + username, ""));
-        else {
-            String code = RandomStringUtils.randomNumeric(6);
-            System.err.println(code);
+                    .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "OTP FAILED", ""));
+        }
+    }
 
-            EmailDetails emailDetails = EmailUtil.otpMailForm(user, code);
-            emailService.sendSimpleMail(emailDetails);
-
+    @PostMapping("/reset-password")
+    ResponseEntity<RespondObject> resetPassword(@RequestParam(name = "resetPasswordToken") String resetPasswordToken,
+                                                @RequestBody Map<String, String> map) {
+        String newPassword = map.get("newPassword");
+        if (userService.resetPassword(resetPasswordToken, newPassword))
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new RespondObject("Ok", "A verification code has been sent to email " + user.getEmail(), ""));
-        }
+                    .body(new RespondObject(HttpStatus.OK.name(), "Reset password successfully", ""));
+        else
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "Reset password failed", ""));
     }
 
     /*

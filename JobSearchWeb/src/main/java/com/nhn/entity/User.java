@@ -78,6 +78,10 @@ public class User {
     private String refreshToken;
 
     @Basic
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @Basic
     @Column(name = "joined_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;

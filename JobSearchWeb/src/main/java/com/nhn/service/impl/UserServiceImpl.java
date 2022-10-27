@@ -15,15 +15,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -113,6 +111,36 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public boolean updateResetPassword(String email, String token) {
+        try {
+            User user = userRepository.findUserByEmail(email);
+            user.setResetPasswordToken(token);
+
+            userRepository.save(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean resetPassword(String resetPasswordToken, String newPassword) {
+        try {
+            User user = userRepository.findUserByResetPasswordToken(resetPasswordToken);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(passwordEncoder.encode(newPassword));
+
+            userRepository.save(user);
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     @Override

@@ -18,4 +18,8 @@ public interface UserService extends UserDetailsService {
 
     User updateAvatar(String username, MultipartFile file);
 
+    boolean updateResetPassword(String email, String token);
+
+    boolean resetPassword(String resetPasswordToken, String newPassword);
+
 }
