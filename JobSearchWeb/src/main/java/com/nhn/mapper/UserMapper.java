@@ -6,7 +6,7 @@ import com.nhn.entity.Candidate;
 import com.nhn.entity.Company;
 import com.nhn.entity.User;
 import com.nhn.model.UserDTO;
-import com.nhn.model.request.UserSignupRequest;
+import com.nhn.model.request.SignupRequest;
 import com.nhn.model.request.admin_request.user.AdminAddUserRequest;
 import com.nhn.model.request.admin_request.user.AdminUpdateUserRequest;
 import com.nhn.model.request.authed_request.UpdateUserRequest;
@@ -122,7 +122,7 @@ public class UserMapper {
 //        return user;
 //    }
 
-    public User toEntity(UserSignupRequest req) {
+    public User toEntity(SignupRequest req) {
         User user = new User();
 
         user.setUsername(req.getUsername());

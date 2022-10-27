@@ -8,7 +8,7 @@ import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.LoginRequest;
-import com.nhn.model.request.UserSignupRequest;
+import com.nhn.model.request.SignupRequest;
 import com.nhn.repository.CandidateRepository;
 import com.nhn.repository.CompanyRepository;
 import com.nhn.repository.UserRepository;
@@ -35,7 +35,7 @@ public class LoginService {
     @Autowired
     private JwtUtils jwtUtils;
 
-    public UserDTO signUp(UserSignupRequest request) {
+    public UserDTO signUp(SignupRequest request) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         User user = userMapper.toEntity(request);

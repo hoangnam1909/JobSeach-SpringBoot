@@ -6,7 +6,7 @@ import com.nhn.mapper.UserMapper;
 import com.nhn.model.UserDTO;
 import com.nhn.model.request.EmailDetails;
 import com.nhn.model.request.LoginRequest;
-import com.nhn.model.request.UserSignupRequest;
+import com.nhn.model.request.SignupRequest;
 import com.nhn.model.response.CurrentUserResponse;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
@@ -208,7 +208,7 @@ public class AuthController {
         Đăng ký
     */
     @PostMapping("/signup")
-    ResponseEntity<RespondObject> signUp(@RequestBody @Valid UserSignupRequest request) {
+    ResponseEntity<RespondObject> signUp(@RequestBody @Valid SignupRequest request) {
 
         try {
             UserDTO userSaved = loginService.signUp(request);

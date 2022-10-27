@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSignupRequest {
+public class SignupRequest {
 
     @NotBlank
     @UnregisteredUsername

@@ -215,6 +215,47 @@
 										],
 										"body": {
 											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"ungvien10\",\r\n    \"password\": \"ungvien10\",\r\n    \"email\": \"ungvien10@gmail.com\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{port-8080}}/admin/api/user/add/user-info",
+											"host": [
+												"{{port-8080}}"
+											],
+											"path": [
+												"admin",
+												"api",
+												"user",
+												"add",
+												"user-info"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "addUserInfo OLD",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "nhn {{adminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
 											"raw": "{\r\n    \"username\": \"ungvien9\",\r\n    \"rawPassword\": \"ungvien9\",\r\n    \"email\": \"ungvien9@gmail.com\",\r\n    \"fullName\": \"Ứng viên 9\",\r\n    \"phone\": \"05473237333\",\r\n    \"dob\": 1665115742000,\r\n    \"gender\": true,\r\n    \"address\": \"Địa chỉ của ứng viên 9\",\r\n    \"role\": \"CANDIDATE\"\r\n}",
 											"options": {
 												"raw": {
@@ -989,7 +1030,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn {{ungvien5Token}}",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuMyIsImV4cCI6MTY2NjgwNjg5NCwiaWF0IjoxNjY2ODAzMjk0fQ.Wz_1WZpRb-D3S4ghmU5xF_DfWfYX_JycaQeXcRFLmUw",
 										"type": "text"
 									}
 								],

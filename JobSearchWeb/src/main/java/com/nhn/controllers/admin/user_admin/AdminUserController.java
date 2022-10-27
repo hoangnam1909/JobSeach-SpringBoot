@@ -4,11 +4,14 @@ import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.entity.User;
 import com.nhn.mapper.UserMapper;
+import com.nhn.model.UserDTO;
+import com.nhn.model.request.SignupRequest;
 import com.nhn.model.request.admin_request.user.AdminAddUserRequest;
 import com.nhn.model.request.admin_request.user.AdminUpdateUserRequest;
 import com.nhn.repository.UserRepository;
 import com.nhn.service.AdminUserService;
 import com.nhn.service.EmailService;
+import com.nhn.service.impl.LoginService;
 import com.nhn.specifications.SpecificationConverter;
 import com.nhn.specifications.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class AdminUserController {
 
     @Autowired
     private AdminUserService adminUserService;
+
+    @Autowired
+    private LoginService loginService;
 
     @Autowired
     private EmailService emailService;
@@ -137,12 +143,27 @@ public class AdminUserController {
     }
 
     // ================ ADD ================
-    @PostMapping("/add/user-info")
+    @PostMapping("/old/add/user-info")
     @Transactional
-    ResponseEntity<RespondObject> addUserInfo(@RequestBody @Valid AdminAddUserRequest request) {
+    ResponseEntity<RespondObject> addUserInfoOld(@RequestBody @Valid AdminAddUserRequest request) {
 
         try {
             User user = adminUserService.add(request);
+
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new RespondObject("Ok", "Save user successfully", user));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new RespondObject("Failed", "Error", ex.getMessage()));
+        }
+    }
+
+    @PostMapping("/add/user-info")
+    ResponseEntity<RespondObject> addUserInfo(@RequestBody @Valid SignupRequest request) {
+
+        try {
+            UserDTO user = loginService.signUp(request);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save user successfully", user));
