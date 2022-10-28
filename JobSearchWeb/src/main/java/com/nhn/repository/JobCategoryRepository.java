@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface JobCategoryRepository extends JpaRepository<JobCategory, Integer> {
 
-    // bean convention getter declarations for fields to fetch
     interface JobCategoryWithoutJobs {
         Integer getId();
         String getName();

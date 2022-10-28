@@ -1,7 +1,9 @@
 package com.nhn.specifications;
 
 import com.nhn.common.SearchCriteria;
-import com.nhn.entity.*;
+import com.nhn.entity.Candidate;
+import com.nhn.entity.Candidate_;
+import com.nhn.entity.User;
 import com.nhn.specifications.key.SearchOperation;
 import org.springframework.data.jpa.domain.Specification;
 

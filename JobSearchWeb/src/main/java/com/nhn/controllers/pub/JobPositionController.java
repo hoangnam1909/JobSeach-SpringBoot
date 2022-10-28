@@ -1,7 +1,6 @@
 package com.nhn.controllers.pub;
 
 import com.nhn.common.RespondObject;
-import com.nhn.entity.Position;
 import com.nhn.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,14 +23,13 @@ public class JobPositionController {
     @GetMapping("")
     ResponseEntity<RespondObject> getAll() {
 
-        List<Position> positions = positionRepository.findAll();
+        List<PositionRepository.PositionWithoutJobs> positions = positionRepository.findAllBy();
         return positions.size() > 0 ?
                 ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Job positions found", positions)
-                ) :
+                        new RespondObject("OK", "Job positions found", positions))
+                :
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("FAIL", "No job positions found", "")
-                );
+                        new RespondObject("FAIL", "No job positions found", ""));
     }
 
 }

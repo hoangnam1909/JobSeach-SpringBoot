@@ -37,7 +37,7 @@ public class Job {
     @Basic
     @Column(name = "date_published")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date datePublished;
+    private Date publishedDate;
 
     @Basic
     @Column(name = "job_start_date")
@@ -111,8 +111,8 @@ public class Job {
 
     @PrePersist
     public void onSave() {
-        if (datePublished == null)
-            datePublished = new Date();
+        if (publishedDate == null)
+            publishedDate = new Date();
 
         available = true;
     }

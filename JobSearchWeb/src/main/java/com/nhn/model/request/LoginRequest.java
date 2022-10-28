@@ -1,6 +1,5 @@
 package com.nhn.model.request;
 
-import com.nhn.valid.RegisteredUsername;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

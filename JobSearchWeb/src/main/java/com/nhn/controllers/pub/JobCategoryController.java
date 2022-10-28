@@ -1,7 +1,6 @@
 package com.nhn.controllers.pub;
 
 import com.nhn.common.RespondObject;
-import com.nhn.entity.JobCategory;
 import com.nhn.repository.JobCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,19 +27,6 @@ public class JobCategoryController {
         return jobCategoryWithoutJobs.size() > 0 ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new RespondObject("OK", "Job categories found", jobCategoryWithoutJobs)
-                ) :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("FAIL", "No job categories found", "")
-                );
-    }
-
-    @GetMapping("/with-jobs")
-    ResponseEntity<RespondObject> getAll() {
-
-        List<JobCategory> jobCategories = jobCategoryRepository.findAll();
-        return jobCategories.size() > 0 ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("OK", "Job categories found", jobCategories)
                 ) :
                 ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                         new RespondObject("FAIL", "No job categories found", "")

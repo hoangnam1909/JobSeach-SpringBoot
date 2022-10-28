@@ -5,7 +5,6 @@ import com.nhn.entity.Candidate_;
 import com.nhn.entity.User_;
 import com.nhn.specifications.key.JobEnum;
 import com.nhn.specifications.key.SearchOperation;
-import com.nhn.specifications.key.UserEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

@@ -794,6 +794,190 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "stat",
+					"item": [
+						{
+							"name": "jobByJobCategory",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/stats/jobs-by-category",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"stats",
+										"jobs-by-category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jobByPosition",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/stats/jobs-by-position",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"stats",
+										"jobs-by-position"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jobByJobType",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{port-8080}}/admin/api/stats/jobs-by-job-type",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"stats",
+										"jobs-by-job-type"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "applyJob",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fromDate\": \"1/4/2021\",\r\n    \"toDate\": \"1/6/2021\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/admin/api/stats/apply-jobs",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"stats",
+										"apply-jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "jobByPublishedDate",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{adminToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fromDate\": \"20/09/2022\",\r\n    \"toDate\": \"19/10/2022\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/admin/api/stats/jobs-by-published-date",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"admin",
+										"api",
+										"stats",
+										"jobs-by-published-date"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -2181,7 +2365,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"nguyenhoangn023@gmail.com\",\r\n    \"password\": \"adminn\"\r\n}",
+							"raw": "{\r\n    \"username\": \"nguyenhoangn023@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -1,7 +1,6 @@
 package com.nhn.controllers.pub;
 
 import com.nhn.common.RespondObject;
-import com.nhn.entity.JobType;
 import com.nhn.repository.JobTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class JobTypeController {
     @GetMapping("")
     ResponseEntity<RespondObject> getAll() {
 
-        List<JobType> jobTypes = jobTypeRepository.findAll();
+        List<JobTypeRepository.JobTypeWithoutJobs> jobTypes = jobTypeRepository.findAllBy();
         return jobTypes.size() > 0 ?
                 ResponseEntity.status(HttpStatus.OK).body(
                         new RespondObject("OK", "Job types found", jobTypes)

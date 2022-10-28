@@ -16,6 +16,11 @@ public class DateUtils {
         return (Date) formatter.parse(dateStr);
     }
 
+    public static Date strToDate(String dateStr, String dateFormat) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+        return formatter.parse(dateStr);
+    }
+
     public static Date removeTime(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -28,9 +33,9 @@ public class DateUtils {
     }
 
     public static List<Date> listRemoveTime(List<Date> dates) {
-        List<Date> dateListResult= new ArrayList<>();
+        List<Date> dateListResult = new ArrayList<>();
 
-        for (Date date : dates){
+        for (Date date : dates) {
             dateListResult.add(removeTime(date));
         }
 

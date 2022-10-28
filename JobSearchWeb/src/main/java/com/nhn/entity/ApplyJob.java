@@ -28,6 +28,11 @@ public class ApplyJob {
     private Date createdDate;
 
     @Basic
+    @Column(name = "modified_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedDate;
+
+    @Basic
     @Column(name = "status")
     private String status;
 
@@ -48,6 +53,11 @@ public class ApplyJob {
             createdDate = currentDate;
 
         status = Constant.APPLYING_STATUS.PENDING;
+    }
+
+    @PostUpdate
+    public void afterUpdate(){
+        modifiedDate = new Date();
     }
 
 }

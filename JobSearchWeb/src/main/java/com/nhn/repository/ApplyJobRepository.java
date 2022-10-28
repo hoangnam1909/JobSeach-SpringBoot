@@ -6,9 +6,19 @@ import com.nhn.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ApplyJobRepository extends JpaRepository<ApplyJob, Integer> {
+
+    interface ApplyJobInfoOnly {
+        Integer getId();
+        Date getCreatedDate();
+        Date getModifiedDate();
+        String getStatus();
+    }
+
+    List<ApplyJobInfoOnly> findAllBy();
 
     List<ApplyJob> findByJobAppliedOrderByCreatedDateDesc(Job job);
 
@@ -22,5 +32,7 @@ public interface ApplyJobRepository extends JpaRepository<ApplyJob, Integer> {
 
     @Query("SELECT aj.createdDate FROM ApplyJob aj")
     List<Object> findAllDate();
+
+
 
 }

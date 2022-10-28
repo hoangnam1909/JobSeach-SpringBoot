@@ -21,7 +21,14 @@ public interface Constant {
         String APPROVED = "APPROVED";
 
         String CANCELLED = "CANCELLED";
+
         String BLOCKED = "BLOCKED";
+
+    }
+
+    interface DATE_FORMAT {
+
+        String FORMAT1 = "dd/MM/yyyy";
 
     }
 
