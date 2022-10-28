@@ -6,6 +6,7 @@ import com.nhn.entity.JobType;
 import com.nhn.entity.Position;
 import com.nhn.repository.*;
 import com.nhn.service.StatService;
+import com.nhn.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -117,20 +118,30 @@ public class StatServiceImpl implements StatService {
     }
 
     @Override
-    public Map<String, String> statJobCreatedDate(Date fromDate, Date toDate) {
+    public List<Map<String, String>> statJobPublishedDate(Date fromDate, Date toDate) {
 
+        List<Map<String, String>> result = new ArrayList<>();
         List<JobRepository.JobDateInfo> jobDateInfos = jobRepository.findAllBy();
+        Set<Date> jobDateInfosDateList = new HashSet<>();
 
-        AtomicInteger counter = new AtomicInteger();
+        jobDateInfos.forEach(jobDateInfo -> jobDateInfosDateList.add(jobDateInfo.getPublishedDate()));
+        jobDateInfosDateList.forEach(DateUtils::removeTime);
 
-        jobDateInfos.forEach(jobDateInfo -> {
-            if (jobDateInfo.getPublishedDate().after(fromDate) && jobDateInfo.getPublishedDate().before(toDate)) {
-                counter.getAndIncrement();
+        for (Date date : jobDateInfosDateList){
+            Map<String, String> map = new HashMap<>();
+            AtomicInteger counter = new AtomicInteger();
+
+            for (JobRepository.JobDateInfo jobDateInfo : jobDateInfos){
+                if (DateUtils.removeTime(jobDateInfo.getPublishedDate()).equals(date)){
+                    counter.getAndIncrement();
+                    jobDateInfos.remove(jobDateInfo);
+                }
             }
-        });
 
-        Map<String, String> result = new HashMap<>();
-        result.put("counter", String.valueOf(counter));
+            map.put("date", date.toString());
+            map.put("counter", counter.toString());
+            result.add(map);
+        }
 
         return result;
     }

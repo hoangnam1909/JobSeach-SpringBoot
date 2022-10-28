@@ -4,10 +4,13 @@ import com.nhn.common.RespondObject;
 import com.nhn.entity.Job;
 import com.nhn.entity.Job_;
 import com.nhn.entity.Requirement;
+import com.nhn.entity.User;
 import com.nhn.model.request.LoginRequest;
 import com.nhn.repository.JobRepository;
 import com.nhn.repository.RequirementRepository;
+import com.nhn.repository.UserRepository;
 import com.nhn.service.EmailService;
+import com.nhn.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +37,9 @@ public class TestAPI {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/find-requirement-by-id/{job-id}")
     ResponseEntity<RespondObject> findAllByJobId(@PathVariable(name = "job-id") int jobId) {
@@ -87,14 +93,13 @@ public class TestAPI {
                 new RespondObject("OK", "Username valid true", request.getUsername()));
     }
 
-//    @GetMapping("/send-email")
-//    ResponseEntity<RespondObject> sendEmail() {
-//        String otp = RandomStringUtils.randomNumeric(6);
-//        EmailDetails emailDetails = EmailUtil.newOtpMailForm(otp);
-//        emailService.sendSimpleMail(emailDetails);
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(
-//                new RespondObject("OK", "Username valid true", ""));
-//    }
+    @GetMapping("/send-email")
+    ResponseEntity<RespondObject> sendEmail() {
+        User userSaved = userRepository.findUserByUsername("nguyenhoangnam023");
+        emailService.sendSimpleMail(EmailUtil.welcomeMailForm(userSaved));
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new RespondObject("OK", "Username valid true", ""));
+    }
 
 }

@@ -14,6 +14,6 @@ public interface StatService {
 
     Map<String, String> statApplyJob(Date fromDate, Date toDate);
 
-    Map<String, String> statJobCreatedDate(Date fromDate, Date toDate);
+    List<Map<String, String>> statJobPublishedDate(Date fromDate, Date toDate);
 
 }

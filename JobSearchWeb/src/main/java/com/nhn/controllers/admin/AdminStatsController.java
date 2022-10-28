@@ -27,7 +27,7 @@ public class AdminStatsController {
         Date toDate = DateUtils.strToDate(map.get("toDate"), Constant.DATE_FORMAT.FORMAT1);
 
         return ResponseEntity.status(HttpStatus.OK).body(
-                new RespondObject(HttpStatus.OK.name(), "Stat result", statService.statJobCreatedDate(fromDate, toDate)));
+                new RespondObject(HttpStatus.OK.name(), "Stat result", statService.statJobPublishedDate(fromDate, toDate)));
     }
 
     @GetMapping("/jobs-by-category")

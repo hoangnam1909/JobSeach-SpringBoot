@@ -163,7 +163,7 @@ public class AdminUserController {
     ResponseEntity<RespondObject> addUserInfo(@RequestBody @Valid SignupRequest request) {
 
         try {
-            UserDTO user = loginService.signUp(request);
+            User user = loginService.signUp(request);
 
             return ResponseEntity.status(HttpStatus.OK).body(
                     new RespondObject("Ok", "Save user successfully", user));

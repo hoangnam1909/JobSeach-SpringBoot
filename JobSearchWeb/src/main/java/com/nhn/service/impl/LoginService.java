@@ -15,6 +15,7 @@ import com.nhn.repository.UserRepository;
 import com.nhn.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,23 +34,27 @@ public class LoginService {
     private UserMapper userMapper;
 
     @Autowired
-    private JwtUtils jwtUtils;
+    private PasswordEncoder passwordEncoder;
 
-    public UserDTO signUp(SignupRequest request) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    public User signUp(SignupRequest request) {
+        try{
+            User user = userMapper.toEntity(request);
+            System.err.println(request.getPassword());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        User user = userMapper.toEntity(request);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+            if (request.getRole().equals(Constant.USER_ROLE.COMPANY)) {
+                Company company = new Company();
+                user.setCompany(companyRepository.save(company));
+            } else if (request.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
+                Candidate candidate = new Candidate();
+                user.setCandidate(candidateRepository.save(candidate));
+            }
 
-        if (request.getRole().equals(Constant.USER_ROLE.COMPANY)) {
-            Company company = new Company();
-            user.setCompany(companyRepository.save(company));
-        } else if (request.getRole().equals(Constant.USER_ROLE.CANDIDATE)) {
-            Candidate candidate = new Candidate();
-            user.setCandidate(candidateRepository.save(candidate));
+            return userRepository.save(user);
+        } catch (Exception ex){
+            ex.printStackTrace();
+            return null;
         }
-
-        return userMapper.toDTO(userRepository.save(user));
     }
 
 //    public RespondObject signUp(UserSignUpRequest userSignUpRequest) {

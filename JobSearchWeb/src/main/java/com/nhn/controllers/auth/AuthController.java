@@ -105,7 +105,7 @@ public class AuthController {
             if (user.getCompany() != null && !user.isActive())
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
-                        .body(new RespondObject("Account deactivated", "Company user deactivated", null));
+                        .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "Company user deactivated", null));
 
             Map<String, String> accessTokenMap = new HashMap<>();
             accessTokenMap.put("username", user.getUsername());
@@ -116,11 +116,11 @@ public class AuthController {
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new RespondObject("Ok", "User logged in", accessTokenMap));
+                    .body(new RespondObject(HttpStatus.OK.name(), "User logged in", accessTokenMap));
         } else {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body(new RespondObject("Login failed", "User logged in, please logout and try again", ""));
+                    .body(new RespondObject(HttpStatus.CONFLICT.name(), "User logged in, please logout and try again", ""));
         }
     }
 
@@ -128,7 +128,7 @@ public class AuthController {
     public ResponseEntity<RespondObject> generateRefreshToken() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new RespondObject("Ok", "Refresh token", UUID.randomUUID().toString()));
+                .body(new RespondObject(HttpStatus.OK.name(), "Refresh token", UUID.randomUUID().toString()));
     }
 
     @PostMapping("/refresh-token")
@@ -221,28 +221,20 @@ public class AuthController {
     ResponseEntity<RespondObject> signUp(@RequestBody @Valid SignupRequest request) {
 
         try {
-            UserDTO userSaved = loginService.signUp(request);
+            User userSaved = loginService.signUp(request);
 
             if (userSaved != null) {
-                EmailDetails emailDetails = new EmailDetails();
-                emailDetails.setRecipient(userSaved.getEmail());
-                emailDetails.setSubject("Chào mừng bạn đến với website tìm kiếm việc làm");
-                emailDetails.setMsgBody("Bạn vừa đăng ký thành công tài khoản");
-
-                emailService.sendSimpleMail(emailDetails);
+                emailService.sendSimpleMail(EmailUtil.welcomeMailForm(userSaved));
 
                 return ResponseEntity.status(HttpStatus.OK).body(
-                        new RespondObject("Ok", "Save user successfully", userSaved)
-                );
+                        new RespondObject("Ok", "Save user successfully", userSaved));
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                        new RespondObject("Failed", "Save user failed", "")
-                );
+                        new RespondObject("Failed", "Save user failed", ""));
             }
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    new RespondObject("Failed", "Error", ex.getMessage())
-            );
+                    new RespondObject("Failed", "Error", ex.getMessage()));
         }
     }
 

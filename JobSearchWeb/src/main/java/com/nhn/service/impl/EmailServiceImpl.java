@@ -22,13 +22,6 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public Boolean sendSimpleMail(EmailDetails details) {
         try {
-//            SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-//            mailMessage.setFrom(sender);
-//            mailMessage.setTo(details.getRecipient());
-//            mailMessage.setSubject(details.getSubject());
-//            mailMessage.setText(details.getMsgBody());
-
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
 
@@ -38,6 +31,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setText(details.getMsgBody(), true);
 
             javaMailSender.send(message);
+
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
