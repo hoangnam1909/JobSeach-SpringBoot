@@ -122,19 +122,22 @@ public class StatServiceImpl implements StatService {
 
         List<Map<String, String>> result = new ArrayList<>();
         List<JobRepository.JobDateInfo> jobDateInfos = jobRepository.findAllBy();
-        Set<Date> jobDateInfosDateList = new HashSet<>();
+        List<Date> jobDateInfosDateList = new ArrayList<>();
 
         jobDateInfos.forEach(jobDateInfo -> jobDateInfosDateList.add(jobDateInfo.getPublishedDate()));
-        jobDateInfosDateList.forEach(DateUtils::removeTime);
 
-        for (Date date : jobDateInfosDateList){
+        List<Date> dateList = DateUtils.listRemoveTime(jobDateInfosDateList);
+        Set<Date> dateSet = new HashSet<>(dateList);
+
+        for (Date date : dateSet){
+            System.err.println(date);
             Map<String, String> map = new HashMap<>();
             AtomicInteger counter = new AtomicInteger();
 
             for (JobRepository.JobDateInfo jobDateInfo : jobDateInfos){
                 if (DateUtils.removeTime(jobDateInfo.getPublishedDate()).equals(date)){
                     counter.getAndIncrement();
-                    jobDateInfos.remove(jobDateInfo);
+//                    jobDateInfos.remove(jobDateInfo);
                 }
             }
 
