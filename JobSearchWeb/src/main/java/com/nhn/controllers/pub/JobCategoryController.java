@@ -22,6 +22,19 @@ public class JobCategoryController {
     private JobCategoryRepository jobCategoryRepository;
 
     @GetMapping("")
+    ResponseEntity<RespondObject> getAllWithoutJobs() {
+
+        List<JobCategoryRepository.JobCategoryWithoutJobs> jobCategoryWithoutJobs = jobCategoryRepository.findAllBy();
+        return jobCategoryWithoutJobs.size() > 0 ?
+                ResponseEntity.status(HttpStatus.OK).body(
+                        new RespondObject("OK", "Job categories found", jobCategoryWithoutJobs)
+                ) :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new RespondObject("FAIL", "No job categories found", "")
+                );
+    }
+
+    @GetMapping("/with-jobs")
     ResponseEntity<RespondObject> getAll() {
 
         List<JobCategory> jobCategories = jobCategoryRepository.findAll();

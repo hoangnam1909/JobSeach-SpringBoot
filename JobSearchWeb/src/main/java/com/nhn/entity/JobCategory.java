@@ -1,11 +1,13 @@
 package com.nhn.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "job_category", schema = "jobsearchingnew")
@@ -28,7 +30,8 @@ public class JobCategory {
     @Column(name = "description")
     private String description;
 
-//    @OneToMany(mappedBy = "jobCategory")
-//    private Collection<JobEntity> jobsById;
+    @OneToMany(mappedBy = "jobCategory")
+//    @JsonIgnore
+    private List<Job> jobs;
 
 }
