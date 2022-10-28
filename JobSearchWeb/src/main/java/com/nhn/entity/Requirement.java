@@ -29,6 +29,7 @@ public class Requirement {
 
     @Basic
     @Column(name = "job_id", insertable = false, updatable = false)
+    @JsonIgnore
     private int jobId;
 
     @ManyToOne

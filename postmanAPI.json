@@ -2338,7 +2338,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"fpt\",\r\n    \"password\": \"fpt\",\r\n    \"email\": \"fpt@gmail.com\",\r\n    \"role\": \"COMPANY\"\r\n}",
+							"raw": "{\r\n    \"username\": \"namnguyenhoang\",\r\n    \"password\": \"namnguyenhoang\",\r\n    \"email\": \"namng43543uyenh324oa534n5g@gmail.com\",\r\n    \"role\": \"COMPANY\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
