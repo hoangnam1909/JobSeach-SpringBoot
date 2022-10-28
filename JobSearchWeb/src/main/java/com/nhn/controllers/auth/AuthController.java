@@ -22,6 +22,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,9 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private EmailService emailService;
 
     @Autowired
@@ -71,39 +75,48 @@ public class AuthController {
         if (userService.currentUser() == null) {
             Authentication authentication;
 
+            User user;
+            if (loginRequest.getUsername().contains("@"))
+                user = userRepository.findUserByEmail(loginRequest.getUsername());
+            else
+                user = userRepository.findUserByUsername(loginRequest.getUsername());
+
+            if (user == null)
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "Could not find user", null));
+
+            if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(new RespondObject(HttpStatus.BAD_REQUEST.name(), "Wrong password ", null));
+
             try {
                 authentication = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                        new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequest.getPassword()));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 System.err.println("logged in");
             } catch (Exception ex) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        loginService.login(loginRequest)
-                );
-            }
-
-            User user = userRepository.findUserByUsername(loginRequest.getUsername());
-            if (user != null) {
-                if (user.getCompany() != null && !user.isActive())
-                    return ResponseEntity
-                            .status(HttpStatus.BAD_REQUEST)
-                            .body(new RespondObject("Account deactivated", "Company user deactivated", null));
-
-                Map<String, String> accessTokenMap = new HashMap<>();
-                accessTokenMap.put("username", user.getUsername());
-                accessTokenMap.put("role", user.getRole());
-                accessTokenMap.put("avatar", user.getAvatar());
-                accessTokenMap.put("accessToken", jwtUtils.generateToken(user));
-                accessTokenMap.put("refreshToken", user.getRefreshToken());
-
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(new RespondObject("Ok", "User logged in", accessTokenMap));
-            } else {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
-                        .body(new RespondObject("Bad request", "User login failed", null));
+                        .body(loginService.login(loginRequest));
             }
+
+            if (user.getCompany() != null && !user.isActive())
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(new RespondObject("Account deactivated", "Company user deactivated", null));
+
+            Map<String, String> accessTokenMap = new HashMap<>();
+            accessTokenMap.put("username", user.getUsername());
+            accessTokenMap.put("role", user.getRole());
+            accessTokenMap.put("avatar", user.getAvatar());
+            accessTokenMap.put("accessToken", jwtUtils.generateToken(user));
+            accessTokenMap.put("refreshToken", user.getRefreshToken());
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new RespondObject("Ok", "User logged in", accessTokenMap));
         } else {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)

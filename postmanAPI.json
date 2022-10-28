@@ -1030,7 +1030,7 @@
 									},
 									{
 										"key": "Authorization",
-										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuMyIsImV4cCI6MTY2NjgwNjg5NCwiaWF0IjoxNjY2ODAzMjk0fQ.Wz_1WZpRb-D3S4ghmU5xF_DfWfYX_JycaQeXcRFLmUw",
+										"value": "nhn eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1bmd2aWVuNSIsImV4cCI6MTY2Njk0OTMyMywiaWF0IjoxNjY2OTQ1NzIzfQ.2MitOSmaugUYz8xzVVcUL64e9n-Pd69LWOh_B0B3Gpw",
 										"type": "text"
 									}
 								],
@@ -1948,6 +1948,46 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "changePassword",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "nhn {{ungvien2Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currentPassword\": \"ungvien2\",\r\n    \"newPassword\": \"ungvien2pass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/authed/api/user/change-password",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"authed",
+										"api",
+										"user",
+										"change-password"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -2141,7 +2181,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"nguyenhoangn023@gmail.com\",\r\n    \"password\": \"adminn\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

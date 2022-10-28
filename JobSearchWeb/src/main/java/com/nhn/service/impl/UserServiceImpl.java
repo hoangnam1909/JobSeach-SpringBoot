@@ -114,6 +114,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public boolean changePassword(User user, String currentPassword, String newPassword) {
+        if (user == null)
+            return false;
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(user);
+
+        return true;
+    }
+
+    @Override
     public boolean updateResetPassword(String email, String token) {
         try {
             User user = userRepository.findUserByEmail(email);
@@ -142,6 +155,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return false;
         }
     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

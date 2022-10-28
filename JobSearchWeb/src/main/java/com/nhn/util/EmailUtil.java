@@ -45,8 +45,8 @@ public class EmailUtil {
                 "    class=\"m_6229982311739101046mdv2rw\">\n" +
                 "    <div style=\"display: flex; justify-content: center\">\n" +
                 "      <img\n" +
-                "        src=\"https://ci5.googleusercontent.com/proxy/T_zJ7UbaC9x27OP4-ZCPfDipqYLSGum30AlaxEycVclfvxO8Cze0sZ0kCrXlx6a-MgvW2tswbIyiNVfczjDuGh9okorzC5SUJDfwkHr6-3j1KUu94HuAw5uxM_jaElQef3Sub84=s0-d-e1-ft#https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color_74x24dp.png\"\n" +
-                "        height=\"35\"\n" +
+                "        src=\"https://res.cloudinary.com/nhn1909/image/upload/v1666939819/iccnc1qrrt7rgmnonaqh.png\"\n" +
+                "        height=\"60\"\n" +
                 "        aria-hidden=\"true\"\n" +
                 "        style=\"margin: 0 auto; margin-bottom: 16px\"\n" +
                 "        alt=\"Google\"\n" +
@@ -64,7 +64,7 @@ public class EmailUtil {
                 "        text-align: center;\n" +
                 "        word-break: break-word;\n" +
                 "      \">\n" +
-                "      <div style=\"font-size: 24px\">Verify your recovery email</div>\n" +
+                "      <div style=\"font-size: 24px\">Verify your account</div>\n" +
                 "    </div>\n" +
                 "    <div\n" +
                 "      style=\"\n" +
