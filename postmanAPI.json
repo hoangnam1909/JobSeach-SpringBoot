@@ -1957,6 +1957,98 @@
 			"name": "auth",
 			"item": [
 				{
+					"name": "forgotPassword",
+					"item": [
+						{
+							"name": "[1] forgotPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/auth/forgot-password",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[2] validateOTP",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\",\r\n    \"otp\": \"950373\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/auth/validate-otp",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"auth",
+										"validate-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[3] resetPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"newPassword\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{port-8080}}/auth/reset-password?token=0b5d7bfc-be1e-49db-bb08-c13678efee2e",
+									"host": [
+										"{{port-8080}}"
+									],
+									"path": [
+										"auth",
+										"reset-password"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "0b5d7bfc-be1e-49db-bb08-c13678efee2e"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "currentUser",
 					"request": {
 						"auth": {
@@ -2064,60 +2156,6 @@
 							"path": [
 								"auth",
 								"authenticated"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "forgotPassword",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{port-8080}}/auth/forgot-password",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"auth",
-								"forgot-password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "validateOTP",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"nguyenhoangn023@gmail.com\",\r\n    \"otp\": \"100074\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{port-8080}}/auth/validate-otp",
-							"host": [
-								"{{port-8080}}"
-							],
-							"path": [
-								"auth",
-								"validate-otp"
 							]
 						}
 					},

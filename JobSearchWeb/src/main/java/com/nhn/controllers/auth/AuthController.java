@@ -15,7 +15,6 @@ import com.nhn.service.impl.LoginService;
 import com.nhn.service.impl.OTPService;
 import com.nhn.util.EmailUtil;
 import com.nhn.util.JwtUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -298,10 +297,10 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    ResponseEntity<RespondObject> resetPassword(@RequestParam(name = "resetPasswordToken") String resetPasswordToken,
+    ResponseEntity<RespondObject> resetPassword(@RequestParam(name = "token") String token,
                                                 @RequestBody Map<String, String> map) {
         String newPassword = map.get("newPassword");
-        if (userService.resetPassword(resetPasswordToken, newPassword))
+        if (userService.resetPassword(token, newPassword))
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new RespondObject(HttpStatus.OK.name(), "Reset password successfully", ""));
@@ -316,7 +315,6 @@ public class AuthController {
      */
     @GetMapping("/logout")
     ResponseEntity<RespondObject> logout() {
-
         try {
             SecurityContextHolder.getContext().setAuthentication(null);
             System.err.println("logged out");
