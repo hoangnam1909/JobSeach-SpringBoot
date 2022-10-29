@@ -4,6 +4,7 @@ import com.nhn.common.Constant;
 import com.nhn.common.RespondObject;
 import com.nhn.common.SearchCriteria;
 import com.nhn.entity.Job;
+import com.nhn.entity.Job_;
 import com.nhn.entity.User;
 import com.nhn.model.request.CreateJobRequest;
 import com.nhn.model.request.JobUpdateRequest;
@@ -160,7 +161,7 @@ public class CompanyJobController {
             specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by(Job_.PUBLISHED_DATE).descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 
@@ -180,7 +181,7 @@ public class CompanyJobController {
             specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, companyUsername, SearchOperation.COMPANY_USERNAME));
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
 
-            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by("id").ascending());
+            Pageable paging = PageRequest.of(Integer.parseInt(page) - 1, Integer.parseInt(size), Sort.by(Job_.PUBLISHED_DATE).descending());
 
             Page<Job> foundJobs = jobRepository.findAll(specification, paging);
 

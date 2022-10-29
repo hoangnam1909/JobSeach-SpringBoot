@@ -61,7 +61,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs * 60L)) // so phut
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs * 120L)) // so phut
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }

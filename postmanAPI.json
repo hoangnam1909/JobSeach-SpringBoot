@@ -239,7 +239,7 @@
 									"response": []
 								},
 								{
-									"name": "addUserInfo OLD",
+									"name": "[OLD] addUserInfo",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -348,7 +348,7 @@
 												{
 													"key": "file",
 													"type": "file",
-													"src": "/F:/Meme/jerry.jpg"
+													"src": "/C:/Users/nguye/OneDrive/Pictures/Screenshot_20200214-181726_Gallery.jpg"
 												}
 											]
 										},
@@ -367,7 +367,7 @@
 											"variable": [
 												{
 													"key": "user-id",
-													"value": "155"
+													"value": "4"
 												}
 											]
 										}
@@ -556,7 +556,7 @@
 							"name": "company",
 							"item": [
 								{
-									"name": "update",
+									"name": "updateCompanyInfo",
 									"request": {
 										"method": "PUT",
 										"header": [
@@ -1527,13 +1527,13 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "nhn {{fptToken}}",
+												"value": "nhn {{tiktokToken}}",
 												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"title\": \"Admin Intern\",\r\n    \"description\": \"Hỗ trợ team EX Design trong các task admin, bao gồm: Book phòng họp, request logistics (nếu cần). Sắp xếp lịch họp và gửi meeting request. Xử lý hồ sơ thanh toán. Một số công việc khác theo yêu cầu của mentor.\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"\",\r\n    \"provinceId\": \"1\",\r\n    \"noOfVacancies\": \"1\",\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"24\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"\",\r\n    \"tagsId\": [],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Tiếng Anh tốt (không yêu cầu phải giao tiếp)\"\r\n        },\r\n        {\r\n            \"content\": \"Có hứng thú về Content Creative, Social Media, Event Planner...\"\r\n        },\r\n        {\r\n            \"content\": \"Ngoan và chịu khó\"\r\n        }\r\n    ]\r\n}",
+											"raw": "{\r\n    \"title\": \"SMB Account Manager - Vietnam\",\r\n    \"description\": \"TikTok's SMB (Small and Midsize Business) Team aims to help businesses and brands unleash their creative side, connect with our audience, and drive revenue and growth. From designing scaled sales and service delivery programs to ensuring our customers have best-in-class tools and products at their fingertips, our SMB team combines operational expertise with a customer-centric mindset to help businesses achieve their marketing goals on TikTok.\",\r\n    \"jobStartDate\": null,\r\n    \"address\": \"\",\r\n    \"provinceId\": \"79\",\r\n    \"noOfVacancies\": null,\r\n    \"positionId\": \"1\",\r\n    \"jobCategoryId\": \"24\",\r\n    \"jobTypeId\": \"1\",\r\n    \"salary\": \"\",\r\n    \"tagsId\": [],\r\n    \"requirements\": [\r\n        {\r\n            \"content\": \"Provide marketing and advertising consultation to small and medium businesses to maximize their revenue on TikTok advertising platform\"\r\n        },\r\n        {\r\n            \"content\": \"Monitor, analyse and explore new revenue opportunities for clients via TikTok Advertising Solutions\"\r\n        },\r\n        {\r\n            \"content\": \"Create optimization strategies for the clients. The strategies can include:1. TikTok Creative tips and best practices 2. Advertising performance recommendations (bidding,budget,targeting, etc)\"\r\n        },\r\n        {\r\n            \"content\": \"Help clients identify and build strong value proposition on TikTok advertising platform\"\r\n        },\r\n        {\r\n            \"content\": \"Collaborate and communicate effectively with external customers and internal stakeholders (Ads Policy, Finance, Product, etc.)\"\r\n        },\r\n        {\r\n            \"content\": \"Minimum 3 years experience as an Account Manager in digital advertising/tech industry;\"\r\n        },\r\n        {\r\n            \"content\": \"Comfortable having sales target as KPI;\"\r\n        },\r\n        {\r\n            \"content\": \"Strong analytical skill and sound ability to identify key insights to to share with clients;\"\r\n        },\r\n        {\r\n            \"content\": \"Strong attention to details and a proven ability to manage multiple priorities and meeting deadlines;\"\r\n        },\r\n        {\r\n            \"content\": \"Experienced working in a fast-paced client support environment;\"\r\n        },\r\n        {\r\n            \"content\": \"Fast learner, self starter and able to work well individually and as a team\"\r\n        },\r\n        {\r\n            \"content\": \"Fluent in Vietnamese and English\"\r\n        }\r\n    ]\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -2365,7 +2365,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"nguyenhoangn023@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2443,7 +2443,7 @@
 									"variable": [
 										{
 											"key": "company-user-id",
-											"value": "151"
+											"value": "154"
 										}
 									]
 								}
@@ -2508,7 +2508,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"title\": \"title\",\r\n    \"categoryId\": 1,\r\n    \"jobTypeId\": 1,\r\n    \"positionId\": 1,\r\n    \"provinceId\": 1\r\n}",
+											"raw": "{\r\n    \"companyUserId\": 154\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"

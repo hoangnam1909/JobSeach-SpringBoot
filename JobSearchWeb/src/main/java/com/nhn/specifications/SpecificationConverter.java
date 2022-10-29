@@ -57,6 +57,14 @@ public class SpecificationConverter {
     public JobSpecification jobSpecification(Map<String, String> params) {
         JobSpecification specification = new JobSpecification();
 
+        if (params.containsKey(JobEnum.COMPANY_USER_ID)) {
+            specification.add(new SearchCriteria(JobEnum.COMPANY_USER_ID, params.get(JobEnum.COMPANY_USER_ID), SearchOperation.COMPANY_USER_ID));
+        }
+
+        if (params.containsKey(JobEnum.COMPANY_USERNAME)) {
+            specification.add(new SearchCriteria(JobEnum.COMPANY_USERNAME, params.get(JobEnum.COMPANY_USERNAME), SearchOperation.COMPANY_USERNAME));
+        }
+
         if (params.containsKey(JobEnum.TITLE)) {
             specification.add(new SearchCriteria(JobEnum.TITLE, params.get(JobEnum.TITLE), SearchOperation.MATCH));
         }

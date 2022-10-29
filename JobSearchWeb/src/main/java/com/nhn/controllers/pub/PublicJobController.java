@@ -71,6 +71,15 @@ public class PublicJobController {
                 );
     }
 
+    /*
+        "title": "",
+        "categoryId": 1,
+        "jobTypeId": 1,
+        "positionId": 1,
+        "provinceId": 1,
+        "companyUserId": 151,
+        "companyUsername": "username"
+    */
     @PostMapping("/get")
     ResponseEntity<RespondObject> getAll(@RequestBody(required = false) Map<String, String> params,
                                          @RequestParam(name = "page", defaultValue = "1") String page,
@@ -93,15 +102,15 @@ public class PublicJobController {
 
             if (foundJobs.getTotalElements() == 0)
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new RespondObject("Not found", "No job found", new ArrayList<>()));
+                        new RespondObject(HttpStatus.NOT_FOUND.name(), "No job found", new ArrayList<>()));
 
             if (Integer.parseInt(page) > foundJobs.getTotalPages()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new RespondObject("Bad request", "Page number of out range", "Page number = " + page));
+                        new RespondObject(HttpStatus.BAD_REQUEST.name(), "Page number of out range", "Page number = " + page));
             }
 
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new RespondObject("Ok", "Jobs found", foundJobs));
+                    new RespondObject(HttpStatus.OK.name(), "Jobs found", foundJobs));
         } else {
             JobSpecification specification = new JobSpecification();
             specification.add(new SearchCriteria(JobEnum.AVAILABLE, true, SearchOperation.AVAILABLE));
@@ -112,11 +121,10 @@ public class PublicJobController {
 
             return foundJobs.getContent().size() > 0 ?
                     ResponseEntity.status(HttpStatus.OK).body(
-                            new RespondObject("Ok", "Jobs found", foundJobs)
-                    ) :
+                            new RespondObject(HttpStatus.OK.name(), "Jobs found", foundJobs))
+                    :
                     ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                            new RespondObject("Not found", "No jobs found", new ArrayList<>())
-                    );
+                            new RespondObject(HttpStatus.NOT_FOUND.name(), "No jobs found", new ArrayList<>()));
         }
     }
 
